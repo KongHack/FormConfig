@@ -1,0 +1,88 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "b15e2b902931a754f474c213d886ea9c",
+    "content-hash": "0d2c1539d771469d30884fde482aed92",
+    "packages": [
+        {
+            "name": "gcworld/interfaces",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.konghack.com/GCWorld/Interfaces.git",
+                "reference": "4ae7124a15367e945dc9020374db9aaa975db4c2"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\Interfaces\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries Interfaces",
+            "time": "2015-08-10 15:04:19"
+        },
+        {
+            "name": "gcworld/orm",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.konghack.com/GCWorld/ORM.git",
+                "reference": "7df0765335504cc0c023d7e169d3dc071547f807"
+            },
+            "require": {
+                "gcworld/interfaces": "2.*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.*@dev",
+                "composer/installers": "1.0.*@dev",
+                "gcworld/common": "1.*",
+                "gcworld/database": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\ORM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries ORM",
+            "time": "2016-03-29 13:40:06"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6.0"
+    },
+    "platform-dev": []
+}

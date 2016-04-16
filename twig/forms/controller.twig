@@ -1,0 +1,23 @@
+{% extends 'core/layout.twig' %}
+
+{% block content %}
+    <div class="row">
+        {% if forms|length > 1 %}
+            <div class="col-sm-3">
+                <div class="panel panel-sitespecific">
+                    <div class="panel-heading">
+                        <div class="panel-title">Navigation</div>
+                    </div>
+                    <div class="panel-body">
+                        {% for key,value in forms %}
+                            <a href="{{ route }}/{{ key }}" class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block">{{ value|raw }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-sm-{{ (forms|length > 1) ? '9' : '12' }}">
+            {% include 'forms/controller_block.twig' %}
+        </div>
+    </div>
+{% endblock %}

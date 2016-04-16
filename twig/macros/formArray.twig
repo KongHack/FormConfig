@@ -1,0 +1,44 @@
+{% macro handleFormArray(arr) %}
+    {% import 'macros/forms.twig' as forms %}
+
+    {% if arr.getMode() == 'table' %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    {% for head in arr.getHeaders() %}
+                        <th>{{ head }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, fields in arr.fields %}
+                    <tr>
+                        {% for field in fields %}
+                            <td class="{{ field.getColWidth() }}">
+                                {{  forms.completeField(field) }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        {% for index, fields in arr.fields %}
+            <div class="row">
+                {% for field in fields %}
+                    <div class="{{ field.getColWidth() }}">
+                        {{  forms.completeField(field) }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if arr.getErrors()|length > 0 %}
+        {% for msg in arr.getErrors() %}
+            <div class="alert alert-danger">{{ msg|raw }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% endmacro %}
