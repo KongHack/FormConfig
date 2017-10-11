@@ -16,7 +16,7 @@ class ComposerInstaller
      *
      * @return bool
      */
-    public static function postDump(Event $event)
+    public static function setupConfig(Event $event)
     {
         $ds        = DIRECTORY_SEPARATOR;
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
@@ -38,9 +38,14 @@ class ComposerInstaller
         }
         file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.ini', 'config_path='.$iniPath.'GCWorld_FormConfig.ini');
 
-        $cCompiler = new Compiler();
-        $cCompiler->run();
+        self::generateCode();
 
         return true;
+    }
+
+    public static function generateCode()
+    {
+        $cCompiler = new Compiler();
+        $cCompiler->run();
     }
 }
