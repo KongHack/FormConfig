@@ -22,7 +22,7 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "GCWorld\\FormConfig\\ComposerInstaller::postDump"
+      "GCWorld\\FormConfig\\ComposerInstaller::setupConfig"
     ]
   },
   "license":"GPL-3.0"

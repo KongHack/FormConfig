@@ -392,7 +392,7 @@ class FormConfig
      *
      * @return void
      */
-    private function makeFieldsReadOnly(array &$fields)
+    protected function makeFieldsReadOnly(array &$fields)
     {
         foreach ($fields as &$field) {
             if ($field instanceof FormField) {

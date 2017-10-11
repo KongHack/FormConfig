@@ -18,7 +18,7 @@ class Compiler
     public function __construct()
     {
         $base = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-        $dir  = '..'.DIRECTORY_SEPARATOR.'Fields';
+        $dir  = $base . '..'.DIRECTORY_SEPARATOR.'Fields';
         $this->groups['\\GCWorld\\FormConfig\\Fields'] = $dir;
 
         $cConfig = new Config();
@@ -65,6 +65,10 @@ class Compiler
         $objects = [];
         foreach ($this->groups as $ns => $dir) {
             $files = glob($dir.DIRECTORY_SEPARATOR.'*.php');
+            if($debug) {
+                d($dir);
+                d($files);
+            }
             foreach ($files as $file) {
                 $tmp       = explode(DIRECTORY_SEPARATOR, $file);
                 $fileName  = array_pop($tmp);
