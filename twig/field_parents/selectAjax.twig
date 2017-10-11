@@ -1,0 +1,56 @@
+{% macro render(field, multi, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+
+    <select name="{{ field.name }}" {{ multi ? 'multiple="multiple"':'' }} id="{{ field.id }}" class="form-control {{ field.class }}" {{ field.getDataAttributeString() }}>
+        {% if placeholder and not multi %}
+            <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>
+        {% endif %}
+
+        {% for k,v in options %}
+            {% if multi and k in field.value %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif  not multi and field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif field.getSelect2MinLength() < 1 %}
+                <option value="{{ k }}">{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ field.id }}").select2({
+                theme: "bootstrap",
+                width:'100%',
+                ajax: {
+                    url: "{{ field.getAjaxUrl() }}",
+                    method: "{{ field.getAjaxMethod() }}",
+                    dataType: "json",
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: false
+                },
+
+                templateSelection: function(result, container) {
+                    return result.text;
+                },
+                templateResult: function(result) {
+                    return result.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                minimumInputLength: {{ field.getSelect2MinLength() }},
+                multiple: {{ multi ? 'true' : 'false' }}
+            });
+        });
+    </script>
+{% endmacro %}

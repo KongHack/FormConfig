@@ -1,0 +1,21 @@
+{% macro render(field) %}
+    {% if (field.value|date('Y-m-d')) <= '0000-00-00' or field.value == '' %}
+        <input type="text" id="{{ field.id }}" name="{{ field.name }}" value="" class="form-control {{ field.class }}" style="text-align:right" placeholder="{{ field.getPlaceholder()|default('') }}" {{ field.getDataAttributeString() }}>
+    {% else %}
+        <input type="text" id="{{ field.id }}" name="{{ field.name }}" value="{{ field.value|date('m/d/Y') }}" style="text-align:right" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" {{ field.getDataAttributeString() }}>
+    {% endif %}
+    {% if field.errors|length>0 %}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    {% endif %}
+
+    <script type="text/javascript">
+
+        $('#{{ field.id }}').datepicker({
+            todayBtn: "linked",
+            todayHighlight: true
+        }).on('changeDate', function(e){
+            $(this).trigger('input');
+        });
+    </script>
+
+{% endmacro %}

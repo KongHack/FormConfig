@@ -1,10 +1,11 @@
 # GCWorld Form Config
 
-Awesome form builder.  More info to come.
+New Form Builder System.  Still a work in progress.
+
+
+
 
 ### Version
 1.0.0
 
 ### Additional Information
-
-* [GCWorld Public Gitlab](https://gitlab.konghack.com/groups/GCWorld)

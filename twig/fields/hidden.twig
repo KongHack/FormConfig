@@ -1,0 +1,3 @@
+{% macro render(field) %}
+    <input type="hidden" name="{{ field.name }}" class="{{ field.class }}" value="{{ field.value }}" {{ field.getDataAttributeString() }}>
+{% endmacro %}

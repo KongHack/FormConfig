@@ -1,0 +1,34 @@
+{% macro render(field, multi) %}
+    <div class="input-group">
+        <label class="input-group-btn">
+            <span tabindex="0" class="btn btn-primary" role="button" id="{{ field.id }}_btn">
+                {% if field.label != '' %}
+                <span class="sr-only">{{ field.label }}</span>
+                {% endif %}
+                Browse... <input type="file" name="{{ field.name }}" class="hide {{ field.class }}" id="{{ field.id }}" {{ multi ? 'multiple' : '' }}>
+            </span>
+        </label>
+        <input title="File Path" type="text" class="form-control" readonly {{ field.getDataAttributeString() }}>
+    </div>
+
+    {% if field.errors|length>0 %}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    {% endif %}
+
+    <script type="text/javascript">
+        $(function () {
+            //making these keyboard accessible
+            $('#{{ field.id }}_btn').on('keypress', function(e){
+                if (e.keyCode === 13 || e.keyCode === 32) {
+                    $('#{{ field.id }}').click();
+                }
+            });
+            $('#{{ field.id }}').on('fileselect', function (event, numFiles, label) {
+                var input = $(this).parents('.input-group').find(':text'), log = numFiles > 1 ? numFiles + ' files selected' : label;
+                if (input.length) {
+                    input.val(log);
+                }
+            });
+        });
+    </script>
+{% endmacro %}

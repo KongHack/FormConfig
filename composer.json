@@ -8,11 +8,22 @@
     }
   ],
   "require": {
-    "php": ">=5.6.0",
-    "gcworld/orm": "^2.6"
+    "php": ">=7.1.0",
+    "composer/composer": "^1.1",
+    "composer/installers": "^1.0",
+    "gcworld/orm": "^3.4.2",
+    "twig/twig": "~2.0",
+    "riimu/kit-phpencoder": "^2.3",
+    "kint-php/kint": "^1.1",
+    "phpdocumentor/reflection-docblock": "^2.0"
   },
   "autoload": {
     "psr-4": {"GCWorld\\FormConfig\\": "src/"}
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "GCWorld\\FormConfig\\ComposerInstaller::postDump"
+    ]
   },
   "license":"GPL-3.0"
 }

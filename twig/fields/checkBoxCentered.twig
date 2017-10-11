@@ -1,0 +1,5 @@
+{% macro render(field) %}
+    <div style="text-align: center">
+        <input type="checkbox" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value ? 'checked="checked"' : '') }} {{ field.getDataAttributeString() }}>
+    </div>
+{% endmacro %}

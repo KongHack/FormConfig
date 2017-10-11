@@ -1,253 +1,3 @@
-{% macro stateSelect(field) %}
-    {% import _self as myself %}
-    {{ myself.selectInput(field, getStates(), '-Select a State-') }}
-{% endmacro %}
-
-{% macro selectInput(field, overrideOptions, overridePlaceholder) %}
-    {% set options = (overrideOptions?overrideOptions:field.options) %}
-    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.placeholder) %}
-
-    <select name="{{ field.name }}" id="{{ field.id }}" class="form-control {{ field.class }}">
-        {% if placeholder %}
-            <option value="" disabled="disabled">{{ placeholder }}</option>
-        {% endif %}
-
-        {% for k,v in options %}
-            {% if field.value == k %}
-                <option value="{{ k }}" selected>{{ v|raw }}</option>
-            {% else %}
-                <option value="{{ k }}">{{ v|raw }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-    <script type="text/javascript">
-        $(function(){
-            $("#{{ field.id }}").select2({theme: "bootstrap"});
-        });
-    </script>
-{% endmacro %}
-
-
-{% macro selectMultipleInput(field, overrideOptions, overridePlaceholder) %}
-    {% set options = (overrideOptions?overrideOptions:field.options) %}
-    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.placeholder) %}
-
-    <select name="{{ field.name }}[]" id="{{ field.id }}" class="form-control {{ field.class }}" multiple>
-        {% if placeholder %}
-            <option value="" disabled="disabled">{{ placeholder }}</option>
-        {% endif %}
-
-        {% for k,v in options %}
-            {% if k in field.value %}
-                <option value="{{ k }}" selected>{{ v|raw }}</option>
-            {% else %}
-                <option value="{{ k }}">{{ v|raw }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-    <script type="text/javascript">
-        $(function(){
-            $("#{{ field.id }}").select2({theme: "bootstrap"});
-        });
-    </script>
-{% endmacro %}
-
-
-
-{% macro radioInput(field, overrideOptions) %}
-    {% set options = (overrideOptions?overrideOptions:field.options) %}
-    <div class="checkbox">
-        {% for k,v in options %}
-            <input
-                    type="radio"
-                    name="{{ field.name }}"
-                    class="radio {{ field.class }}"
-                    style="display:inline;"
-                    value="{{ k }}"
-                    {% if field.value == k %}
-                        checked="checked"
-                    {% endif %}
-            > {{ v|raw }}<br>
-        {% endfor %}
-    </div>
-{% endmacro %}
-
-{% macro textInput(field) %}
-    <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.placeholder|default('') }}" id="{{ field.id }}">
-    {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-{% endmacro %}
-
-{% macro fileManager(field) %}
-    <div class="input-group">
-        <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.placeholder|default('') }}" id="{{ field.id }}">
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-default" onclick="launchFileManager('load_{{ field.id }}')">File Manager</button>
-        </span>
-    </div>
-
-    <script type="text/javascript">
-        function load_{{ field.id }}(url)
-        {
-            $("#{{ field.id }}").val(url);
-        }
-    </script>
-
-    {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-{% endmacro %}
-
-{% macro dateInput(field) %}
-    {% if (field.value|date('Y-m-d')) <= '0000-00-00' or field.value == '' %}
-        <input type="text" id="{{ field.id }}" name="{{ field.name }}" value="" class="form-control {{ field.class }}" style="text-align:right" placeholder="{{ field.placeholder|default('') }}">
-    {% else %}
-        <input type="text" id="{{ field.id }}" name="{{ field.name }}" value="{{ field.value|date('m/d/Y') }}" style="text-align:right" class="form-control {{ field.class }}" placeholder="{{ field.placeholder|default('') }}">
-    {% endif %}
-    {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-
-    <script type="text/javascript">
-        $('#{{ field.id }}').pickadate({
-            format: 'mm/dd/yyyy',
-            formatSubmit: 'yyyy-mm-dd',
-            selectYears: 24,
-            selectMonths: true,
-            min: new Date(1900,1,1),
-            max: new Date(2999,12,31)
-        });
-    </script>
-
-{% endmacro %}
-
-{% macro passwordInput(field) %}
-    <div class="row">
-        <div class="col-sm-8">
-            <input type="password" name="{{ field.name }}" id="{{ field.id }}-input" value="" class="form-control {{ field.class }}" placeholder="{{ field.placeholder|default('') }}">
-        </div>
-        <div class="col-sm-4">
-            <div id="{{ name }}-text"></div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#{{ field.id }}-input').strengthMeter('text', {
-                container: $('#{{ field.id }}-text'),
-                hierarchy: {
-                    '0':  ['text-danger', '...'],
-                    '10': ['text-danger', 'very weak'],
-                    '20': ['text-warning', 'weak'],
-                    '30': ['text-warning', 'good'],
-                    '40': ['text-success', 'strong'],
-                    '50': ['text-success', 'very strong']
-                }
-            });
-        });
-    </script>
-    {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-{% endmacro %}
-
-{% macro toggleGender(field) %}
-    <div>
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default {{ (field.value=='M' ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="M" autocomplete="off" {{ (field.value=='M' ? 'checked="checked"' : '') }}> Male
-            </label>
-            <label class="btn btn-default {{ (field.value=='F' ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="F" autocomplete="off" {{ (field.value=='F' ? 'checked="checked"' : '') }}> Female
-            </label>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro testQuestion(field) %}
-    <div>
-        <div class="panel panel-sitespecific">
-            <div class="panel-heading">
-                <div class="title">
-                    {{ field.placeholder }}
-                </div>
-            </div>
-            <table class="table table-striped">
-                <tbody>
-                    {% for k, v in field.options %}
-                        <tr>
-                            <td>
-                                <div class="options">
-                                    <input type="radio" id="option_{{ k }}" name="{{ field.name }}" value="{{ k }}" class="{{ (field.value==k?'ctrain':'') }}">
-                                    <label for="option_{{ k }}" {{ (field.value == k ? 'active':'') }}><span class="btn btn-default"><span class="glyphicon glyphicon-ok"></span></span> {{ v }}</label>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro toggleYesNo(field) %}
-    <div>
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default {{ (field.value=='Y' ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="Y" autocomplete="off" {{ (field.value=='Y' ? 'checked="checked"' : '') }}> Yes
-            </label>
-            <label class="btn btn-default {{ (field.value=='N' ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="N" autocomplete="off" {{ (field.value=='N' ? 'checked="checked"' : '') }}> No
-            </label>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro toggleTrueFalse(field) %}
-    <div>
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default {{ (field.value==1 ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value==1 ? 'checked="checked"' : '') }}> Yes
-            </label>
-            <label class="btn btn-default {{ (field.value==0 ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="0" autocomplete="off" {{ (field.value==0 ? 'checked="checked"' : '') }}> No
-            </label>
-        </div>
-    </div>
-{% endmacro %}
-
-{% macro checkBox(field) %}
-    <div>
-        <input type="checkbox" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value ? 'checked="checked"' : '') }}>
-    </div>
-{% endmacro %}
-
-
-{% macro textAreaInput(field) %}
-    <textarea name="{{ field.name }}" class="form-control {{ field.class }}" style="height:{{ field.height|default('120px') }}">{{ field.value }}</textarea>
-{% endmacro %}
-
-{% macro numberInput(field) %}
-    <input name="{{ field.name }}" class="form-control {{ field.class }}" maxlength="{{ field.maxLength }}" type="number" step="any" value="{{ field.value }}">
-        {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-{% endmacro %}
-
-{% macro moneyInput(field) %}
-    <input name="{{ field.name }}" class="form-control {{ field.class }}" style="text-align:right" maxlength="{{ field.maxLength }}" type="number" step="0.01" value="{{ field.value }}" onblur="$(this).val(parseFloat($(this).val()).toFixed(2))">
-        {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
-{% endmacro %}
-
-{% macro CKEditor(field) %}
-    <textarea name="{{ field.name }}" class="form-control {{ field.class }}" style="height:{{ field.height|default('120px') }}" id="ck_{{ field.name }}">{{ field.value|raw }}</textarea>
-    <script type="text/javascript">
-        CKEDITOR.replace("{{ field.name }}");
-    </script>
-{% endmacro %}
-
 {% macro fieldErrorNotice(value) %}
     {% if value|length > 1 %}
         <div>
@@ -260,64 +10,45 @@
     <span class="label label-warning">Required</span>
 {% endmacro %}
 
+
+
+
 {% macro completeField(field) %}
     {% import _self as myself %}
+    {% set def = field.getDefinition() %}
+    {% import def.twig as twigFile %}
 
     {% if field.reqLevel > 0 %}
-        <div class="form-group {{ field.errors|length>0?'has-error has-feedback'}}">
-            {% if field.label is not null %}
-                <label>
+        <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
+            {% if field.label is not null  %}
+                <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }}>
                     {{ field.label|raw }}
+                    {% if field.helpText is not null %}
+                        <span class="tool_badge text-info" title="{{ field.helpText }}">
+                            <i class="fa fa-fw fa-question-circle"></i>
+                        </span>
+                    {% endif %}
                     {% if field.reqLevel > 1 %}
                         {{ myself.requiredIndicator() }}
                     {% endif %}
                 </label>
+            {% else %}
+                {% if field.helpText is not null %}
+                    <span class="tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
             {% endif %}
 
-            {% if field.type == 'textInput' %}
-                {{ myself.textInput(field) }}
-            {% elseif field.type == 'stateSelect' %}
-                {{ myself.stateSelect(field) }}
-            {% elseif field.type == 'selectInput' %}
-                {{ myself.selectInput(field) }}
-            {% elseif field.type == 'selectMultipleInput' %}
-                {{ myself.selectMultipleInput(field) }}
-            {% elseif field.type == 'radioInput' %}
-                {{ myself.radioInput(field) }}
-            {% elseif field.type == 'testQuestion' %}
-                {{ myself.testQuestion(field) }}
-            {% elseif field.type == 'dateInput' %}
-                {{ myself.dateInput(field) }}
-            {% elseif field.type == 'passwordInput' %}
-                {{ myself.passwordInput(field) }}
-            {% elseif field.type == 'toggleGender' %}
-                {{ myself.toggleGender(field) }}
-            {% elseif field.type == 'toggleYesNo' %}
-                {{ myself.toggleYesNo(field) }}
-            {% elseif field.type == 'toggleTrueFalse' %}
-                {{ myself.toggleTrueFalse(field) }}
-            {% elseif field.type == 'textAreaInput' %}
-                {{ myself.textAreaInput(field) }}
-            {% elseif field.type == 'numberInput' %}
-                {{ myself.numberInput(field) }}
-            {% elseif field.type == 'moneyInput' %}
-                {{ myself.moneyInput(field) }}
-            {% elseif field.type == 'checkBox' %}
-                {{ myself.checkBox(field) }}
-            {% elseif field.type == 'CKEditor' %}
-                {{ myself.CKEditor(field) }}
-            {% elseif field.type == 'fileManager' %}
-                {{ myself.fileManager(field) }}
-            {% elseif field.type == 'html' %}
-                {{ field.value|raw }}
-            {% elseif field.type == 'static' %}
-                <div class="form-control-static">{{ field.value|raw }}</div>
-            {% endif %}
+            {{ twigFile.render(field) }}
 
             {% if field.errors|length > 0 %}
                 {% for err in field.errors %}
                     {{ myself.fieldErrorNotice(err) }}
                 {% endfor %}
+            {% endif %}
+            {% if field.getNoticeText()|length > 0 %}
+                <div class="alert alert-warning">{{ field.getNoticeText()|raw }}</div>
             {% endif %}
         </div>
     {% endif %}

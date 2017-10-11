@@ -1,0 +1,19 @@
+{% macro render(field) %}
+    <div class="input-group">
+        <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" id="{{ field.id }}" {{ field.getDataAttributeString() }}>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" onclick="launchFileManager('load_{{ field.id }}')">File Manager</button>
+        </span>
+    </div>
+
+    <script type="text/javascript">
+        function load_{{ field.id }}(url)
+        {
+            $("#{{ field.id }}").val(url).trigger('change');
+        }
+    </script>
+
+    {% if field.errors|length>0 %}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,23 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+
+    <select name="{{ field.name }}" id="{{ field.id }}" class="form-control {{ field.class }}" {{ field.getDataAttributeString() }}>
+        {% if placeholder %}
+            <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>
+        {% endif %}
+
+        {% for k,v in options %}
+            {% if field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% else %}
+                <option value="{{ k }}">{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ field.id }}").select2({theme: "bootstrap", width:'100%'});
+        });
+    </script>
+{% endmacro %}

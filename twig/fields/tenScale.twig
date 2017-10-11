@@ -1,0 +1,21 @@
+{% macro render(field) %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center">N/A</th>
+                {% for i in range(1,10) %}
+                    <th style="text-align: center">{{ i }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for i in range(0,10) %}
+                    <td style="text-align: center">
+                        <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString() }}>
+                    </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+{% endmacro %}

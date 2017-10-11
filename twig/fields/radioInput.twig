@@ -1,0 +1,17 @@
+{% macro render(field, overrideOptions) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    <div class="checkbox">
+        {% for k,v in options %}
+            <input
+                    type="radio"
+                    name="{{ field.name }}"
+                    class="radio {{ field.class }}"
+                    style="display:inline;"
+                    value="{{ k }}"
+                    {% if field.value == k %}
+                        checked="checked"
+                    {% endif %}
+                    {{ field.getDataAttributeString() }}> {{ v|raw }}<br>
+        {% endfor %}
+    </div>
+{% endmacro %}

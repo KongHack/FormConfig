@@ -1,0 +1,53 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+    {% set id = (field.id?field.id:field.name) %}
+
+    <div class="input-group">
+        <select name="{{ field.name }}" id="{{ id }}" class="form-control {{ field.class }}" multiple {{ field.getDataAttributeString() }}>
+            {% if placeholder %}
+                <option value="" disabled="disabled">{{ placeholder }}</option>
+            {% endif %}
+            {% for k,v in options %}
+                {% if k in field.value %}
+                    <option value="{{ k }}" selected>{{ v|raw }}</option>
+                {% else %}
+                    <option value="{{ k }}">{{ v|raw }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <span class="input-group-btn">
+            <button class="btn btn-success tool_button" id="{{ id }}-all" type="button" title="Select All">
+                <i class="fa fa-check"></i>
+            </button>
+        </span>
+        <span class="input-group-btn">
+            <button class="btn btn-danger tool_button" id="{{ id }}-none" type="button" title="Remove All">
+                <i class="fa fa-times"></i>
+            </button>
+        </span>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ id }}").select2({theme: "bootstrap", width:'100%'});
+            $("#{{ id }}-all").click(function(){
+                var $sel = $("#{{ id }}");
+                $sel.find('option').each(function(){
+                    if($(this).prop('disabled')) {
+                        $(this).prop('selected', false);
+                    } else {
+                        $(this).prop('selected',true);
+                    }
+                });
+                $sel.trigger('change');
+            });
+            $("#{{ id }}-none").click(function(){
+                var $sel = $("#{{ id }}");
+                $sel.find('option').each(function(){
+                    $(this).prop('selected',false);
+                });
+                $sel.trigger('change');
+            });
+        });
+    </script>
+{% endmacro %}

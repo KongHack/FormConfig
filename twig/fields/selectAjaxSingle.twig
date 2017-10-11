@@ -1,0 +1,4 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% import '@form_config/field_parents/selectAjax.twig' as select %}
+    {{ select.render(field, 0, overrideOptions, overridePlaceholder) }}
+{% endmacro %}

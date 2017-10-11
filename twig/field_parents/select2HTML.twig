@@ -1,0 +1,36 @@
+{% macro render(field, multi) %}
+    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" class="{{ field.class }}" {{ field.getDataAttributeString() }}>
+
+    <script type="text/javascript">
+        $(function(){
+            var field = $("#{{ field.id }}").select2({
+                theme: "bootstrap",
+                width:'100%',
+                data: {{ field.getOptionsSelect2()|json_encode|raw }},
+                templateSelection: function(result, container) {
+                    console.log(result);
+                    return result.text;
+                },
+                templateResult: function(result) {
+                    console.log(result);
+                    return result.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                allowClear: {{ multi ? 'false':'true' }},
+                multiple: {{ multi ? 'true':'false' }}
+            });
+            {% if field.value|length > 0 %}
+                {% if field.value is iterable %}
+                    {% for k in field.value %}
+                        $(field).select2('val',{{ field.value|json_encode|raw }});
+                    {% endfor %}
+                {% else %}
+                    {% if field.value != '' %}
+                        $(field).select2('val',"{{ field.value }}");
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+        });
+    </script>
+{% endmacro %}

@@ -1,0 +1,12 @@
+{% macro render(field) %}
+    <div>
+        <div class="btn-group" id="{{ field.id }}" data-toggle="buttons">
+            <label class="btn btn-default yes {{ (field.value=='Y' ? 'active' : '') }}">
+                <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="Y" autocomplete="off" {{ (field.value=='Y' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString() }}> Yes
+            </label>
+            <label class="btn btn-default no {{ (field.value=='N' ? 'active' : '') }}">
+                <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="N" autocomplete="off" {{ (field.value=='N' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString() }}> No
+            </label>
+        </div>
+    </div>
+{% endmacro %}

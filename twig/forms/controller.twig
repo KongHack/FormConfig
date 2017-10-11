@@ -6,18 +6,26 @@
             <div class="col-sm-3">
                 <div class="panel panel-sitespecific">
                     <div class="panel-heading">
-                        <div class="panel-title">Navigation</div>
+                        <h4 class="panel-title">Navigation</h4>
                     </div>
                     <div class="panel-body">
                         {% for key,value in forms %}
-                            <a href="{{ route }}/{{ key }}" class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block">{{ value|raw }}</a>
+                            <a href="{{ route }}/{{ key }}" class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block" aria-selected="{{ activeForm==key?'true':'' }}">{{ value|raw }}</a>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         {% endif %}
         <div class="col-sm-{{ (forms|length > 1) ? '9' : '12' }}">
-            {% include 'forms/controller_block.twig' %}
+            {% if not twigOverrides.replace %}
+                {% include '@form_config/forms/controller_block.twig' %}
+            {% else %}
+                {% if includePath %}
+                    {% include includePath %}
+                {% else %}
+                    <div class="alert alert-danger">includePath not defined!</div>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

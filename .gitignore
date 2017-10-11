@@ -1,4 +1,5 @@
 .idea/*
 src/Generated/*
 vendor/*
-config/*
+config/config.ini
+config/GCWorld_FormConfig.ini

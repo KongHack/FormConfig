@@ -2,11 +2,12 @@
     {% import 'macros/forms.twig' as forms %}
 
     {% if arr.getMode() == 'table' %}
-        <table class="table table-striped">
+        <table class="form-array {{ arr.getTableClasses() }}" id="{{ arr.getTableId() }}">
             <thead>
                 <tr>
-                    {% for head in arr.getHeaders() %}
-                        <th>{{ head }}</th>
+                    {% set widths = arr.getWidths() %}
+                    {% for i, head in arr.getHeaders() %}
+                        <th class="{{ widths[i] }}">{{ head|raw }}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -21,18 +22,38 @@
                     </tr>
                 {% endfor %}
             </tbody>
+            {% if arr.getFootFields()|length > 0 %}
+                <tfoot>
+                    <tr>
+                        {% for field in arr.getFootFields() %}
+                            <td class="{{ field.getColWidth() }}">
+                                {{  forms.completeField(field) }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </tfoot>
+            {% endif %}
         </table>
 
     {% else %}
         {% for index, fields in arr.fields %}
             <div class="row">
                 {% for field in fields %}
-                    <div class="{{ field.getColWidth() }}">
+                    <div class="{{ field.getColWidth()?field.getColWidth():'col-sm-12' }}">
                         {{  forms.completeField(field) }}
                     </div>
                 {% endfor %}
             </div>
         {% endfor %}
+        {% if arr.getFootFields()|length > 0 %}
+            <div class="row">
+                {% for field in arr.getFootFields() %}
+                    <div class="{{ field.getColWidth()?field.getColWidth():'col-sm-12' }}">
+                        {{  forms.completeField(field) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
     {% endif %}
 
     {% if arr.getErrors()|length > 0 %}

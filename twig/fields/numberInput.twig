@@ -1,0 +1,7 @@
+{% macro render(field) %}
+    <input title="{{ field.label }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" id="{{ field.id }}" class="form-control {{ field.class }}" maxlength="{{ field.maxLength }}" type="number" step="any" value="{{ field.value }}" {{ field.getDataAttributeString() }}>
+
+    {% if field.errors|length>0 %}
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    {% endif %}
+{% endmacro %}

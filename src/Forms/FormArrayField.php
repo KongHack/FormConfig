@@ -1,19 +1,19 @@
 <?php
-namespace GCWorld\FormConfig;
+namespace GCWorld\FormConfig\Forms;
 
 /**
- * Class FormArrayField
- * @package GCWorld\FormConfig\Forms
+ * Class FormArrayField.
  */
 class FormArrayField extends FormField
 {
     protected $colWidth = 'col-sm-12';
 
     /**
-     * @param $colWidth
+     * @param string $colWidth
+     *
      * @return $this
      */
-    public function setColWidth($colWidth)
+    public function setColWidth(string $colWidth)
     {
         $this->colWidth = $colWidth;
 

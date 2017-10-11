@@ -1,17 +1,17 @@
-<div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
-    <div class="panel-heading">
-        <div class="panel-title">{{ forms[activeForm]|raw }}</div>
-    </div>
-    <div class="panel-body">
-        <form action="{{ formUrl }}" method="post" id="{{ formId }}">
+<form action="{{ formUrl }}" method="post" id="{{ formId }}" enctype="multipart/form-data">
+    <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
+        <div class="panel-heading">
+            <h4 class="panel-title">{{ forms[activeForm]|raw }}</h4>
+        </div>
+        <div class="panel-body">
             {% include form %}
-            <div class="form-group">
-                {% if twigOverrides.submitButton is not defined %}
-                    <input type="submit" class="btn btn-success" value="Save">
-                {% else %}
-                    {{ twigOverrides.submitButton|raw }}
-                {% endif %}
-            </div>
-        </form>
+        </div>
+        <div class="panel-footer">
+            {% if twigOverrides.submitButton is not defined %}
+                <input type="submit" class="btn btn-success" value="Save">
+            {% else %}
+                {{ twigOverrides.submitButton|raw }}
+            {% endif %}
+        </div>
     </div>
-</div>
+</form>

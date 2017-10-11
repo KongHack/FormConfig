@@ -1,0 +1,18 @@
+{% macro render(field) %}
+    <textarea name="{{ field.name }}" class="form-control {{ field.class }}" style="height:{{ field.height|default('120px') }}" id="ck_{{ field.name }}"  {{ field.getDataAttributeString() }}>{{ field.value }}</textarea>
+    <script type="text/javascript">
+        CKEDITOR.replace("ck_{{ field.name }}", {toolbarGroups: [
+            {"name":"basicstyles","groups":["basicstyles"]},
+            {"name":"links","groups":["links"]},
+            {"name":"paragraph","groups":["list","blocks"]},
+            {"name":"document","groups":["mode"]},
+            '/',
+            {"name":"insert","groups":["insert"]},
+            {"name":"styles","groups":["styles"]},
+            {"name":"about","groups":["about"]}
+        ],
+            removeButtons: 'Flash,Smiley,Save,NewPage,SetLanguage,IFrame'
+        });
+        nanospell.ckeditor('ck_{{ field.name }}',{server : "php"});
+    </script>
+{% endmacro %}
