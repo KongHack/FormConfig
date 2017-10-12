@@ -77,7 +77,7 @@ abstract class Base implements FieldConstants, FieldInterface
     public function __construct()
     {
         $this->name = static::getName();
-        $this->definition = self::DEFINITIONS[static::getName()];
+        $this->definition = self::DEFINITIONS[static::getKey()];
     }
 
     /**
