@@ -618,13 +618,11 @@ class FormField implements FieldConstants
     public function getDataAttributeString()
     {
         $dataString = '';
-        if (count($this->dataAttributes) > 0) {
-            foreach ($this->dataAttributes as $dk => $dv) {
-                if (null == $dv || '' == $dv) {
-                    $dataString .= ' data-'.$dk.'=""';
-                } else {
-                    $dataString .= ' data-'.$dk.'='.htmlentities($dv);
-                }
+        foreach ($this->getDataAttributes() as $dk => $dv) {
+            if (null == $dv || '' == $dv) {
+                $dataString .= ' data-'.$dk.'=""';
+            } else {
+                $dataString .= ' data-'.$dk.'='.htmlentities($dv);
             }
         }
 
