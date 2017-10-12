@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.0](https://github.com/KongHack/FormConfig/releases/tag/1.2.0)
+ - @GameCharmer Field Builder System
+ 
+
 ## [1.1.1](https://github.com/KongHack/FormConfig/releases/tag/1.1.1)
  - @GameCharmer Fix for reqLevel
 
