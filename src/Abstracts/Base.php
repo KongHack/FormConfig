@@ -207,7 +207,7 @@ abstract class Base implements FieldInterface
      */
     public function getDefinition()
     {
-        if(class_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
+        if(interface_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
             return FieldConstants::DEFINITIONS[static::getKey()];
         }
         return [];
