@@ -1,4 +1,8 @@
 {% macro render(field) %}
+    {% set step = field.getStep() %}
+    {% set min = field.getMin() %}
+    {% set max = field.getMax() %}
+
     <input
             title="{{ field.label }}"
             placeholder="{{ field.placeholder }}"
@@ -7,9 +11,9 @@
             class="form-control {{ field.class }}"
             maxlength="{{ field.maxLength }}"
             type="number"
-            step="{{ field.getStep() is null ? 'any' : field.getStep() }}"
-            {% if field.getMin() not is null  %} min="{{ field.getMin() }}"
-            {% if field.getMax() not is null  %} max="{{ field.getMax() }}"
+            step="{{ step is null ? 'any' : step }}"
+            {% if min is not null  %} min="{{ min }}"
+            {% if max is not null  %} max="{{ max }}"
             value="{{ field.value }}"
             {{ field.getDataAttributeString() }}
     >
