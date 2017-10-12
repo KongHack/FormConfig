@@ -412,7 +412,7 @@ abstract class Base implements FieldConstants, FieldInterface
             if (null == $dv || '' == $dv) {
                 $dataString .= ' data-'.$dk.'=""';
             } else {
-                $dataString .= ' data-'.$dk.'='.htmlentities($dv);
+                $dataString .= ' data-'.$dk.'="'.htmlentities($dv).'"';
             }
         }
 
