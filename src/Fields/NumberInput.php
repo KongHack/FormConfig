@@ -1,14 +1,19 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 
 /**
  * Class NumberInput
  */
-class NumberInput implements FieldInterface
+class NumberInput extends Base implements FieldInterface
 {
+    protected $min = null;
+    protected $max = null;
+    protected $step = null;
+
     /**
      * @return string
      */
@@ -32,4 +37,62 @@ class NumberInput implements FieldInterface
     {
         return '@'.Twig::TWIG_NAMESPACE.'/fields/numberInput.twig';
     }
+
+    /**
+     * @param float $min
+     * @return $this
+     */
+    public function setMin(float $min)
+    {
+        $this->min = $min;
+
+        return $this;
+    }
+
+    /**
+     * @param float $max
+     * @return $this
+     */
+    public function setMax(float $max)
+    {
+        $this->max = $max;
+
+        return $this;
+    }
+
+    /**
+     * @param float $step
+     * @return $this
+     */
+    public function setStep(float $step)
+    {
+        $this->step = $step;
+
+        return $this;
+    }
+
+    /**
+     * @return null|float
+     */
+    public function getMin()
+    {
+        return $this->min;
+    }
+
+    /**
+     * @return null|float
+     */
+    public function getMax()
+    {
+        return $this->max;
+    }
+
+    /**
+     * @return null|float
+     */
+    public function getStep()
+    {
+        return $this->step;
+    }
+
 }

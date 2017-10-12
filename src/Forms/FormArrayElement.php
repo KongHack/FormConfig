@@ -2,6 +2,8 @@
 namespace GCWorld\FormConfig\Forms;
 
 use Exception;
+use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\FieldInterface;
 
 /**
  * Class FormArrayElement.
@@ -61,6 +63,18 @@ class FormArrayElement
      * @return $this
      */
     public function addFieldObject(FormField $field)
+    {
+        $this->fields[$this->index][$field->getName()] = $field;
+
+        return $this;
+    }
+
+    /**
+     * @param Base $field
+     *
+     * @return $this
+     */
+    public function addBuiltField(Base $field)
     {
         $this->fields[$this->index][$field->getName()] = $field;
 

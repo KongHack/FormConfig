@@ -1,14 +1,18 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Traits\Options;
 
 /**
  * Class RadioInput
  */
-class RadioInput implements FieldInterface
+class RadioInput extends Base implements FieldInterface
 {
+    use Options;
+
     /**
      * @return string
      */

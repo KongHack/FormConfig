@@ -1,13 +1,14 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 
 /**
  * Class TextInput
  */
-class TextInput implements FieldInterface
+class TextInput extends Base implements FieldInterface
 {
     /**
      * @return string

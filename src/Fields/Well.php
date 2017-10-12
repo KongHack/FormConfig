@@ -1,14 +1,18 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Traits\Height;
 
 /**
  * Class Well
  */
-class Well implements FieldInterface
+class Well extends Base implements FieldInterface
 {
+    use Height;
+
     /**
      * @return string
      */

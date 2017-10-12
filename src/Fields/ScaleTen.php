@@ -1,13 +1,14 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 
 /**
  * Class ScaleTen
  */
-class ScaleTen implements FieldInterface
+class ScaleTen extends Base implements FieldInterface
 {
     /**
      * @return string

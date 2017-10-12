@@ -1,14 +1,20 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Traits\Ajax;
+use GCWorld\FormConfig\Traits\Options;
 
 /**
  * Class FileInput
  */
-class FileInput implements FieldInterface
+class FileInput extends Base implements FieldInterface
 {
+    use Options;
+    use Ajax;
+
     /**
      * @return string
      */

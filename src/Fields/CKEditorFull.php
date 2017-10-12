@@ -1,14 +1,18 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Traits\Height;
 
 /**
  * Class CKEditorFull
  */
-class CKEditorFull implements FieldInterface
+class CKEditorFull extends Base implements FieldInterface
 {
+    use Height;
+
     /**
      * @return string
      */

@@ -1,13 +1,14 @@
 <?php
 namespace GCWorld\FormConfig\Fields;
 
+use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 
 /**
  * Class CheckBox
  */
-class CheckBox implements FieldInterface
+class CheckBox extends Base implements FieldInterface
 {
     /**
      * @return string

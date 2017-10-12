@@ -106,6 +106,10 @@ class Compiler
             ];
         }
 
+        if($debug) {
+            d($definitions);
+        }
+
         // Make sure directory exists!
         $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.
             DIRECTORY_SEPARATOR.'Generated'.DIRECTORY_SEPARATOR;
@@ -133,6 +137,36 @@ class Compiler
             'null.capitalize'    => true,
         ]);
         $contents .= '    const DEFINITIONS = '.$encoded.';'.PHP_EOL;
+        $contents .= '}'.PHP_EOL.PHP_EOL;
+
+        file_put_contents($dir.$fileName, $contents);
+
+        $fileName = 'FieldCreate.php';
+        $contents = '<?php'.PHP_EOL;
+        $contents .= 'namespace GCWorld\\FormConfig\\Generated;'.PHP_EOL;
+        $contents .= PHP_EOL;
+        $contents .= 'use GCWorld\\FormConfig\\Abstracts\\FieldCreateParent as FCP;'.PHP_EOL;
+        $contents .= PHP_EOL;
+        $contents .= 'class FieldCreate extends FCP'.PHP_EOL;
+        $contents .= '{'.PHP_EOL;
+        foreach($definitions as $key => $definition) {
+            $class = $definition['class'];
+            $pieces = preg_split('/(?=[A-Z])/',$key);
+            $pieces[0] = ucfirst($pieces[0]);
+            $function = 'create'.implode('',$pieces);
+            $contents .= '    /**'.PHP_EOL;
+            $contents .= '     * @param string $name'.PHP_EOL;
+            $contents .= '     * @return \\'.$class.PHP_EOL;
+            $contents .= '     */'.PHP_EOL;
+            $contents .= '    public function '.$function.'(string $name)'.PHP_EOL;
+            $contents .= '    {'.PHP_EOL;
+            $contents .= '        $obj = new \\'.$class.'();'.PHP_EOL;
+            $contents .= '        $obj->setName($name);'.PHP_EOL;
+            $contents .= '        $this->formConfig->addBuiltField($obj);'.PHP_EOL;
+            $contents .= PHP_EOL;
+            $contents .= '        return $obj;'.PHP_EOL;
+            $contents .= '    }'.PHP_EOL;
+        }
         $contents .= '}'.PHP_EOL.PHP_EOL;
 
         file_put_contents($dir.$fileName, $contents);

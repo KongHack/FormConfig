@@ -1,6 +1,8 @@
 <?php
 namespace GCWorld\FormConfig\Forms;
 
+use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\ORM\FieldName;
 
 /**
@@ -17,6 +19,7 @@ class FormConfig
     protected $twigOverrides = [];
     protected $fields        = [];
     protected $formArrays    = [];
+    protected $builder       = null;
 
     /**
      * @param string $name
@@ -103,6 +106,18 @@ class FormConfig
     public function addFieldObject(FormField $field)
     {
         $this->fields[$field->getNameRaw()] = $field;
+
+        return $this;
+    }
+
+    /**
+     * @param Base $field
+     *
+     * @return $this
+     */
+    public function addBuiltField(Base $field)
+    {
+        $this->fields[$field->getName()] = $field;
 
         return $this;
     }
@@ -401,5 +416,16 @@ class FormConfig
                 $field->makeFieldsReadOnly();
             }
         }
+    }
+
+    /**
+     * @return FieldCreate
+     */
+    public function getBuilder()
+    {
+        if($this->builder == null) {
+            $this->builder = new FieldCreate($this);
+        }
+        return $this->builder;
     }
 }
