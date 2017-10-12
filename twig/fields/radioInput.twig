@@ -11,7 +11,7 @@
                     {% if field.value == k %}
                         checked="checked"
                     {% endif %}
-                    {{ field.getDataAttributeString() }}> {{ v|raw }}<br>
+                    {{ field.getDataAttributeString()|raw }}> {{ v|raw }}<br>
         {% endfor %}
     </div>
 {% endmacro %}

@@ -2,16 +2,10 @@
     <div>
         <div class="btn-group" id="{{ field.id }}" data-toggle="buttons">
             <label class="btn btn-default yes {{ (field.value==1 ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value==1 ? 'checked="checked"' : '') }} {{ field.getDataAttributeString() }}> Yes
+                <input type="radio" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value==1 ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}> Yes
             </label>
             <label class="btn btn-default no {{ (field.value==0 ? 'active' : '') }}">
-                <input type="radio" name="{{ field.name }}" value="0" autocomplete="off" {{ (field.value==0 ? 'checked="checked"' : '') }}
-                    {% if field.dataAttributes|length > 0 %}
-                        {% for dk, dv in field.dataAttributes %}
-                            data-{{ dk }}="{{ dv }}"
-                        {% endfor %}
-                    {% endif %}
-                >  No
+                <input type="radio" name="{{ field.name }}" value="0" autocomplete="off" {{ (field.value==0 ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}>  No
             </label>
         </div>
     </div>

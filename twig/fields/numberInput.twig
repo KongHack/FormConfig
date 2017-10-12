@@ -15,7 +15,7 @@
             {% if min is not null  %} min="{{ min }}"{% endif %}
             {% if max is not null  %} max="{{ max }}"{% endif %}
             value="{{ field.value }}"
-            {{ field.getDataAttributeString() }}
+            {{ field.getDataAttributeString()|raw }}
     >
 
     {% if field.errors|length>0 %}

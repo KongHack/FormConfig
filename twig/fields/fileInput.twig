@@ -8,7 +8,7 @@
                 Browse... <input type="file" name="{{ field.name }}" class="hide {{ field.class }}" id="{{ field.id }}" {{ multi ? 'multiple' : '' }}>
             </span>
         </label>
-        <input title="File Path" type="text" class="form-control" readonly {{ field.getDataAttributeString() }}>
+        <input title="File Path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
     </div>
 
     {% if field.errors|length>0 %}

@@ -1,6 +1,6 @@
 {% macro render(field) %}
     <div class="input-group">
-        <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" id="{{ field.id }}" {{ field.getDataAttributeString() }}>
+        <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" id="{{ field.id }}" {{ field.getDataAttributeString()|raw }}>
         <span class="input-group-btn">
             <button type="button" class="btn btn-default" onclick="launchFileManager('load_{{ field.id }}')">File Manager</button>
         </span>

@@ -1,5 +1,5 @@
 {% macro render(field) %}
     <div>
-        <input type="checkbox" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value ? 'checked="checked"' : '') }} {{ field.getDataAttributeString() }} class="{{ field.class }}">
+        <input type="checkbox" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }} class="{{ field.class }}">
     </div>
 {% endmacro %}
