@@ -1,5 +1,5 @@
 {% macro render(field) %}
-    <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" id="{{ field.id }}" {{ field.dataString|raw }} {{ field.getDataAttributeString() }}>
+    <input type="text" maxlength="{{ field.maxLength }}" name="{{ field.name }}" value="{{ field.value|default('') }}" class="form-control {{ field.class }}" placeholder="{{ field.getPlaceholder()|default('') }}" id="{{ field.id }}" {{ field.getDataAttributeString() }}>
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
     {% endif %}
