@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.2](https://github.com/KongHack/FormConfig/releases/tag/1.2.2)
+ - @GameCharmer OMFG, didn't know interface_exists was a thing
+
+
 ## [1.2.1](https://github.com/KongHack/FormConfig/releases/tag/1.2.1)
  - @GameCharmer major bug fix
 
