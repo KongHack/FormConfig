@@ -3,12 +3,13 @@ namespace GCWorld\FormConfig\Forms;
 
 use Exception;
 use GCWorld\FormConfig\Abstracts\Base;
-use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\FieldContainerInterface;
+use GCWorld\FormConfig\Generated\FieldCreate;
 
 /**
  * Class FormArrayElement.
  */
-class FormArrayElement
+class FormArrayElement implements FieldContainerInterface
 {
     protected $headers       = [];
     protected $widths        = [];
@@ -19,6 +20,7 @@ class FormArrayElement
     protected $table_classes = 'table table-striped';
     protected $footFields    = [];
     protected $table_id      = '';
+    protected $builder       = null;
 
     /**
      * @param string $name
@@ -67,6 +69,17 @@ class FormArrayElement
         $this->fields[$this->index][$field->getName()] = $field;
 
         return $this;
+    }
+
+    /**
+     * @return FieldCreate
+     */
+    public function getBuilder(): FieldCreate
+    {
+        if($this->builder == null) {
+            $this->builder = new FieldCreate($this);
+        }
+        return $this->builder;
     }
 
     /**

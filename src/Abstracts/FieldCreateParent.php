@@ -1,7 +1,7 @@
 <?php
 namespace GCWorld\FormConfig\Abstracts;
 
-use GCWorld\FormConfig\Forms\FormConfig;
+use GCWorld\FormConfig\FieldContainerInterface;
 
 /**
  * Class FieldCreateParent
@@ -12,9 +12,9 @@ abstract class FieldCreateParent
 
     /**
      * FieldCreateParent constructor.
-     * @param FormConfig $formConfig
+     * @param FieldContainerInterface $formConfig
      */
-    public function __construct(FormConfig $formConfig)
+    public function __construct(FieldContainerInterface $formConfig)
     {
         $this->formConfig = $formConfig;
     }

@@ -2,13 +2,14 @@
 namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\ORM\FieldName;
 
 /**
  * Class FormConfig.
  */
-class FormConfig
+class FormConfig implements FieldContainerInterface
 {
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
@@ -421,7 +422,7 @@ class FormConfig
     /**
      * @return FieldCreate
      */
-    public function getBuilder()
+    public function getBuilder(): FieldCreate
     {
         if($this->builder == null) {
             $this->builder = new FieldCreate($this);
