@@ -7,7 +7,7 @@ use GCWorld\FormConfig\Generated\FieldConstants;
 /**
  * Class Base.
  */
-abstract class Base implements FieldConstants, FieldInterface
+abstract class Base implements FieldInterface
 {
     /**
      * @var array
@@ -62,11 +62,6 @@ abstract class Base implements FieldConstants, FieldInterface
     protected $dataAttributes = [];
 
     /**
-     * @var array
-     */
-    protected $definition = [];
-
-    /**
      * @var int
      */
     protected $maxLength = 255;
@@ -77,7 +72,6 @@ abstract class Base implements FieldConstants, FieldInterface
     public function __construct()
     {
         $this->name = static::getName();
-        $this->definition = self::DEFINITIONS[static::getKey()];
     }
 
     /**
@@ -213,7 +207,10 @@ abstract class Base implements FieldConstants, FieldInterface
      */
     public function getDefinition()
     {
-        return $this->definition;
+        if(class_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
+            return FieldConstants::DEFINITIONS[static::getKey()];
+        }
+        return [];
     }
 
     /**
@@ -418,13 +415,4 @@ abstract class Base implements FieldConstants, FieldInterface
 
         return $dataString;
     }
-
-    /**
-     * @return array
-     */
-    public static function getTypes()
-    {
-        return array_keys(self::DEFINITIONS);
-    }
-
 }
