@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.4](https://github.com/KongHack/FormConfig/releases/tag/1.2.4)
+ - @GameCharmer fix assignment issue in password js
+
+
 ## [1.2.3](https://github.com/KongHack/FormConfig/releases/tag/1.2.3)
  - @GameCharmer raw on data attributes string
 
