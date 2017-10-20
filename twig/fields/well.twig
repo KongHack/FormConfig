@@ -1,3 +1,3 @@
 {% macro render(field) %}
-    <div class="well well-sm {{ field.class }}" id="{{ field.id }}" style="height:{{ field.height|default('120px') }}" {{ field.getDataAttributeString()|raw }}>{{ field.value|nl2br }}</div>
+    <div class="well well-sm {{ field.class }}" id="{{ field.id }}" style="height:{{ field.height|default('120px') }};overflow:auto" {{ field.getDataAttributeString()|raw }}>{{ field.value|nl2br }}</div>
 {% endmacro %}

@@ -253,7 +253,7 @@ class FormField implements FieldConstants
      */
     public function getClass()
     {
-        return $this->class;
+        return 'gc-form-field '.$this->class;
     }
 
     /**

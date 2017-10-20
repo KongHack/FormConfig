@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.2.5](https://github.com/KongHack/FormConfig/releases/tag/1.2.5)
+ - @GameCharmer new global class, overflow auto on well
+
+
 ## [1.2.4](https://github.com/KongHack/FormConfig/releases/tag/1.2.4)
  - @GameCharmer fix assignment issue in password js
 
