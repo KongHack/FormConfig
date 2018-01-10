@@ -5,15 +5,15 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
-use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\Ajax;
 use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;
 
 /**
  * Class Select2HTMLMulti
+ * Note: Does not get the Multi interface, since this operates on a comma separated string instead of an array
  */
-class Select2HTMLMulti extends Base implements FieldInterface, MultiSelectInterface
+class Select2HTMLMulti extends Base implements FieldInterface
 {
     use Ajax;
     use Options;

@@ -56,4 +56,16 @@ class Hidden extends Base implements FieldInterface
         $field->setValue('');
         return $field;
     }
+
+    /**
+     * @param FormField $field
+     *
+     * @return FormField
+     */
+    public static function init(FormField $field): FormField
+    {
+        $field->setSuppressLabel(true);
+
+        return $field;
+    }
 }

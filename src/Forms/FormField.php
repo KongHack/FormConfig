@@ -2,6 +2,7 @@
 namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Generated\FieldConstants;
+use GCWorld\FormConfig\MultiSelectInterface;
 
 /**
  * Class FormField.
@@ -174,12 +175,9 @@ class FormField
      */
     public function getName()
     {
-        // Do not add the select2 multi to this block
-        if (in_array($this->type, [
-            FieldConstants::TYPE_SELECT_MULTI,
-            FieldConstants::TYPE_FILE_INPUT_MULTI,
-            FieldConstants::TYPE_SELECT_AJAX_MULTI, ])
-        ) {
+        $class = FieldConstants::DEFINITIONS[$this->type]['class'];
+        $obj = new $class();
+        if($obj instanceof MultiSelectInterface) {
             if ('[]' != substr($this->name, -2)) {
                 return $this->name.'[]';
             }
@@ -240,7 +238,7 @@ class FormField
     public function addClass(string $class)
     {
         $classes = explode(' ', $this->class);
-        if (!in_array($class, $classes, true)) {
+        if (!in_array($class, $classes)) {
             $classes[]   = $class;
             $this->class = implode(' ', $classes);
         }
@@ -268,12 +266,14 @@ class FormField
         if (!in_array($type, self::getTypes())) {
             throw new \Exception('Invalid Type: '.$type.'<br>Possible field types are: '.implode(', ', self::getTypes()));
         }
-        if (FieldConstants::TYPE_HIDDEN == $type) {
-            $this->setSuppressLabel(true);
-        }
 
         $this->type = $type;
         $this->definition = FieldConstants::DEFINITIONS[$type];
+        $class = FieldConstants::DEFINITIONS[$type]['class'];
+        if(method_exists($class, 'init')) {
+            $class::init($this);
+        }
+
 
         return $this;
     }
