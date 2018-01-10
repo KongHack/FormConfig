@@ -4,6 +4,7 @@ namespace GCWorld\FormConfig\Fields;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Forms\FormField;
 
 /**
  * Class StaticInput
@@ -32,5 +33,17 @@ class StaticInput extends Base implements FieldInterface
     public static function getTwigPath(): string
     {
         return '@'.Twig::TWIG_NAMESPACE.'/fields/static.twig';
+    }
+
+    /**
+     * @param FormField $field
+     *
+     * @return FormField
+     */
+    public static function makeReadOnly(FormField $field): FormField
+    {
+        // Already Read Only
+
+        return $field;
     }
 }

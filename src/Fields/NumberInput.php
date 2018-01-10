@@ -4,6 +4,7 @@ namespace GCWorld\FormConfig\Fields;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Forms\FormField;
 
 /**
  * Class NumberInput
@@ -95,4 +96,15 @@ class NumberInput extends Base implements FieldInterface
         return $this->step;
     }
 
+
+    /**
+     * @param FormField $field
+     * @return FormField
+     */
+    public static function makeReadOnly(FormField $field): FormField
+    {
+        $field->setType(FormField::TYPE_STATIC);
+
+        return $field;
+    }
 }

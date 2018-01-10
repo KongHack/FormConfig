@@ -660,4 +660,15 @@ class FormField implements FieldConstants
     {
         return $this->select2MinLength;
     }
+
+    /**
+     * @return FormField
+     */
+    public function makeReadOnly()
+    {
+        $definition = $this->getDefinition();
+        $class      = $definition['class'];
+
+        return $class::makeReadOnly($this);
+    }
 }

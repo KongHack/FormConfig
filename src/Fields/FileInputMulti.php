@@ -4,6 +4,7 @@ namespace GCWorld\FormConfig\Fields;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Forms\FormField;
 use GCWorld\FormConfig\Traits\Ajax;
 use GCWorld\FormConfig\Traits\Options;
 
@@ -48,5 +49,16 @@ class FileInputMulti extends Base implements FieldInterface
             return $this->name.'[]';
         }
         return parent::getName();
+    }
+
+    /**
+     * @param FormField $field
+     * @return FormField
+     */
+    public static function makeReadOnly(FormField $field): FormField
+    {
+        $field->setValue('File Input Here')->setType(FormField::TYPE_STATIC);
+
+        return $field;
     }
 }

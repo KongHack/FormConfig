@@ -139,6 +139,22 @@ class FormConfig implements FieldContainerInterface
     /**
      * @param string $name
      *
+     * @return FormField
+     *
+     * @throws \Exception
+     */
+    public function getField(string $name)
+    {
+        if (!array_key_exists($name, $this->fields)) {
+            throw new \Exception('Field Not Defined: '.$name);
+        }
+
+        return $this->fields[$name];
+    }
+
+    /**
+     * @param string $name
+     *
      * @return FormArrayElement
      */
     public function createFieldArray(string $name)
@@ -345,62 +361,7 @@ class FormConfig implements FieldContainerInterface
      */
     public static function makeFieldReadOnly(FormField &$field)
     {
-        switch ($field->getType()) {
-            case FormField::TYPE_SELECT_SINGLE:
-            case FormField::TYPE_SELECT2_HTML_SINGLE:
-            case FormField::TYPE_SELECT_AJAX_SINGLE:
-                if (array_key_exists($field->getValue(), $field->getOptions())) {
-                    $opts = $field->getOptions();
-                    $field->setType(FormField::TYPE_STATIC)
-                        ->setValue($opts[$field->getValue()])
-                        ->setOptions([]);
-                } else {
-                    $field->setType(FormField::TYPE_STATIC)->setOptions([])->setValue('- Not Set -');
-                }
-                break;
-            case FormField::TYPE_SELECT_MULTI:
-            case FormField::TYPE_SELECT2_HTML_MULTI:
-            case FormField::TYPE_SELECT_AJAX_MULTI:
-                $opts = $field->getOptions();
-                $vals = is_array($field->getValue()) ? $field->getValue() : [$field->getValue()];
-                $text = [];
-                foreach ($vals as $val) {
-                    if (array_key_exists($val, $opts)) {
-                        $text[] = $opts[$val];
-                    }
-                }
-                $field->setType(FormField::TYPE_STATIC)->setOptions([]);
-                if (count($text) > 0) {
-                    $field->setValue(implode(', ', $text));
-                } else {
-                    $field->setValue(' - Not Set - ');
-                }
-                break;
-            case FormField::TYPE_CHECKBOX:
-            case FormField::TYPE_CHECKBOX_CENTERED:
-            case FormField::TYPE_TOGGLE_TRUE_FALSE:
-                $val = $field->getValue();
-                $field->setValue($val ? 'Yes' : 'No')->setType(FormField::TYPE_STATIC);
-                break;
-            case FormField::TYPE_COLORPICKER:
-                $field->setValue('Color Picker Here')->setType(FormField::TYPE_HTML);
-                break;
-            case FormField::TYPE_TOGGLE_YES_NO:
-                $val = $field->getValue();
-                $field->setValue('Y' == $val ? 'Yes' : 'No')->setType(FormField::TYPE_STATIC);
-                break;
-            case FormField::TYPE_FILE_INPUT:
-            case FormField::TYPE_FILE_INPUT_MULTI:
-            case FormField::TYPE_FILEMANAGER:
-                $field->setValue('File Input Here')->setType(FormField::TYPE_STATIC);
-                break;
-            case FormField::TYPE_HIDDEN:
-                $field->setValue('');
-                break;
-            default:
-                $field->setType(FormField::TYPE_STATIC);
-                break;
-        }
+        $field->makeReadOnly();
     }
 
     /**

@@ -40,4 +40,23 @@ class SelectAjaxSingle extends Base implements FieldInterface
     {
         return '@'.Twig::TWIG_NAMESPACE.'/fields/selectAjaxSingle.twig';
     }
+
+    /**
+     * @param FormField $field
+     *
+     * @return FormField
+     */
+    public static function makeReadOnly(FormField $field): FormField
+    {
+        if (array_key_exists($field->getValue(), $field->getOptions())) {
+            $opts = $field->getOptions();
+            $field->setType(FormField::TYPE_STATIC)
+                ->setValue($opts[$field->getValue()])
+                ->setOptions([]);
+        } else {
+            $field->setType(FormField::TYPE_STATIC)->setOptions([])->setValue('- Not Set -');
+        }
+
+        return $field;
+    }
 }
