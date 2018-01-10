@@ -41,7 +41,7 @@ class ColorPicker extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setValue('Color Picker Here')->setType(FormField::TYPE_HTML);
+        $field->setValue('Color Picker Here')->setType(StaticInput::getKey());
 
         return $field;
     }

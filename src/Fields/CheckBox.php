@@ -43,7 +43,7 @@ class CheckBox extends Base implements FieldInterface
     public static function makeReadOnly(FormField $field): FormField
     {
         $val = $field->getValue();
-        $field->setValue($val ? 'Yes' : 'No')->setType(FormField::TYPE_STATIC);
+        $field->setValue($val ? 'Yes' : 'No')->setType(StaticInput::getKey());
         return $field;
     }
 }

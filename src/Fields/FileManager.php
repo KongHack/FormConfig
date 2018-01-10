@@ -44,7 +44,7 @@ class FileManager extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setValue('File Input Here')->setType(FormField::TYPE_STATIC);
+        $field->setValue('File Input Here')->setType(StaticInput::getKey());
 
         return $field;
     }

@@ -69,7 +69,7 @@ class Select2HTMLMulti extends Base implements FieldInterface
                 $text[] = $opts[$val];
             }
         }
-        $field->setType(FormField::TYPE_STATIC)->setOptions([]);
+        $field->setType(StaticInput::getKey())->setOptions([]);
         if (count($text) > 0) {
             $field->setValue(implode(', ', $text));
         } else {

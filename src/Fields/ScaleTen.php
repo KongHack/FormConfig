@@ -5,6 +5,7 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
+use GCWorld\FormConfig\Generated\FieldConstants;
 
 /**
  * Class ScaleTen
@@ -42,7 +43,7 @@ class ScaleTen extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setType(FormField::TYPE_STATIC);
+        $field->setType(StaticInput::getKey());
 
         return $field;
     }

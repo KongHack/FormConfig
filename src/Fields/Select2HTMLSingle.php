@@ -51,11 +51,11 @@ class Select2HTMLSingle extends Base implements FieldInterface
     {
         if (array_key_exists($field->getValue(), $field->getOptions())) {
             $opts = $field->getOptions();
-            $field->setType(FormField::TYPE_STATIC)
+            $field->setType(StaticInput::getKey())
                 ->setValue($opts[$field->getValue()])
                 ->setOptions([]);
         } else {
-            $field->setType(FormField::TYPE_STATIC)->setOptions([])->setValue('- Not Set -');
+            $field->setType(StaticInput::getKey())->setOptions([])->setValue('- Not Set -');
         }
 
         return $field;

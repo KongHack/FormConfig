@@ -43,7 +43,7 @@ class ToggleYesNo extends Base implements FieldInterface
     public static function makeReadOnly(FormField $field): FormField
     {
         $val = $field->getValue();
-        $field->setValue($val == 'Y' ? 'Yes' : 'No')->setType(FormField::TYPE_STATIC);
+        $field->setValue($val == 'Y' ? 'Yes' : 'No')->setType(StaticInput::getKey());
         return $field;
     }
 }

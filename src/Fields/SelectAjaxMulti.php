@@ -69,7 +69,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
                 $text[] = $opts[$val];
             }
         }
-        $field->setType(FormField::TYPE_STATIC)->setOptions([]);
+        $field->setType(StaticInput::getKey())->setOptions([]);
         if (count($text) > 0) {
             $field->setValue(implode(', ', $text));
         } else {

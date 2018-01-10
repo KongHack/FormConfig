@@ -103,7 +103,7 @@ class NumberInput extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setType(FormField::TYPE_STATIC);
+        $field->setType(StaticInput::getKey());
 
         return $field;
     }
