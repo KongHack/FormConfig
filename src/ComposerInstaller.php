@@ -18,6 +18,8 @@ class ComposerInstaller
      */
     public static function setupConfig(Event $event = null)
     {
+        register_shutdown_function(['\\GCWorld\\FormConfig\\ComposerInstaller', 'trace']);
+
         $ds    = DIRECTORY_SEPARATOR;
         $myDir = __DIR__;
 
@@ -48,9 +50,20 @@ class ComposerInstaller
         return true;
     }
 
+    /**
+     * @return void
+     */
     public static function generateCode()
     {
         $cCompiler = new Compiler();
         $cCompiler->run();
+    }
+
+    /**
+     * @return void
+     */
+    public static function trace()
+    {
+        debug_print_backtrace();
     }
 }
