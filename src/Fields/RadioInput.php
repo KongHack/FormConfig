@@ -41,11 +41,17 @@ class RadioInput extends Base implements FieldInterface
     /**
      * @param FormField $field
      * @return FormField
-     * @todo UPDATE TO MATCH TYPE
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setType(FormField::TYPE_STATIC);
+        if (array_key_exists($field->getValue(), $field->getOptions())) {
+            $opts = $field->getOptions();
+            $field->setType(FormField::TYPE_STATIC)
+                ->setValue($opts[$field->getValue()])
+                ->setOptions([]);
+        } else {
+            $field->setType(FormField::TYPE_STATIC)->setOptions([])->setValue('- Not Set -');
+        }
 
         return $field;
     }
