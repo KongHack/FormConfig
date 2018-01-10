@@ -4,6 +4,7 @@ namespace GCWorld\FormConfig\Fields;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
+use GCWorld\FormConfig\Forms\FormField;
 use GCWorld\FormConfig\Traits\Ajax;
 use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;

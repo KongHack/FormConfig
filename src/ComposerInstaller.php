@@ -16,11 +16,16 @@ class ComposerInstaller
      *
      * @return bool
      */
-    public static function setupConfig(Event $event)
+    public static function setupConfig(Event $event = null)
     {
-        $ds        = DIRECTORY_SEPARATOR;
-        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        $myDir     = dirname(__FILE__);
+        $ds    = DIRECTORY_SEPARATOR;
+        $myDir = __DIR__;
+
+        if($event !== null) {
+            $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        } else {
+            $vendorDir = rtrim(__DIR__,DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor';
+        }
 
         // Determine if FormConfig ini already exists.
         $iniPath = realpath($vendorDir.$ds.'..'.$ds.'config').$ds;
