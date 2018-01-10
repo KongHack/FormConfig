@@ -6,7 +6,7 @@ use GCWorld\FormConfig\Generated\FieldConstants;
 /**
  * Class FormField.
  */
-class FormField implements FieldConstants
+class FormField
 {
     /**
      * @var array
@@ -114,7 +114,7 @@ class FormField implements FieldConstants
     public function __construct(string $name)
     {
         $this->name = $name;
-        $this->definition = self::DEFINITIONS[self::TYPE_TEXT];
+        $this->definition = FieldConstants::DEFINITIONS[FieldConstants::TYPE_TEXT];
     }
 
     /**
@@ -176,9 +176,9 @@ class FormField implements FieldConstants
     {
         // Do not add the select2 multi to this block
         if (in_array($this->type, [
-            self::TYPE_SELECT_MULTI,
-            self::TYPE_FILE_INPUT_MULTI,
-            self::TYPE_SELECT_AJAX_MULTI, ])
+            FieldConstants::TYPE_SELECT_MULTI,
+            FieldConstants::TYPE_FILE_INPUT_MULTI,
+            FieldConstants::TYPE_SELECT_AJAX_MULTI, ])
         ) {
             if ('[]' != substr($this->name, -2)) {
                 return $this->name.'[]';
@@ -268,12 +268,12 @@ class FormField implements FieldConstants
         if (!in_array($type, self::getTypes())) {
             throw new \Exception('Invalid Type: '.$type.'<br>Possible field types are: '.implode(', ', self::getTypes()));
         }
-        if (self::TYPE_HIDDEN == $type) {
+        if (FieldConstants::TYPE_HIDDEN == $type) {
             $this->setSuppressLabel(true);
         }
 
         $this->type = $type;
-        $this->definition = self::DEFINITIONS[$type];
+        $this->definition = FieldConstants::DEFINITIONS[$type];
 
         return $this;
     }
@@ -635,7 +635,7 @@ class FormField implements FieldConstants
     public static function getTypes()
     {
         if (count(self::$types) < 1) {
-            self::$types = array_keys(self::DEFINITIONS);
+            self::$types = array_keys(FieldConstants::DEFINITIONS);
         }
 
         return self::$types;
