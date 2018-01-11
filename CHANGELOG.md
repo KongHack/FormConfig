@@ -7,6 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.0](https://github.com/KongHack/FormConfig/releases/tag/1.3.0)
+ - @GameCharmer !!CAUTION!! May not be backwards compatible if you're not using the builder
+ - NEW: Get field function
+ - NEW: Make Read-Only system (per field)
+ - NEW: MultiSelectInterface for identifying fields that need [] in the name 
+ - FIX: potential recursive issue
+
+
 ## [1.2.5](https://github.com/KongHack/FormConfig/releases/tag/1.2.5)
  - @GameCharmer new global class, overflow auto on well
 
