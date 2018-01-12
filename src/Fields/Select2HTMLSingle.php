@@ -49,7 +49,12 @@ class Select2HTMLSingle extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        if (array_key_exists($field->getValue(), $field->getOptions())) {
+        $val = $field->getValue();
+        if(!is_array($val)) {
+            $val = explode(',',$val);
+        }
+
+        if (array_key_exists($val, $field->getOptions())) {
             $opts = $field->getOptions();
             $field->setType(StaticInput::getKey())
                 ->setValue($opts[$field->getValue()])
