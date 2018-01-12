@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.1](https://github.com/KongHack/FormConfig/releases/tag/1.3.1)
+ - @GameCharmer fix for file input multi
+
+
 ## [1.3.0](https://github.com/KongHack/FormConfig/releases/tag/1.3.0)
  - @GameCharmer !!CAUTION!! May not be backwards compatible if you're not using the builder
  - NEW: Get field function
