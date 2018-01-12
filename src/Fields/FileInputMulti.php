@@ -5,13 +5,14 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
+use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\Ajax;
 use GCWorld\FormConfig\Traits\Options;
 
 /**
  * Class FileInputMulti
  */
-class FileInputMulti extends Base implements FieldInterface
+class FileInputMulti extends Base implements FieldInterface, MultiSelectInterface
 {
     use Options;
     use Ajax;
