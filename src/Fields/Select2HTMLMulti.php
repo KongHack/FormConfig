@@ -61,10 +61,10 @@ class Select2HTMLMulti extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $opts = $field->getOptions();
-        $vals = is_array($field->getValue()) ? $field->getValue() : [$field->getValue()];
-        $text = [];
-        foreach ($vals as $val) {
+        $opts   = $field->getOptions();
+        $values = is_array($field->getValue()) ? $field->getValue() : explode(',',$field->getValue());
+        $text   = [];
+        foreach ($values as $val) {
             if (array_key_exists($val, $opts)) {
                 $text[] = $opts[$val];
             }
