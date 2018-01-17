@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.2](https://github.com/KongHack/FormConfig/releases/tag/1.3.2)
+ - @GameCharmer Added for on labels, adjusted radio input
+
+
 ## [1.3.1](https://github.com/KongHack/FormConfig/releases/tag/1.3.1)
  - @GameCharmer fix for file input multi
 
