@@ -1,5 +1,17 @@
 {% macro render(field) %}
-    <input title="{{ field.label }}" placeholder="{{ field.placeholder }}" name="{{ field.name }}" id="{{ field.id }}" class="form-control {{ field.class }}" style="text-align:right" maxlength="{{ field.maxLength }}" type="number" step="0.01" value="{{ field.value }}" onblur="$(this).val(parseFloat($(this).val()).toFixed(2))" {{ field.getDataAttributeString()|raw }}>
+    <input title="{{ field.label }}"
+           placeholder="{{ field.placeholder }}"
+           name="{{ field.name }}"
+           id="{{ field.id }}"
+           class="form-control {{ field.class }}"
+           style="text-align:right"
+           maxlength="{{ field.maxLength }}"
+           type="number"
+           step="0.01"
+           value="{{ field.value }}"
+           onblur="$(this).val(parseFloat($(this).val()).toFixed(2))"
+            {{ field.getDataAttributeString()|raw }}
+    >
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
     {% endif %}

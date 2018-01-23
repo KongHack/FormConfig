@@ -1,5 +1,11 @@
 {% macro render(field) %}
-    <textarea name="{{ field.name }}" class="form-control {{ field.class }}" style="height:{{ field.height|default('120px') }}" id="ck_{{ field.name }}"  {{ field.getDataAttributeString()|raw }}>{{ field.value }}</textarea>
+    <textarea
+            name="{{ field.name }}"
+            class="form-control {{ field.class }}"
+            style="height:{{ field.height|default('120px') }}"
+            id="ck_{{ field.name }}"
+            {{ field.getDataAttributeString()|raw }}
+    >{{ field.value }}</textarea>
     <script type="text/javascript">
         CKEDITOR.replace("ck_{{ field.name }}", {toolbarGroups: [
             {"name":"basicstyles","groups":["basicstyles"]},

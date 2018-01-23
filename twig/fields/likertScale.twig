@@ -1,5 +1,5 @@
 {% macro render(field) %}
-    <table class="table">
+    <table class="table" id="{{ field.id }}">
         <thead>
             <tr>
                 <th style="text-align: center">N/A</th>
@@ -14,7 +14,15 @@
             <tr>
                 {% for i in range(0,5) %}
                     <td style="text-align: center">
-                        <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString()|raw }}>
+                        <input
+                                type="radio"
+                                name="{{ field.name }}"
+                                value="{{ i }}"
+                                {{ (field.value == i ? 'checked="checked"' : '') }}
+                                class="{{ field.class }}"
+                                id="{{ field.id }}_{{ i }}"
+                                {{ field.getDataAttributeString()|raw }}
+                        >
                     </td>
                 {% endfor %}
             </tr>
