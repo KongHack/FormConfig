@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.4](https://github.com/KongHack/FormConfig/releases/tag/1.3.4)
+ - @GameCharmer Update Composer License Field
+
+
 ## [1.3.3](https://github.com/KongHack/FormConfig/releases/tag/1.3.3)
  - @GameCharmer Added missing IDs, cleanup twig files
 
