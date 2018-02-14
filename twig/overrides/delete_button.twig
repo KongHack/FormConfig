@@ -1,0 +1,23 @@
+{% set rand = random() %}
+<input type="submit" class="btn btn-danger" id="override_delete_{{ rand }}" value="Delete">
+
+<script type="text/javascript">
+    $(function(){
+        var $form = $("#override_delete_{{ rand }}").closest('form');
+        $form.submit(function(e){
+            e.preventDefault();
+            if(typeof bootbox !== undefined) {
+                bootbox.confirm("Are you sure you want to delete?", function(result){
+                    if(result) {
+                        $form.submit();
+                    }
+                })
+            } else {
+                var result = confirm("Are you sure you want to delete?");
+                if(result) {
+                    $form.submit();
+                }
+            }
+        });
+    });
+</script>

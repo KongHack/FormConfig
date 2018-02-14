@@ -2,6 +2,7 @@
 namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\ORM\FieldName;
@@ -314,8 +315,9 @@ class FormConfig implements FieldContainerInterface
     {
         switch ($mode) {
             case 'delete':
+                $html = Twig::get()->render('overrides/delete_button.twig');
                 $this->setOverride('panelClass', 'danger')
-                    ->setOverride('submitButton', '<input type="submit" class="btn btn-danger" value="Delete">');
+                    ->setOverride('submitButton', $html);
                 break;
             case 'activate':
                 $this->setOverride('panelClass', 'success')
