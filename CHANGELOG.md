@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.6](https://github.com/KongHack/FormConfig/releases/tag/1.3.6)
+ - @GameCharmer Wasn't using the DocBlock library anywhere, so removed it
+
+
 ## [1.3.5](https://github.com/KongHack/FormConfig/releases/tag/1.3.5)
  - @GameCharmer Update DocBlock Library
 

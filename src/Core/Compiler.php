@@ -132,6 +132,7 @@ class Compiler
             'array.base'         => 4,
             'array.inline'       => false,
             'array.omit'         => false,
+            'array.align'        => true,
             'array.indent'       => 4,
             'boolean.capitalize' => true,
             'null.capitalize'    => true,

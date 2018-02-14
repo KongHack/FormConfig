@@ -1,0 +1,9 @@
+parameters:
+	autoload_directories:
+		- %rootDir%/../../../src
+
+	excludes_analyse:
+		- %rootDir%/../../../src/Generated/*
+
+	ignoreErrors:
+		- '#will always evaluate to false#'
