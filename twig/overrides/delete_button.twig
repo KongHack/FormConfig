@@ -9,12 +9,14 @@
             if(typeof bootbox !== undefined) {
                 bootbox.confirm("Are you sure you want to delete?", function(result){
                     if(result) {
+                        $form.unbind('submit');
                         $form.submit();
                     }
                 })
             } else {
                 var result = confirm("Are you sure you want to delete?");
                 if(result) {
+                    $form.unbind('submit');
                     $form.submit();
                 }
             }

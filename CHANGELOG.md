@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.3.7](https://github.com/KongHack/FormConfig/releases/tag/1.3.7)
+ - @GameCharmer throw an unbind in the delete hook
+
+
 ## [1.3.6](https://github.com/KongHack/FormConfig/releases/tag/1.3.6)
  - @GameCharmer Wasn't using the DocBlock library anywhere, so removed it
 
