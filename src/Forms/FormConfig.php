@@ -22,6 +22,12 @@ class FormConfig implements FieldContainerInterface
     protected $fields        = [];
     protected $formArrays    = [];
     protected $builder       = null;
+    protected $renderArgs    = [
+        'formArray'   => [],
+        'formCurrent' => '',
+        'urlBase'     => '',
+        'urlCurrent'  => '',
+    ];
 
     /**
      * @param string $name
@@ -278,17 +284,74 @@ class FormConfig implements FieldContainerInterface
      */
     public function getRenderArray(array $formsArray, string $currentForm, string $baseRoute, string $formUrl)
     {
+        return $this->setRenderForms($formsArray)
+            ->setRenderForm($currentForm)
+            ->setRenderUrlBase($baseRoute)
+            ->setRenderUrlForm($formUrl)
+            ->getTwigArray();
+    }
+
+    /**
+     * @param string $form
+     * @return $this
+     */
+    public function setRenderForm(string $form)
+    {
+        $this->renderArgs['formCurrent'] = $form;
+
+        return $this;
+    }
+
+    /**
+     * @param array $forms
+     * @return $this
+     */
+    public function setRenderForms(array $forms)
+    {
+        $this->renderArgs['formArray'] = $forms;
+
+        return $this;
+    }
+
+    /**
+     * @param string $url
+     * @return $this
+     */
+    public function setRenderUrlBase(string $url)
+    {
+        $this->renderArgs['urlBase'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * @param string $url
+     * @return $this
+     */
+    public function setRenderUrlForm(string $url)
+    {
+        $this->renderArgs['urlCurrent'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTwigArray()
+    {
         return [
             'form'          => $this->twigTemplate,
-            'activeForm'    => $currentForm,
-            'forms'         => $formsArray,
-            'route'         => $baseRoute,
-            'formUrl'       => $formUrl,
+            'activeForm'    => $this->renderArgs['formCurrent'],
+            'forms'         => $this->renderArgs['formArray'],
+            'route'         => $this->renderArgs['urlBase'],
+            'formUrl'       => $this->renderArgs['urlCurrent'],
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
             $this->name     => $this->fields,
         ];
     }
+
 
     /**
      * @throws \Exception
