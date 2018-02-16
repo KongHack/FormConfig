@@ -7,9 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.4.1](https://github.com/KongHack/FormConfig/releases/tag/1.4.1)
+ - @GameCharmer New fluent methods for easier form config rendering
+
+
 ## [1.4.0](https://github.com/KongHack/FormConfig/releases/tag/1.4.0)
  - @GameCharmer New Simple Form System! Omit ``setTwigTemplate`` to generate a simple form with all fields as a list, even field arrays!
  - @GameCharmer No need to import the field array separately anymore. ``completeField`` handles those as well!
+
 
 ## [1.3.8](https://github.com/KongHack/FormConfig/releases/tag/1.3.8)
  - @GameCharmer Add class to true/false toggles
