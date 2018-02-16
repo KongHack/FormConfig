@@ -4,7 +4,12 @@
             <h4 class="panel-title">{{ forms[activeForm]|raw }}</h4>
         </div>
         <div class="panel-body">
-            {% include form %}
+            {% if form is defined and form != '' %}
+                {% include form %}
+            {% else %}
+                {% import '@form_config/macros/simple_form.twig' as simpleForm %}
+                {{ simpleForm.render(_context) }}
+            {% endif %}
         </div>
         <div class="panel-footer">
             {% if twigOverrides.submitButton is not defined %}
