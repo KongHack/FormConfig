@@ -1,6 +1,6 @@
 {% macro render(context) %}
-    {{ bugout(context.activeForm) }}
+    {% import '@form_config/macros/forms.twig' as form %}
     {% for field in context[context.activeForm] %}
-        {{ bugout(field) }}
+        {{ form.completeField(field) }}
     {% endfor %}
 {% endmacro %}

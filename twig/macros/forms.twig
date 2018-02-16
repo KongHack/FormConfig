@@ -12,43 +12,48 @@
 
 {% macro completeField(field) %}
     {% if field is not empty %}
-        {% import _self as myself %}
-        {% set def = field.getDefinition() %}
-        {% import def.twig as twigFile %}
+        {% if field.fields is defined %}
+            {% import '@form_config/macros/formArray.twig' as formArray %}
+            {{ formArray.handleFormArray(field) }}
+        {% else %}
+            {% import _self as myself %}
+            {% set def = field.getDefinition() %}
+            {% import def.twig as twigFile %}
 
-        {% if field.reqLevel > 0 %}
-            <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
-                {% if field.label is not null  %}
-                    <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
-                        {{ field.label|raw }}
+            {% if field.reqLevel > 0 %}
+                <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
+                    {% if field.label is not null  %}
+                        <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
+                            {{ field.label|raw }}
+                            {% if field.helpText is not null %}
+                                <span class="tool_badge text-info" title="{{ field.helpText }}">
+                                    <i class="fa fa-fw fa-question-circle"></i>
+                                </span>
+                            {% endif %}
+                            {% if field.reqLevel > 1 %}
+                                {{ myself.requiredIndicator() }}
+                            {% endif %}
+                        </label>
+                    {% else %}
                         {% if field.helpText is not null %}
                             <span class="tool_badge text-info" title="{{ field.helpText }}">
                                 <i class="fa fa-fw fa-question-circle"></i>
                             </span>
                         {% endif %}
-                        {% if field.reqLevel > 1 %}
-                            {{ myself.requiredIndicator() }}
-                        {% endif %}
-                    </label>
-                {% else %}
-                    {% if field.helpText is not null %}
-                        <span class="tool_badge text-info" title="{{ field.helpText }}">
-                            <i class="fa fa-fw fa-question-circle"></i>
-                        </span>
                     {% endif %}
-                {% endif %}
 
-                {{ twigFile.render(field) }}
+                    {{ twigFile.render(field) }}
 
-                {% if field.errors|length > 0 %}
-                    {% for err in field.errors %}
-                        {{ myself.fieldErrorNotice(err) }}
-                    {% endfor %}
-                {% endif %}
-                {% if field.getNoticeText()|length > 0 %}
-                    <div class="alert alert-warning">{{ field.getNoticeText()|raw }}</div>
-                {% endif %}
-            </div>
+                    {% if field.errors|length > 0 %}
+                        {% for err in field.errors %}
+                            {{ myself.fieldErrorNotice(err) }}
+                        {% endfor %}
+                    {% endif %}
+                    {% if field.getNoticeText()|length > 0 %}
+                        <div class="alert alert-warning">{{ field.getNoticeText()|raw }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% endif %}
     {% endif %}
 {% endmacro %}
