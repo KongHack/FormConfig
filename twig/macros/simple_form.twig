@@ -1,3 +1,6 @@
 {% macro render(context) %}
-    {{ bugout(context) }}
+    {{ bugout(context.activeForm) }}
+    {% for field in context[context.activeForm] %}
+        {{ bugout(field) }}
+    {% endfor %}
 {% endmacro %}
