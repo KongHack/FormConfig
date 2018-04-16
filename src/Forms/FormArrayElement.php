@@ -21,6 +21,7 @@ class FormArrayElement implements FieldContainerInterface
     protected $footFields    = [];
     protected $table_id      = '';
     protected $builder       = null;
+    protected $row_classes   = [];
 
     /**
      * @param string $name
@@ -114,6 +115,14 @@ class FormArrayElement implements FieldContainerInterface
         $this->index = $index;
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIndex()
+    {
+        return $this->index;
     }
 
     /**
@@ -257,5 +266,37 @@ class FormArrayElement implements FieldContainerInterface
                 FormConfig::makeFieldReadOnly($field);
             }
         }
+    }
+
+    /**
+     * @param int|null $index
+     * @return string
+     */
+    public function getRowClass(int $index = null)
+    {
+        if($index === null) {
+            $index = $this->index;
+        }
+
+        if(isset($this->row_classes[$index])) {
+            return $this->row_classes[$index];
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string   $class
+     * @param int|null $index
+     * @return $this
+     */
+    public function setRowClass(string $class, int $index = null)
+    {
+        if($index === null) {
+            $index = $this->index;
+        }
+        $this->row_classes[$index] = $class;
+
+        return $this;
     }
 }

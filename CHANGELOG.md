@@ -2,9 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/KongHack/Object-Manager/commits/master)
+## [Unreleased](https://github.com/KongHack/FormConfig/commits/master)
 
 
+
+
+## [1.4.2](https://github.com/KongHack/FormConfig/releases/tag/1.4.2)
+ - @GameCharmer Row class management for array elements
 
 
 ## [1.4.1](https://github.com/KongHack/FormConfig/releases/tag/1.4.1)

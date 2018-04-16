@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 {% for index, fields in arr.fields %}
-                    <tr>
+                    <tr class="{{ arr.getRowClass(index) }}">
                         {% for field in fields %}
                             <td class="{{ field.getColWidth() }}">
                                 {{  forms.completeField(field) }}
@@ -37,7 +37,7 @@
 
     {% else %}
         {% for index, fields in arr.fields %}
-            <div class="row">
+            <div class="row {{ arr.getRowClass(index) }}">
                 {% for field in fields %}
                     <div class="{{ field.getColWidth()?field.getColWidth():'col-sm-12' }}">
                         {{  forms.completeField(field) }}
