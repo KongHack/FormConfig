@@ -5,6 +5,7 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
+use GCWorld\FormConfig\Interfaces\ModelFieldText;
 use GCWorld\ORM\FieldName;
 
 /**
@@ -221,6 +222,9 @@ class FormConfig implements FieldContainerInterface
      */
     public function setValuesFromObject($object)
     {
+        $stock = ($object instanceof ModelFieldText);
+
+
         foreach ($this->fields as $name => $field) {
             /** @var \GCWorld\FormConfig\Forms\FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
@@ -240,12 +244,42 @@ class FormConfig implements FieldContainerInterface
                     }
                 }
             }
-            if (method_exists($field, 'getLabel') && empty($field->getLabel()) && method_exists(
-                $object,
-                'getFieldName'
-            )
-            ) {
-                $field->setLabel($object->getFieldName(str_replace('[]', '', $field->getName())));
+
+            // Stock makes things much quicker, so instead of adding these in as an or
+            // I'm splitting it out for speed purposes.
+            // Eventually, I'd like to remove the second half and only care about instances of model field text;
+            if($stock) {
+                if(empty($field->getLabel())) {
+                    $name = $object->getFieldName(str_replace('[]', '', $field->getName()));
+                    if($name !== null) {
+                        $field->setLabel($name);
+                    }
+                }
+                if(empty($field->getHelpText())) {
+                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getName()));
+                    if($name !== null) {
+                        $field->setHelpText($name);
+                    }
+                }
+            } else {
+                if (method_exists($field, 'getLabel')
+                    && empty($field->getLabel())
+                    && method_exists($object, 'getFieldName')
+                ) {
+                    $name = $object->getFieldName(str_replace('[]', '', $field->getName()));
+                    if ($name !== null) {
+                        $field->setLabel($name);
+                    }
+                }
+                if (method_exists($field, 'getHelpText')
+                    && empty($field->getHelpText())
+                    && method_exists($object, 'getFieldHelpText')
+                ) {
+                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getName()));
+                    if ($name !== null) {
+                        $field->setHelpText($name);
+                    }
+                }
             }
         }
 
