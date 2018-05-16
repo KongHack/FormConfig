@@ -126,7 +126,7 @@ class FormConfig implements FieldContainerInterface
      */
     public function addBuiltField(Base $field)
     {
-        $this->fields[$field->getName()] = $field;
+        $this->fields[$field->getNameRaw()] = $field;
 
         return $this;
     }
@@ -250,13 +250,13 @@ class FormConfig implements FieldContainerInterface
             // Eventually, I'd like to remove the second half and only care about instances of model field text;
             if($stock) {
                 if(empty($field->getLabel())) {
-                    $name = $object->getFieldName(str_replace('[]', '', $field->getName()));
+                    $name = $object->getFieldName(str_replace('[]', '', $field->getNameRaw()));
                     if($name !== null) {
                         $field->setLabel($name);
                     }
                 }
                 if(empty($field->getHelpText())) {
-                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getName()));
+                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getNameRaw()));
                     if($name !== null) {
                         $field->setHelpText($name);
                     }
@@ -266,7 +266,7 @@ class FormConfig implements FieldContainerInterface
                     && empty($field->getLabel())
                     && method_exists($object, 'getFieldName')
                 ) {
-                    $name = $object->getFieldName(str_replace('[]', '', $field->getName()));
+                    $name = $object->getFieldName(str_replace('[]', '', $field->getNameRaw()));
                     if ($name !== null) {
                         $field->setLabel($name);
                     }
@@ -275,7 +275,7 @@ class FormConfig implements FieldContainerInterface
                     && empty($field->getHelpText())
                     && method_exists($object, 'getFieldHelpText')
                 ) {
-                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getName()));
+                    $name = $object->getFieldHelpText(str_replace('[]', '', $field->getNameRaw()));
                     if ($name !== null) {
                         $field->setHelpText($name);
                     }

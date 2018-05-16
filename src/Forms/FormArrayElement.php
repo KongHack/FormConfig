@@ -67,7 +67,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function addFieldObject(FormField $field)
     {
-        $this->fields[$this->index][$field->getName()] = $field;
+        $this->fields[$this->index][$field->getNameRaw()] = $field;
 
         return $this;
     }
@@ -90,7 +90,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function addBuiltField(Base $field)
     {
-        $this->fields[$this->index][$field->getName()] = $field;
+        $this->fields[$this->index][$field->getNameRaw()] = $field;
 
         return $this;
     }
