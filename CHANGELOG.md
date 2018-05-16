@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.4.3](https://github.com/KongHack/FormConfig/releases/tag/1.4.3)
+ - @GameCharmer Resolve issue with multi-select via builder system
+
+
 ## [1.4.2](https://github.com/KongHack/FormConfig/releases/tag/1.4.2)
  - @GameCharmer Row class management for array elements
 
