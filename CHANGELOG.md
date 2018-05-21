@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+ - @GameCharmer Upgraded to YML for configs
+ - @GameCharmer added options for using HoldOn within your forms
+
 
 ## [1.4.3](https://github.com/KongHack/FormConfig/releases/tag/1.4.3)
  - @GameCharmer Resolve issue with multi-select via builder system

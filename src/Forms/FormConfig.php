@@ -2,6 +2,7 @@
 namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\Core\Config;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
@@ -16,6 +17,7 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
+    protected $useHoldOn     = false;
     protected $name          = '';
     protected $formId        = '';
     protected $twigTemplate  = '';
@@ -29,6 +31,31 @@ class FormConfig implements FieldContainerInterface
         'urlBase'     => '',
         'urlCurrent'  => '',
     ];
+
+    public function __construct()
+    {
+        $config = Config::getInstance()->getConfig();
+        if(isset($config['general']['holdOn'])) {
+            $this->useHoldOn = (bool) $config['general']['holdOn'];
+        }
+    }
+
+    /**
+     * @param bool $use
+     *
+     * @return $this
+     */
+    public function setHoldOn(bool $use)
+    {
+        $this->useHoldOn = $use;
+
+        return $this;
+    }
+
+    public function canHoldOn()
+    {
+        return $this->useHoldOn;
+    }
 
     /**
      * @param string $name
@@ -382,6 +409,7 @@ class FormConfig implements FieldContainerInterface
             'formUrl'       => $this->renderArgs['urlCurrent'],
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
+            'holdOn'        => $this->useHoldOn,
             $this->name     => $this->fields,
         ];
     }
