@@ -13,10 +13,29 @@
         </div>
         <div class="panel-footer">
             {% if twigOverrides.submitButton is not defined %}
-                <input type="submit" class="btn btn-success" value="Save">
+                <input type="submit" class="btn btn-success" value="Save" id="FC_SAVE_BTN">
             {% else %}
                 {{ twigOverrides.submitButton|raw }}
             {% endif %}
         </div>
     </div>
 </form>
+{% if FC_getConfig().general.holdOn %}
+    <script type="text/javascript">
+        $(function(){
+            var FC_HOTrip = false;
+            $("#formId").submit(function(){
+                if(!FC_HOTrip) {
+                    HoldOn.open({{ FC_getConfig().general.holdOnOptions }});
+                    FC_HOTrip = true;
+                }
+            });
+            $("#FC_SAVE_BTN").click(function(){
+                if(!FC_HOTrip) {
+                    HoldOn.open({{ FC_getConfig().general.holdOnOptions }});
+                    FC_HOTrip = true;
+                }
+            });
+        });
+    </script>
+{% endif %}

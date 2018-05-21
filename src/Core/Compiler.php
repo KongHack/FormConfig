@@ -24,21 +24,23 @@ class Compiler
         $cConfig = new Config();
         $config = $cConfig->getConfig();
 
-        foreach($config as $group => $item) {
-            $namespace = $item['namespace'];
-            $directory = $item['directory'];
-            // Core / Source / Vendors
-            $found = false;
-            for($i=3;$i<10;++$i) {
-                $up = str_repeat('..'.DIRECTORY_SEPARATOR,$i);
-                if(is_dir($base.$up.$directory)) {
-                    $this->addFieldGroup($namespace,realpath($base.$up.$directory));
-                    $found = true;
-                    break;
+        if(isset($config['forms'])) {
+            foreach ($config['forms'] as $group => $item) {
+                $namespace = $item['namespace'];
+                $directory = $item['directory'];
+                // Core / Source / Vendors
+                $found = false;
+                for ($i = 3; $i < 10; ++$i) {
+                    $up = str_repeat('..'.DIRECTORY_SEPARATOR, $i);
+                    if (is_dir($base.$up.$directory)) {
+                        $this->addFieldGroup($namespace, realpath($base.$up.$directory));
+                        $found = true;
+                        break;
+                    }
                 }
-            }
-            if(!$found) {
-                throw new \Exception('Did not find the things in group: '.$group);
+                if (!$found) {
+                    throw new \Exception('Did not find the things in group: '.$group);
+                }
             }
         }
     }
@@ -129,6 +131,7 @@ class Compiler
 
         $cEncoder = new PHPEncoder();
         $encoded  = $cEncoder->encode($definitions, [
+            'array.short'        => true,
             'array.base'         => 4,
             'array.inline'       => false,
             'array.omit'         => false,

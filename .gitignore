@@ -1,6 +1,6 @@
 .idea/*
 src/Generated/*
 vendor/*
-config/config.ini
-config/GCWorld_FormConfig.ini
+config/config.yml
+config/GCWorld_FormConfig.yml
 twig/cache/*

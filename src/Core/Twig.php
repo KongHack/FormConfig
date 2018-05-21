@@ -36,6 +36,13 @@ class Twig
             self::attachPath($loader);
         }
 
+        $environment->addFunction(new \Twig_SimpleFunction('FC_getConfig', function(){
+            $cConfig = new Config();
+            $config  = $cConfig->getConfig();
+            unset($config['forms']);
+            return $config;
+        }));
+
     }
 
     /**

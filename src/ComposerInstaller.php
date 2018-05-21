@@ -27,21 +27,21 @@ class ComposerInstaller
             $vendorDir = rtrim(__DIR__,DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'vendor';
         }
 
-        // Determine if FormConfig ini already exists.
-        $iniPath = realpath($vendorDir.$ds.'..'.$ds.'config').$ds;
+        // Determine if FormConfig yml already exists.
+        $ymlPath = realpath($vendorDir.$ds.'..'.$ds.'config').$ds;
 
-        if (!is_dir($iniPath)) {
-            @mkdir($iniPath);
-            if (!is_dir($iniPath)) {
-                echo 'WARNING:: Cannot create config folder in application root:: '.$iniPath;
+        if (!is_dir($ymlPath)) {
+            @mkdir($ymlPath);
+            if (!is_dir($ymlPath)) {
+                echo 'WARNING:: Cannot create config folder in application root:: '.$ymlPath;
                 return false;   // Silently Fail.
             }
         }
-        if (!file_exists($iniPath.'GCWorld_FormConfig.ini')) {
-            $example = file_get_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.example.ini');
-            file_put_contents($iniPath.'GCWorld_FormConfig.ini', $example);
+        if (!file_exists($ymlPath.'GCWorld_FormConfig.yml')) {
+            $example = file_get_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.example.yml');
+            file_put_contents($ymlPath.'GCWorld_FormConfig.yml', $example);
         }
-        file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.ini', 'config_path='.$iniPath.'GCWorld_FormConfig.ini');
+        file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.yml', 'config_path='.$ymlPath.'GCWorld_FormConfig.yml');
 
         self::generateCode();
 
