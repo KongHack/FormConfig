@@ -37,8 +37,7 @@ class Twig
         }
 
         $environment->addFunction(new \Twig_SimpleFunction('FC_getConfig', function(){
-            $cConfig = new Config();
-            $config  = $cConfig->getConfig();
+            $config  = Config::getInstance()->getConfig();
             unset($config['forms']);
             return $config;
         }));

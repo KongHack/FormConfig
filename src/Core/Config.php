@@ -13,14 +13,20 @@ class Config
      * @var array
      */
     protected $config = [];
-
+    /**
+     * @var null|string
+     */
     protected $configPath = null;
+    /**
+     * @var null|Config
+     */
+    protected static $instance = null;
 
     /**
      * Config constructor.
      * @throws Exception
      */
-    public function __construct()
+    protected function __construct()
     {
         $file = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..';
         $file .= DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.yml';
@@ -66,6 +72,19 @@ class Config
         }
 
         $this->config = $config;
+    }
+
+    /**
+     * @return Config|null
+     * @throws Exception
+     */
+    public static function getInstance()
+    {
+        if(self::$instance == null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
     }
 
     /**

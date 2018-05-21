@@ -3,6 +3,7 @@ namespace GCWorld\FormConfig;
 
 use GCWorld\FormConfig\Core\Compiler;
 use Composer\Script\Event;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Used for a post autoload dump script in composer.
@@ -41,7 +42,10 @@ class ComposerInstaller
             $example = file_get_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.example.yml');
             file_put_contents($ymlPath.'GCWorld_FormConfig.yml', $example);
         }
-        file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.yml', 'config_path='.$ymlPath.'GCWorld_FormConfig.yml');
+
+        $tmp = ['config_path' => $ymlPath.'GCWorld_FormConfig.yml'];
+
+        file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.yml', Yaml::dump($tmp,4));
 
         self::generateCode();
 

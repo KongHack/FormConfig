@@ -21,11 +21,14 @@ class Compiler
         $dir  = $base . '..'.DIRECTORY_SEPARATOR.'Fields';
         $this->groups['\\GCWorld\\FormConfig\\Fields'] = $dir;
 
-        $cConfig = new Config();
-        $config = $cConfig->getConfig();
+        $config = Config::getInstance()->getConfig();
 
         if(isset($config['forms'])) {
             foreach ($config['forms'] as $group => $item) {
+                if($group == 'example_group') {
+                    continue;
+                }
+
                 $namespace = $item['namespace'];
                 $directory = $item['directory'];
                 // Core / Source / Vendors
