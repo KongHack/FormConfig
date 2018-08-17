@@ -44,7 +44,7 @@ class TextArea extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setType(StaticInput::getKey());
+        $field->setType(Well::getKey());
 
         return $field;
     }

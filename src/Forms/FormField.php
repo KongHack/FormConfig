@@ -114,7 +114,7 @@ class FormField
      */
     public function __construct(string $name)
     {
-        $this->name = $name;
+        $this->name       = $name;
         $this->definition = FieldConstants::DEFINITIONS[FieldConstants::TYPE_TEXT];
     }
 
@@ -176,8 +176,8 @@ class FormField
     public function getName()
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
-        $obj = new $class();
-        if($obj instanceof MultiSelectInterface) {
+        $obj   = new $class();
+        if ($obj instanceof MultiSelectInterface) {
             if ('[]' != substr($this->name, -2)) {
                 return $this->name.'[]';
             }
@@ -264,16 +264,16 @@ class FormField
     public function setType(string $type)
     {
         if (!in_array($type, self::getTypes())) {
-            throw new \Exception('Invalid Type: '.$type.'<br>Possible field types are: '.implode(', ', self::getTypes()));
+            $msg = 'Invalid Type: '.$type.'<br>Possible field types are: '.implode(', ',self::getTypes());
+            throw new \Exception($msg);
         }
 
-        $this->type = $type;
+        $this->type       = $type;
         $this->definition = FieldConstants::DEFINITIONS[$type];
-        $class = FieldConstants::DEFINITIONS[$type]['class'];
-        if(method_exists($class, 'init')) {
+        $class            = FieldConstants::DEFINITIONS[$type]['class'];
+        if (method_exists($class, 'init')) {
             $class::init($this);
         }
-
 
         return $this;
     }

@@ -24,6 +24,7 @@ interface FieldInterface
     public static function getTwigPath(): string;
 
     /**
+     * @param FormField $field
      * @return FormField
      */
     public static function makeReadOnly(FormField $field): FormField;
