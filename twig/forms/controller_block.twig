@@ -24,7 +24,7 @@
     <script type="text/javascript">
         $(function(){
             var FC_HOTrip = false;
-            $("#formId").submit(function(){
+            $("#{{ formId }}").submit(function(){
                 if(!FC_HOTrip) {
                     HoldOn.open({{ FC_getConfig().general.holdOnOptions }});
                     FC_HOTrip = true;
