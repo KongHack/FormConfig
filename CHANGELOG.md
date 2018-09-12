@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.0.3](https://github.com/KongHack/FormConfig/releases/tag/2.0.3)
+ - @GameCharmer Fix issue with spaces in data attribute values
+
+
 ## [2.0.2](https://github.com/KongHack/FormConfig/releases/tag/2.0.2)
  - @GameCharmer Fix form controller formId in JS
 
