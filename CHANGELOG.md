@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.0.4](https://github.com/KongHack/FormConfig/releases/tag/2.0.4)
+ - @GameCharmer Resolve issue with both hold on and delete form
+
+
 ## [2.0.3](https://github.com/KongHack/FormConfig/releases/tag/2.0.3)
  - @GameCharmer Fix issue with spaces in data attribute values
 
