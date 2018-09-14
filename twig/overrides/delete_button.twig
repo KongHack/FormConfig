@@ -4,19 +4,20 @@
 <script type="text/javascript">
     $(function(){
         var $form = $("#override_delete_{{ rand }}").closest('form');
-        $form.submit(function(e){
+        $form.addClass('FC_BOUND');
+        $form.on('submit.FCDEL',function(e){
             e.preventDefault();
             if(typeof bootbox !== undefined) {
                 bootbox.confirm("Are you sure you want to delete?", function(result){
                     if(result) {
-                        $form.unbind('submit');
+                        $form.unbind('submit.FCDEL');
                         $form.submit();
                     }
                 })
             } else {
                 var result = confirm("Are you sure you want to delete?");
                 if(result) {
-                    $form.unbind('submit');
+                    $form.unbind('submit.FCDEL');
                     $form.submit();
                 }
             }
