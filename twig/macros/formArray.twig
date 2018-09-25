@@ -12,14 +12,37 @@
                 </tr>
             </thead>
             <tbody>
-                {% for index, fields in arr.fields %}
-                    <tr class="{{ arr.getRowClass(index) }}">
-                        {% for field in fields %}
-                            <td class="{{ field.getColWidth() }}">
-                                {{  forms.completeField(field) }}
-                            </td>
-                        {% endfor %}
-                    </tr>
+                {% for index in range(0, arr.getIndex()) %}
+                    {% if arr.getFields()[index] %}
+                        {% set fields = arr.getFields()[index] %}
+                        <tr class="{{ arr.getRowClass(index) }}">
+                            {% for field in fields %}
+                                <td class="{{ field.getColWidth() }}">
+                                    {{  forms.completeField(field) }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                    {% if arr.getExtras()[index] %}
+                        {% set extra = arr.getExtras()[index] %}
+                        {% if extra == 'HR' %}
+                            <tr>
+                                <td colspan="{{ arr.getHeaders()|length }}"><hr></td>
+                            </tr>
+                        {% endif %}
+                        {% if extra == 'BREAK' %}
+                            <tr>
+                                <td colspan="{{ arr.getHeaders()|length }}">&nbsp;</td>
+                            </tr>
+                        {% endif %}
+                        {% if extra == 'HEADERS' %}
+                            <tr>
+                                {% for i, head in arr.getHeaders() %}
+                                    <th class="{{ widths[i] }}">{{ head|raw }}</th>
+                                {% endfor %}
+                            </tr>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             </tbody>
             {% if arr.getFootFields()|length > 0 %}
@@ -36,14 +59,29 @@
         </table>
 
     {% else %}
-        {% for index, fields in arr.fields %}
-            <div class="row {{ arr.getRowClass(index) }}">
-                {% for field in fields %}
-                    <div class="{{ field.getColWidth()?field.getColWidth():'col-sm-12' }}">
-                        {{  forms.completeField(field) }}
-                    </div>
-                {% endfor %}
-            </div>
+        {% for index in range(0, arr.getIndex()) %}
+            {% if arr.getFields()[index] %}
+                {% set fields = arr.getFields()[index] %}
+                <div class="row {{ arr.getRowClass(index) }}">
+                    {% for field in fields %}
+                        <div class="{{ field.getColWidth()?field.getColWidth():'col-sm-12' }}">
+                            {{  forms.completeField(field) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if arr.getExtras()[index] %}
+                {% set extra = arr.getExtras()[index] %}
+                {% if extra == 'HR' %}
+                    <hr>
+                {% endif %}
+                {% if extra == 'BREAK' %}
+                    <br>
+                {% endif %}
+                {% if extra == 'HEADERS' %}
+                    <br>
+                {% endif %}
+            {% endif %}
         {% endfor %}
         {% if arr.getFootFields()|length > 0 %}
             <div class="row">

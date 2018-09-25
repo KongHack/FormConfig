@@ -22,6 +22,7 @@ class FormArrayElement implements FieldContainerInterface
     protected $table_id      = '';
     protected $builder       = null;
     protected $row_classes   = [];
+    protected $extras        = [];
 
     /**
      * @param string $name
@@ -101,6 +102,48 @@ class FormArrayElement implements FieldContainerInterface
     public function bumpIndex()
     {
         ++$this->index;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function addBreak()
+    {
+        if(isset($this->fields[$this->index])) {
+           $this->bumpIndex();
+        }
+        $this->extras[$this->index] = 'BREAK';
+        $this->bumpIndex();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function addHR()
+    {
+        if(isset($this->fields[$this->index])) {
+           $this->bumpIndex();
+        }
+        $this->extras[$this->index] = 'HR';
+        $this->bumpIndex();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function repeatHeaders()
+    {
+        if(isset($this->fields[$this->index])) {
+           $this->bumpIndex();
+        }
+        $this->extras[$this->index] = 'HEADERS';
+        $this->bumpIndex();
 
         return $this;
     }
@@ -298,5 +341,13 @@ class FormArrayElement implements FieldContainerInterface
         $this->row_classes[$index] = $class;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtras()
+    {
+        return $this->extras;
     }
 }
