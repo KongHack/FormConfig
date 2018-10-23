@@ -12,6 +12,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ComposerInstaller
 {
+    const CONFIG_FILE_NAME = 'GCWorld_FormConfig.yml';
+
     /**
      * Runs post-dump after composer finishes executing.
      *
@@ -38,12 +40,32 @@ class ComposerInstaller
                 return false;   // Silently Fail.
             }
         }
-        if (!file_exists($ymlPath.'GCWorld_FormConfig.yml')) {
+        if (!file_exists($ymlPath.self::CONFIG_FILE_NAME)) {
             $example = file_get_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.example.yml');
-            file_put_contents($ymlPath.'GCWorld_FormConfig.yml', $example);
+            file_put_contents($ymlPath.self::CONFIG_FILE_NAME, $example);
         }
 
-        $tmp = ['config_path' => $ymlPath.'GCWorld_FormConfig.yml'];
+        $tmpYml = explode(DIRECTORY_SEPARATOR, $ymlPath);
+        $tmpMy  = explode(DIRECTORY_SEPARATOR, $myDir);
+        $loops  = max(count($tmpMy),count($tmpYml));
+
+        array_pop($tmpYml); // Remove the trailing slash
+
+        for($i=0;$i<$loops;++$i) {
+            if(!isset($tmpYml[$i]) || !isset($tmpMy[$i])) {
+                break;
+            }
+            if($tmpYml[$i] === $tmpMy[$i]) {
+                unset($tmpYml[$i]);
+                unset($tmpMy[$i]);
+            }
+        }
+
+        $relPath = str_repeat('..'.DIRECTORY_SEPARATOR,count($tmpMy));
+        $relPath .= implode(DIRECTORY_SEPARATOR, $tmpYml);
+        $ymlPath = $relPath.DIRECTORY_SEPARATOR.self::CONFIG_FILE_NAME;
+
+        $tmp = ['config_path' => $ymlPath];
 
         file_put_contents($myDir.$ds.'..'.$ds.'config'.$ds.'config.yml', Yaml::dump($tmp,4));
 

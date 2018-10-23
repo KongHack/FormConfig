@@ -34,17 +34,19 @@ class Config
             throw new Exception('Config File Not Found');
         }
         $this->configPath = $file;
-        $config           = Yaml::parse(file_get_contents($file));
+        $config           = Yaml::parseFile($file);
         if (isset($config['config_path'])) {
-            $file             = $config['config_path'];
+            // We need an extra ../ here due to the composer installer being 1 level up.
+
+            $file             = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$config['config_path'];
             $this->configPath = $file;
-            $config           = Yaml::parse(file_get_contents($file));
+            $config           = Yaml::parseFile($file);
         }
 
         // Get the example config, make sure we have all variables.
         $example = rtrim(dirname(__FILE__), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..';
         $example .= DIRECTORY_SEPARATOR.'config/config.example.yml';
-        $exConfig = Yaml::parse(file_get_contents($example));
+        $exConfig = Yaml::parseFile($example);
 
         $reSave = false;
         foreach ($exConfig as $k => $v) {
