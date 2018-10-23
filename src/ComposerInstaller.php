@@ -15,7 +15,7 @@ class ComposerInstaller
     const CONFIG_FILE_NAME = 'GCWorld_FormConfig.yml';
 
     /**
-     * Runs post-dump after composer finishes executing.
+     * @param Event|null $event
      *
      * @return bool
      */
