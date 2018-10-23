@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.0.6](https://github.com/KongHack/FormConfig/releases/tag/2.0.6)
+ - @GameCharmer convert config pathing to relative
+
+
 ## [2.0.5](https://github.com/KongHack/FormConfig/releases/tag/2.0.5)
  - @GameCharmer addBreak, addHR, repeatHeaders functions for arrays
 
