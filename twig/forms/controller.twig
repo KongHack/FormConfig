@@ -32,9 +32,9 @@
     </div>
 </div>
 
-{% if forms[activeForm].getTwigAppend() %}
-    {% include forms[activeForm].getTwigAppend() %}
+{% if FC_Config.getTwigAppend() %}
+    {% include FC_Config.getTwigAppend() %}
 {% endif %}
-{% if forms[activeForm].getHtmlAppend() %}
-    {{ forms[activeForm].getHtmlAppend()|raw }}
+{% if FC_Config.getHtmlAppend() %}
+    {{ FC_Config.getHtmlAppend()|raw }}
 {% endif %}

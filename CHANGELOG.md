@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.0.9](https://github.com/KongHack/FormConfig/releases/tag/2.0.9)
+ - @GameCharmer Implement Twig & HTML Append methods in output
+ - @GameCharmer New Twig Object, `FC_Config`
+
+
 ## [2.0.8](https://github.com/KongHack/FormConfig/releases/tag/2.0.8)
  - @GameCharmer Added Twig & Html Append methods to form config
  - @GameCharmer Added key based IDs to each navigational button

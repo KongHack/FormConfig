@@ -404,6 +404,7 @@ class FormConfig implements FieldContainerInterface
     public function getTwigArray()
     {
         return [
+            'FC_Config'     => $this,
             'form'          => $this->twigTemplate,
             'activeForm'    => $this->renderArgs['formCurrent'],
             'forms'         => $this->renderArgs['formArray'],
