@@ -8,6 +8,7 @@
                 <div class="panel-body">
                     {% for key,value in forms %}
                         <a href="{{ route }}/{{ key }}"
+                           id="FC_NAV_BTN_{{ key }}"
                            class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
                                 {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
                         >{{ value|raw }}</a>
