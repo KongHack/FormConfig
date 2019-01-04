@@ -33,3 +33,11 @@
         });
     </script>
 {% endif %}
+{% if not FC_CONTROLLER %}
+    {% if forms[activeForm].getTwigAppend() %}
+        {% include forms[activeForm].getTwigAppend() %}
+    {% endif %}
+    {% if forms[activeForm].getHtmlAppend() %}
+        {{ forms[activeForm].getHtmlAppend()|raw }}
+    {% endif %}
+{% endif %}

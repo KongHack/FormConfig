@@ -1,3 +1,4 @@
+{% set FC_CONTROLLER = true %}
 <div class="row">
     {% if forms|length > 1 %}
         <div class="col-md-3">
@@ -30,3 +31,10 @@
         {% endif %}
     </div>
 </div>
+
+{% if forms[activeForm].getTwigAppend() %}
+    {% include forms[activeForm].getTwigAppend() %}
+{% endif %}
+{% if forms[activeForm].getHtmlAppend() %}
+    {{ forms[activeForm].getHtmlAppend()|raw }}
+{% endif %}
