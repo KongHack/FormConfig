@@ -8,6 +8,7 @@
                 autocomplete="off"
                 {{ (field.value ? 'checked="checked"' : '') }}
                 {{ field.getDataAttributeString()|raw }}
+                class="{{ field.class }}"
         >
     </div>
 {% endmacro %}
