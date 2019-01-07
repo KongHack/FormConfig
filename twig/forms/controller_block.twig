@@ -33,3 +33,11 @@
         });
     </script>
 {% endif %}
+{% if not FC_CONTROLLER %}
+    {% if FC_Config.getTwigAppend() %}
+        {% include FC_Config.getTwigAppend() %}
+    {% endif %}
+    {% if FC_Config.getHtmlAppend() %}
+        {{ FC_Config.getHtmlAppend()|raw }}
+    {% endif %}
+{% endif %}

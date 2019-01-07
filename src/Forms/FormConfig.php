@@ -31,6 +31,8 @@ class FormConfig implements FieldContainerInterface
         'urlBase'     => '',
         'urlCurrent'  => '',
     ];
+    protected $twigAppend = null;
+    protected $htmlAppend = null;
 
     public function __construct()
     {
@@ -402,6 +404,7 @@ class FormConfig implements FieldContainerInterface
     public function getTwigArray()
     {
         return [
+            'FC_Config'     => $this,
             'form'          => $this->twigTemplate,
             'activeForm'    => $this->renderArgs['formCurrent'],
             'forms'         => $this->renderArgs['formArray'],
@@ -516,5 +519,41 @@ class FormConfig implements FieldContainerInterface
             $this->builder = new FieldCreate($this);
         }
         return $this->builder;
+    }
+
+    /**
+     * @param string $twig_path
+     * @return $this
+     */
+    public function setTwigAppend(string $twig_path)
+    {
+        $this->twigAppend = $twig_path;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTwigAppend()
+    {
+        return $this->twigAppend;
+    }
+
+    /**
+     * @param string $html
+     * @return $this
+     */
+    public function setHtmlAppend(string $html)
+    {
+        $this->htmlAppend = $html;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHtmlAppend()
+    {
+        return $this->htmlAppend;
     }
 }
