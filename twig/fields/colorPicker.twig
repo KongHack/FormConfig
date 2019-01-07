@@ -6,6 +6,9 @@
                class="form-control {{ field.class }}"
                placeholder="{{ field.getPlaceholder()|default('') }}"
                id="{{ field.id }}"
+               {% if field.labelledBy != '' %}
+                   aria-labelledby="{{ field.labelledBy }}"
+               {% endif %}
                 {{ field.getDataAttributeString()|raw }}
         >
     </div>

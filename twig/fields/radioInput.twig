@@ -1,9 +1,11 @@
 {% macro render(field, overrideOptions) %}
     {% set options = (overrideOptions?overrideOptions:field.options) %}
+
     <div class="checkbox" id="{{ field.id }}">
         {% for k,v in options %}
             <input
                 type="radio"
+                id="ri_{{ field.id }}_{{ k }}"
                 name="{{ field.name }}"
                 class="radio {{ field.class }}"
                 style="display:inline;"
@@ -13,7 +15,7 @@
                 {% endif %}
                 {{ field.getDataAttributeString()|raw }}
             >
-            {{ v|raw }}<br>
+            <label for="ri_{{ field.id }}_{{ k }}"> {{ v|raw }}</label><br>
         {% endfor %}
     </div>
 {% endmacro %}

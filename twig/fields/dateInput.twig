@@ -7,6 +7,9 @@
                class="form-control {{ field.class }}"
                style="text-align:right"
                placeholder="{{ field.getPlaceholder()|default('') }}"
+               {% if field.labelledBy != '' %}
+                   aria-labelledby="{{ field.labelledBy }}"
+               {% endif %}
                 {{ field.getDataAttributeString()|raw }}
         >
     {% else %}
@@ -17,6 +20,9 @@
                style="text-align:right"
                class="form-control {{ field.class }}"
                placeholder="{{ field.getPlaceholder()|default('') }}"
+               {% if field.labelledBy != '' %}
+                   aria-labelledby="{{ field.labelledBy }}"
+               {% endif %}
                 {{ field.getDataAttributeString()|raw }}
         >
     {% endif %}

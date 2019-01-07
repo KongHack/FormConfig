@@ -40,6 +40,11 @@ class FormArrayElement implements FieldContainerInterface
             $field->setColWidth($this->widths[$index]);
         }
 
+        //sets a default val that can be overwritten for the sake of WCAG aria-labelledby
+        if(empty($this->table_id)){
+            $this->table_id = rand();
+        }
+
         return $field;
     }
 
