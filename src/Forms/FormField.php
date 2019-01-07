@@ -120,7 +120,7 @@ class FormField
     public function __construct(string $name)
     {
         $this->name       = $name;
-        $this->definition = FieldConstant::DEFINITIONS[FieldConstants::TYPE_TEXT];
+        $this->definition = FieldConstants::DEFINITIONS[FieldConstants::TYPE_TEXT];
     }
 
     /**
