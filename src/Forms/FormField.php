@@ -110,6 +110,11 @@ class FormField
     protected $definition = [];
 
     /**
+     * @var string
+     */
+    protected $labelledBy = '';
+
+    /**
      * @param string $name
      */
     public function __construct(string $name)
@@ -670,5 +675,24 @@ class FormField
         $class      = $definition['class'];
 
         return $class::makeReadOnly($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabelledBy()
+    {
+        return $this->labelledBy;
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setLabelledBy(string $value)
+    {
+        $this->labelledBy = $value;
+
+        return $this;
     }
 }

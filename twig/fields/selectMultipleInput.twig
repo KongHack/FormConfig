@@ -4,7 +4,13 @@
     {% set id = (field.id?field.id:field.name) %}
 
     <div class="input-group">
-        <select name="{{ field.name }}" id="{{ id }}" class="form-control {{ field.class }}" multiple {{ field.getDataAttributeString()|raw }}>
+        <select name="{{ field.name }}"
+                id="{{ id }}"
+                class="form-control {{ field.class }}"
+                multiple
+                {{ field.getDataAttributeString()|raw }}
+                {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+        >
             {% if placeholder %}
                 <option value="" disabled="disabled">{{ placeholder }}</option>
             {% endif %}

@@ -189,6 +189,11 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function getTableId()
     {
+        //wcag compliance (sets ID for TH and fields)
+        if(empty($this->table_id)){
+            $this->setTableId('table_'.rand());
+        }
+
         return $this->table_id;
     }
 

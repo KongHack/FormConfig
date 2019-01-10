@@ -5,6 +5,7 @@
             style="height:{{ field.height|default('120px') }}"
             id="ck_{{ field.name }}"
             {{ field.getDataAttributeString()|raw }}
+            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
     >{{ field.value }}</textarea>
     <script type="text/javascript">
         CKEDITOR.replace("ck_{{ field.name }}", {'toolbar':'Full'});

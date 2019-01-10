@@ -1,3 +1,10 @@
 {% macro render(field) %}
-    <textarea name="{{ field.name }}" id="{{ field.id }}" class="form-control {{ field.class }}" style="height:{{ field.height|default('120px') }}" {{ field.getDataAttributeString()|raw }}>{{ field.value }}</textarea>
+    <textarea name="{{ field.name }}"
+              id="{{ field.id }}"
+              class="form-control {{ field.class }}"
+              style="height:{{ field.height|default('120px') }}"
+              {{ field.getDataAttributeString()|raw }}
+              {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+    >{{ field.value }}</textarea>
 {% endmacro %}
+

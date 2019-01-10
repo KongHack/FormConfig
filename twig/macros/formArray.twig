@@ -7,7 +7,8 @@
                 <tr>
                     {% set widths = arr.getWidths() %}
                     {% for i, head in arr.getHeaders() %}
-                        <th class="{{ widths[i] }}">{{ head|raw }}</th>
+
+                        <th id="th_{{ arr.getTableId() }}_{{ loop.index }}" class="{{ widths[i] }}">{{ head|raw }}</th>
                     {% endfor %}
                 </tr>
             </thead>
@@ -18,6 +19,7 @@
                         <tr class="{{ arr.getRowClass(index) }}">
                             {% for field in fields %}
                                 <td class="{{ field.getColWidth() }}">
+                                    {% set tmp = field.setLabelledBy('th_' ~ arr.getTableId() ~ '_' ~ loop.index) %}
                                     {{  forms.completeField(field) }}
                                 </td>
                             {% endfor %}

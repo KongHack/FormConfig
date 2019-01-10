@@ -10,6 +10,7 @@
            step="0.01"
            value="{{ field.value }}"
            onblur="$(this).val(parseFloat($(this).val()).toFixed(2))"
+           {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
             {{ field.getDataAttributeString()|raw }}
     >
     {% if field.errors|length>0 %}

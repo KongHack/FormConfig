@@ -1,14 +1,14 @@
 {% macro render(field) %}
     <div>
-        <input
-                type="checkbox"
-                name="{{ field.name }}"
-                id="{{ field.id }}"
-                value="1"
-                autocomplete="off"
-                {{ (field.value ? 'checked="checked"' : '') }}
-                {{ field.getDataAttributeString()|raw }}
-                class="{{ field.class }}"
+        <input type="checkbox"
+               name="{{ field.name }}"
+               id="{{ field.id }}"
+               value="1"
+               autocomplete="off"
+               {{ (field.value ? 'checked="checked"' : '') }}
+               {{ field.getDataAttributeString()|raw }}
+               class="{{ field.class }}"
+               {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
         >
     </div>
 {% endmacro %}
