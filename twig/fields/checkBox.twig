@@ -8,9 +8,7 @@
                {{ (field.value ? 'checked="checked"' : '') }}
                {{ field.getDataAttributeString()|raw }}
                class="{{ field.class }}"
-               {% if field.labelledBy != '' %}
-                   aria-labelledby="{{ field.labelledBy }}"
-               {% endif %}
+               {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
         >
     </div>
 {% endmacro %}

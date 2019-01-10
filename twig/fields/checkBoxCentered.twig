@@ -7,9 +7,7 @@
                autocomplete="off"
                {{ (field.value ? 'checked="checked"' : '') }}
                {{ field.getDataAttributeString()|raw }}
-               {% if field.labelledBy != '' %}
-                   aria-labelledby="{{ field.labelledBy }}"
-               {% endif %}
+               {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
                class="{{ field.class }}"
         >
     </div>

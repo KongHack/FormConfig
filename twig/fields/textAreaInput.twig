@@ -4,9 +4,7 @@
               class="form-control {{ field.class }}"
               style="height:{{ field.height|default('120px') }}"
               {{ field.getDataAttributeString()|raw }}
-              {% if field.labelledBy != '' %}
-                  aria-labelledby="{{ field.labelledBy }}"
-              {% endif %}
+              {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
     >{{ field.value }}</textarea>
 {% endmacro %}
 
