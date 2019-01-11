@@ -15,7 +15,7 @@
             {% if min is not null  %} min="{{ min }}"{% endif %}
             {% if max is not null  %} max="{{ max }}"{% endif %}
             value="{{ field.value }}"
-            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+            {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
             {{ field.getDataAttributeString()|raw }}
     >
 

@@ -7,7 +7,7 @@
            placeholder="{{ field.getPlaceholder()|default('') }}"
            id="{{ field.id }}"
            {{ field.getDataAttributeString()|raw }}
-           {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+           {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>

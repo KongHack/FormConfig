@@ -9,7 +9,7 @@
                 class="form-control {{ field.class }}"
                 multiple
                 {{ field.getDataAttributeString()|raw }}
-                {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+                {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
         >
             {% if placeholder %}
                 <option value="" disabled="disabled">{{ placeholder }}</option>

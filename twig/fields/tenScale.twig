@@ -2,7 +2,7 @@
     <table class="table" id="{{ field.id }}">
         <thead>
             <tr>
-                <th style="text-align: center">N/A</th>
+                <th style="text-align: center" id="ts_{{ field.id }}_0">N/A</th>
                 {% for i in range(1,10) %}
                     <th id="ts_{{ field.id }}_{{ i }}" style="text-align: center">{{ i }}</th>
                 {% endfor %}
