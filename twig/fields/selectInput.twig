@@ -6,7 +6,7 @@
             id="{{ field.id }}"
             class="form-control {{ field.class }}"
             {{ field.getDataAttributeString()|raw }}
-            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+            {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >
         {% if placeholder %}
             <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>

@@ -7,7 +7,7 @@
                class="form-control {{ field.class }}"
                style="text-align:right"
                placeholder="{{ field.getPlaceholder()|default('') }}"
-               {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
                 {{ field.getDataAttributeString()|raw }}
         >
     {% else %}
@@ -18,7 +18,7 @@
                style="text-align:right"
                class="form-control {{ field.class }}"
                placeholder="{{ field.getPlaceholder()|default('') }}"
-               {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
                 {{ field.getDataAttributeString()|raw }}
         >
     {% endif %}
