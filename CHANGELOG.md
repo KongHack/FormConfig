@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased](https://github.com/KongHack/FormConfig/commits/master)
 
 
+
 ## [2.1.0](https://github.com/KongHack/FormConfig/releases/tag/2.1.0)
  - @jakerarr Updated radio-type/scale-type with WCAG compliant labeling
  - @jakerarr Table style update- adds IDs to TH's and aria-labelledby attributes to fields
