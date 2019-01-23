@@ -1,7 +1,9 @@
 {% macro fieldErrorNotice(value) %}
     {% if value|length > 1 %}
         <div>
-            <span class="label label-danger">{{ value|replace({"\n":"</span><br><span class=\"label label-danger\">"})|raw }}</span>
+            <span class="FC_error_notice label label-danger">
+                {{ value|replace({"\n":"</span><br><span class=\"label label-danger\">"})|raw }}
+            </span>
         </div>
     {% endif %}
 {% endmacro %}
@@ -34,18 +36,18 @@
                     {% if field.label is not null  %}
                         <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
                             {{ field.label|raw }}
-                            {% if field.helpText is not null %}
-                                <span class="tool_badge text-info" title="{{ field.helpText }}">
-                                    <i class="fa fa-fw fa-question-circle"></i>
-                                </span>
-                            {% endif %}
                             {% if field.reqLevel > 1 %}
                                 {{ myself.requiredIndicator(field) }}
+                            {% endif %}
+                            {% if field.helpText is not null %}
+                                <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                                    <i class="fa fa-fw fa-question-circle"></i>
+                                </span>
                             {% endif %}
                         </label>
                     {% else %}
                         {% if field.helpText is not null %}
-                            <span class="tool_badge text-info" title="{{ field.helpText }}">
+                            <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
                                 <i class="fa fa-fw fa-question-circle"></i>
                             </span>
                         {% endif %}
@@ -58,8 +60,9 @@
                             {{ myself.fieldErrorNotice(err) }}
                         {% endfor %}
                     {% endif %}
+
                     {% if field.getNoticeText()|length > 0 %}
-                        <div class="alert alert-warning">{{ field.getNoticeText()|raw }}</div>
+                        <div class="FC_notice_text alert alert-warning">{{ field.getNoticeText()|raw }}</div>
                     {% endif %}
                 </div>
             {% endif %}
