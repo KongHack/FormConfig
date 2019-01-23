@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.1.3](https://github.com/KongHack/FormConfig/releases/tag/2.1.3)
+ - @GameCharmer Moved required indicator to the left of help text
+ - @GameCharmer Added FC_* helper classes for indicators/text
+
+
 ## [2.1.2](https://github.com/KongHack/FormConfig/releases/tag/2.1.2)
  - @GameCharmer New Required Indicator and system for managing them
 
