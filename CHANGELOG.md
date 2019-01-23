@@ -6,7 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [2.1.4](https://github.com/KongHack/FormConfig/releases/tag/2.1.4)
+## [2.1.5](https://github.com/KongHack/FormConfig/releases/tag/2.1.5)
+ - @GameCharmer add getReqLevel method to FormArrayElement
+
+
+
+## [2.1.4](https://github.com/KongHack/FormConfig/releases/tag/2.1.4) *DNU*
  - @GameCharmer Patched missing FormConfig in FormArray
 
 
