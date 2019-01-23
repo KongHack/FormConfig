@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.1.2](https://github.com/KongHack/FormConfig/releases/tag/2.1.2)
+ - @GameCharmer New Required Indicator and system for managing them
+
+
 ## [2.1.1](https://github.com/KongHack/FormConfig/releases/tag/2.1.1)
  - @jakerarr Fix for ternaries in the aria-labelledby attribute
 
