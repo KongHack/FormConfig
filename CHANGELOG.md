@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.1.6](https://github.com/KongHack/FormConfig/releases/tag/2.1.6)
+ - @GameCharmer added a span around the "* = required" text to assist with additional styling
+
+
 ## [2.1.5](https://github.com/KongHack/FormConfig/releases/tag/2.1.5)
  - @GameCharmer add getReqLevel method to FormArrayElement
 
