@@ -6,20 +6,28 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [2.1.3](https://github.com/KongHack/FormConfig/releases/tag/2.1.3)
+## [2.1.4](https://github.com/KongHack/FormConfig/releases/tag/2.1.4)
+ - @GameCharmer Patched missing FormConfig in FormArray
+
+
+
+## [2.1.3](https://github.com/KongHack/FormConfig/releases/tag/2.1.3) *DNU*
  - @GameCharmer Moved required indicator to the left of help text
  - @GameCharmer Added FC_* helper classes for indicators/text
 
 
-## [2.1.2](https://github.com/KongHack/FormConfig/releases/tag/2.1.2)
+
+## [2.1.2](https://github.com/KongHack/FormConfig/releases/tag/2.1.2) *DNU*
  - @GameCharmer New Required Indicator and system for managing them
+
 
 
 ## [2.1.1](https://github.com/KongHack/FormConfig/releases/tag/2.1.1)
  - @jakerarr Fix for ternaries in the aria-labelledby attribute
 
 
-## [2.1.0](https://github.com/KongHack/FormConfig/releases/tag/2.1.0)
+
+## [2.1.0](https://github.com/KongHack/FormConfig/releases/tag/2.1.0) *DNU*
  - @jakerarr Updated radio-type/scale-type with WCAG compliant labeling
  - @jakerarr Table style update- adds IDs to TH's and aria-labelledby attributes to fields
  - @jakerarr Table style update- set default table ID for FormArrayElements if one is not set
