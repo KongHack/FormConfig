@@ -3,6 +3,13 @@
         <div class="panel-heading">
             <h4 class="panel-title">{{ forms[activeForm]|raw }}</h4>
         </div>
+        {% if FC_Config.getRequiredIndicator() == 1 %}
+            {% if FC_Config.hasRequired() %}
+                <div class="text-right FC_global_required_text">
+                    * = required
+                </div>
+            {% endif %}
+        {% endif %}
         <div class="panel-body">
             {% if form is defined and form != '' %}
                 {% include form %}

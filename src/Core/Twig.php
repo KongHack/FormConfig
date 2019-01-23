@@ -41,7 +41,6 @@ class Twig
             unset($config['forms']);
             return $config;
         }));
-
     }
 
     /**
@@ -74,6 +73,9 @@ class Twig
         return self::$loader;
     }
 
+    /**
+     * @return string
+     */
     protected static function getTwigDir()
     {
         return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';

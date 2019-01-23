@@ -6,8 +6,17 @@
     {% endif %}
 {% endmacro %}
 
-{% macro requiredIndicator() %}
-    <span class="label label-warning">Required</span>
+{% macro requiredIndicator(field) %}
+    {% if field %}
+        {% set ind = field.getFormConfig().getRequiredIndicator() %}
+        {% if ind == 1 %}
+            <span class="FC_required">*</span>
+        {% elseif ind == 2 %}
+            <span class="FC_required label label-warning">Required</span>
+        {% endif %}
+    {% else %}
+        <span class="FC_required label label-warning">Required</span>
+    {% endif %}
 {% endmacro %}
 
 {% macro completeField(field) %}
@@ -31,7 +40,7 @@
                                 </span>
                             {% endif %}
                             {% if field.reqLevel > 1 %}
-                                {{ myself.requiredIndicator() }}
+                                {{ myself.requiredIndicator(field) }}
                             {% endif %}
                         </label>
                     {% else %}

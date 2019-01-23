@@ -5,12 +5,15 @@ use Exception;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
+use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 
 /**
  * Class FormArrayElement.
  */
 class FormArrayElement implements FieldContainerInterface
 {
+    use FieldFormConfigTrait;
+
     protected $headers       = [];
     protected $widths        = [];
     protected $fields        = [];
@@ -33,6 +36,7 @@ class FormArrayElement implements FieldContainerInterface
     {
         $field                             = new FormArrayField($name);
         $this->fields[$this->index][$name] = $field;
+        $field->setFormConfig($this->formConfig);
 
         // Set width baby!
         $index = count($this->fields[$this->index]) - 1;
@@ -92,6 +96,7 @@ class FormArrayElement implements FieldContainerInterface
     public function addBuiltField(Base $field)
     {
         $this->fields[$this->index][$field->getNameRaw()] = $field;
+        $field->setFormConfig($this->formConfig);
 
         return $this;
     }

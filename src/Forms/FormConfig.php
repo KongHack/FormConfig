@@ -17,15 +17,20 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
-    protected $useHoldOn     = false;
-    protected $name          = '';
-    protected $formId        = '';
-    protected $twigTemplate  = '';
-    protected $twigOverrides = [];
-    protected $fields        = [];
-    protected $formArrays    = [];
-    protected $builder       = null;
-    protected $renderArgs    = [
+    const REQUIRED_INDICATOR_OFF = 0;
+    const REQUIRED_INDICATOR_ASTERISK = 1;
+    const REQUIRED_INDICATOR_VERBOSE = 2;
+
+    protected $requiredIndicator = 2;
+    protected $useHoldOn         = false;
+    protected $name              = '';
+    protected $formId            = '';
+    protected $twigTemplate      = '';
+    protected $twigOverrides     = [];
+    protected $fields            = [];
+    protected $formArrays        = [];
+    protected $builder           = null;
+    protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
         'urlBase'     => '',
@@ -34,11 +39,17 @@ class FormConfig implements FieldContainerInterface
     protected $twigAppend = null;
     protected $htmlAppend = null;
 
+    /**
+     * FormConfig constructor.
+     */
     public function __construct()
     {
         $config = Config::getInstance()->getConfig();
         if(isset($config['general']['holdOn'])) {
             $this->useHoldOn = (bool) $config['general']['holdOn'];
+        }
+        if(isset($config['general']['requiredIndicator'])) {
+            $this->requiredIndicator = (int) $config['general']['requiredIndicator'];
         }
     }
 
@@ -54,9 +65,47 @@ class FormConfig implements FieldContainerInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function canHoldOn()
     {
         return $this->useHoldOn;
+    }
+
+    /**
+     * @param int $ind
+     *
+     * @return $this
+     */
+    public function setRequiredIndicator(int $ind)
+    {
+        $this->requiredIndicator = $ind;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequiredIndicator()
+    {
+        return $this->requiredIndicator;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRequired()
+    {
+        foreach($this->getFormFields() as $field) {
+            if($field->getReqLevel() > 1) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -144,6 +193,7 @@ class FormConfig implements FieldContainerInterface
     public function addFieldObject(FormField $field)
     {
         $this->fields[$field->getNameRaw()] = $field;
+        $field->setFormConfig($this);
 
         return $this;
     }
@@ -156,6 +206,7 @@ class FormConfig implements FieldContainerInterface
     public function addBuiltField(Base $field)
     {
         $this->fields[$field->getNameRaw()] = $field;
+        $field->setFormConfig($this);
 
         return $this;
     }
@@ -169,6 +220,7 @@ class FormConfig implements FieldContainerInterface
     {
         $field               = new FormField($name);
         $this->fields[$name] = $field;
+        $field->setFormConfig($this);
 
         return $field;
     }

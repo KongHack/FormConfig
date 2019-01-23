@@ -1,6 +1,7 @@
 general:
   holdOn: false
   holdOnOptions: "HoldOnOptions"
+  requiredIndicator: 2
 
 forms:
   example_group:

@@ -3,12 +3,15 @@ namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
+use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 
 /**
  * Class FormField.
  */
 class FormField
 {
+    use FieldFormConfigTrait;
+
     /**
      * @var array
      */

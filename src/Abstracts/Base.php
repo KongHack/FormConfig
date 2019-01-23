@@ -3,12 +3,15 @@ namespace GCWorld\FormConfig\Abstracts;
 
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
+use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 
 /**
  * Class Base.
  */
 abstract class Base implements FieldInterface
 {
+    use FieldFormConfigTrait;
+
     /**
      * @var array
      */
