@@ -48,6 +48,21 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
+     * @return int
+     */
+    public function getReqLevel()
+    {
+        $max = 0;
+        foreach($this->fields as $fields) {
+            /** @var FormField $field */
+            foreach($fields as $field) {
+                $max = max($max, $field->getReqLevel());
+            }
+        }
+        return $max;
+    }
+
+    /**
      * @param string $name
      *
      * @return \GCWorld\FormConfig\Forms\FormArrayField
