@@ -1,7 +1,7 @@
 <form action="{{ formUrl }}" method="post" id="{{ formId }}" enctype="multipart/form-data">
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">
-            <h4 class="panel-title">{{ forms[activeForm]|raw }}</h4>
+            <div class="panel-title">{{ forms[activeForm]|raw }}</div>
         </div>
         {% if FC_Config.getRequiredIndicator() == 1 %}
             {% if FC_Config.hasRequired() %}
