@@ -6,8 +6,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.1.7](https://github.com/KongHack/FormConfig/releases/tag/2.1.7)
+ - @GameCharmer Revert some H4s to DIVs where appropriate
+
+
+
 ## [2.1.6](https://github.com/KongHack/FormConfig/releases/tag/2.1.6)
  - @GameCharmer added a span around the "* = required" text to assist with additional styling
+
 
 
 ## [2.1.5](https://github.com/KongHack/FormConfig/releases/tag/2.1.5)
