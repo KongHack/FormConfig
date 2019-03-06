@@ -14,7 +14,7 @@
     "gcworld/orm": "^3.4.2",
     "twig/twig": "~2.0",
     "riimu/kit-phpencoder": "^2.3",
-    "kint-php/kint": "^1.1",
+    "kint-php/kint": ">=1.1",
     "symfony/yaml": "^3.3"
   },
   "autoload": {

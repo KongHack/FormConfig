@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.1.8](https://github.com/KongHack/FormConfig/releases/tag/2.1.8)
+ - @GameCharmer Updated composer.json to handle newer KInt
+
+
+
 ## [2.1.7](https://github.com/KongHack/FormConfig/releases/tag/2.1.7)
  - @GameCharmer Revert some H4s to DIVs where appropriate
 
