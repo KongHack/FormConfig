@@ -24,7 +24,7 @@
 {% macro completeField(field) %}
     {% if field is not empty %}
         {% if field.fields is defined %}
-            {% import '@form_config/macros/formArray.twig' as formArray %}
+            {% import '@form_config_BS3/macros/formArray.twig' as formArray %}
             {{ formArray.handleFormArray(field) }}
         {% else %}
             {% import _self as myself %}

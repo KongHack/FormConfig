@@ -32,7 +32,7 @@ class TextInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/textInput.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/textInput.twig';
     }
 
     /**

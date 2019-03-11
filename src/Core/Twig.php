@@ -6,7 +6,10 @@ namespace GCWorld\FormConfig\Core;
  */
 class Twig
 {
-    const TWIG_NAMESPACE = 'form_config';
+    const TWIG_NAMESPACE_REPLACE     = 'form_config_REPLACE';
+    const TWIG_NAMESPACES = [
+        'BS3',
+    ];
 
     protected static $twig   = null;
     protected static $loader = null;
@@ -21,8 +24,12 @@ class Twig
         $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
         $dir .= '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
         $dir = realpath($dir);
+        $dir = rtrim($dir,DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 
-        $filesystem->addPath($dir, self::TWIG_NAMESPACE);
+        foreach(self::TWIG_NAMESPACES as $namespace) {
+            $ns = str_replace('REPLACE',$namespace, self::TWIG_NAMESPACE_REPLACE);
+            $filesystem->addPath($dir.$namespace.DIRECTORY_SEPARATOR, $ns);
+        }
     }
 
     /**

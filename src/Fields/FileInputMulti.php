@@ -38,7 +38,7 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/fileInputMulti.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/fileInputMulti.twig';
     }
 
     /**

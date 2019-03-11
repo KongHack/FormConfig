@@ -14,7 +14,7 @@
             {% if form is defined and form != '' %}
                 {% include form %}
             {% else %}
-                {% import '@form_config/macros/simple_form.twig' as simpleForm %}
+                {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
                 {{ simpleForm.render(_context) }}
             {% endif %}
         </div>

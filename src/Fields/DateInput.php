@@ -32,7 +32,7 @@ class DateInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/dateInput.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/dateInput.twig';
     }
 
     /**

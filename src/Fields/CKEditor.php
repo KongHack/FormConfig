@@ -35,7 +35,7 @@ class CKEditor extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/CKEditor.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/CKEditor.twig';
     }
 
     /**

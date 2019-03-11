@@ -32,7 +32,7 @@ class StaticInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/static.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/static.twig';
     }
 
     /**

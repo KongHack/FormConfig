@@ -32,7 +32,7 @@ class ToggleTrueFalse extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/toggleTrueFalse.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/toggleTrueFalse.twig';
     }
 
     /**

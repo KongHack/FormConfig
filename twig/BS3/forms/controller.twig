@@ -21,7 +21,7 @@
     {% endif %}
     <div class="col-md-{{ (forms|length > 1) ? '9' : '12' }}">
         {% if not twigOverrides.replace %}
-            {% include '@form_config/forms/controller_block.twig' %}
+            {% include '@form_config_BS3/forms/controller_block.twig' %}
         {% else %}
             {% if includePath %}
                 {% include includePath %}

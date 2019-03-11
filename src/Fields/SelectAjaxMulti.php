@@ -40,7 +40,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/selectAjaxMulti.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/selectAjaxMulti.twig';
     }
 
     /**
