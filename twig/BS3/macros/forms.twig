@@ -29,7 +29,8 @@
         {% else %}
             {% import _self as myself %}
             {% set def = field.getDefinition() %}
-            {% import def.twig as twigFile %}
+            {% set file = def|replace({'@form_config_REPLACE':'@form_config_BS3'}) %}
+            {% import file as twigFile %}
 
             {% if field.reqLevel > 0 %}
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
