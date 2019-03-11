@@ -23,7 +23,7 @@ class FormConfig implements FieldContainerInterface
 
     const FORM_MODE_BOOTSTRAP_3       = 'BS3';
     const FORM_MODE_BOOTSTRAP_4       = 'BS4';
-
+    const FORM_MODE_IONIC             = 'ION';
 
     protected static $requiredIndicator = null;
     protected static $formMode          = null;
