@@ -1,4 +1,5 @@
 general:
+  formMode: 'BS3'
   holdOn: false
   holdOnOptions: "HoldOnOptions"
   requiredIndicator: 2

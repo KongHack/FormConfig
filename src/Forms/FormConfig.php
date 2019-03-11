@@ -17,11 +17,17 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
-    const REQUIRED_INDICATOR_OFF = 0;
+    const REQUIRED_INDICATOR_OFF      = 0;
     const REQUIRED_INDICATOR_ASTERISK = 1;
-    const REQUIRED_INDICATOR_VERBOSE = 2;
+    const REQUIRED_INDICATOR_VERBOSE  = 2;
 
-    protected $requiredIndicator = 2;
+    const FORM_MODE_BOOTSTRAP_3       = 'BS3';
+    const FORM_MODE_BOOTSTRAP_4       = 'BS4';
+
+
+    protected static $requiredIndicator = null;
+    protected static $formMode          = null;
+
     protected $useHoldOn         = false;
     protected $name              = '';
     protected $formId            = '';
@@ -48,9 +54,56 @@ class FormConfig implements FieldContainerInterface
         if(isset($config['general']['holdOn'])) {
             $this->useHoldOn = (bool) $config['general']['holdOn'];
         }
-        if(isset($config['general']['requiredIndicator'])) {
-            $this->requiredIndicator = (int) $config['general']['requiredIndicator'];
+        if(self::$requiredIndicator === null) {
+            self::$requiredIndicator = 2;
+
+            if (isset($config['general']['requiredIndicator'])) {
+                self::$requiredIndicator = (int) $config['general']['requiredIndicator'];
+            }
         }
+        if(self::$formMode === null) {
+            self::$formMode = 'BS3';
+
+            if (isset($config['general']['formMode'])) {
+                self::$requiredIndicator = (string) $config['general']['formMode'];
+            }
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getRequiredIndicator()
+    {
+        return self::$requiredIndicator;
+    }
+
+    /**
+     * @param int $indicator
+     *
+     * @return void
+     */
+    public static function setRequiredIndicator(int $indicator)
+    {
+        self::$requiredIndicator = $indicator;
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getFormMode()
+    {
+        return self::$formMode;
+    }
+
+    /**
+     * @param string $mode
+     *
+     * @return void
+     */
+    public static function setFormMode(string $mode)
+    {
+        self::$formMode = $mode;
     }
 
     /**
@@ -71,26 +124,6 @@ class FormConfig implements FieldContainerInterface
     public function canHoldOn()
     {
         return $this->useHoldOn;
-    }
-
-    /**
-     * @param int $ind
-     *
-     * @return $this
-     */
-    public function setRequiredIndicator(int $ind)
-    {
-        $this->requiredIndicator = $ind;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequiredIndicator()
-    {
-        return $this->requiredIndicator;
     }
 
     /**
