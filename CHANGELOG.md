@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.1](https://github.com/KongHack/FormConfig/releases/tag/3.0.1)
+ - @GameCharmer Patch delete button form override
+
+
+
 ## [3.0.0](https://github.com/KongHack/FormConfig/releases/tag/3.0.0)
  - @GameCharmer Mode system to allow switching banks of twig files
 
