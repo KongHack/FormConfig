@@ -529,7 +529,7 @@ class FormConfig implements FieldContainerInterface
     {
         switch ($mode) {
             case 'delete':
-                $html = Twig::get()->render('overrides/delete_button.twig');
+                $html = Twig::get()->render(self::$formMode.'/overrides/delete_button.twig');
                 $this->setOverride('panelClass', 'danger')
                     ->setOverride('submitButton', $html);
                 break;
