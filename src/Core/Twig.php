@@ -61,6 +61,7 @@ class Twig
                 'cache'       => self::getTwigDir().DIRECTORY_SEPARATOR.'cache',
                 'auto_reload' => true,
             ]);
+            self::mapAll($twig);
             self::$twig = $twig;
         }
 
@@ -86,6 +87,42 @@ class Twig
     protected static function getTwigDir()
     {
         return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
+    }
+
+    /**
+     * @param string     $name
+     * @param array|null $context
+     *
+     * @throws \Twig_Error_Syntax
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     *
+     * @return string
+     */
+    public static function render(string $name, array $context = null)
+    {
+        try {
+            if (null == $context) {
+                return self::get()->render($name);
+            }
+
+            return self::get()->render($name, $context);
+        } catch (\Twig_Error_Syntax $e) {
+            d($e);
+
+            throw $e;
+        } catch (\Twig_Error_Loader $e) {
+            d($e);
+
+            throw $e;
+        } catch (\Twig_Error_Runtime $e) {
+            $previous = $e->getPrevious();
+            if (\is_object($previous)) {
+                throw $previous;
+            }
+
+            throw $e;
+        }
     }
 }
 

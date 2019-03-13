@@ -1,0 +1,124 @@
+{% macro handleFormArray(arr) %}
+    {% import _self as form %}
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            {% for index in range(0, arr.getIndex()) %}
+                {% if arr.getFields()[index] %}
+                    <ion-fab-button data-for-field="{{ index }}">
+                        <ion-icon name="{{ arr.getIcons[index] }}"></ion-icon>
+                    </ion-fab-button>
+                {% endif %}
+            {% endfor %}
+        </ion-fab-list>
+    </ion-fab>
+
+    {% for index, fields in arr.getFields() %}
+        {{ form.handleFieldRow(fields) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro handleFieldRow(fabItems) %}
+    {% import 'macros/forms.twig' as forms %}
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            {% for item_id, item_data in fabItems %}
+                <ion-fab-button data-for-field="{{ item_id }}">
+                    <ion-icon name="{{ item_data.icon }}"></ion-icon>
+                </ion-fab-button>
+            {% endfor %}
+        </ion-fab-list>
+    </ion-fab>
+
+    <script>
+        var IDCounter = -1001;
+        {% for item_id,item_data in fabItems %}
+        var inputsAlone_{{ item_id }} = [
+            {% for field_inputs in item_data.fields %}
+            {{ field_inputs|json_encode|raw }},
+            {% endfor %}
+        ];
+
+        {% if item_data.fabIsComplex == true %}
+        $(document).on('formModalSave.modal_{{ item_id }}', function(e) {
+            var formInputs = e.detail;
+            window.ACE.__FORMS.addon_changes['{{ item_id }}']['add'][--IDCounter] = formInputs;
+            window.ACE.__FORMS.allowSave();
+
+            var $list = $("#{{ item_id }}-list");
+
+            var showVal = formInputs['{{ item_data.field_display }}'];
+
+            var newElem = '<ion-item-sliding data-id="' + IDCounter + '">' +
+                '     <ion-item>' +
+                '         <ion-label>' + showVal + '</ion-label>' +
+                '     </ion-item>' +
+                '         <ion-item-options side="end">' +
+                '             <ion-item-option class="sliding-list-remove" data-id="' + IDCounter + '">Remove</ion-item-option>' +
+                '         </ion-item-options>' +
+                ' </ion-item-sliding>';
+            $list.html($list.html() + newElem);
+        });
+        {% endif %}
+
+        $(document).on('click.fab_button_{{ item_id }}', "ion-fab-button[data-for-field='{{ item_id }}']", function () {
+            {% if item_data.fabIsComplex == true %}
+            window.ACE.Ion.GenerateModal({
+                component: 'form-modal',
+                componentProps: {
+                    'header': "{{ item_data.header }}",
+                    'fields': {{ item_data.fields|json_encode|raw }}
+                }
+            });
+            {% else %}
+            window.ACE.Ion.GenerateAlert({
+                inputs: inputsAlone_{{ item_id }},
+                header: "{{ item_data.header }}",
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel'
+                    },
+                    {
+                        text: 'Add',
+                        handler: function (data) {
+                            window.ACE.__FORMS.addon_changes['{{ item_id }}']['add'][--IDCounter] = data;
+                            window.ACE.__FORMS.allowSave();
+                            var $list = $("#{{ item_id }}-list");
+
+                            var showVal = data['{{ item_data.fields|keys|first }}'];
+
+                            var newElem = '<ion-item-sliding data-id="' + IDCounter + '">' +
+                                '     <ion-item>' +
+                                '         <ion-label>' + showVal + '</ion-label>' +
+                                '     </ion-item>' +
+                                '         <ion-item-options side="end">' +
+                                '             <ion-item-option class="sliding-list-remove" data-id="' + IDCounter + '">Remove</ion-item-option>' +
+                                '         </ion-item-options>' +
+                                ' </ion-item-sliding>';
+                            $list.html($list.html() + newElem);
+                        }
+                    }
+                ]
+            });
+            {% endif %}
+        });
+        {% endfor %}
+    </script>
+
+
+
+    {% if arr.getErrors()|length > 0 %}
+        {% for msg in arr.getErrors() %}
+            <div class="alert alert-danger">{{ msg|raw }}</div>
+        {% endfor %}
+    {% endif %}
+
+{% endmacro %}
