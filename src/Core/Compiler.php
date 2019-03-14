@@ -169,9 +169,10 @@ class Compiler
             $contents .= '    {'.PHP_EOL;
             // $contents .= '        $obj = new \\'.$class.'();'.PHP_EOL;
             // $contents .= '        $obj->setName($name);'.PHP_EOL;
+            // $contents .= '        $this->formConfig->addBuiltField($obj);'.PHP_EOL;
             $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);'.PHP_EOL;
             $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::'.$definition['constant'].');';
-            $contents .= '        $this->formConfig->addBuiltField($obj);'.PHP_EOL;
+            $contents .= '        $this->formConfig->addFieldObject($obj);'.PHP_EOL;
             $contents .= PHP_EOL;
             $contents .= '        return $obj;'.PHP_EOL;
             $contents .= '    }'.PHP_EOL;
