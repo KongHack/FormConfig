@@ -39,6 +39,20 @@ class FormArrayElement implements FieldContainerInterface
     protected $icons         = [];
 
     /**
+     * Used for indicating which row contains the "new item" inputs
+     *
+     * @var null|int
+     */
+    protected $newRow        = null;
+
+    /**
+     * Used for indicating which column is the display column for mobile lists
+     *
+     * @var null|int
+     */
+    protected $displayColumn = null;
+
+    /**
      * @param string $name
      *
      * @return \GCWorld\FormConfig\Forms\FormArrayField
@@ -133,6 +147,16 @@ class FormArrayElement implements FieldContainerInterface
     public function bumpIndex()
     {
         ++$this->index;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setNewRow()
+    {
+        $this->newRow = $this->index;
 
         return $this;
     }
@@ -243,13 +267,17 @@ class FormArrayElement implements FieldContainerInterface
     /**
      * @param string $header
      * @param string $width
+     * @param bool $displayCol
      *
      * @return $this
      */
-    public function addHeader(string $header, string $width = 'col-sm-1')
+    public function addHeader(string $header, string $width = 'col-sm-1', bool $displayCol = false)
     {
         $this->headers[] = $header;
         $this->widths[]  = $width;
+        if($displayCol) {
+            $this->displayColumn = \count($this->headers) - 1;
+        }
 
         return $this;
     }
