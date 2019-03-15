@@ -24,7 +24,7 @@
             {% include '@form_config_BS3/forms/controller_block.twig' %}
         {% else %}
             {% if includePath %}
-                {% include includePath|replace('REPLACE','BS3') %}
+                {% include includePath|replace({'REPLACE':'BS3'}) %}
             {% else %}
                 <div class="alert alert-danger">includePath not defined!</div>
             {% endif %}
