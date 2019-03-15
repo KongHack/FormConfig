@@ -29,7 +29,7 @@
         {% else %}
             {% import _self as myself %}
             {% set def = field.getDefinition() %}
-            {% set file = def.twig|replace({'@form_config_REPLACE':'@form_config_BS3'}) %}
+            {% set file = def.twig|replace({'REPLACE':'BS3'}) %}
             {% import file as twigFile %}
 
             {% if field.reqLevel > 0 %}

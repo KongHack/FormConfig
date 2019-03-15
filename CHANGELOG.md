@@ -6,6 +6,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.3](https://github.com/KongHack/FormConfig/releases/tag/3.0.3)
+ - @GameCharmer Swap the twig macro's replace to key on only REPLACE instead of `@form_config_REPLACE` 
+
+
+
+## [3.0.2](https://github.com/KongHack/FormConfig/releases/tag/3.0.2)
+ - @GameCharmer The builder now uses the standard FormField for field generation, but says it returns a particular object to assist with intellisense 
+
+
+
 ## [3.0.1](https://github.com/KongHack/FormConfig/releases/tag/3.0.1)
  - @GameCharmer Patch delete button form override
 
