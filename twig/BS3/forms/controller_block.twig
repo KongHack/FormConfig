@@ -12,7 +12,7 @@
         {% endif %}
         <div class="panel-body">
             {% if form is defined and form != '' %}
-                {% include form %}
+                {% include form|replace('REPLACE','BS3') %}
             {% else %}
                 {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
                 {{ simpleForm.render(_context) }}
@@ -42,7 +42,7 @@
 {% endif %}
 {% if not FC_CONTROLLER %}
     {% if FC_Config.getTwigAppend() %}
-        {% include FC_Config.getTwigAppend() %}
+        {% include FC_Config.getTwigAppend()|replace('REPLACE','BS3') %}
     {% endif %}
     {% if FC_Config.getHtmlAppend() %}
         {{ FC_Config.getHtmlAppend()|raw }}
