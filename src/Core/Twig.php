@@ -1,6 +1,8 @@
 <?php
 namespace GCWorld\FormConfig\Core;
 
+use GCWorld\FormConfig\Forms\FormConfigFormElement;
+
 /**
  * Class Twig
  */
@@ -47,6 +49,10 @@ class Twig
             $config  = Config::getInstance()->getConfig();
             unset($config['forms']);
             return $config;
+        }));
+
+        $environment->addFunction(new \Twig_SimpleFunction('FC_isFormElement',function($obj){
+            return $obj instanceof FormConfigFormElement;
         }));
     }
 
