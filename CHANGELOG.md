@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.4](https://github.com/KongHack/FormConfig/releases/tag/3.0.4)
+ - @GameCharmer New system for form config element types
+
+
 ## [3.0.3](https://github.com/KongHack/FormConfig/releases/tag/3.0.3)
  - @GameCharmer Swap the twig macro's replace to key on only REPLACE instead of `@form_config_REPLACE` 
 
