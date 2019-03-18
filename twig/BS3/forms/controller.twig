@@ -7,12 +7,16 @@
                     <div class="panel-title">Navigation</div>
                 </div>
                 <div class="panel-body">
-                    {% for key,value in forms %}
-                        <a href="{{ route }}/{{ key }}"
-                           id="FC_NAV_BTN_{{ key }}"
-                           class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
-                                {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
-                        >{{ value|raw }}</a>
+                    {% for key, value in forms %}
+                        {% if value is FC_isFormElement() %}
+
+                        {% else %}
+                            <a href="{{ route }}/{{ key }}"
+                               id="FC_NAV_BTN_{{ key }}"
+                               class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
+                                    {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+                            >{{ value|raw }}</a>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div id="form_controller_described_by" style="display:none">Current Form</div>
@@ -38,3 +42,22 @@
 {% if FC_Config.getHtmlAppend() %}
     {{ FC_Config.getHtmlAppend()|raw }}
 {% endif %}
+
+{% macro doFormElement(element, route, activeForm) %}
+    {% if element.getFormType() == 1 %}
+        {% if element.getFormUrl() != '' %}
+            {% set url = element.getFormUrl() %}
+        {% else %}
+            {% set url = route ~ '/' ~ element.getFormKey() %}
+        {% endif %}
+        <a href="{{ url }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
+           {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+        >{{ element|getFormName() }}</a>
+    {% else if element.getFormType() == 2 %}
+        <div class="FC_DIV_BREAK"></div>
+    {% else if element.getFormType() == 3 %}
+        <hr class="FC_HR_BREAK">
+    {% endif %}
+{% endmacro %}
