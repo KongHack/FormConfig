@@ -3,9 +3,10 @@ namespace GCWorld\FormConfig\Forms;
 
 class FormConfigFormElement
 {
-    const TYPE_STANDARD  = 1;
-    const TYPE_DIV_BREAK = 2;
-    const TYPE_HR_BREAK  = 3;
+    const TYPE_STANDARD   = 1;
+    const TYPE_DIV_BREAK  = 2;
+    const TYPE_HR_BREAK   = 3;
+    const TYPE_HTML_BREAK = 4;
 
     protected $form_key  = '';
     protected $form_url  = '';
