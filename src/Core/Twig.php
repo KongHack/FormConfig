@@ -51,7 +51,7 @@ class Twig
             return $config;
         }));
 
-        $environment->addFunction(new \Twig_SimpleFunction('FC_isFormElement',function($obj){
+        $environment->addTest(new \Twig_Test('FC_isFormElement',function($obj){
             return $obj instanceof FormConfigFormElement;
         }));
     }
