@@ -65,13 +65,13 @@ class FormConfig implements FieldContainerInterface
             self::$formMode = 'BS3';
 
             if (isset($config['general']['formMode'])) {
-                self::$requiredIndicator = (string) $config['general']['formMode'];
+                self::$formMode = (string) $config['general']['formMode'];
             }
         }
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
     public static function getRequiredIndicator()
     {

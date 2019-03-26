@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.5](https://github.com/KongHack/FormConfig/releases/tag/3.0.5)
+ - @GameCharmer fix bug in form mode config loading
+
+
 ## [3.0.4](https://github.com/KongHack/FormConfig/releases/tag/3.0.4)
  - @GameCharmer New system for form config element types
 
