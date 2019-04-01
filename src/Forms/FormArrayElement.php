@@ -162,6 +162,14 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
+     * @return int
+     */
+    public function getNewRow()
+    {
+        return $this->newRow ?? 0;
+    }
+
+    /**
      * @return $this
      */
     public function addBreak()
@@ -280,6 +288,14 @@ class FormArrayElement implements FieldContainerInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDisplayColumn()
+    {
+        return $this->displayColumn ?? 0;
     }
 
     /**
