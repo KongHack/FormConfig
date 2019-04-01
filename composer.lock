@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c759d4a8898e25fe9532d652219d1c04",
+    "content-hash": "216edf23bea6ee35602d3b7ce508fd09",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -428,222 +428,6 @@
                 "performance"
             ],
             "time": "2019-01-28T20:25:53+00:00"
-        },
-        {
-            "name": "gcworld/common",
-            "version": "2.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KongHack/Common.git",
-                "reference": "58674164d356e4c10815fd5d00d40e1b797a1e3d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Common/zipball/58674164d356e4c10815fd5d00d40e1b797a1e3d",
-                "reference": "58674164d356e4c10815fd5d00d40e1b797a1e3d",
-                "shasum": ""
-            },
-            "require": {
-                "gcworld/database": "^2.3.10",
-                "gcworld/errorhandlers": "^1.2.0",
-                "gcworld/interfaces": ">=3.1.1",
-                "php": ">=7.1",
-                "symfony/yaml": "^3.3"
-            },
-            "require-dev": {
-                "gcworld/code_sniffer_contrib": "^1.0",
-                "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "^0.6.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GCWorld\\Common\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "GameCharmer",
-                    "email": "admin@gamecharmer.com"
-                }
-            ],
-            "description": "GCWorld Industries Common",
-            "time": "2019-02-25T18:33:41+00:00"
-        },
-        {
-            "name": "gcworld/database",
-            "version": "2.3.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KongHack/Database.git",
-                "reference": "0152da9e1cd5e346c06a7a4a319278bcd2eaad98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Database/zipball/0152da9e1cd5e346c06a7a4a319278bcd2eaad98",
-                "reference": "0152da9e1cd5e346c06a7a4a319278bcd2eaad98",
-                "shasum": ""
-            },
-            "require": {
-                "composer/composer": "^1.1",
-                "composer/installers": "^1.0",
-                "ext-pdo": "*",
-                "gcworld/interfaces": ">=3.1.1",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "gcworld/code_sniffer_contrib": "^1.0",
-                "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "^0.6.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GCWorld\\Database\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "GameCharmer",
-                    "email": "admin@gamecharmer.com"
-                }
-            ],
-            "description": "GCWorld Industries Database",
-            "time": "2019-02-25T17:54:25+00:00"
-        },
-        {
-            "name": "gcworld/errorhandlers",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KongHack/Error-Handlers.git",
-                "reference": "8e27e7897013df89e2f40ccc6a511543a258e091"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Error-Handlers/zipball/8e27e7897013df89e2f40ccc6a511543a258e091",
-                "reference": "8e27e7897013df89e2f40ccc6a511543a258e091",
-                "shasum": ""
-            },
-            "require": {
-                "kint-php/kint": ">=1.1",
-                "php": ">=7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GCWorld\\ErrorHandlers\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "GameCharmer",
-                    "email": "admin@gamecharmer.com"
-                }
-            ],
-            "description": "GCWorld Industries Error Handlers",
-            "time": "2019-03-06T16:16:19+00:00"
-        },
-        {
-            "name": "gcworld/interfaces",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KongHack/Interfaces.git",
-                "reference": "311df843403e0ae236bfe50c883dd6730d3d1211"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/311df843403e0ae236bfe50c883dd6730d3d1211",
-                "reference": "311df843403e0ae236bfe50c883dd6730d3d1211",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "gcworld/code_sniffer_contrib": "^1.0",
-                "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "^0.6.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GCWorld\\Interfaces\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "GameCharmer",
-                    "email": "admin@gamecharmer.com"
-                }
-            ],
-            "description": "GCWorld Industries Interfaces",
-            "time": "2018-07-31T19:44:35+00:00"
-        },
-        {
-            "name": "gcworld/orm",
-            "version": "3.6.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KongHack/ORM.git",
-                "reference": "fa929dd34d084d069367bf6db1f5f94e6bf31a94"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/ORM/zipball/fa929dd34d084d069367bf6db1f5f94e6bf31a94",
-                "reference": "fa929dd34d084d069367bf6db1f5f94e6bf31a94",
-                "shasum": ""
-            },
-            "require": {
-                "composer/composer": "^1.1",
-                "composer/installers": "^1.0",
-                "ext-pdo": "*",
-                "gcworld/common": "~2.2",
-                "gcworld/database": "^2.3.4",
-                "gcworld/interfaces": ">=3.1.1",
-                "php": ">=7.1.0",
-                "symfony/yaml": "^3.3"
-            },
-            "require-dev": {
-                "gcworld/code_sniffer_contrib": "^1.0",
-                "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "^0.6.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GCWorld\\ORM\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "GameCharmer",
-                    "email": "admin@gamecharmer.com"
-                }
-            ],
-            "description": "GCWorld Industries ORM",
-            "time": "2019-01-31T15:20:32+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1505,6 +1289,222 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "gcworld/common",
+            "version": "2.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KongHack/Common.git",
+                "reference": "58674164d356e4c10815fd5d00d40e1b797a1e3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KongHack/Common/zipball/58674164d356e4c10815fd5d00d40e1b797a1e3d",
+                "reference": "58674164d356e4c10815fd5d00d40e1b797a1e3d",
+                "shasum": ""
+            },
+            "require": {
+                "gcworld/database": "^2.3.10",
+                "gcworld/errorhandlers": "^1.2.0",
+                "gcworld/interfaces": ">=3.1.1",
+                "php": ">=7.1",
+                "symfony/yaml": "^3.3"
+            },
+            "require-dev": {
+                "gcworld/code_sniffer_contrib": "^1.0",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\Common\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries Common",
+            "time": "2019-02-25T18:33:41+00:00"
+        },
+        {
+            "name": "gcworld/database",
+            "version": "2.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KongHack/Database.git",
+                "reference": "0152da9e1cd5e346c06a7a4a319278bcd2eaad98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KongHack/Database/zipball/0152da9e1cd5e346c06a7a4a319278bcd2eaad98",
+                "reference": "0152da9e1cd5e346c06a7a4a319278bcd2eaad98",
+                "shasum": ""
+            },
+            "require": {
+                "composer/composer": "^1.1",
+                "composer/installers": "^1.0",
+                "ext-pdo": "*",
+                "gcworld/interfaces": ">=3.1.1",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "gcworld/code_sniffer_contrib": "^1.0",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\Database\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries Database",
+            "time": "2019-02-25T17:54:25+00:00"
+        },
+        {
+            "name": "gcworld/errorhandlers",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KongHack/Error-Handlers.git",
+                "reference": "8e27e7897013df89e2f40ccc6a511543a258e091"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KongHack/Error-Handlers/zipball/8e27e7897013df89e2f40ccc6a511543a258e091",
+                "reference": "8e27e7897013df89e2f40ccc6a511543a258e091",
+                "shasum": ""
+            },
+            "require": {
+                "kint-php/kint": ">=1.1",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\ErrorHandlers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries Error Handlers",
+            "time": "2019-03-06T16:16:19+00:00"
+        },
+        {
+            "name": "gcworld/interfaces",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KongHack/Interfaces.git",
+                "reference": "311df843403e0ae236bfe50c883dd6730d3d1211"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/311df843403e0ae236bfe50c883dd6730d3d1211",
+                "reference": "311df843403e0ae236bfe50c883dd6730d3d1211",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "gcworld/code_sniffer_contrib": "^1.0",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\Interfaces\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries Interfaces",
+            "time": "2018-07-31T19:44:35+00:00"
+        },
+        {
+            "name": "gcworld/orm",
+            "version": "3.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KongHack/ORM.git",
+                "reference": "fa929dd34d084d069367bf6db1f5f94e6bf31a94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KongHack/ORM/zipball/fa929dd34d084d069367bf6db1f5f94e6bf31a94",
+                "reference": "fa929dd34d084d069367bf6db1f5f94e6bf31a94",
+                "shasum": ""
+            },
+            "require": {
+                "composer/composer": "^1.1",
+                "composer/installers": "^1.0",
+                "ext-pdo": "*",
+                "gcworld/common": "~2.2",
+                "gcworld/database": "^2.3.4",
+                "gcworld/interfaces": ">=3.1.1",
+                "php": ">=7.1.0",
+                "symfony/yaml": "^3.3"
+            },
+            "require-dev": {
+                "gcworld/code_sniffer_contrib": "^1.0",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GCWorld\\ORM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "GameCharmer",
+                    "email": "admin@gamecharmer.com"
+                }
+            ],
+            "description": "GCWorld Industries ORM",
+            "time": "2019-01-31T15:20:32+00:00"
+        },
         {
             "name": "jean85/pretty-package-versions",
             "version": "1.2",
