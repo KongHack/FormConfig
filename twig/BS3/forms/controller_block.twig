@@ -1,3 +1,14 @@
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_BLOCK_PRE') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% include hook.getData() %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
 <form action="{{ formUrl }}" method="post" id="{{ formId }}" enctype="multipart/form-data">
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">
@@ -40,11 +51,14 @@
         });
     </script>
 {% endif %}
-{% if not FC_CONTROLLER %}
-    {% if FC_Config.getTwigAppend() %}
-        {% include FC_Config.getTwigAppend() %}
+
+{{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_BLOCK_POST') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% include hook.getData() %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
     {% endif %}
-    {% if FC_Config.getHtmlAppend() %}
-        {{ FC_Config.getHtmlAppend()|raw }}
-    {% endif %}
-{% endif %}
+{% endfor %}
