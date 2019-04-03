@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.7.1](https://github.com/KongHack/FormConfig/releases/tag/3.0.7.1)
+ - @GameCharmer Fix typo in controller_block.twig
+
+
+
 ## [3.0.7](https://github.com/KongHack/FormConfig/releases/tag/3.0.7)
  - @GameCharmer Merge in Ionic branch
 
