@@ -3,7 +3,8 @@
         {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
             {{ hook.getData()|raw }}
         {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
-            {% include hook.getData() %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
         {% endif %}
         {% do FC_Config.removeHook(k) %}
     {% endif %}
@@ -23,7 +24,8 @@
         {% endif %}
         <div class="panel-body">
             {% if form is defined and form != '' %}
-                {% include form %}
+                {% set file = form|replace({'REPLACE':'BS3'}) %}
+                {% include file %}
             {% else %}
                 {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
                 {{ simpleForm.render(_context) }}
@@ -57,7 +59,8 @@
         {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
             {{ hook.getData()|raw }}
         {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
-            {% include hook.getData() %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
         {% endif %}
         {% do FC_Config.removeHook(k) %}
     {% endif %}
