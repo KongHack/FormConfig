@@ -52,7 +52,7 @@
     </script>
 {% endif %}
 
-{{% for k, hook in FC_Config.getHooks() %}
+{% for k, hook in FC_Config.getHooks() %}
     {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_BLOCK_POST') %}
         {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
             {{ hook.getData()|raw }}
