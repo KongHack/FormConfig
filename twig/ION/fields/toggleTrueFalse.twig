@@ -1,0 +1,8 @@
+{% extends '@form_config_ION/field_wrapper.twig' %}
+{% block inputContent %}
+    <ion-toggle
+        id="{{ id }}"
+        checked="{{ value ? 'true' : 'false' }}"
+        {{ disabled ? 'disabled' : '' }}>
+    </ion-toggle>
+{% endblock %}

@@ -14,6 +14,16 @@ class FormArrayElement implements FieldContainerInterface
 {
     use FieldFormConfigTrait;
 
+    const MODE_TABLE = 'table';
+    const MODE_DIV   = 'div';
+    const MODE_IONIC = 'ionic';
+    const MODES = [
+        self::MODE_TABLE,
+        self::MODE_DIV,
+        self::MODE_IONIC,
+    ];
+
+
     protected $headers       = [];
     protected $widths        = [];
     protected $fields        = [];
@@ -26,6 +36,7 @@ class FormArrayElement implements FieldContainerInterface
     protected $builder       = null;
     protected $row_classes   = [];
     protected $extras        = [];
+    protected $icons         = [];
 
     /**
      * @param string $name
@@ -268,7 +279,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function setMode(string $mode)
     {
-        if (!in_array($mode, ['div', 'table'], true)) {
+        if (!in_array($mode, self::MODES, true)) {
             throw new Exception('Invalid Mode Type');
         }
         $this->mode = $mode;
@@ -374,5 +385,38 @@ class FormArrayElement implements FieldContainerInterface
     public function getExtras()
     {
         return $this->extras;
+    }
+
+
+    /**
+     * @param int $index
+     * @return string
+     */
+    public function getIcon(int $index)
+    {
+        return $this->icons[$index]??'';
+    }
+
+    /**
+     * @param string $icon
+     * @return $this
+     */
+    public function setIcon(string $icon)
+    {
+        $this->icons[$this->index] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @param int    $index
+     * @param string $icon
+     * @return $this
+     */
+    public function replaceIcon(int $index, string $icon)
+    {
+        $this->icons[$index] = $icon;
+
+        return $this;
     }
 }
