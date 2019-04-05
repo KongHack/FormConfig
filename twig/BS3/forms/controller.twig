@@ -1,5 +1,19 @@
 {% import _self as fcc %}
 {% set FC_CONTROLLER = true %}
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_MAIN_PRE') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+
 <div class="row">
     {% if forms|length > 1 %}
         <div class="col-md-3">
@@ -29,7 +43,8 @@
             {% include '@form_config_BS3/forms/controller_block.twig' %}
         {% else %}
             {% if includePath %}
-                {% include includePath|replace({'REPLACE':'BS3'}) %}
+                {% set file = includePath|replace({'REPLACE':'BS3'}) %}
+                {% include file %}
             {% else %}
                 <div class="alert alert-danger">includePath not defined!</div>
             {% endif %}
@@ -37,12 +52,19 @@
     </div>
 </div>
 
-{% if FC_Config.getTwigAppend() %}
-    {% include FC_Config.getTwigAppend() %}
-{% endif %}
-{% if FC_Config.getHtmlAppend() %}
-    {{ FC_Config.getHtmlAppend()|raw }}
-{% endif %}
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_MAIN_POST') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+
 
 {% macro doFormElement(element, route, activeForm) %}
     {% if element.getFormType() == 1 %}

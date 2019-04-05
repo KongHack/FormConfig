@@ -3,6 +3,7 @@ namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Config;
+use GCWorld\FormConfig\Core\FCHook;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
@@ -30,6 +31,7 @@ class FormConfig implements FieldContainerInterface
 
     protected $useHoldOn         = false;
     protected $name              = '';
+    protected $hooks             = [];
     protected $formId            = '';
     protected $twigTemplate      = '';
     protected $twigOverrides     = [];
@@ -42,8 +44,6 @@ class FormConfig implements FieldContainerInterface
         'urlBase'     => '',
         'urlCurrent'  => '',
     ];
-    protected $twigAppend = null;
-    protected $htmlAppend = null;
 
     /**
      * FormConfig constructor.
@@ -608,38 +608,33 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
-     * @param string $twig_path
+     * @param FCHook $hook
      * @return $this
      */
-    public function setTwigAppend(string $twig_path)
+    public function addHook(FCHook $hook)
     {
-        $this->twigAppend = $twig_path;
+        $this->hooks[] = $hook;
+
         return $this;
     }
 
     /**
-     * @return string|null
-     */
-    public function getTwigAppend()
-    {
-        return $this->twigAppend;
-    }
-
-    /**
-     * @param string $html
+     * @param int $index
      * @return $this
      */
-    public function setHtmlAppend(string $html)
+    public function removeHook(int $index)
     {
-        $this->htmlAppend = $html;
+        unset($this->hooks[$index]);
+
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return array
      */
-    public function getHtmlAppend()
+    public function getHooks()
     {
-        return $this->htmlAppend;
+        return $this->hooks;
     }
+
 }
