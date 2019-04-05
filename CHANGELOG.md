@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.9](https://github.com/KongHack/FormConfig/releases/tag/3.0.9)
+ - @GameCharmer Merge Ionic Again
+
+
+
 ## [3.0.8](https://github.com/KongHack/FormConfig/releases/tag/3.0.8)
  - @GameCharmer Add replace for namespaces to internal includes
 
