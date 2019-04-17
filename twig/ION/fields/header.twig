@@ -1,12 +1,11 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block headerItem %}
-    <ion-list-header id="{{ id }}">
+{% macro render(field) %}
+    <ion-list-header id="{{ field.getName() }}">
         <ion-label><strong>
-                {% if value is defined %}
-                    {{ value|raw }}
-                {% elseif label is defined %}
-                    {{ label|raw }}
+                {% if field.getValue() is defined %}
+                    {{ field.getValue() |raw }}
+                {% elseif field.getLabel() is defined %}
+                    {{ field.getLabel() |raw }}
                 {% endif %}
             </strong></ion-label>
     </ion-list-header>
-{% endblock %}
+{% endmacro %}

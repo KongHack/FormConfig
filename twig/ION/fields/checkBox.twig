@@ -1,11 +1,7 @@
 {% macro render(field) %}
-    {% extends '@form_config_ION/field_wrapper.twig' %}
-    {% block inputContent %}
-        <ion-checkbox
-            id="{{ field.getId() }}"
-            checked="{{ field.getValue() ? 'true' : 'false' }}"
-            slot="end"
-            {{ field.isDisabled() ? 'disabled' : '' }}>
-        </ion-checkbox>
-    {% endblock %}
-{% endmacrk %}
+    <ion-checkbox
+        id="{{ field.getName() }}"
+        checked="{{ field.getValue() ? 'true' : 'false' }}"
+        slot="end">
+    </ion-checkbox>
+{% endmacro %}

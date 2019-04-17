@@ -1,4 +1,41 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
-    <ion-text color="danger">{{ id }} - Not supported</ion-text>
-{% endblock %}
+{% macro render(field) %}
+    {% set fieldNameNB = field.getName()|slice(0, field.getName()|length-2) %}
+
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-text id="{{ fieldNameNB }}-option-display">{{ field.getValue()|length }} Selected</ion-text>
+    <ion-icon mode="ios" name="arrow-forward"></ion-icon>
+
+    <script>
+        {% set useAjax = false %}
+        {% set attributes = field.getDataAttributes() %}
+        {% if attributes.url is defined %}
+            {% set useAjax = true %}
+            {% set ajaxUrl = attributes.url %}
+        {% endif %}
+
+        $(document).on('click.case_log_multi_select', "#item-{{ fieldNameNB }}", function() {
+            window.ACE.Ion.GenerateModal({
+                component: 'multi-select-modal',
+                componentProps: {
+                    opts: {
+                        useAjax: {{ useAjax ? 'true' : 'false' }},
+                        {% if useAjax == true %}
+                        ajaxUrl: "{{ ajaxUrl }}",
+                        {% else %}
+                        options: {{ field.getOptions()|json_encode|raw }},
+                        {% endif %}
+                        values: window.ACE.__FORMS.fields["{{ fieldNameNB }}"],
+                        field_name: "{{ fieldNameNB }}",
+                        header: "{{ field.getLabel()|e('js') }}"
+                    }
+                }
+            })
+        });
+
+        $(document).on('multiSelectModalSave.form-{{ pid }}', function(e) {
+            window.ACE.__FORMS.addon_changes[e.detail.field_name] = e.detail.selected;
+            window.ACE.__FORMS.allowSave();
+            $("#"+e.detail.field_name+"-option-display").text(e.detail.selected.length+" Selected");
+        });
+    </script>
+{% endmacro %}

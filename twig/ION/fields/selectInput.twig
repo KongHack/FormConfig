@@ -1,38 +1,39 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
-    <ion-text id="display-{{ id }}"><i>No option picked</i></ion-text>
+{% macro render(field, optOverride) %}
+    <ion-text id="display-{{ field.getName() }}"><i>No option picked</i></ion-text>
+
     <script>
         $(function () {
-            window.ACE.__FORMS.addon_changes['{{ id }}'] = "{{ value|raw }}";
+            window.ACE.__FORMS.addon_changes['{{ field.getName() }}'] = "{{ field.getValue()|raw }}";
         });
 
         {% set selectedIndex = 0 %}
         {% set selectedText = "" %}
         {% set i = 0 %}
         var columnOpts = [];
-        {% for key,val in options %}
+
+        {% for key,val in optOverride ?? field.getOptions() %}
             columnOpts.push({
-                text: "{{ val }}",
-                value: "{{ key }}"
+                value: "{{ key }}",
+                text: "{{ val }}"
             });
-            {% if key == value %}
+            {% if key == field.getValue() %}
                 {% set selectedIndex = i %}
                 {% set selectedText = val %}
             {% endif %}
 
-        {% set i = i + 1 %}
+            {% set i = i + 1 %}
         {% endfor %}
 
-        {% if value is not empty %}
-            $('#display-{{ id }}').html("{{ selectedText|e('js')|raw }}");
+        {% if field.getValue() is not empty %}
+            $('#display-{{ field.getName() }}').html("{{ selectedText|e('js')|raw }}");
         {% endif %}
 
 
-        $(document).on('click.field_{{ id }}', '#item-{{ id }}', function() {
+        $(document).on('click.field_{{ field.getName() }}', '#item-{{ field.getName() }}', function() {
             window.ACE.Ion.GeneratePicker({
                 columns: [
                     {
-                        name: "{{ id }}",
+                        name: "{{ field.getName() }}",
                         options: columnOpts,
                         selectedIndex: {{ selectedIndex }}
                     }
@@ -54,7 +55,7 @@
                                     continue;
                                 }
                                 window.ACE.__FORMS.allowSave();
-                                $('#display-{{ id }}').html(d[k]["text"]);
+                                $('#display-{{ field.getName() }}').html(d[k]["text"]);
                                 window.ACE.__FORMS.addon_changes[k] = d[k]["value"];
                             }
                         }
@@ -63,4 +64,4 @@
             });
         });
     </script>
-{% endblock %}
+{% endmacro %}

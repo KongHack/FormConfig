@@ -1,13 +1,8 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block textPosition %}
-position="floating"
-{% endblock %}
-{% block inputContent %}
-    <ion-input
-        clear-input
-        id="{{ id }}"
-        value="{{ value }}"
-        maxlength="{{ maxLength }}"
-        {{ disabled ? 'disabled' : '' }}>
-    </ion-input>
-{% endblock %}
+{% macro render(field) %}
+        <ion-input
+            clear-input
+            id="{{ field.getName() }}"
+            value="{{ field.getValue() }}"
+            maxlength="{{ field.getMaxLength() }}">
+        </ion-input>
+{% endmacro %}

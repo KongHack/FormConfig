@@ -1,10 +1,8 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
+{% macro render(field) %}
     <ion-datetime
-        id="{{ id }}"
-        value="{{ value }}"
+        id="{{ field.getName() }}"
+        value="{{ field.getValue() }}"
         max="{{ "now"|date('Y') + 40 }}"
-        display-format="{{ dateDisplayFormat }}"
-        {{ disabled ? 'disabled' : '' }}>
+        display-format="{{ field.getDisplayFormat() }}">
     </ion-datetime>
-{% endblock %}
+{% endmacro %}

@@ -1,17 +1,16 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
+{% macro render(field) %}
     <ion-button
         fill="solid"
         expand="block"
         href="#!"
-        data-g2fa-code="{{ value }}"
-        id="{{ id }}">Tap to Copy</ion-button>
+        data-copy-data="{{ field.getValue() }}"
+        id="{{ field.getName() }}">Tap to Copy</ion-button>
     <script>
-        $(document).on('click.{{ id }}-copy', "#{{ id }}", function() {
-            cordova.plugins.clipboard.copy($(this).data('g2fa-code'));
+        $(document).on('click.{{ field.getName() }}-copy', "#{{ field.getName() }}", function() {
+            cordova.plugins.clipboard.copy($(this).data('copy-data'));
             window.ACE.Ion.GenerateToast({
-                message: "Copied to Clipboard!"
+                message: "Coppied to Clipboard!"
             });
         })
     </script>
-{% endblock %}
+{% endmacro %}

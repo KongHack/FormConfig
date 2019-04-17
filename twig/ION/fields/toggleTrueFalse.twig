@@ -1,8 +1,6 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
+{% macro render(field) %}
     <ion-toggle
-        id="{{ id }}"
-        checked="{{ value ? 'true' : 'false' }}"
-        {{ disabled ? 'disabled' : '' }}>
+        id="{{ field.getName() }}"
+        checked="{{ field.getValue() ? 'true' : 'false' }}">
     </ion-toggle>
-{% endblock %}
+{% endmacro %}

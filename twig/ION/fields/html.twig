@@ -1,7 +1,6 @@
-{% extends '@form_config_ION/field_wrapper.twig' %}
-{% block inputContent %}
+{% macro render(field) %}
     <ion-text
-        id="{{ id }}">
-        {{ value|raw }}
+        id="{{ field.getName() }}">
+        {{ field.getValue()|raw }}
     </ion-text>
-{% endblock %}
+{% endmacro %}
