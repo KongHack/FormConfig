@@ -1,0 +1,9 @@
+{% macro render(field) %}
+        <ion-textarea
+            id="{{ field.getName() }}"
+            value="{{ field.getValue() }}"
+            maxlength="{{ field.getMaxLength() }}"
+            rows="4">
+        </ion-textarea>
+    {#{% endblock %}#}
+{% endmacro %}

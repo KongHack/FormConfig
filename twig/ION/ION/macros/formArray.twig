@@ -1,0 +1,26 @@
+{% macro handleFormArray(arr) %}
+    {% import '@form_config_ION/macros/form.twig' as form %}
+    {% set displayCol = arr.getDisplayColumn() %}
+    <ion-list-header>
+        <ion-label>{{ arr.getHeaders()[displayCol] }}</ion-label>
+    </ion-list-header>
+    {% set displayedCount = 0 %}
+    {% for index in range(0, arr.getIndex()) %}
+        {% if arr.getFields()[index] %}
+            {% set fields = arr.getFields()[index] %}
+            {% for field in fields %}
+                {% if displayCol == loop.index - 1 %}
+                    {% if field.getValue()|trim|replace({"&nbsp;": ""})|length > 1 %}
+                        {{  form.completeField(field) }}
+                        {% set displayedCount = displayedCount + 1 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    {% if displayedCount < 1 %}
+        <ion-item>
+            <ion-text color="grey"><i>No Entries</i></ion-text>
+        </ion-item>
+    {% endif %}
+{% endmacro %}

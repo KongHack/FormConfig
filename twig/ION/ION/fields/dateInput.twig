@@ -1,0 +1,8 @@
+{% macro render(field) %}
+    <ion-datetime
+        id="{{ field.getName() }}"
+        value="{{ field.getValue() }}"
+        max="{{ "now"|date('Y') + 40 }}"
+        display-format="{{ field.getDisplayFormat() }}">
+    </ion-datetime>
+{% endmacro %}

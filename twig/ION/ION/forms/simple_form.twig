@@ -1,0 +1,8 @@
+{% macro render(context) %}
+    {% import '@form_config_ION/macros/form.twig' as form %}
+    {% if context.activeForm is defined %}
+        {% for field in context[context.activeForm] %}
+            {{ form.completeField(field) }}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}

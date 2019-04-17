@@ -1,0 +1,7 @@
+{% macro render(field) %}
+    <ion-checkbox
+        id="{{ field.getName() }}"
+        checked="{{ field.getValue() ? 'true' : 'false' }}"
+        slot="end">
+    </ion-checkbox>
+{% endmacro %}

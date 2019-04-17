@@ -1,0 +1,4 @@
+{% macro render(field) %}
+    {% import '@form_config_ION/fields/toggleTrueFalse.twig' as select %}
+    {{ select.render(field) }}
+{% endmacro %}

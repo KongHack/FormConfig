@@ -1,0 +1,68 @@
+{% macro completeField(field, hideItemLine) %}
+    {% if field is not empty %}
+        {% if field.fields is defined %}
+            {% import '@form_config_ION/macros/formArray.twig' as formArray %}
+            {{ formArray.handleFormArray(field) }}
+        {% else %}
+            {% import _self as myself %}
+
+            {% set def = field.getDefinition() %}
+            {% set file = def.twig|replace({
+                'REPLACE':'ION',
+            }) %}
+            {% import file as twigFile %}
+
+            {% if field.reqLevel > 0 %}
+                {% if field.getType() == 'header' %}
+                    {% block headerItem %}
+                    {% endblock %}
+                {% elseif field.getType() != 'addRemoveItemList'%}
+                    {% set labelPos = {
+                        "emailInput": "floating",
+                        "numberInput": "floating",
+                        "passwordInput": "floating",
+                        "phoneInput": "floating",
+                        "textAreaInput": "floating",
+                        "textInput": "floating",
+                    } %}
+
+                    {% set newFieldName = field.getName() %}
+                    {% if field.getValue() is iterable %}
+                        {% set newFieldName = field.getName()|slice(0, field.getName()|length-2) %}
+                    {% endif %}
+
+                    <ion-item
+                        id="item-{{ newFieldName }}"
+                        class="{{ (field.getType() == "hidden") ? 'hidden' : '' }} ion-activatable"
+                        lines="{{ (hideItemLine == true ? 'none' : '') }}"
+                    >
+                        {% if field.getLabel()|length > 0 %}
+                            <ion-label position="{% if labelPos[field.getType()] is defined %}{{ labelPos[field.getType()] }}{% endif %}" id="item-{{ newFieldName }}-label">
+                                {{ field.getLabel()|raw }}
+                                {{ (((field.getType() != 'html') and (field.getType() != 'static')) and (field.reqLevel < 2)) ? '<ion-text color="medium"><small><i> (Optional)</i></small></ion-text>' : '' }}
+                            </ion-label>
+                        {% endif %}
+                        {{ twigFile.render(field) }}
+                    </ion-item>
+                    <ion-text
+                            style="margin: 0 16px; font-size: small; display: block"
+                            color="medium"
+                            class="form-help-text">
+                        {{ field.getHelpText()|escape }}
+                    </ion-text>
+                    <ion-text
+                            style="margin: 0 16px; font-size: small; font-style: italic; display: block"
+                            color="danger"
+                            class="hidden form-error-text"
+                            data-for-field="{{ newFieldName }}">
+                    </ion-text>
+                {% else %}
+                    <ion-list-header>
+                        {{ field.getName() }}
+                    </ion-list-header>
+                    {{ twigFile.render(field) }}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endmacro %}

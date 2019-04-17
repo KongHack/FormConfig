@@ -1,0 +1,4 @@
+{% macro render(field) %}
+    {% import '@form_config_ION/fields/html.twig' as html %}
+    {{ html.render(field) }}
+{% endmacro %}

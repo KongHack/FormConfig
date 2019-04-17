@@ -1,0 +1,16 @@
+{% macro render(field) %}
+    <ion-button
+        fill="solid"
+        expand="block"
+        href="#!"
+        data-copy-data="{{ field.getValue() }}"
+        id="{{ field.getName() }}">Tap to Copy</ion-button>
+    <script>
+        $(document).on('click.{{ field.getName() }}-copy', "#{{ field.getName() }}", function() {
+            cordova.plugins.clipboard.copy($(this).data('copy-data'));
+            window.ACE.Ion.GenerateToast({
+                message: "Coppied to Clipboard!"
+            });
+        })
+    </script>
+{% endmacro %}

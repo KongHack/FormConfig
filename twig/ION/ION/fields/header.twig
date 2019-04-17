@@ -1,0 +1,11 @@
+{% macro render(field) %}
+    <ion-list-header id="{{ field.getName() }}">
+        <ion-label><strong>
+                {% if field.getValue() is defined %}
+                    {{ field.getValue() |raw }}
+                {% elseif field.getLabel() is defined %}
+                    {{ field.getLabel() |raw }}
+                {% endif %}
+            </strong></ion-label>
+    </ion-list-header>
+{% endmacro %}

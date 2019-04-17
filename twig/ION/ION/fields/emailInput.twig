@@ -1,0 +1,9 @@
+{% macro render(field) %}
+    <ion-input
+        clearInput
+        id="{{ field.getName() }}"
+        value="{{ field.getValue() }}"
+        maxlength="{{ field.getMaxLengt() }}"
+        type="email">
+    </ion-input>
+{% endmacro %}
