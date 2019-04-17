@@ -1,195 +1,192 @@
-{% extends 'mobile/core/layout.twig' %}
-{% block content %}
-    {% if forms|length > 1 %}
-        {% set formKeys = forms|keys %}
-        {% set activeFormIndex = -1 %}
-        {% for k,v in formKeys %}
-            {% if v == activeForm %}
-                {% set activeFormIndex = k %}
-            {% endif %}
-        {% endfor %}
+{% if forms|length > 1 %}
+    {% set formKeys = forms|keys %}
+    {% set activeFormIndex = -1 %}
+    {% for k,v in formKeys %}
+        {% if v == activeForm %}
+            {% set activeFormIndex = k %}
+        {% endif %}
+    {% endfor %}
 
-        <ion-item lines="none">
-            {% if activeFormIndex > 0 %}
-                <ion-text slot="start" class="ion-activatable" id="multi_form_previous_{{ pid }}">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    <ion-icon name="arrow-back"></ion-icon>&nbsp;{{ forms[formKeys[activeFormIndex-1]]|raw }}
-                </ion-text>
+    <ion-item lines="none">
+        {% if activeFormIndex > 0 %}
+            <ion-text slot="start" class="ion-activatable" id="multi_form_previous_{{ pid }}">
+                <ion-ripple-effect></ion-ripple-effect>
+                <ion-icon name="arrow-back"></ion-icon>&nbsp;{{ forms[formKeys[activeFormIndex-1]]|raw }}
+            </ion-text>
 
-                <script>
-                    var prevDisabled = false;
-                    $(document).on('click.multi_form_nav_{{ pid }}', "#multi_form_previous_{{ pid }}", function() {
-                        if (!prevDisabled) {
-                            prevDisabled = true;
-                            window.ACE.API.POST("{{ formUrl }}", {
-                                'multi_form_nav': 'previous'
-                            }).then(function(resp) {
-                                if (resp.json.redirect.url.length > 1) {
-                                    window.ACE.API.ContentRetriever(resp.json.redirect.url, {}, "", function() {
-                                        window.ACE.Mulch.doRemovePageByIndex("main_navigator", window.ACE.Mulch.queryByRoute("main_navigator", "{{ route }}"));
-                                    });
-                                }
-                                prevDisabled = false;
-                            });
-                        }
-                    });
-                </script>
-            {% endif %}
-            {% if activeFormIndex+1 < formKeys|length and activeFormIndex > -1%}
-                <ion-text slot="end" class="ion-activatable" id="multi_form_next_{{ pid }}">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    {{ forms[formKeys[activeFormIndex+1]]|raw }}&nbsp;<ion-icon name="arrow-forward"></ion-icon>
-                </ion-text>
-                <script>
-                    var nextDisabled = false;
-                    $(document).on('click.multi_form_nav_{{ pid }}', "#multi_form_next_{{ pid }}", function() {
-                        if (!nextDisabled) {
-                            nextDisabled = true;
-                            window.ACE.API.POST("{{ formUrl }}", {
-                                'multi_form_nav': 'next'
-                            }).then(function(resp) {
-                                    if (resp.json.redirect.url.length > 1) {
-                                    window.ACE.API.ContentRetriever(resp.json.redirect.url, {}, "", function() {
-                                        window.ACE.Mulch.doRemovePageByIndex("main_navigator", window.ACE.Mulch.queryByRoute("main_navigator", "{{ route }}"));
-                                    });
-                                }
-                                nextDisabled = false;
-                            });
-                        }
-                    });
-                </script>
-            {% endif %}
-        </ion-item>
-        <hr>
-    {% endif %}
-    <form id="{{ formId }}">
-        <ion-list>
-            {% if not twigOverrides.replace %}
-                {% if form is defined and form != '' %}
-                    {% include form|replace({'REPLACE':'ION'}) %}
-                {% else %}
-                    {% import '@form_config_ION/simple_form.twig' as simpleForm %}
-                    {{ simpleForm.render(_context) }}
-                {% endif %}
-            {% else %}
-                {% if includePath %}
-                    {% include includePath|replace({'REPLACE':'ION'}) %}
-                {% else %}
-                    <script>
-                        $(function() {
-                            window.ACE.Ion.GenerateAlert({
-                                "message": "includePath not defined!"
-                            });
-                        })
-                    </script>
-                {% endif %}
-            {% endif %}
-        </ion-list>
-    </form>
-    <script>
-        window.ACE.__FORMS = {
-            __allowSaveRan: false,
-            addon_changes: {},
-            fields: [],
-            allowSave: function () {
-                if (!window.ACE.__FORMS.__allowSaveRan) {
-                    window.ACE.__FORMS.__allowSaveRan = true;
-                    $("#save-settings-form-{{ pid }}").removeAttr('disabled');
-                }
-            }
-        };
-
-        $(document).on('click.settings-save-{{ pid }}', '#save-settings-form-{{ pid }}', function() {
-            var temp = Object.assign({}, changed, window.ACE.__FORMS.addon_changes || {});
-            for (var k in temp) {
-                if (!temp.hasOwnProperty(k)) {
-                    continue;
-                }
-
-                if (temp[k] === undefined) {
-                    delete(temp[k]);
-                }
-            }
-            window.ACE.API.POST("{{ formUrl }}", temp)
-                .then(function (resp) {
-                    if (resp.json.status) {
-                        if (resp.json.data.hasOwnProperty('display') && resp.json.data.display.hasOwnProperty('js')) {
-                            eval(resp.json.data.display.js.join(''));
-                        } else if (resp.json.redirect.hasOwnProperty('url') && resp.json.redirect.url.length > 0) {
-                            if (resp.json.redirect.action === 'I') {
+            <script>
+                var prevDisabled = false;
+                $(document).on('click.multi_form_nav_{{ pid }}', "#multi_form_previous_{{ pid }}", function() {
+                    if (!prevDisabled) {
+                        prevDisabled = true;
+                        window.ACE.API.POST("{{ formUrl }}", {
+                            'multi_form_nav': 'previous'
+                        }).then(function(resp) {
+                            if (resp.json.redirect.url.length > 1) {
                                 window.ACE.API.ContentRetriever(resp.json.redirect.url, {}, "", function() {
                                     window.ACE.Mulch.doRemovePageByIndex("main_navigator", window.ACE.Mulch.queryByRoute("main_navigator", "{{ route }}"));
                                 });
-                            } else if (resp.json.redirect.action === 'T') {
-
-                            } else if (resp.json.redirect.action === "P") {
-                                window.ACE.Mulch.closeCurrent("main_navigator");
                             }
-                        }
-                    } else if (Object.keys(resp.json.errors).length > 0) {
-                        window.ACE.Ion.GenerateAlert({
-                            message: "There were errors in the submitted information"
-                        });
-                        $(".form-error-text").each(function (e, d) {
-                            var $currentElem = $(d);
-                            var field = $currentElem.data('for-field');
-
-                            if (resp.json.errors.hasOwnProperty(field)) {
-                                $currentElem.html(resp.json.errors[field]).removeClass('hidden');
-                            } else {
-                                $currentElem.addClass('hidden');
-                            }
+                            prevDisabled = false;
                         });
                     }
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    window.ACE.Ion.GenerateAlert({
-                        message: "Error saving. Please try again later"
-                    })
                 });
-        });
-        var changed = {};
-        {% for field in _context[_context.activeForm] %}
-            {% if field.fields is defined %}
-                {% for row in field.fields %}
-                    {% for arrField in row %}
-                        changed['{{ arrField.getName() }}'] = "{{ arrField.getValue()|e('js') }}";
-                    {% endfor %}
-                {% endfor %}
+            </script>
+        {% endif %}
+        {% if activeFormIndex+1 < formKeys|length and activeFormIndex > -1%}
+            <ion-text slot="end" class="ion-activatable" id="multi_form_next_{{ pid }}">
+                <ion-ripple-effect></ion-ripple-effect>
+                {{ forms[formKeys[activeFormIndex+1]]|raw }}&nbsp;<ion-icon name="arrow-forward"></ion-icon>
+            </ion-text>
+            <script>
+                var nextDisabled = false;
+                $(document).on('click.multi_form_nav_{{ pid }}', "#multi_form_next_{{ pid }}", function() {
+                    if (!nextDisabled) {
+                        nextDisabled = true;
+                        window.ACE.API.POST("{{ formUrl }}", {
+                            'multi_form_nav': 'next'
+                        }).then(function(resp) {
+                                if (resp.json.redirect.url.length > 1) {
+                                window.ACE.API.ContentRetriever(resp.json.redirect.url, {}, "", function() {
+                                    window.ACE.Mulch.doRemovePageByIndex("main_navigator", window.ACE.Mulch.queryByRoute("main_navigator", "{{ route }}"));
+                                });
+                            }
+                            nextDisabled = false;
+                        });
+                    }
+                });
+            </script>
+        {% endif %}
+    </ion-item>
+    <hr>
+{% endif %}
+<form id="{{ formId }}">
+    <ion-list>
+        {% if not twigOverrides.replace %}
+            {% if form is defined and form != '' %}
+                {% include form|replace({'REPLACE':'ION'}) %}
             {% else %}
-                {% if field.getValue() is iterable %}
-                    changed['{{ field.getName()|slice(0, field.getName()|length-2) }}'] = {{ field.getValue()|json_encode|raw }};
-                {% else %}
-                    changed['{{ field.getName() }}'] = "{{ field.getValue()|e('js') }}";
-                {% endif %}
+                {% import '@form_config_ION/simple_form.twig' as simpleForm %}
+                {{ simpleForm.render(_context) }}
             {% endif %}
-        {% endfor %}
+        {% else %}
+            {% if includePath %}
+                {% include includePath|replace({'REPLACE':'ION'}) %}
+            {% else %}
+                <script>
+                    $(function() {
+                        window.ACE.Ion.GenerateAlert({
+                            "message": "includePath not defined!"
+                        });
+                    })
+                </script>
+            {% endif %}
+        {% endif %}
+    </ion-list>
+</form>
+<script>
+    window.ACE.__FORMS = {
+        __allowSaveRan: false,
+        addon_changes: {},
+        fields: [],
+        allowSave: function () {
+            if (!window.ACE.__FORMS.__allowSaveRan) {
+                window.ACE.__FORMS.__allowSaveRan = true;
+                $("#save-settings-form-{{ pid }}").removeAttr('disabled');
+            }
+        }
+    };
 
-        var fields = Object.keys(changed);
-        window.ACE.__FORMS['fields'] = changed;
+    $(document).on('click.settings-save-{{ pid }}', '#save-settings-form-{{ pid }}', function() {
+        var temp = Object.assign({}, changed, window.ACE.__FORMS.addon_changes || {});
+        for (var k in temp) {
+            if (!temp.hasOwnProperty(k)) {
+                continue;
+            }
 
-        $(function () {
-            fields.forEach(function (field) {
-                $(document).on('ionChange.form-{{ pid }}', '#' + field, function (e) {
-                    window.ACE.__FORMS.allowSave();
+            if (temp[k] === undefined) {
+                delete(temp[k]);
+            }
+        }
+        window.ACE.API.POST("{{ formUrl }}", temp)
+            .then(function (resp) {
+                if (resp.json.status) {
+                    if (resp.json.data.hasOwnProperty('display') && resp.json.data.display.hasOwnProperty('js')) {
+                        eval(resp.json.data.display.js.join(''));
+                    } else if (resp.json.redirect.hasOwnProperty('url') && resp.json.redirect.url.length > 0) {
+                        if (resp.json.redirect.action === 'I') {
+                            window.ACE.API.ContentRetriever(resp.json.redirect.url, {}, "", function() {
+                                window.ACE.Mulch.doRemovePageByIndex("main_navigator", window.ACE.Mulch.queryByRoute("main_navigator", "{{ route }}"));
+                            });
+                        } else if (resp.json.redirect.action === 'T') {
 
-                    //To int then to string. Would probably work without the toString(), but best to stay consistent with other POST data
-                    if ($(this)[0].tagName === 'ION-CHECKBOX' || $(this)[0].tagName === 'ION-TOGGLE') {
-                        changed[field] = (+(e.detail.checked)).toString();
-                    } else {
-                        var val = e.detail.value;
-                        if (typeof e.detail.value === "number") {
-                            val = (+(val)).toString();
+                        } else if (resp.json.redirect.action === "P") {
+                            window.ACE.Mulch.closeCurrent("main_navigator");
                         }
-                        changed[field] = val;
                     }
-                });
+                } else if (Object.keys(resp.json.errors).length > 0) {
+                    window.ACE.Ion.GenerateAlert({
+                        message: "There were errors in the submitted information"
+                    });
+                    $(".form-error-text").each(function (e, d) {
+                        var $currentElem = $(d);
+                        var field = $currentElem.data('for-field');
+
+                        if (resp.json.errors.hasOwnProperty(field)) {
+                            $currentElem.html(resp.json.errors[field]).removeClass('hidden');
+                        } else {
+                            $currentElem.addClass('hidden');
+                        }
+                    });
+                }
+            })
+            .catch(function (resp) {
+                console.log(resp);
+                window.ACE.Ion.GenerateAlert({
+                    message: "Error saving. Please try again later"
+                })
+            });
+    });
+    var changed = {};
+    {% for field in _context[_context.activeForm] %}
+        {% if field.fields is defined %}
+            {% for row in field.fields %}
+                {% for arrField in row %}
+                    changed['{{ arrField.getName() }}'] = "{{ arrField.getValue()|e('js') }}";
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            {% if field.getValue() is iterable %}
+                changed['{{ field.getName()|slice(0, field.getName()|length-2) }}'] = {{ field.getValue()|json_encode|raw }};
+            {% else %}
+                changed['{{ field.getName() }}'] = "{{ field.getValue()|e('js') }}";
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    var fields = Object.keys(changed);
+    window.ACE.__FORMS['fields'] = changed;
+
+    $(function () {
+        fields.forEach(function (field) {
+            $(document).on('ionChange.form-{{ pid }}', '#' + field, function (e) {
+                window.ACE.__FORMS.allowSave();
+
+                //To int then to string. Would probably work without the toString(), but best to stay consistent with other POST data
+                if ($(this)[0].tagName === 'ION-CHECKBOX' || $(this)[0].tagName === 'ION-TOGGLE') {
+                    changed[field] = (+(e.detail.checked)).toString();
+                } else {
+                    var val = e.detail.value;
+                    if (typeof e.detail.value === "number") {
+                        val = (+(val)).toString();
+                    }
+                    changed[field] = val;
+                }
             });
         });
-
-    </script>
-    {% if FC_Config.getHtmlAppend() %}
-        {{ FC_Config.getHtmlAppend()|raw }}
-    {% endif %}
+    });
+</script>
+{% if FC_Config.getHtmlAppend() %}
+    {{ FC_Config.getHtmlAppend()|raw }}
+{% endif %}
 {% endblock %}
