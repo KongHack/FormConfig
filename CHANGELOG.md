@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.10](https://github.com/KongHack/FormConfig/releases/tag/3.0.10)
+ - @GameCharmer *EXPERIMENTAL*  Allow array elements to contain array elements. 
+     You can totally create an infinitely recursive mess with this, so be careful.
+
+
 ## [3.0.9](https://github.com/KongHack/FormConfig/releases/tag/3.0.9)
  - @GameCharmer Merge Ionic Again
 
