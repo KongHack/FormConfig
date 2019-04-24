@@ -55,7 +55,7 @@ class FormArrayElement implements FieldContainerInterface
     /**
      * @param string $name
      *
-     * @return \GCWorld\FormConfig\Forms\FormArrayField
+     * @return FormArrayField
      */
     public function createField(string $name)
     {
@@ -68,6 +68,20 @@ class FormArrayElement implements FieldContainerInterface
         if (isset($this->widths[$index])) {
             $field->setColWidth($this->widths[$index]);
         }
+
+        return $field;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return FormArrayElement
+     */
+    public function createFieldArray(string $name)
+    {
+        $field                             = new FormArrayElement();
+        $this->fields[$this->index][$name] = $field;
+        $field->setFormConfig($this->getFormConfig());
 
         return $field;
     }
@@ -90,7 +104,7 @@ class FormArrayElement implements FieldContainerInterface
     /**
      * @param string $name
      *
-     * @return \GCWorld\FormConfig\Forms\FormArrayField
+     * @return FormArrayField
      */
     public function createFootField(string $name)
     {
@@ -106,7 +120,7 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
-     * @param \GCWorld\FormConfig\Forms\FormField $field
+     * @param FormField $field
      *
      * @return $this
      */
