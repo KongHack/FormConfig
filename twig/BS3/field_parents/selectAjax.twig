@@ -34,10 +34,15 @@
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
-                        return {
+                        let subData = {
                             q: params.term,
                             page: params.page
                         };
+                        $.each($("#{{ field.id }}").data(),function(i, e) {
+                            subData[i] = e;
+                        });
+
+                        return subData;
                     },
                     processResults: function (data, page) {
                         return {

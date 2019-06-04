@@ -6,8 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.11](https://github.com/KongHack/FormConfig/releases/tag/3.0.11)
+ - @GameCharmer Automatically grab any data points on select2 ajax fields and auto-pass
+
+
 ## [3.0.10](https://github.com/KongHack/FormConfig/releases/tag/3.0.10)
- - @GameCharmer *EXPERIMENTAL*  Allow array elements to contain array elements. 
+ - @GameCharmer Allow array elements to contain array elements. 
      You can totally create an infinitely recursive mess with this, so be careful.
 
 
