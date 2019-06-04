@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.12](https://github.com/KongHack/FormConfig/releases/tag/3.0.12)
+ - @GameCharmer Only run select2 ajax auto-pass on primitives
+
+
 ## [3.0.11](https://github.com/KongHack/FormConfig/releases/tag/3.0.11)
  - @GameCharmer Automatically grab any data points on select2 ajax fields and auto-pass
 

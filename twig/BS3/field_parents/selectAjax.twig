@@ -39,7 +39,13 @@
                             page: params.page
                         };
                         $.each($("#{{ field.id }}").data(),function(i, e) {
-                            subData[i] = e;
+                            if(typeof e != 'object'
+                                && typeof e != 'function'
+                                && i != 'q'
+                                && i != 'page'
+                            ) {
+                                subData[i] = e;
+                            }
                         });
 
                         return subData;
