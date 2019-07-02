@@ -58,7 +58,7 @@ class FormConfigFormElement
      */
     public function getFormName()
     {
-        return $this->form_key;
+        return $this->form_name;
     }
 
     /**
