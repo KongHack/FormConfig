@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.1.1](https://github.com/KongHack/FormConfig/releases/tag/3.1.1)
+ - @GameCharmer Fix getFormName in FormConfigFormElement
+
+
+
 ## [3.1.0](https://github.com/KongHack/FormConfig/releases/tag/3.1.0)
   - twig/twig updated from v2.6.2 to v2.11.3
     See changes: https://github.com/twigphp/Twig/compare/v2.6.2...v2.11.3
