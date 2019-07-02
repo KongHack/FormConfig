@@ -11,7 +11,7 @@
     "php": ">=7.1.0",
     "composer/composer": "^1.1",
     "composer/installers": "^1.0",
-    "twig/twig": "~2.0",
+    "twig/twig": "^2.11",
     "riimu/kit-phpencoder": "^2.3",
     "kint-php/kint": ">=1.1",
     "symfony/yaml": "^3.3"

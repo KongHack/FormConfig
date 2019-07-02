@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.1.0](https://github.com/KongHack/FormConfig/releases/tag/3.1.0)
+  - twig/twig updated from v2.6.2 to v2.11.3
+    See changes: https://github.com/twigphp/Twig/compare/v2.6.2...v2.11.3
+    Release notes: https://github.com/twigphp/Twig/releases/tag/v2.11.3
+
+
+
 ## [3.0.12](https://github.com/KongHack/FormConfig/releases/tag/3.0.12)
  - @GameCharmer Only run select2 ajax auto-pass on primitives
 

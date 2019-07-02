@@ -299,7 +299,7 @@ class FormConfig implements FieldContainerInterface
             //Iterate fields.
             foreach ($requirements as $name => $level) {
                 if (array_key_exists($name, $this->fields)) {
-                    /** @var \GCWorld\FormConfig\Forms\FormField $field */
+                    /** @var FormField $field */
                     $field = $this->fields[$name];
                     $field->setReqLevel($level);
                 }
@@ -320,7 +320,7 @@ class FormConfig implements FieldContainerInterface
             //Iterate fields.
             foreach ($errors as $name => $err) {
                 if (array_key_exists($name, $this->fields)) {
-                    /** @var \GCWorld\FormConfig\Forms\FormField $field */
+                    /** @var FormField $field */
                     $field = $this->fields[$name];
                     $field->addError($err);
                 }
@@ -341,7 +341,7 @@ class FormConfig implements FieldContainerInterface
 
 
         foreach ($this->fields as $name => $field) {
-            /** @var \GCWorld\FormConfig\Forms\FormField $field */
+            /** @var FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
                 $function = FieldName::getterName($name);
                 $field->setValue($object->$function());

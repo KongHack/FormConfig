@@ -2,6 +2,13 @@
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\Forms\FormConfigFormElement;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
+use Twig\TwigTest;
 
 /**
  * Class Twig
@@ -17,11 +24,11 @@ class Twig
     protected static $loader = null;
 
     /**
-     * @param \Twig_Loader_Filesystem $filesystem
+     * @param FilesystemLoader $filesystem
      *
      * @return void
      */
-    public static function attachPath(\Twig_Loader_Filesystem $filesystem)
+    public static function attachPath(FilesystemLoader $filesystem)
     {
         $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
         $dir .= '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
@@ -35,35 +42,35 @@ class Twig
     }
 
     /**
-     * @param \Twig_Environment $environment
+     * @param Environment $environment
      * @return void
      */
-    public static function mapAll(\Twig_Environment $environment)
+    public static function mapAll(Environment $environment)
     {
         $loader = $environment->getLoader();
-        if ($loader instanceof \Twig_Loader_Filesystem) {
+        if ($loader instanceof FilesystemLoader) {
             self::attachPath($loader);
         }
 
-        $environment->addFunction(new \Twig_SimpleFunction('FC_getConfig', function(){
+        $environment->addFunction(new TwigFunction('FC_getConfig', function(){
             $config  = Config::getInstance()->getConfig();
             unset($config['forms']);
             return $config;
         }));
 
-        $environment->addTest(new \Twig_Test('FC_isFormElement',function($obj){
+        $environment->addTest(new TwigTest('FC_isFormElement',function($obj){
             return $obj instanceof FormConfigFormElement;
         }));
     }
 
     /**
-     * @return \Twig_Environment
+     * @return Environment
      */
     public static function get()
     {
         if (null == self::$twig) {
             $loader     = self::getLoader();
-            $twig       = new \Twig_Environment($loader, [
+            $twig       = new Environment($loader, [
                 'cache'       => self::getTwigDir().DIRECTORY_SEPARATOR.'cache',
                 'auto_reload' => true,
             ]);
@@ -75,12 +82,12 @@ class Twig
     }
 
     /**
-     * @return \Twig_Loader_Filesystem
+     * @return FilesystemLoader
      */
     public static function getLoader()
     {
         if (null == self::$loader) {
-            $loader       = new \Twig_Loader_Filesystem(self::getTwigDir());
+            $loader       = new FilesystemLoader(self::getTwigDir());
             self::$loader = $loader;
         }
 
@@ -99,9 +106,9 @@ class Twig
      * @param string     $name
      * @param array|null $context
      *
-     * @throws \Twig_Error_Syntax
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
+     * @throws SyntaxError
+     * @throws LoaderError
+     * @throws RuntimeError
      *
      * @return string
      */
@@ -113,15 +120,15 @@ class Twig
             }
 
             return self::get()->render($name, $context);
-        } catch (\Twig_Error_Syntax $e) {
+        } catch (SyntaxError $e) {
             d($e);
 
             throw $e;
-        } catch (\Twig_Error_Loader $e) {
+        } catch (LoaderError $e) {
             d($e);
 
             throw $e;
-        } catch (\Twig_Error_Runtime $e) {
+        } catch (RuntimeError $e) {
             $previous = $e->getPrevious();
             if (\is_object($previous)) {
                 throw $previous;
