@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.1.3](https://github.com/KongHack/FormConfig/releases/tag/3.1.3)
+ - @GameCharmer Support Wrapping Classes for simple form and form fields
+
+
+
 ## [3.1.2](https://github.com/KongHack/FormConfig/releases/tag/3.1.2)
  - @GameCharmer Add passwordClean password field
 

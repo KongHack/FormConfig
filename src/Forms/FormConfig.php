@@ -46,6 +46,13 @@ class FormConfig implements FieldContainerInterface
     ];
 
     /**
+     * Only used in the event of a simple form.  Great for rows!
+     *
+     * @var string
+     */
+    protected $simpleFormWrappingClass = '';
+
+    /**
      * FormConfig constructor.
      */
     public function __construct()
@@ -635,6 +642,25 @@ class FormConfig implements FieldContainerInterface
     public function getHooks()
     {
         return $this->hooks;
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setSimpleFormWrappingClass(string $value)
+    {
+        $this->simpleFormWrappingClass = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSimpleFormWrappingClass()
+    {
+        return $this->simpleFormWrappingClass;
     }
 
 }

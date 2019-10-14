@@ -118,6 +118,11 @@ class FormField
     protected $labelledBy = '';
 
     /**
+     * @var string
+     */
+    protected $wrappingClass = '';
+
+    /**
      * @param string $name
      */
     public function __construct(string $name)
@@ -697,5 +702,25 @@ class FormField
         $this->labelledBy = $value;
 
         return $this;
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setWrappingClass(string $value)
+    {
+        $this->wrappingClass = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function getWrappingClass(string $value)
+    {
+        return $this->wrappingClass;
     }
 }
