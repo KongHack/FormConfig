@@ -716,10 +716,9 @@ class FormField
     }
 
     /**
-     * @param string $value
      * @return string
      */
-    public function getWrappingClass(string $value)
+    public function getWrappingClass()
     {
         return $this->wrappingClass;
     }
