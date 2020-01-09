@@ -6,7 +6,144 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
-## [2.1.0](https://github.com/KongHack/FormConfig/releases/tag/2.1.0)
+## [3.1.4](https://github.com/KongHack/FormConfig/releases/tag/3.1.4)
+ - @GameCharmer Fix get wrapping class on field
+
+
+
+## [3.1.3](https://github.com/KongHack/FormConfig/releases/tag/3.1.3)
+ - @GameCharmer Support Wrapping Classes for simple form and form fields
+
+
+
+## [3.1.2](https://github.com/KongHack/FormConfig/releases/tag/3.1.2)
+ - @GameCharmer Add passwordClean password field
+
+
+
+## [3.1.1](https://github.com/KongHack/FormConfig/releases/tag/3.1.1)
+ - @GameCharmer Fix getFormName in FormConfigFormElement
+
+
+
+## [3.1.0](https://github.com/KongHack/FormConfig/releases/tag/3.1.0)
+  - twig/twig updated from v2.6.2 to v2.11.3
+    See changes: https://github.com/twigphp/Twig/compare/v2.6.2...v2.11.3
+    Release notes: https://github.com/twigphp/Twig/releases/tag/v2.11.3
+
+
+
+## [3.0.12](https://github.com/KongHack/FormConfig/releases/tag/3.0.12)
+ - @GameCharmer Only run select2 ajax auto-pass on primitives
+
+
+
+## [3.0.11](https://github.com/KongHack/FormConfig/releases/tag/3.0.11)
+ - @GameCharmer Automatically grab any data points on select2 ajax fields and auto-pass
+
+
+
+## [3.0.10](https://github.com/KongHack/FormConfig/releases/tag/3.0.10)
+ - @GameCharmer Allow array elements to contain array elements. 
+     You can totally create an infinitely recursive mess with this, so be careful.
+
+
+
+## [3.0.9](https://github.com/KongHack/FormConfig/releases/tag/3.0.9)
+ - @GameCharmer Merge Ionic Again
+
+
+
+## [3.0.8](https://github.com/KongHack/FormConfig/releases/tag/3.0.8)
+ - @GameCharmer Add replace for namespaces to internal includes
+
+
+
+## [3.0.7.1](https://github.com/KongHack/FormConfig/releases/tag/3.0.7.1)
+ - @GameCharmer Fix typo in controller_block.twig
+
+
+
+## [3.0.7](https://github.com/KongHack/FormConfig/releases/tag/3.0.7)
+ - @GameCharmer Merge in Ionic branch
+
+
+
+## [3.0.6](https://github.com/KongHack/FormConfig/releases/tag/3.0.6)
+ - @GameCharmer replace append twig/html with new hook system 
+
+
+
+## [3.0.5](https://github.com/KongHack/FormConfig/releases/tag/3.0.5)
+ - @GameCharmer fix bug in form mode config loading
+
+
+## [3.0.4](https://github.com/KongHack/FormConfig/releases/tag/3.0.4)
+ - @GameCharmer New system for form config element types
+
+
+## [3.0.3](https://github.com/KongHack/FormConfig/releases/tag/3.0.3)
+ - @GameCharmer Swap the twig macro's replace to key on only REPLACE instead of `@form_config_REPLACE` 
+
+
+
+## [3.0.2](https://github.com/KongHack/FormConfig/releases/tag/3.0.2)
+ - @GameCharmer The builder now uses the standard FormField for field generation, but says it returns a particular object to assist with intellisense 
+
+
+
+## [3.0.1](https://github.com/KongHack/FormConfig/releases/tag/3.0.1)
+ - @GameCharmer Patch delete button form override
+
+
+
+## [3.0.0](https://github.com/KongHack/FormConfig/releases/tag/3.0.0)
+ - @GameCharmer Mode system to allow switching banks of twig files
+
+
+
+## [2.1.8](https://github.com/KongHack/FormConfig/releases/tag/2.1.8)
+ - @GameCharmer Updated composer.json to handle newer KInt
+
+
+
+## [2.1.7](https://github.com/KongHack/FormConfig/releases/tag/2.1.7)
+ - @GameCharmer Revert some H4s to DIVs where appropriate
+
+
+
+## [2.1.6](https://github.com/KongHack/FormConfig/releases/tag/2.1.6)
+ - @GameCharmer added a span around the "* = required" text to assist with additional styling
+
+
+
+## [2.1.5](https://github.com/KongHack/FormConfig/releases/tag/2.1.5)
+ - @GameCharmer add getReqLevel method to FormArrayElement
+
+
+
+## [2.1.4](https://github.com/KongHack/FormConfig/releases/tag/2.1.4) *DNU*
+ - @GameCharmer Patched missing FormConfig in FormArray
+
+
+
+## [2.1.3](https://github.com/KongHack/FormConfig/releases/tag/2.1.3) *DNU*
+ - @GameCharmer Moved required indicator to the left of help text
+ - @GameCharmer Added FC_* helper classes for indicators/text
+
+
+
+## [2.1.2](https://github.com/KongHack/FormConfig/releases/tag/2.1.2) *DNU*
+ - @GameCharmer New Required Indicator and system for managing them
+
+
+
+## [2.1.1](https://github.com/KongHack/FormConfig/releases/tag/2.1.1)
+ - @jakerarr Fix for ternaries in the aria-labelledby attribute
+
+
+
+## [2.1.0](https://github.com/KongHack/FormConfig/releases/tag/2.1.0) *DNU*
  - @jakerarr Updated radio-type/scale-type with WCAG compliant labeling
  - @jakerarr Table style update- adds IDs to TH's and aria-labelledby attributes to fields
  - @jakerarr Table style update- set default table ID for FormArrayElements if one is not set

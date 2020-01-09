@@ -35,7 +35,7 @@ class RadioInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/radioInput.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/radioInput.twig';
     }
 
     /**

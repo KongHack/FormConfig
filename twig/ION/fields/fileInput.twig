@@ -1,0 +1,12 @@
+{% extends '@form_config_ION/field_wrapper.twig' %}
+{% block inputContent %}
+    <ion-input
+        clearInput
+        id="{{ id }}"
+        type="file"
+        slot="end"
+        multiple="{{ multiple }}"
+        accept="{{ fileAcceptTypes }}"
+        {{ disabled ? 'disabled' : '' }}>
+    </ion-input>
+{% endblock %}

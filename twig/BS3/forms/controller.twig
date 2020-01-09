@@ -1,0 +1,88 @@
+{% import _self as fcc %}
+{% set FC_CONTROLLER = true %}
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_MAIN_PRE') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+
+<div class="row">
+    {% if forms|length > 1 %}
+        <div class="col-md-3">
+            <div class="panel panel-sitespecific">
+                <div class="panel-heading">
+                    <div class="panel-title">Navigation</div>
+                </div>
+                <div class="panel-body">
+                    {% for key, value in forms %}
+                        {% if value is FC_isFormElement() %}
+                            {{ fcc.doFormElement(value, route, activeForm) }}
+                        {% else %}
+                            <a href="{{ route }}/{{ key }}"
+                               id="FC_NAV_BTN_{{ key }}"
+                               class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
+                                    {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+                            >{{ value|raw }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="form_controller_described_by" style="display:none">Current Form</div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="col-md-{{ (forms|length > 1) ? '9' : '12' }}">
+        {% if not twigOverrides.replace %}
+            {% include '@form_config_BS3/forms/controller_block.twig' %}
+        {% else %}
+            {% if includePath %}
+                {% set file = includePath|replace({'REPLACE':'BS3'}) %}
+                {% include file %}
+            {% else %}
+                <div class="alert alert-danger">includePath not defined!</div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_MAIN_POST') %}
+        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+
+
+{% macro doFormElement(element, route, activeForm) %}
+    {% if element.getFormType() == 1 %}
+        {% if element.getFormUrl() != '' %}
+            {% set url = element.getFormUrl() %}
+        {% else %}
+            {% set url = route ~ '/' ~ element.getFormKey() %}
+        {% endif %}
+        <a href="{{ url }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
+           {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+        >{{ element.getFormName()|raw }}</a>
+    {% elseif element.getFormType() == 2 %}
+        <div class="FC_DIV_BREAK"></div>
+    {% elseif element.getFormType() == 3 %}
+        <hr class="FC_HR_BREAK">
+    {% elseif element.getFormType() == 4 %}
+        <div class="FC_HTML_BREAK">{{ element.getFormName()|raw }}</div>
+    {% endif %}
+{% endmacro %}

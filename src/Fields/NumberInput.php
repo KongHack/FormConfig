@@ -36,7 +36,7 @@ class NumberInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/numberInput.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/numberInput.twig';
     }
 
     /**

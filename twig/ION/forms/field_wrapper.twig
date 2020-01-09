@@ -1,0 +1,42 @@
+{% if reqLevel > 0 %}
+    {% if type == 'header' %}
+        {% block headerItem %}
+        {% endblock %}
+    {% elseif type != 'addRemoveItemList'%}
+        <ion-item id="item-{{ id }}" class="{{ (type == "hidden") ? 'hidden' : '' }}">
+            {% if label|length > 0 %}
+                <ion-label {% block textPosition %}{% endblock %} id="item-{{ id }}-label">
+                    {{ label|raw }}
+                    {% if helpText|length > 0 %}
+                        <ion-icon name="alert"></ion-icon>
+
+                        <script>
+                            $(document).on('click.{{ id }}_help', '#item-{{ id }}-label', function () {
+                                window.ACE.Ion.GenerateAlert({
+                                    header: "Extra Info",
+                                    message: "{{ helpText|escape('js') }}"
+                                });
+                            });
+                        </script>
+                    {% endif %}
+                    {{ (reqLevel < 2) ? '<ion-text color="medium"><small><i> (Optional)</i></small></ion-text>' : '' }}
+                </ion-label>
+            {% endif %}
+            {% block inputContent %}
+            {% endblock %}
+        </ion-item>
+        <ion-text
+                style="margin: 0 10px; font-size: small; font-style: italic; display: block"
+                color="danger"
+                class="hidden form-error-text"
+                data-for-field="{{ id }}">
+        </ion-text>
+    {% else %}
+        <ion-list-header>
+            {{ label }}
+        </ion-list-header>
+        {% block itemContent %}
+        {% endblock %}
+    {% endif %}
+
+{% endif %}

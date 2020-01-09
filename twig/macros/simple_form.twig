@@ -1,6 +1,0 @@
-{% macro render(context) %}
-    {% import '@form_config/macros/forms.twig' as form %}
-    {% for field in context[context.activeForm] %}
-        {{ form.completeField(field) }}
-    {% endfor %}
-{% endmacro %}

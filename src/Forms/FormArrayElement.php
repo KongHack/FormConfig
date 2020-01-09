@@ -5,12 +5,25 @@ use Exception;
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
+use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 
 /**
  * Class FormArrayElement.
  */
 class FormArrayElement implements FieldContainerInterface
 {
+    use FieldFormConfigTrait;
+
+    const MODE_TABLE = 'table';
+    const MODE_DIV   = 'div';
+    const MODE_IONIC = 'ionic';
+    const MODES = [
+        self::MODE_TABLE,
+        self::MODE_DIV,
+        self::MODE_IONIC,
+    ];
+
+
     protected $headers       = [];
     protected $widths        = [];
     protected $fields        = [];
@@ -23,16 +36,32 @@ class FormArrayElement implements FieldContainerInterface
     protected $builder       = null;
     protected $row_classes   = [];
     protected $extras        = [];
+    protected $icons         = [];
+
+    /**
+     * Used for indicating which row contains the "new item" inputs
+     *
+     * @var null|int
+     */
+    protected $newRow        = null;
+
+    /**
+     * Used for indicating which column is the display column for mobile lists
+     *
+     * @var null|int
+     */
+    protected $displayColumn = null;
 
     /**
      * @param string $name
      *
-     * @return \GCWorld\FormConfig\Forms\FormArrayField
+     * @return FormArrayField
      */
     public function createField(string $name)
     {
         $field                             = new FormArrayField($name);
         $this->fields[$this->index][$name] = $field;
+        $field->setFormConfig($this->formConfig);
 
         // Set width baby!
         $index = count($this->fields[$this->index]) - 1;
@@ -46,7 +75,36 @@ class FormArrayElement implements FieldContainerInterface
     /**
      * @param string $name
      *
-     * @return \GCWorld\FormConfig\Forms\FormArrayField
+     * @return FormArrayElement
+     */
+    public function createFieldArray(string $name)
+    {
+        $field                             = new FormArrayElement();
+        $this->fields[$this->index][$name] = $field;
+        $field->setFormConfig($this->getFormConfig());
+
+        return $field;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReqLevel()
+    {
+        $max = 0;
+        foreach($this->fields as $fields) {
+            /** @var FormField $field */
+            foreach($fields as $field) {
+                $max = max($max, $field->getReqLevel());
+            }
+        }
+        return $max;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return FormArrayField
      */
     public function createFootField(string $name)
     {
@@ -62,7 +120,7 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
-     * @param \GCWorld\FormConfig\Forms\FormField $field
+     * @param FormField $field
      *
      * @return $this
      */
@@ -92,6 +150,7 @@ class FormArrayElement implements FieldContainerInterface
     public function addBuiltField(Base $field)
     {
         $this->fields[$this->index][$field->getNameRaw()] = $field;
+        $field->setFormConfig($this->formConfig);
 
         return $this;
     }
@@ -104,6 +163,24 @@ class FormArrayElement implements FieldContainerInterface
         ++$this->index;
 
         return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setNewRow()
+    {
+        $this->newRow = $this->index;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNewRow()
+    {
+        return $this->newRow ?? 0;
     }
 
     /**
@@ -212,15 +289,27 @@ class FormArrayElement implements FieldContainerInterface
     /**
      * @param string $header
      * @param string $width
+     * @param bool $displayCol
      *
      * @return $this
      */
-    public function addHeader(string $header, string $width = 'col-sm-1')
+    public function addHeader(string $header, string $width = 'col-sm-1', bool $displayCol = false)
     {
         $this->headers[] = $header;
         $this->widths[]  = $width;
+        if($displayCol) {
+            $this->displayColumn = \count($this->headers) - 1;
+        }
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDisplayColumn()
+    {
+        return $this->displayColumn ?? 0;
     }
 
     /**
@@ -248,7 +337,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function setMode(string $mode)
     {
-        if (!in_array($mode, ['div', 'table'], true)) {
+        if (!in_array($mode, self::MODES, true)) {
             throw new Exception('Invalid Mode Type');
         }
         $this->mode = $mode;
@@ -354,5 +443,38 @@ class FormArrayElement implements FieldContainerInterface
     public function getExtras()
     {
         return $this->extras;
+    }
+
+
+    /**
+     * @param int $index
+     * @return string
+     */
+    public function getIcon(int $index)
+    {
+        return $this->icons[$index]??'';
+    }
+
+    /**
+     * @param string $icon
+     * @return $this
+     */
+    public function setIcon(string $icon)
+    {
+        $this->icons[$this->index] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @param int    $index
+     * @param string $icon
+     * @return $this
+     */
+    public function replaceIcon(int $index, string $icon)
+    {
+        $this->icons[$index] = $icon;
+
+        return $this;
     }
 }

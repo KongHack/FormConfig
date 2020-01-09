@@ -1,42 +1,58 @@
 {% macro fieldErrorNotice(value) %}
     {% if value|length > 1 %}
         <div>
-            <span class="label label-danger">{{ value|replace({"\n":"</span><br><span class=\"label label-danger\">"})|raw }}</span>
+            <span class="FC_error_notice label label-danger">
+                {{ value|replace({"\n":"</span><br><span class=\"label label-danger\">"})|raw }}
+            </span>
         </div>
     {% endif %}
 {% endmacro %}
 
-{% macro requiredIndicator() %}
-    <span class="label label-warning">Required</span>
+{% macro requiredIndicator(field) %}
+    {% if field %}
+        {% set ind = field.getFormConfig().getRequiredIndicator() %}
+        {% if ind == 1 %}
+            <span class="FC_required">*</span>
+        {% elseif ind == 2 %}
+            <span class="FC_required label label-warning">Required</span>
+        {% endif %}
+    {% else %}
+        <span class="FC_required label label-warning">Required</span>
+    {% endif %}
 {% endmacro %}
 
 {% macro completeField(field) %}
     {% if field is not empty %}
         {% if field.fields is defined %}
-            {% import '@form_config/macros/formArray.twig' as formArray %}
+            {% import '@form_config_BS3/macros/formArray.twig' as formArray %}
             {{ formArray.handleFormArray(field) }}
         {% else %}
             {% import _self as myself %}
             {% set def = field.getDefinition() %}
-            {% import def.twig as twigFile %}
+            {% set file = def.twig|replace({'REPLACE':'BS3'}) %}
+            {% import file as twigFile %}
 
             {% if field.reqLevel > 0 %}
+                {% if field.getWrappingClass() != '' %}
+                    <div class="{{ field.getWrappingClass()|raw }}">
+                {% endif %}
+
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
                     {% if field.label is not null  %}
                         <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
                             {{ field.label|raw }}
+                            {% if field.reqLevel > 1 %}
+                                {{ myself.requiredIndicator(field) }}
+                            {% endif %}
                             {% if field.helpText is not null %}
-                                <span class="tool_badge text-info" title="{{ field.helpText }}">
+                                <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
                                     <i class="fa fa-fw fa-question-circle"></i>
                                 </span>
-                            {% endif %}
-                            {% if field.reqLevel > 1 %}
-                                {{ myself.requiredIndicator() }}
                             {% endif %}
                         </label>
                     {% else %}
                         {% if field.helpText is not null %}
-                            <span class="tool_badge text-info" title="{{ field.helpText }}">
+                            <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
                                 <i class="fa fa-fw fa-question-circle"></i>
                             </span>
                         {% endif %}
@@ -49,10 +65,15 @@
                             {{ myself.fieldErrorNotice(err) }}
                         {% endfor %}
                     {% endif %}
+
                     {% if field.getNoticeText()|length > 0 %}
-                        <div class="alert alert-warning">{{ field.getNoticeText()|raw }}</div>
+                        <div class="FC_notice_text alert alert-warning">{{ field.getNoticeText()|raw }}</div>
                     {% endif %}
                 </div>
+
+                {% if field.getWrappingClass() != '' %}
+                    </div>
+                {% endif %}
             {% endif %}
         {% endif %}
     {% endif %}

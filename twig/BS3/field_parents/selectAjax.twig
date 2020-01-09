@@ -34,10 +34,21 @@
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
-                        return {
+                        let subData = {
                             q: params.term,
                             page: params.page
                         };
+                        $.each($("#{{ field.id }}").data(),function(i, e) {
+                            if(typeof e != 'object'
+                                && typeof e != 'function'
+                                && i != 'q'
+                                && i != 'page'
+                            ) {
+                                subData[i] = e;
+                            }
+                        });
+
+                        return subData;
                     },
                     processResults: function (data, page) {
                         return {

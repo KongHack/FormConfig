@@ -32,7 +32,7 @@ class ToggleYesNo extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/toggleYesNo.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/toggleYesNo.twig';
     }
 
     /**

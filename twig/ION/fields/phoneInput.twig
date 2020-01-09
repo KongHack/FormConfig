@@ -1,0 +1,14 @@
+{% extends '@form_config_ION/field_wrapper.twig' %}
+{% block textPosition %}
+position="floating"
+{% endblock %}
+{% block inputContent %}
+    <ion-input
+        clearInput
+        id="{{ id }}"
+        value="{{ value }}"
+        maxlength="{{ maxLength }}"
+        type="tel"
+        {{ disabled ? 'disabled' : '' }}>
+    </ion-input>
+{% endblock %}

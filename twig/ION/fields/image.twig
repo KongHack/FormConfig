@@ -1,0 +1,9 @@
+{% extends '@form_config_ION/field_wrapper.twig' %}
+{% block inputContent %}
+    <img
+        src="https://{{ (Common.getDomain()).getDomainName()|raw }}{{ value }}"
+        alt="{{ id }} image"
+        id="{{ id }}"
+        height="{{ imageHeight }}"
+        style="margin-bottom: 1rem">
+{% endblock %}

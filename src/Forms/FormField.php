@@ -3,12 +3,15 @@ namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
+use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 
 /**
  * Class FormField.
  */
 class FormField
 {
+    use FieldFormConfigTrait;
+
     /**
      * @var array
      */
@@ -113,6 +116,11 @@ class FormField
      * @var string
      */
     protected $labelledBy = '';
+
+    /**
+     * @var string
+     */
+    protected $wrappingClass = '';
 
     /**
      * @param string $name
@@ -694,5 +702,24 @@ class FormField
         $this->labelledBy = $value;
 
         return $this;
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setWrappingClass(string $value)
+    {
+        $this->wrappingClass = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWrappingClass()
+    {
+        return $this->wrappingClass;
     }
 }

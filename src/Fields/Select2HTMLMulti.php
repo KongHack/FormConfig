@@ -40,7 +40,7 @@ class Select2HTMLMulti extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/select2HTMLMulti.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/select2HTMLMulti.twig';
     }
 
     /**

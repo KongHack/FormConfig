@@ -3,6 +3,7 @@ namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Config;
+use GCWorld\FormConfig\Core\FCHook;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Generated\FieldCreate;
@@ -17,29 +18,99 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
-    protected $useHoldOn     = false;
-    protected $name          = '';
-    protected $formId        = '';
-    protected $twigTemplate  = '';
-    protected $twigOverrides = [];
-    protected $fields        = [];
-    protected $formArrays    = [];
-    protected $builder       = null;
-    protected $renderArgs    = [
+    const REQUIRED_INDICATOR_OFF      = 0;
+    const REQUIRED_INDICATOR_ASTERISK = 1;
+    const REQUIRED_INDICATOR_VERBOSE  = 2;
+
+    const FORM_MODE_BOOTSTRAP_3       = 'BS3';
+    const FORM_MODE_BOOTSTRAP_4       = 'BS4';
+    const FORM_MODE_IONIC             = 'ION';
+
+    protected static $requiredIndicator = null;
+    protected static $formMode          = null;
+
+    protected $useHoldOn         = false;
+    protected $name              = '';
+    protected $hooks             = [];
+    protected $formId            = '';
+    protected $twigTemplate      = '';
+    protected $twigOverrides     = [];
+    protected $fields            = [];
+    protected $formArrays        = [];
+    protected $builder           = null;
+    protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
         'urlBase'     => '',
         'urlCurrent'  => '',
     ];
-    protected $twigAppend = null;
-    protected $htmlAppend = null;
 
+    /**
+     * Only used in the event of a simple form.  Great for rows!
+     *
+     * @var string
+     */
+    protected $simpleFormWrappingClass = '';
+
+    /**
+     * FormConfig constructor.
+     */
     public function __construct()
     {
         $config = Config::getInstance()->getConfig();
         if(isset($config['general']['holdOn'])) {
             $this->useHoldOn = (bool) $config['general']['holdOn'];
         }
+        if(self::$requiredIndicator === null) {
+            self::$requiredIndicator = 2;
+
+            if (isset($config['general']['requiredIndicator'])) {
+                self::$requiredIndicator = (int) $config['general']['requiredIndicator'];
+            }
+        }
+        if(self::$formMode === null) {
+            self::$formMode = 'BS3';
+
+            if (isset($config['general']['formMode'])) {
+                self::$formMode = (string) $config['general']['formMode'];
+            }
+        }
+    }
+
+    /**
+     * @return int|null
+     */
+    public static function getRequiredIndicator()
+    {
+        return self::$requiredIndicator;
+    }
+
+    /**
+     * @param int $indicator
+     *
+     * @return void
+     */
+    public static function setRequiredIndicator(int $indicator)
+    {
+        self::$requiredIndicator = $indicator;
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getFormMode()
+    {
+        return self::$formMode;
+    }
+
+    /**
+     * @param string $mode
+     *
+     * @return void
+     */
+    public static function setFormMode(string $mode)
+    {
+        self::$formMode = $mode;
     }
 
     /**
@@ -54,9 +125,27 @@ class FormConfig implements FieldContainerInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function canHoldOn()
     {
         return $this->useHoldOn;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRequired()
+    {
+        foreach($this->getFormFields() as $field) {
+            if($field->getReqLevel() > 1) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -144,6 +233,7 @@ class FormConfig implements FieldContainerInterface
     public function addFieldObject(FormField $field)
     {
         $this->fields[$field->getNameRaw()] = $field;
+        $field->setFormConfig($this);
 
         return $this;
     }
@@ -156,6 +246,7 @@ class FormConfig implements FieldContainerInterface
     public function addBuiltField(Base $field)
     {
         $this->fields[$field->getNameRaw()] = $field;
+        $field->setFormConfig($this);
 
         return $this;
     }
@@ -169,6 +260,7 @@ class FormConfig implements FieldContainerInterface
     {
         $field               = new FormField($name);
         $this->fields[$name] = $field;
+        $field->setFormConfig($this);
 
         return $field;
     }
@@ -198,6 +290,7 @@ class FormConfig implements FieldContainerInterface
     {
         $field               = new FormArrayElement();
         $this->fields[$name] = $field;
+        $field->setFormConfig($this);
 
         return $field;
     }
@@ -213,7 +306,7 @@ class FormConfig implements FieldContainerInterface
             //Iterate fields.
             foreach ($requirements as $name => $level) {
                 if (array_key_exists($name, $this->fields)) {
-                    /** @var \GCWorld\FormConfig\Forms\FormField $field */
+                    /** @var FormField $field */
                     $field = $this->fields[$name];
                     $field->setReqLevel($level);
                 }
@@ -234,7 +327,7 @@ class FormConfig implements FieldContainerInterface
             //Iterate fields.
             foreach ($errors as $name => $err) {
                 if (array_key_exists($name, $this->fields)) {
-                    /** @var \GCWorld\FormConfig\Forms\FormField $field */
+                    /** @var FormField $field */
                     $field = $this->fields[$name];
                     $field->addError($err);
                 }
@@ -255,7 +348,7 @@ class FormConfig implements FieldContainerInterface
 
 
         foreach ($this->fields as $name => $field) {
-            /** @var \GCWorld\FormConfig\Forms\FormField $field */
+            /** @var FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
                 $function = FieldName::getterName($name);
                 $field->setValue($object->$function());
@@ -443,7 +536,7 @@ class FormConfig implements FieldContainerInterface
     {
         switch ($mode) {
             case 'delete':
-                $html = Twig::get()->render('overrides/delete_button.twig');
+                $html = Twig::get()->render(self::$formMode.'/overrides/delete_button.twig');
                 $this->setOverride('panelClass', 'danger')
                     ->setOverride('submitButton', $html);
                 break;
@@ -522,38 +615,52 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
-     * @param string $twig_path
+     * @param FCHook $hook
      * @return $this
      */
-    public function setTwigAppend(string $twig_path)
+    public function addHook(FCHook $hook)
     {
-        $this->twigAppend = $twig_path;
+        $this->hooks[] = $hook;
+
         return $this;
     }
 
     /**
-     * @return string|null
-     */
-    public function getTwigAppend()
-    {
-        return $this->twigAppend;
-    }
-
-    /**
-     * @param string $html
+     * @param int $index
      * @return $this
      */
-    public function setHtmlAppend(string $html)
+    public function removeHook(int $index)
     {
-        $this->htmlAppend = $html;
+        unset($this->hooks[$index]);
+
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return array
      */
-    public function getHtmlAppend()
+    public function getHooks()
     {
-        return $this->htmlAppend;
+        return $this->hooks;
     }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
+    public function setSimpleFormWrappingClass(string $value)
+    {
+        $this->simpleFormWrappingClass = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSimpleFormWrappingClass()
+    {
+        return $this->simpleFormWrappingClass;
+    }
+
 }

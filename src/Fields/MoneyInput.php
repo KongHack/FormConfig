@@ -32,7 +32,7 @@ class MoneyInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE.'/fields/moneyInput.twig';
+        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/moneyInput.twig';
     }
 
     /**

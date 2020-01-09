@@ -1,0 +1,12 @@
+{% macro render(context) %}
+    {% import '@form_config_BS3/macros/forms.twig' as form %}
+    {% if context[context.activeForm].getSimpleFormWrappingClass() != '' %}
+        <div class="{{ context[context.activeForm].getSimpleFormWrappingClass()|raw }}">
+    {% endif %}
+    {% for field in context[context.activeForm] %}
+        {{ form.completeField(field) }}
+    {% endfor %}
+    {% if context[context.activeForm].getSimpleFormWrappingClass() != '' %}
+        </div>
+    {% endif %}
+{% endmacro %}

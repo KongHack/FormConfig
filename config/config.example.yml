@@ -1,6 +1,8 @@
 general:
+  formMode: 'BS3'
   holdOn: false
   holdOnOptions: "HoldOnOptions"
+  requiredIndicator: 2
 
 forms:
   example_group:
