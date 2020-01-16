@@ -1,3 +1,6 @@
 {% macro render(field) %}
     <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" class="{{ field.class }}" value="{{ field.value }}" {{ field.getDataAttributeString()|raw }}>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}

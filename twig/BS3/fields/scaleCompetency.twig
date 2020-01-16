@@ -19,4 +19,7 @@
             </tr>
         </tbody>
     </table>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}

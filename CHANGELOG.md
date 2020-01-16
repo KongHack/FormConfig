@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.1.5](https://github.com/KongHack/FormConfig/releases/tag/3.1.5)
+ - @GameCharmer add missing support for set/get script to BS3 fields
+
+
+
 ## [3.1.4](https://github.com/KongHack/FormConfig/releases/tag/3.1.4)
  - @GameCharmer Fix get wrapping class on field
 

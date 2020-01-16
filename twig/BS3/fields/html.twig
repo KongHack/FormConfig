@@ -1,3 +1,6 @@
 {% macro render(field) %}
     <span class="{{ field.class }}" id="{{ field.id }}" {{ field.getDataAttributeString()|raw }}>{{ field.value|raw }}</span>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}
