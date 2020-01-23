@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.2](https://github.com/KongHack/FormConfig/releases/tag/3.2.2)
+- @GameCharmer Support for YAML 4 - 5 due to composer meltdown
+
+
 ## [3.2.1](https://github.com/KongHack/FormConfig/releases/tag/3.2.1)
  - @GameCharmer Support for YAML 4 or 5
 
