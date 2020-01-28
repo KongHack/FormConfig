@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.4](https://github.com/KongHack/FormConfig/releases/tag/3.2.4)
+ - @Mitch Add additional class to select2 ajax
+
+
 ## [3.2.3](https://github.com/KongHack/FormConfig/releases/tag/3.2.3)
  - @GameCharmer Downgrade to YAML 4 due to composer "Something's changed, looking at all rules again" bug
  
