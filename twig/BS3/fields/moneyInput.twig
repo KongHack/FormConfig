@@ -16,4 +16,7 @@
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
     {% endif %}
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}

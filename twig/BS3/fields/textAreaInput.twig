@@ -6,5 +6,8 @@
               {{ field.getDataAttributeString()|raw }}
               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >{{ field.value }}</textarea>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}
 

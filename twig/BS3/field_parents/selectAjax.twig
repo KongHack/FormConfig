@@ -26,6 +26,7 @@
     <script type="text/javascript">
         $(function(){
             $("#{{ field.id }}").select2({
+                containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
                 theme: "bootstrap",
                 width:'100%',
                 ajax: {
@@ -38,6 +39,7 @@
                             q: params.term,
                             page: params.page
                         };
+
                         $.each($("#{{ field.id }}").data(),function(i, e) {
                             if(typeof e != 'object'
                                 && typeof e != 'function'
@@ -70,4 +72,7 @@
             });
         });
     </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
 {% endmacro %}

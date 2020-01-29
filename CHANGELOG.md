@@ -6,6 +6,179 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.4](https://github.com/KongHack/FormConfig/releases/tag/3.2.4)
+ - @Mitch Add additional class to select2 ajax
+
+
+## [3.2.3](https://github.com/KongHack/FormConfig/releases/tag/3.2.3)
+ - @GameCharmer Downgrade to YAML 4 due to composer "Something's changed, looking at all rules again" bug
+ 
+ 
+## [3.2.2](https://github.com/KongHack/FormConfig/releases/tag/3.2.2)
+- @GameCharmer Support for YAML 4 - 5 due to composer meltdown
+
+
+## [3.2.1](https://github.com/KongHack/FormConfig/releases/tag/3.2.1)
+ - @GameCharmer Support for YAML 4 or 5
+
+
+
+## [3.2.0](https://github.com/KongHack/FormConfig/releases/tag/3.2.0)
+ - @GameCharmer Updated min php version from 7.1 to 7.2.5
+ - @GameCharmer Updated Composer Dependencies
+
+
+ - symfony/contracts removed (installed version was v1.0.2)
+
+ - gcworld/interfaces removed (installed version was 3.2.0)
+
+ - gcworld/errorhandlers removed (installed version was 1.2.1)
+
+ - gcworld/database removed (installed version was 2.3.10)
+
+ - gcworld/orm removed (installed version was 3.6.5)
+
+ - gcworld/common removed (installed version was 2.4.2)
+
+ - composer/installers updated from v1.6.0 to v1.7.0
+   See changes: https://github.com/composer/installers/compare/v1.6.0...v1.7.0
+   Release notes: https://github.com/composer/installers/releases/tag/v1.7.0
+
+ - ocramius/package-versions updated from 1.4.0 to 1.5.1
+   See changes: https://github.com/Ocramius/PackageVersions/compare/1.4.0...1.5.1
+   Release notes: https://github.com/Ocramius/PackageVersions/releases/tag/1.5.1
+
+ - symfony/process updated from v4.2.4 to v4.4.3
+   See changes: https://github.com/symfony/process/compare/v4.2.4...v4.4.3
+   Release notes: https://github.com/symfony/process/releases/tag/v4.4.3
+
+ - symfony/finder updated from v4.2.4 to v4.4.3
+   See changes: https://github.com/symfony/finder/compare/v4.2.4...v4.4.3
+   Release notes: https://github.com/symfony/finder/releases/tag/v4.4.3
+
+ - symfony/polyfill-ctype updated from v1.10.0 to v1.13.1
+   See changes: https://github.com/symfony/polyfill-ctype/compare/v1.10.0...v1.13.1
+   Release notes: https://github.com/symfony/polyfill-ctype/releases/tag/v1.13.1
+
+ - symfony/filesystem updated from v4.2.4 to v4.4.3
+   See changes: https://github.com/symfony/filesystem/compare/v4.2.4...v4.4.3
+   Release notes: https://github.com/symfony/filesystem/releases/tag/v4.4.3
+
+ - symfony/polyfill-mbstring updated from v1.10.0 to v1.13.1
+   See changes: https://github.com/symfony/polyfill-mbstring/compare/v1.10.0...v1.13.1
+   Release notes: https://github.com/symfony/polyfill-mbstring/releases/tag/v1.13.1
+
+ - psr/container installed in version 1.0.0
+   Release notes: https://github.com/php-fig/container/releases/tag/1.0.0
+
+ - symfony/service-contracts installed in version v2.0.1
+   Release notes: https://github.com/symfony/service-contracts/releases/tag/v2.0.1
+
+ - symfony/polyfill-php73 installed in version v1.13.1
+   Release notes: https://github.com/symfony/polyfill-php73/releases/tag/v1.13.1
+
+ - symfony/console updated from v4.2.4 to v4.4.3
+   See changes: https://github.com/symfony/console/compare/v4.2.4...v4.4.3
+   Release notes: https://github.com/symfony/console/releases/tag/v4.4.3
+
+ - psr/log updated from 1.1.0 to 1.1.2
+   See changes: https://github.com/php-fig/log/compare/1.1.0...1.1.2
+   Release notes: https://github.com/php-fig/log/releases/tag/1.1.2
+
+ - seld/phar-utils updated from 1.0.1 to 1.0.2
+   See changes: https://github.com/Seldaek/phar-utils/compare/1.0.1...1.0.2
+   Release notes: https://github.com/Seldaek/phar-utils/releases/tag/1.0.2
+
+ - seld/jsonlint updated from 1.7.1 to 1.7.2
+   See changes: https://github.com/Seldaek/jsonlint/compare/1.7.1...1.7.2
+   Release notes: https://github.com/Seldaek/jsonlint/releases/tag/1.7.2
+
+ - justinrainbow/json-schema updated from 5.2.8 to 5.2.9
+   See changes: https://github.com/justinrainbow/json-schema/compare/5.2.8...5.2.9
+   Release notes: https://github.com/justinrainbow/json-schema/releases/tag/5.2.9
+
+ - composer/xdebug-handler updated from 1.3.2 to 1.4.0
+   See changes: https://github.com/composer/xdebug-handler/compare/1.3.2...1.4.0
+   Release notes: https://github.com/composer/xdebug-handler/releases/tag/1.4.0
+
+ - composer/spdx-licenses updated from 1.5.0 to 1.5.2
+   See changes: https://github.com/composer/spdx-licenses/compare/1.5.0...1.5.2
+   Release notes: https://github.com/composer/spdx-licenses/releases/tag/1.5.2
+
+ - composer/semver updated from 1.4.2 to 1.5.1
+   See changes: https://github.com/composer/semver/compare/1.4.2...1.5.1
+   Release notes: https://github.com/composer/semver/releases/tag/1.5.1
+
+ - composer/ca-bundle updated from 1.1.4 to 1.2.6
+   See changes: https://github.com/composer/ca-bundle/compare/1.1.4...1.2.6
+   Release notes: https://github.com/composer/ca-bundle/releases/tag/1.2.6
+
+ - composer/composer updated from 1.8.4 to 1.9.2
+   See changes: https://github.com/composer/composer/compare/1.8.4...1.9.2
+   Release notes: https://github.com/composer/composer/releases/tag/1.9.2
+
+ - twig/twig updated from v2.11.3 to v2.12.3
+   See changes: https://github.com/twigphp/Twig/compare/v2.11.3...v2.12.3
+   Release notes: https://github.com/twigphp/Twig/releases/tag/v2.12.3
+
+ - kint-php/kint updated from 3.1 to 3.3
+   See changes: https://github.com/kint-php/kint/compare/3.1...3.3
+   Release notes: https://github.com/kint-php/kint/releases/tag/3.3
+
+ - symfony/yaml updated from v3.4.23 to v5.0.3
+   See changes: https://github.com/symfony/yaml/compare/v3.4.23...v5.0.3
+   Release notes: https://github.com/symfony/yaml/releases/tag/v5.0.3
+
+ - phpstan/phpdoc-parser updated from 0.3.1 to 0.3.5
+   See changes: https://github.com/phpstan/phpdoc-parser/compare/0.3.1...0.3.5
+   Release notes: https://github.com/phpstan/phpdoc-parser/releases/tag/0.3.5
+
+ - nikic/php-parser updated from v4.2.1 to v4.3.0
+   See changes: https://github.com/nikic/PHP-Parser/compare/v4.2.1...v4.3.0
+   Release notes: https://github.com/nikic/PHP-Parser/releases/tag/v4.3.0
+
+ - nette/utils updated from v2.5.3 to v3.1.0
+   See changes: https://github.com/nette/utils/compare/v2.5.3...v3.1.0
+   Release notes: https://github.com/nette/utils/releases/tag/v3.1.0
+
+ - nette/schema installed in version v1.0.2
+   Release notes: https://github.com/nette/schema/releases/tag/v1.0.2
+
+ - nette/finder updated from v2.5.0 to v2.5.2
+   See changes: https://github.com/nette/finder/compare/v2.5.0...v2.5.2
+   Release notes: https://github.com/nette/finder/releases/tag/v2.5.2
+
+ - nette/robot-loader updated from v3.1.1 to v3.2.1
+   See changes: https://github.com/nette/robot-loader/compare/v3.1.1...v3.2.1
+   Release notes: https://github.com/nette/robot-loader/releases/tag/v3.2.1
+
+ - nette/neon updated from v3.0.0 to v3.1.0
+   See changes: https://github.com/nette/neon/compare/v3.0.0...v3.1.0
+   Release notes: https://github.com/nette/neon/releases/tag/v3.1.0
+
+ - nette/php-generator updated from v3.2.1 to v3.3.3
+   See changes: https://github.com/nette/php-generator/compare/v3.2.1...v3.3.3
+   Release notes: https://github.com/nette/php-generator/releases/tag/v3.3.3
+
+ - nette/di updated from v2.4.15 to v3.0.3
+   See changes: https://github.com/nette/di/compare/v2.4.15...v3.0.3
+   Release notes: https://github.com/nette/di/releases/tag/v3.0.3
+
+ - nette/bootstrap updated from v2.4.6 to v3.0.1
+   See changes: https://github.com/nette/bootstrap/compare/v2.4.6...v3.0.1
+   Release notes: https://github.com/nette/bootstrap/releases/tag/v3.0.1
+
+ - phpstan/phpstan updated from 0.11.3 to 0.11.19
+   See changes: https://github.com/phpstan/phpstan/compare/0.11.3...0.11.19
+   Release notes: https://github.com/phpstan/phpstan/releases/tag/0.11.19
+
+
+
+## [3.1.5](https://github.com/KongHack/FormConfig/releases/tag/3.1.5)
+ - @GameCharmer add missing support for set/get script to BS3 fields
+
+
+
 ## [3.1.4](https://github.com/KongHack/FormConfig/releases/tag/3.1.4)
  - @GameCharmer Fix get wrapping class on field
 
