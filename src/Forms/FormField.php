@@ -91,9 +91,9 @@ class FormField
      * @var null|array
      */
     protected $dataAttributes = [];
-
     /**
      * @var string
+
      */
     protected $ajaxMethod = 'GET';
 
