@@ -18,6 +18,8 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
+    const DEFAULT_NAVIGATION_HEADING_LEVEL = 'h3';
+
     const REQUIRED_INDICATOR_OFF      = 0;
     const REQUIRED_INDICATOR_ASTERISK = 1;
     const REQUIRED_INDICATOR_VERBOSE  = 2;
@@ -38,6 +40,7 @@ class FormConfig implements FieldContainerInterface
     protected $fields            = [];
     protected $formArrays        = [];
     protected $builder           = null;
+    protected $navigationHeading = null;
     protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
@@ -190,6 +193,35 @@ class FormConfig implements FieldContainerInterface
         }
 
         return 'form_'.$this->name;
+    }
+
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setNavigationHeadingLevel($value)
+    {
+        if(strlen($value) == 1 && is_numeric($value)){
+            $value = 'h'.$value;
+        }
+        $value = strtolower($value);
+        $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+        if(in_array($value, $headings)) {
+            $this->navigationHeading = $value;
+        }
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getNavigationHeadingLevel()
+    {
+        if(null != $this->navigationHeading){
+            return $this->navigationHeading;
+        }
+
+        return self::DEFAULT_NAVIGATION_HEADING_LEVEL;
     }
 
     /**
@@ -506,10 +538,10 @@ class FormConfig implements FieldContainerInterface
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
             'holdOn'        => $this->useHoldOn,
+            'navHeading'    => $this->getNavigationHeadingLevel(),
             $this->name     => $this->fields,
         ];
     }
-
 
     /**
      * @throws \Exception

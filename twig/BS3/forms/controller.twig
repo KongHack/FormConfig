@@ -13,13 +13,12 @@
     {% endif %}
 {% endfor %}
 
-
 <div class="row">
     {% if forms|length > 1 %}
         <div class="col-md-3">
             <div class="panel panel-sitespecific">
                 <div class="panel-heading">
-                    <div class="panel-title">Navigation</div>
+                    <{{ navHeading }} class="panel-title">Navigation</{{ navHeading }}>
                 </div>
                 <div class="panel-body">
                     {% for key, value in forms %}

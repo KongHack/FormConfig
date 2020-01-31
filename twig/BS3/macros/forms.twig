@@ -38,23 +38,26 @@
                 {% endif %}
 
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
-                    {% if field.label is not null  %}
-                        <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
-                            {{ field.label|raw }}
-                            {% if field.reqLevel > 1 %}
-                                {{ myself.requiredIndicator(field) }}
-                            {% endif %}
+                    {% set labelIdSwitch = {0:'TYPE_TOGGLE_TRUE_FALSE', 1:'TYPE_TOGGLE_YES_NO', 2:'TYPE_STATIC'} %}
+                    {% if def.constant not in labelIdSwitch%}
+                        {% if field.label is not null %}
+                            <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
+                                {{ field.label|raw }}
+                                {% if field.reqLevel > 1 %}
+                                    {{ myself.requiredIndicator(field) }}
+                                {% endif %}
+                                {% if field.helpText is not null %}
+                                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                                        <i class="fa fa-fw fa-question-circle"></i>
+                                    </span>
+                                {% endif %}
+                            </label>
+                        {% else %}
                             {% if field.helpText is not null %}
                                 <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
                                     <i class="fa fa-fw fa-question-circle"></i>
                                 </span>
                             {% endif %}
-                        </label>
-                    {% else %}
-                        {% if field.helpText is not null %}
-                            <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
-                                <i class="fa fa-fw fa-question-circle"></i>
-                            </span>
                         {% endif %}
                     {% endif %}
 

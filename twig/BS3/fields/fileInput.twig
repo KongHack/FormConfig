@@ -1,14 +1,15 @@
 {% macro render(field, multi) %}
     <div class="input-group">
-        <label class="input-group-btn">
-            <span tabindex="0" class="btn btn-primary" role="button" id="{{ field.id }}_btn">
+        <span class="input-group-btn">
+            <button tabindex="0" class="btn btn-primary" role="button" id="{{ field.id }}_btn">
                 {% if field.label != '' %}
                 <span class="sr-only">{{ field.label }}</span>
                 {% endif %}
                 Browse... <input type="file" name="{{ field.name }}" class="hide {{ field.class }}" id="{{ field.id }}" {{ multi ? 'multiple' : '' }}>
-            </span>
-        </label>
-        <input title="File Path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
+            </button>
+        </span>
+        <label class="sr-only" for="{{ field.id }}_path">File Path</label>
+        <input id="{{ field.id }}_path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
     </div>
 
     {% if field.errors|length>0 %}
