@@ -31,6 +31,7 @@ class FormConfig implements FieldContainerInterface
     protected static $requiredIndicator = null;
     protected static $formMode          = null;
 
+    protected $isReadOnly        = false;
     protected $useHoldOn         = false;
     protected $name              = '';
     protected $hooks             = [];
@@ -544,6 +545,24 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @return array
+     */
+    public function getTwigOverrides()
+    {
+        return $this->twigOverrides;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getRenderArg(string $key)
+    {
+        return $this->renderArgs[$key] ?? null;
+    }
+
+
+    /**
      * @throws \Exception
      *
      * @return array
@@ -606,11 +625,12 @@ class FormConfig implements FieldContainerInterface
      */
     public function makeReadOnly()
     {
+        $this->isReadOnly = true;
         $this->makeFieldsReadOnly($this->fields);
     }
 
     /**
-     * @param \GCWorld\FormConfig\Forms\FormField $field
+     * @param FormField $field
      *
      * @return void
      */
@@ -693,6 +713,14 @@ class FormConfig implements FieldContainerInterface
     public function getSimpleFormWrappingClass()
     {
         return $this->simpleFormWrappingClass;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReadOnly()
+    {
+        return $this->isReadOnly;
     }
 
 }

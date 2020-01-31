@@ -1,7 +1,7 @@
 {% macro render(field, overrideOptions) %}
     {% set options = (overrideOptions?overrideOptions:field.options) %}
 
-    <div class="checkbox" id="{{ field.id }}">
+    <div id="{{ field.id }}">
         {% for k,v in options %}
             <input
                 type="radio"

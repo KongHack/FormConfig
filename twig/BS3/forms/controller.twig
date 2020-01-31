@@ -14,21 +14,21 @@
 {% endfor %}
 
 <div class="row">
-    {% if forms|length > 1 %}
+    {% if FC_Config.getRenderArg('formArray')|length > 1 %}
         <div class="col-md-3">
             <div class="panel panel-sitespecific">
                 <div class="panel-heading">
                     <{{ navHeading }} class="panel-title">Navigation</{{ navHeading }}>
                 </div>
                 <div class="panel-body">
-                    {% for key, value in forms %}
+                    {% for key, value in FC_Config.getRenderArg('formArray') %}
                         {% if value is FC_isFormElement() %}
-                            {{ fcc.doFormElement(value, route, activeForm) }}
+                            {{ fcc.doFormElement(value, FC_Config.getRenderArg('urlBase'), FC_Config.getRenderArg('formCurrent')) }}
                         {% else %}
-                            <a href="{{ route }}/{{ key }}"
+                            <a href="{{ FC_Config.getRenderArg('urlBase') }}/{{ key }}"
                                id="FC_NAV_BTN_{{ key }}"
-                               class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
-                                    {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+                               class="btn btn-left btn-{{ FC_Config.getRenderArg('formCurrent')==key?'primary':'default' }} btn-block"
+                                    {{ FC_Config.getRenderArg('formCurrent')==key?'aria-describedby="form_controller_described_by"':'' }}
                             >{{ value|raw }}</a>
                         {% endif %}
                     {% endfor %}
