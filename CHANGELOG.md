@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.5](https://github.com/KongHack/FormConfig/releases/tag/3.2.5)
+ - @Mitch Remove checkbox class from radio group
+
+
+
 ## [3.2.4](https://github.com/KongHack/FormConfig/releases/tag/3.2.4)
  - @Mitch Add additional class to select2 ajax
 
