@@ -512,6 +512,14 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @return array
+     */
+    public function getTwigOverrides()
+    {
+        return $this->twigOverrides;
+    }
+
+    /**
      * @param string $key
      * @return string|null
      */

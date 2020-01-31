@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.6](https://github.com/KongHack/FormConfig/releases/tag/3.2.6)
+ - @Mitch Add isReadOnly indicator in form config
+ - @Mitch Add getTwigOverrides method to form config
+ - @Mitch Start of converting old flat variables to FC_Config methods
+
+
+
 ## [3.2.5](https://github.com/KongHack/FormConfig/releases/tag/3.2.5)
  - @Mitch Remove checkbox class from radio group
 
