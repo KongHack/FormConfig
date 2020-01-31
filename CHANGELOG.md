@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.2.7](https://github.com/KongHack/FormConfig/releases/tag/3.2.7)
+ - @Mitch Handle mixed return on getRenderArg
+
+
+
 ## [3.2.6](https://github.com/KongHack/FormConfig/releases/tag/3.2.6)
  - @Mitch Add isReadOnly indicator in form config
  - @Mitch Add getTwigOverrides method to form config

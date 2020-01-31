@@ -521,9 +521,9 @@ class FormConfig implements FieldContainerInterface
 
     /**
      * @param string $key
-     * @return string|null
+     * @return mixed
      */
-    public function getRenderArg(string $key): ?string
+    public function getRenderArg(string $key)
     {
         return $this->renderArgs[$key] ?? null;
     }
