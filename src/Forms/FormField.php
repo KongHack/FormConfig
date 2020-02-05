@@ -1,7 +1,6 @@
 <?php
 namespace GCWorld\FormConfig\Forms;
 
-use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
