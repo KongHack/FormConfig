@@ -6,25 +6,31 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.0](https://github.com/KongHack/FormConfig/releases/tag/3.3.0)
+ - @GameCharmer Merge WCAG Branch
+ - @jakerarr WCAG Updates
+
+
+
 ## [3.2.7](https://github.com/KongHack/FormConfig/releases/tag/3.2.7)
- - @Mitch Handle mixed return on getRenderArg
+ - @GameCharmer Handle mixed return on getRenderArg
 
 
 
 ## [3.2.6](https://github.com/KongHack/FormConfig/releases/tag/3.2.6)
- - @Mitch Add isReadOnly indicator in form config
- - @Mitch Add getTwigOverrides method to form config
- - @Mitch Start of converting old flat variables to FC_Config methods
+ - @GameCharmer Add isReadOnly indicator in form config
+ - @GameCharmer Add getTwigOverrides method to form config
+ - @GameCharmer Start of converting old flat variables to FC_Config methods
 
 
 
 ## [3.2.5](https://github.com/KongHack/FormConfig/releases/tag/3.2.5)
- - @Mitch Remove checkbox class from radio group
+ - @GameCharmer Remove checkbox class from radio group
 
 
 
 ## [3.2.4](https://github.com/KongHack/FormConfig/releases/tag/3.2.4)
- - @Mitch Add additional class to select2 ajax
+ - @GameCharmer Add additional class to select2 ajax
 
 
 ## [3.2.3](https://github.com/KongHack/FormConfig/releases/tag/3.2.3)
