@@ -38,7 +38,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
     /**
      * @return bool
      */
-    public static function getIsStandardLabel(): bool
+    public static function isStandardLabel(): bool
     {
         return true;
     }

@@ -18,7 +18,7 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
-    const DEFAULT_NAVIGATION_HEADING_LEVEL = 'h3';
+    const DEFAULT_NAVIGATION_TAG = 'div';
 
     const REQUIRED_INDICATOR_OFF      = 0;
     const REQUIRED_INDICATOR_ASTERISK = 1;
@@ -41,7 +41,7 @@ class FormConfig implements FieldContainerInterface
     protected $fields            = [];
     protected $formArrays        = [];
     protected $builder           = null;
-    protected $navigationHeading = null;
+    protected $navigationTag = null;
     protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
@@ -200,12 +200,12 @@ class FormConfig implements FieldContainerInterface
      * @param $value
      * @return $this
      */
-    public function setNavigationHeadingLevel($value)
+    public function setNavigationTag($value)
     {
         if(strlen($value) == 1 && is_numeric($value)){
             $value = 'h'.$value;
         }
-        $this->navigationHeading = strtolower($value);
+        $this->navigationTag = strtolower($value);
 
         return $this;
     }
@@ -213,13 +213,13 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return null|string
      */
-    public function getNavigationHeadingLevel()
+    public function getNavigationTag()
     {
-        if(null != $this->navigationHeading){
-            return $this->navigationHeading;
+        if(null != $this->navigationTag){
+            return $this->navigationTag;
         }
 
-        return self::DEFAULT_NAVIGATION_HEADING_LEVEL;
+        return self::DEFAULT_NAVIGATION_TAG;
     }
 
     /**
@@ -536,7 +536,7 @@ class FormConfig implements FieldContainerInterface
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
             'holdOn'        => $this->useHoldOn,
-            'navHeading'    => $this->getNavigationHeadingLevel(),
+            'navHeading'    => $this->getNavigationTag(),
             $this->name     => $this->fields,
         ];
     }

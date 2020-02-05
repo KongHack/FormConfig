@@ -44,7 +44,7 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
     /**
      * @return bool
      */
-    public static function getIsStandardLabel(): bool
+    public static function isStandardLabel(): bool
     {
         return true;
     }

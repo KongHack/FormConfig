@@ -33,7 +33,7 @@ class TextArea extends Base implements FieldInterface
     /**
      * @return bool
      */
-    public static function getIsStandardLabel(): bool
+    public static function isStandardLabel(): bool
     {
         return true;
     }

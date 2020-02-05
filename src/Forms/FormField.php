@@ -724,12 +724,15 @@ class FormField
         return $this->wrappingClass;
     }
 
-    public function getIsStandardLabel()
+    /**
+     * @return bool
+     */
+    public function isStandardLabel()
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
         /** @var FieldInterface $obj */
         $obj   = new $class();
 
-        return $obj::getIsStandardLabel();
+        return $obj::isStandardLabel();
     }
 }

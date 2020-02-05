@@ -38,7 +38,7 @@
                 {% endif %}
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
 
-                    {% if field.getIsStandardLabel() %}
+                    {% if field.isStandardLabel() %}
                         {% if field.label is not null %}
                             <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
                                 {{ field.label|raw }}

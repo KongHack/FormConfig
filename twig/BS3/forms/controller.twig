@@ -18,7 +18,7 @@
         <div class="col-md-3">
             <div class="panel panel-sitespecific">
                 <div class="panel-heading">
-                    <{{ FC_Config.getNavigationHeadingLevel() }} class="panel-title">Navigation</{{ FC_Config.getNavigationHeadingLevel() }}>
+                    <{{ FC_Config.getNavigationTag() }} class="panel-title">Navigation</{{ FC_Config.getNavigationTag() }}>
                 </div>
                 <div class="panel-body">
                     {% for key, value in FC_Config.getRenderArg('formArray') %}
