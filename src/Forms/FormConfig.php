@@ -41,7 +41,7 @@ class FormConfig implements FieldContainerInterface
     protected $fields            = [];
     protected $formArrays        = [];
     protected $builder           = null;
-    protected $navigationTag = null;
+    protected $navigationTag     = null;
     protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
