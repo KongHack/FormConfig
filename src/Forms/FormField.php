@@ -1,6 +1,7 @@
 <?php
 namespace GCWorld\FormConfig\Forms;
 
+use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
@@ -91,9 +92,9 @@ class FormField
      * @var null|array
      */
     protected $dataAttributes = [];
+
     /**
      * @var string
-
      */
     protected $ajaxMethod = 'GET';
 
@@ -721,5 +722,14 @@ class FormField
     public function getWrappingClass()
     {
         return $this->wrappingClass;
+    }
+
+    public function getIsStandardLabel()
+    {
+        $class = FieldConstants::DEFINITIONS[$this->type]['class'];
+        /** @var FieldInterface $obj */
+        $obj   = new $class();
+
+        return $obj::getIsStandardLabel();
     }
 }

@@ -19,6 +19,11 @@ interface FieldInterface
     public static function getKey(): string;
 
     /**
+     * @return bool
+     */
+    public static function getIsStandardLabel(): bool;
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string;

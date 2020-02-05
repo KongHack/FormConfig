@@ -41,6 +41,14 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
         return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/selectMultipleInput.twig';
     }
 
+    /**
+     * @return bool
+     */
+    public static function getIsStandardLabel(): bool
+    {
+        return true;
+    }
+
 
     /**
      * @return string

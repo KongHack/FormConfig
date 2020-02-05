@@ -205,11 +205,8 @@ class FormConfig implements FieldContainerInterface
         if(strlen($value) == 1 && is_numeric($value)){
             $value = 'h'.$value;
         }
-        $value = strtolower($value);
-        $headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-        if(in_array($value, $headings)) {
-            $this->navigationHeading = $value;
-        }
+        $this->navigationHeading = strtolower($value);
+
         return $this;
     }
 

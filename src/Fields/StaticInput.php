@@ -28,6 +28,14 @@ class StaticInput extends Base implements FieldInterface
     }
 
     /**
+     * @return bool
+     */
+    public static function getIsStandardLabel(): bool
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

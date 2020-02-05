@@ -36,10 +36,9 @@
                 {% if field.getWrappingClass() != '' %}
                     <div class="{{ field.getWrappingClass()|raw }}">
                 {% endif %}
-
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
-                    {% set labelIdSwitch = {0:'TYPE_TOGGLE_TRUE_FALSE', 1:'TYPE_TOGGLE_YES_NO', 2:'TYPE_STATIC'} %}
-                    {% if def.constant not in labelIdSwitch%}
+
+                    {% if field.getIsStandardLabel() %}
                         {% if field.label is not null %}
                             <label {{ (field.isSuppressLabel() ? 'class="sr-only"') }} for="{{ field.id }}">
                                 {{ field.label|raw }}

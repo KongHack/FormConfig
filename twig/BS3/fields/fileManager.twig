@@ -1,5 +1,6 @@
 {% macro render(field) %}
     <div class="input-group">
+        <label class="sr-only" for="{{ field.id }}">File Manager Path</label>
         <input type="text"
                maxlength="{{ field.maxLength }}"
                name="{{ field.name }}"
