@@ -13,13 +13,12 @@
     {% endif %}
 {% endfor %}
 
-
 <div class="row">
     {% if FC_Config.getRenderArg('formArray')|length > 1 %}
         <div class="col-md-3">
             <div class="panel panel-sitespecific">
                 <div class="panel-heading">
-                    <div class="panel-title">Navigation</div>
+                    <{{ FC_Config.getNavigationTag() }} class="panel-title">Navigation</{{ FC_Config.getNavigationTag() }}>
                 </div>
                 <div class="panel-body">
                     {% for key, value in FC_Config.getRenderArg('formArray') %}

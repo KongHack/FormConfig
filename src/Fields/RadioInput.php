@@ -31,6 +31,14 @@ class RadioInput extends Base implements FieldInterface
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardLabel(): bool
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

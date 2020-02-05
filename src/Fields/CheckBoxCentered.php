@@ -28,6 +28,14 @@ class CheckBoxCentered extends Base implements FieldInterface
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardLabel(): bool
+    {
+        return true;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

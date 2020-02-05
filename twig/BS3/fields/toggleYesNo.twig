@@ -1,14 +1,25 @@
 {% macro render(field) %}
-    <div>
-        <div class="btn-group" id="{{ field.id }}" data-toggle="buttons">
+    <fieldset>
+        {% if field.label is not null %}
+            <legend style="display: inline; font-size: inherit; font-weight: bold; border: 0; width: auto; margin: 0 0 5px 0;">
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+        {% endif %}
+
+        <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-default yes {{ (field.value=='Y' ? 'active' : '') }}">
                 <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="Y" autocomplete="off" {{ (field.value=='Y' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}> Yes
             </label>
             <label class="btn btn-default no {{ (field.value=='N' ? 'active' : '') }}">
-                <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="N" autocomplete="off" {{ (field.value=='N' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}> No
+                <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="N" autocomplete="off" {{ (field.value=='N' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}>  No
             </label>
         </div>
-    </div>
+    </fieldset>
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}

@@ -34,6 +34,14 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardLabel(): bool
+    {
+        return true;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

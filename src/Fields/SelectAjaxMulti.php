@@ -36,6 +36,14 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardLabel(): bool
+    {
+        return true;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

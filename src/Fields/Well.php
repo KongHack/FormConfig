@@ -30,6 +30,15 @@ class Well extends Base implements FieldInterface
         return 'well';
     }
 
+
+    /**
+     * @return bool
+     */
+    public static function isStandardLabel(): bool
+    {
+        return true;
+    }
+
     /**
      * @return string
      */

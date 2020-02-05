@@ -18,6 +18,8 @@ class FormConfig implements FieldContainerInterface
     const OVERRIDE_SUBMIT      = 'submitButton';
     const OVERRIDE_PANEL_CLASS = 'panelClass';
 
+    const DEFAULT_NAVIGATION_TAG = 'div';
+
     const REQUIRED_INDICATOR_OFF      = 0;
     const REQUIRED_INDICATOR_ASTERISK = 1;
     const REQUIRED_INDICATOR_VERBOSE  = 2;
@@ -39,6 +41,7 @@ class FormConfig implements FieldContainerInterface
     protected $fields            = [];
     protected $formArrays        = [];
     protected $builder           = null;
+    protected $navigationTag     = null;
     protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
@@ -191,6 +194,32 @@ class FormConfig implements FieldContainerInterface
         }
 
         return 'form_'.$this->name;
+    }
+
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setNavigationTag($value)
+    {
+        if(strlen($value) == 1 && is_numeric($value)){
+            $value = 'h'.$value;
+        }
+        $this->navigationTag = strtolower($value);
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getNavigationTag()
+    {
+        if(null != $this->navigationTag){
+            return $this->navigationTag;
+        }
+
+        return self::DEFAULT_NAVIGATION_TAG;
     }
 
     /**
@@ -507,6 +536,7 @@ class FormConfig implements FieldContainerInterface
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
             'holdOn'        => $this->useHoldOn,
+            'navHeading'    => $this->getNavigationTag(),
             $this->name     => $this->fields,
         ];
     }
