@@ -1,31 +1,43 @@
 {% macro render(field) %}
-    <table class="table" id="{{ field.id }}">
-        <thead>
+    <fieldset>
+        {% if field.label is not null %}
+            <legend style="display: inline; font-size: inherit; font-weight: bold; border: 0; width: auto; margin: 0 0 5px 0;">
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+        {% endif %}
+        <table class="table" id="{{ field.id }}">
+            <thead>
             <tr>
                 <th style="text-align: center" id="ts_{{ field.id }}_0">N/A</th>
                 {% for i in range(1,10) %}
                     <th id="ts_{{ field.id }}_{{ i }}" style="text-align: center">{{ i }}</th>
                 {% endfor %}
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tr>
                 {% for i in range(0,10) %}
                     <td style="text-align: center">
                         <input type="radio"
-                            aria-labelledby="ts_{{ field.id }}_{{ i }}"
-                            name="{{ field.name }}" value="{{ i }}"
-                            {{ (field.value == i ? 'checked="checked"' : '') }}
-                            class="{{ field.class }}"
-                            id="{{ field.id }}_{{ i }}"
-                            {{ field.dataString|raw }}
-                            {{ field.getDataAttributeString()|raw }}
+                               aria-labelledby="ts_{{ field.id }}_{{ i }}"
+                               name="{{ field.name }}" value="{{ i }}"
+                                {{ (field.value == i ? 'checked="checked"' : '') }}
+                               class="{{ field.class }}"
+                               id="{{ field.id }}_{{ i }}"
+                                {{ field.dataString|raw }}
+                                {{ field.getDataAttributeString()|raw }}
                         >
                     </td>
                 {% endfor %}
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </fieldset>
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}
