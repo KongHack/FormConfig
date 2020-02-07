@@ -32,7 +32,7 @@ class ScaleLikert extends Base implements FieldInterface
      */
     public static function isStandardLabel(): bool
     {
-        return false;
+        return true;
     }
 
     /**
