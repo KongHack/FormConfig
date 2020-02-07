@@ -1,7 +1,7 @@
 {% macro render(field, multi) %}
     <fieldset>
         {% if field.label is not null %}
-            <legend style="display: inline; font-size: inherit; font-weight: bold; border: 0; width: auto; margin: 0 0 5px 0;">
+            <legend>
                 {{ field.label|raw }}
                 {% if field.helpText is not null %}
                     <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
