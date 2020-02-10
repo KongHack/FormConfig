@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.1](https://github.com/KongHack/FormConfig/releases/tag/3.3.1)
+ - @GameCharmer Fix broken likert scale heading
+
+
+
 ## [3.3.0](https://github.com/KongHack/FormConfig/releases/tag/3.3.0)
  - @GameCharmer Merge WCAG Branch
  - @jakerarr WCAG Updates
