@@ -1,16 +1,28 @@
 {% macro render(field, multi) %}
-    <div class="input-group">
+    <fieldset>
+        {% if field.label is not null %}
+            <legend>
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+        {% endif %}
+        <div class="input-group">
         <span class="input-group-btn">
             <label for="{{ field.id }}" tabindex="0" class="btn btn-primary" role="button" id="{{ field.id }}_btn">
                 {% if field.label != '' %}
-                <span class="sr-only">{{ field.label }}</span>
+                    <span class="sr-only">{{ field.label }}</span>
                 {% endif %}
                 Browse... <input type="file" name="{{ field.name }}" class="hide {{ field.class }}" id="{{ field.id }}" {{ multi ? 'multiple' : '' }}>
             </label>
         </span>
-        <label class="sr-only" for="{{ field.id }}_path">File Path</label>
-        <input id="{{ field.id }}_path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
-    </div>
+            <label class="sr-only" for="{{ field.id }}_path">File Path</label>
+            <input id="{{ field.id }}_path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
+        </div>
+    </fieldset>
 
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>

@@ -1,24 +1,36 @@
 {% macro render(field) %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="text-align: center">N/A</th>
-                <th style="text-align: center">Needs Improvement (NI)</th>
-                <th style="text-align: center">Developing (D)</th>
-                <th style="text-align: center">Satisfactory (S)</th>
-                <th style="text-align: center">Excellent (E)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                {% for i in range(0,4) %}
-                    <td style="text-align: center">
-                        <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString()|raw }}>
-                    </td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
+    <fieldset>
+        {% if field.label is not null %}
+            <legend>
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+        {% endif %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center">N/A</th>
+                    <th style="text-align: center">Needs Improvement (NI)</th>
+                    <th style="text-align: center">Developing (D)</th>
+                    <th style="text-align: center">Satisfactory (S)</th>
+                    <th style="text-align: center">Excellent (E)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for i in range(0,4) %}
+                        <td style="text-align: center">
+                            <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString()|raw }}>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}

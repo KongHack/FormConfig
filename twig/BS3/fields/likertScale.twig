@@ -1,34 +1,47 @@
 {% macro render(field) %}
-    <table class="table" id="{{ field.id }}">
-        <thead>
-            <tr>
-                <th id="ls_{{ field.id }}_0" style="text-align: center">N/A</th>
-                <th id="ls_{{ field.id }}_1" style="text-align: center">Strongly Disagree</th>
-                <th id="ls_{{ field.id }}_2" style="text-align: center">Disagree</th>
-                <th id="ls_{{ field.id }}_3" style="text-align: center">Neither Agree nor Disagree</th>
-                <th id="ls_{{ field.id }}_4" style="text-align: center">Agree</th>
-                <th id="ls_{{ field.id }}_5" style="text-align: center">Strongly Agree</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                {% for i in range(0,5) %}
-                    <td style="text-align: center">
-                        <input
-                                type="radio"
-                                name="{{ field.name }}"
-                                aria-labelledby="ls_{{ field.id }}_{{ i }}"
-                                value="{{ i }}"
-                                {{ (field.value == i ? 'checked="checked"' : '') }}
-                                class="{{ field.class }}"
-                                id="{{ field.id }}_{{ i }}"
-                                {{ field.getDataAttributeString()|raw }}
-                        >
-                    </td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
+    <fieldset>
+        {% if field.label is not null %}
+            <legend>
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+        {% endif %}
+        <table class="table" id="{{ field.id }}">
+            <thead>
+                <tr>
+                    <th id="ls_{{ field.id }}_0" style="text-align: center">N/A</th>
+                    <th id="ls_{{ field.id }}_1" style="text-align: center">Strongly Disagree</th>
+                    <th id="ls_{{ field.id }}_2" style="text-align: center">Disagree</th>
+                    <th id="ls_{{ field.id }}_3" style="text-align: center">Neither Agree nor Disagree</th>
+                    <th id="ls_{{ field.id }}_4" style="text-align: center">Agree</th>
+                    <th id="ls_{{ field.id }}_5" style="text-align: center">Strongly Agree</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for i in range(0,5) %}
+                        <td style="text-align: center">
+                            <input
+                                    type="radio"
+                                    name="{{ field.name }}"
+                                    aria-labelledby="ls_{{ field.id }}_{{ i }}"
+                                    value="{{ i }}"
+                                    {{ (field.value == i ? 'checked="checked"' : '') }}
+                                    class="{{ field.class }}"
+                                    id="{{ field.id }}_{{ i }}"
+                                    {{ field.getDataAttributeString()|raw }}
+                            >
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}
