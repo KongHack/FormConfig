@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.3](https://github.com/KongHack/FormConfig/releases/tag/3.3.3)
+- @GameCharmer @jakerarr Another hopeful fix for WCAG updates
+
+
+
 ## [3.3.2](https://github.com/KongHack/FormConfig/releases/tag/3.3.2)
  - @jakerarr Patch field issues from WCAG Updates
 
