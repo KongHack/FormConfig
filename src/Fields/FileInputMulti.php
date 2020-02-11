@@ -38,7 +38,7 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
      */
     public static function isStandardLabel(): bool
     {
-        return true;
+        return false;
     }
 
     /**

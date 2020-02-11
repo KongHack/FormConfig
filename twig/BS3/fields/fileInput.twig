@@ -1,7 +1,7 @@
 {% macro render(field, multi) %}
     <fieldset>
         {% if field.label is not null %}
-            <legend>
+            <legend {{ (field.isSuppressLabel() ? 'class="sr-only"') }}>
                 {{ field.label|raw }}
                 {% if field.helpText is not null %}
                     <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
@@ -22,11 +22,11 @@
             <label class="sr-only" for="{{ field.id }}_path">File Path</label>
             <input id="{{ field.id }}_path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
         </div>
-    </fieldset>
 
-    {% if field.errors|length>0 %}
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-    {% endif %}
+        {% if field.errors|length>0 %}
+            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        {% endif %}
+    </fieldset>
 
     <script type="text/javascript">
         $(function () {

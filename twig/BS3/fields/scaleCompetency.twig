@@ -1,7 +1,7 @@
 {% macro render(field) %}
     <fieldset>
         {% if field.label is not null %}
-            <legend>
+            <legend {{ (field.isSuppressLabel() ? 'class="sr-only"') }}>
                 {{ field.label|raw }}
                 {% if field.helpText is not null %}
                     <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
