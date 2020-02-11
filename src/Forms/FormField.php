@@ -1,6 +1,7 @@
 <?php
 namespace GCWorld\FormConfig\Forms;
 
+use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
@@ -594,8 +595,9 @@ class FormField
      */
     public function getDataAttributes()
     {
-        $attributes             = $this->dataAttributes;
-        $attributes['reqLevel'] = $this->reqLevel;
+        $attributes               = $this->dataAttributes;
+        $attributes['reqLevel']   = $this->reqLevel;
+        $attributes['fc_version'] = Twig::getFCVersion();
 
         return $attributes;
     }

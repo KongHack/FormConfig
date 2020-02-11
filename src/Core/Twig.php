@@ -20,8 +20,26 @@ class Twig
         'BS3',
     ];
 
-    protected static $twig   = null;
-    protected static $loader = null;
+    protected static $twig      = null;
+    protected static $loader    = null;
+    protected static $FCVersion = null;
+
+    /**
+     * @return string
+     */
+    public static function getFCVersion()
+    {
+        if(static::$FCVersion === null) {
+            $file  = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+            $file .= '..'.DIRECTORY_SEPARATOR;
+            $file .= '..'.DIRECTORY_SEPARATOR;
+            $file .= 'VERSION';
+
+            static::$FCVersion = trim(file_get_contents($file));
+        }
+
+        return static::$FCVersion;
+    }
 
     /**
      * @param FilesystemLoader $filesystem
@@ -138,4 +156,3 @@ class Twig
         }
     }
 }
-
