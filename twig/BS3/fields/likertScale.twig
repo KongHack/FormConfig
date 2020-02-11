@@ -1,7 +1,7 @@
 {% macro render(field) %}
     <fieldset>
         {% if field.label is not null %}
-            <legend>
+            <legend {{ (field.isSuppressLabel() ? 'class="sr-only"') }}>
                 {{ field.label|raw }}
                 {% if field.helpText is not null %}
                     <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
@@ -10,6 +10,7 @@
                 {% endif %}
             </legend>
         {% endif %}
+
         <table class="table" id="{{ field.id }}">
             <thead>
                 <tr>
@@ -41,7 +42,6 @@
             </tbody>
         </table>
     </fieldset>
-
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}

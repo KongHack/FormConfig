@@ -1,7 +1,7 @@
 {% macro render(field) %}
     <fieldset>
         {% if field.label is not null %}
-            <legend>
+            <legend {{ (field.isSuppressLabel() ? 'class="sr-only"') }}>
                 {{ field.label|raw }}
                 {% if field.helpText is not null %}
                     <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
@@ -10,15 +10,16 @@
                 {% endif %}
             </legend>
         {% endif %}
+
         <table class="table" id="{{ field.id }}">
             <tbody>
-            <tr>
-                {% for i in range(1,7) %}
-                    <td style="text-align: center">
-                        <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString()|raw }}>
-                    </td>
-                {% endfor %}
-            </tr>
+                <tr>
+                    {% for i in range(1,7) %}
+                        <td style="text-align: center">
+                            <input type="radio" name="{{ field.name }}" value="{{ i }}" {{ (field.value == i ? 'checked="checked"' : '') }} class="{{ field.class }}" id="{{ field.id }}_{{ i }}" {{ field.dataString|raw }} {{ field.getDataAttributeString()|raw }}>
+                        </td>
+                    {% endfor %}
+                </tr>
             </tbody>
         </table>
     </fieldset>
