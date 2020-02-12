@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.6](https://github.com/KongHack/FormConfig/releases/tag/3.3.6)
+ - @GameCharmer Fix issue with form array element
+
+
+
 ## [3.3.5](https://github.com/KongHack/FormConfig/releases/tag/3.3.5)
  - @GameCharmer Debugging and CSRF items
 

@@ -53,6 +53,20 @@ class FormArrayElement implements FieldContainerInterface
     protected $displayColumn = null;
 
     /**
+     * @var string
+     */
+    protected $name = 'ARRAY';
+
+    /**
+     * FormArrayElement constructor.
+     * @param string $name
+     */
+    public function __construct(string $name = 'ARRAY')
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @param string $name
      *
      * @return FormArrayField
