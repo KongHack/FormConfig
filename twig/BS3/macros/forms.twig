@@ -23,6 +23,7 @@
 
 {% macro completeField(field) %}
     {% if field is not empty %}
+        {% do field.doUsed() %}
         {% if field.fields is defined %}
             {% import '@form_config_BS3/macros/formArray.twig' as formArray %}
             {{ formArray.handleFormArray(field) }}

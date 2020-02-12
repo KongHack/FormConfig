@@ -1,4 +1,6 @@
 {% macro handleFormArray(arr) %}
+    {% do arr.doUsed() %}
+
     {% import 'macros/forms.twig' as forms %}
 
     {% if arr.getMode() == 'table' %}
@@ -20,7 +22,7 @@
                             {% for field in fields %}
                                 <td class="{{ field.getColWidth() }}">
                                     {% set tmp = field.setLabelledBy('th_' ~ arr.getTableId() ~ '_' ~ loop.index) %}
-                                    {{  forms.completeField(field) }}
+                                    {{ forms.completeField(field) }}
                                 </td>
                             {% endfor %}
                         </tr>

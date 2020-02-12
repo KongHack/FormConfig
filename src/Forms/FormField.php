@@ -2,6 +2,7 @@
 namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Core\Twig;
+use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
@@ -122,6 +123,11 @@ class FormField
      * @var string
      */
     protected $wrappingClass = '';
+
+    /**
+     * @var bool
+     */
+    protected $isUsed = false;
 
     /**
      * @param string $name
@@ -735,5 +741,23 @@ class FormField
         $obj   = new $class();
 
         return $obj::isStandardLabel();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUsed()
+    {
+        return $this->isUsed;
+    }
+
+    /**
+     * @return $this
+     */
+    public function doUsed()
+    {
+        $this->isUsed = true;
+
+        return $this;
     }
 }

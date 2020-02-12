@@ -6,9 +6,9 @@ use GCWorld\FormConfig\Core\Config;
 use GCWorld\FormConfig\Core\FCHook;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldContainerInterface;
+use GCWorld\FormConfig\Fields\Hidden;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\FormConfig\Interfaces\ModelFieldText;
-use GCWorld\ORM\FieldName;
 
 /**
  * Class FormConfig.
@@ -31,6 +31,7 @@ class FormConfig implements FieldContainerInterface
     protected static $requiredIndicator = null;
     protected static $formMode          = null;
 
+    protected $csrfName          = null;
     protected $isReadOnly        = false;
     protected $useHoldOn         = false;
     protected $name              = '';
@@ -39,7 +40,6 @@ class FormConfig implements FieldContainerInterface
     protected $twigTemplate      = '';
     protected $twigOverrides     = [];
     protected $fields            = [];
-    protected $formArrays        = [];
     protected $builder           = null;
     protected $navigationTag     = null;
     protected $renderArgs        = [
@@ -78,6 +78,20 @@ class FormConfig implements FieldContainerInterface
             if (isset($config['general']['formMode'])) {
                 self::$formMode = (string) $config['general']['formMode'];
             }
+        }
+
+        if(isset($config['csrf'])
+           && $config['csrf']['enabled']
+           && $config['csrf']['tokenNameMethod'] != ''
+           && $config['csrf']['tokenNameMethod'] != ''
+        ) {
+            $name   = call_user_func($config['csrf']['tokenNameMethod']);
+            $value  = call_user_func($config['csrf']['tokenValueMethod']);
+            $cField = new FormField($name);
+            $cField->setValue($value);
+            $cField->setType(Hidden::getKey());
+            $this->csrfName = $name;
+            $this->addFieldObject($cField);
         }
     }
 
@@ -380,8 +394,10 @@ class FormConfig implements FieldContainerInterface
         foreach ($this->fields as $name => $field) {
             /** @var FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
-                $function = FieldName::getterName($name);
-                $field->setValue($object->$function());
+                $function = 'get'.str_replace('_', '', ucwords($name, '_'));
+                if(method_exists($function,$object)) {
+                    $field->setValue($object->$function());
+                }
             }
             if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
                 $dbType = $object::$dbInfo[$name];
@@ -720,4 +736,26 @@ class FormConfig implements FieldContainerInterface
         return $this->isReadOnly;
     }
 
+    /**
+     * @return bool
+     */
+    public function doDebug()
+    {
+        $config = Config::getInstance()->getConfig();
+        if(isset($config['debugging'])
+            && $config['debugging']['enabled']
+            && isset($config['debugging']['userCheckMethod'])
+            && $config['debugging']['userCheckMethod'] != ''
+        ) {
+            return call_user_func($config['debugging']['userCheckMethod']);
+        }
+
+        return false;
+    }
+
+    public function getCSRFTokenName()
+    {
+
+
+    }
 }
