@@ -332,7 +332,7 @@ class FormConfig implements FieldContainerInterface
      */
     public function createFieldArray(string $name)
     {
-        $field               = new FormArrayElement();
+        $field               = new FormArrayElement($name);
         $this->fields[$name] = $field;
         $field->setFormConfig($this);
 
