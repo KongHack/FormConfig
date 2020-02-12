@@ -73,6 +73,22 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameRaw()
+    {
+        return $this->name;
+    }
+
+    /**
      * @param string $name
      *
      * @return FormArrayElement
