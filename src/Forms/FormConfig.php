@@ -395,7 +395,7 @@ class FormConfig implements FieldContainerInterface
             /** @var FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
                 $function = 'get'.str_replace('_', '', ucwords($name, '_'));
-                if(method_exists($function,$object)) {
+                if(method_exists($object,$function)) {
                     $field->setValue($object->$function());
                 }
             }
@@ -430,7 +430,8 @@ class FormConfig implements FieldContainerInterface
                     }
                 }
             } else {
-                if (method_exists($field, 'getLabel')
+                if ($field->getNameRaw() != $this->csrfName
+                    && method_exists($field, 'getLabel')
                     && empty($field->getLabel())
                     && method_exists($object, 'getFieldName')
                 ) {
