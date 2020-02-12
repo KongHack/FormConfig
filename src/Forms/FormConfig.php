@@ -754,9 +754,11 @@ class FormConfig implements FieldContainerInterface
         return false;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCSRFTokenName()
     {
-
-
+        return $this->csrfName;
     }
 }

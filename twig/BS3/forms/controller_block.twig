@@ -39,7 +39,16 @@
             {% endif %}
         </div>
     </div>
+
+    {% if FC_Config.getCSRFTokenName() != null %}
+        {% set csrf_token_name = FC_Config.getCSRFTokenName() %}
+        {% if not FC_Config.getField(csrf_token_name).isUsed() %}
+            {% import '@form_config_BS3/macros/forms.twig' as form %}
+            {{ form.completeField(FC_Config.getField(csrf_token_name)) }}
+        {% endif %}
+    {% endif %}
 </form>
+
 {% if holdOn %}
     <script type="text/javascript">
         $(function(){
