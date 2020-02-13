@@ -1,7 +1,6 @@
 <?php
 namespace GCWorld\FormConfig\Forms;
 
-use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
@@ -108,6 +107,12 @@ class FormField
      * @var int
      */
     protected $select2MinLength = 2;
+
+    /**
+     * @var string
+     */
+    protected $select2DropdownParent = '';
+
 
     /**
      * @var array
@@ -758,5 +763,24 @@ class FormField
         $this->isUsed = true;
 
         return $this;
+    }
+
+    /**
+     * @param string $parent
+     * @return $this
+     */
+    public function setSelect2DropdownParent(string $parent)
+    {
+        $this->select2DropdownParent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSelect2DropdownParent()
+    {
+        return $this->select2DropdownParent;
     }
 }
