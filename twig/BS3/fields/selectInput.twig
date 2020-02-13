@@ -22,7 +22,13 @@
     </select>
     <script type="text/javascript">
         $(function(){
-            $("#{{ field.id }}").select2({theme: "bootstrap", width:'100%'});
+            $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                theme: "bootstrap",
+                width:'100%'
+            });
         });
     </script>
     {% if field.getScript() is not empty %}

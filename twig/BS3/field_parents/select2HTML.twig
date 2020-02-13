@@ -4,6 +4,9 @@
     <script type="text/javascript">
         $(function(){
             var field = $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
                 theme: "bootstrap",
                 width:'100%',
                 data: {{ field.getOptionsSelect2()|json_encode|raw }},

@@ -35,7 +35,13 @@
     </div>
     <script type="text/javascript">
         $(function(){
-            $("#{{ id }}").select2({theme: "bootstrap", width:'100%'});
+            $("#{{ id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                theme: "bootstrap",
+                width:'100%'
+            });
             $("#{{ id }}-all").click(function(){
                 var $sel = $("#{{ id }}");
                 $sel.find('option').each(function(){

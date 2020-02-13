@@ -26,6 +26,9 @@
     <script type="text/javascript">
         $(function(){
             $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
                 containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
                 theme: "bootstrap",
                 width:'100%',
