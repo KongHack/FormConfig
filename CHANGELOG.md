@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.8](https://github.com/KongHack/FormConfig/releases/tag/3.3.8)
+ - @GameCharmer experimental support for select2 dropdown parent
+
+
+
 ## [3.3.7](https://github.com/KongHack/FormConfig/releases/tag/3.3.7)
  - @GameCharmer Pass name through to array element
 
