@@ -601,9 +601,8 @@ class FormField
      */
     public function getDataAttributes()
     {
-        $attributes               = $this->dataAttributes;
-        $attributes['reqLevel']   = $this->reqLevel;
-        $attributes['fc_version'] = Twig::getFCVersion();
+        $attributes             = $this->dataAttributes;
+        $attributes['reqLevel'] = $this->reqLevel;
 
         return $attributes;
     }
