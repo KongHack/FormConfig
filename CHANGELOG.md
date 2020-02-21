@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.3.9](https://github.com/KongHack/FormConfig/releases/tag/3.3.9)
+ - @GameCharmer Fix Missing IDs from Toggles post-WCAG Update
+
+
+
 ## [3.3.8](https://github.com/KongHack/FormConfig/releases/tag/3.3.8)
  - @GameCharmer experimental support for select2 dropdown parent
 
