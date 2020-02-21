@@ -11,7 +11,7 @@
             </legend>
         {% endif %}
 
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group" data-toggle="buttons" id="{{ field.id }}">
             <label class="btn btn-default yes {{ (field.value==1 ? 'active' : '') }}">
                 <input type="radio" class="{{ field.class }}" name="{{ field.name }}" value="1" autocomplete="off" {{ (field.value==1 ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}> Yes
             </label>
