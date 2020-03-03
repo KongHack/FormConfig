@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.0](https://github.com/KongHack/FormConfig/releases/tag/3.4.0)
+ - @GameCharmer Update Twig from 2.x to 3.x
+
+
 ## [3.3.9](https://github.com/KongHack/FormConfig/releases/tag/3.3.9)
  - @GameCharmer Fix Missing IDs from Toggles post-WCAG Update
 
