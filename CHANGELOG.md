@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.2](https://github.com/KongHack/FormConfig/releases/tag/3.4.2)
+ - @GameCharmer Fix undefined Key and Url in element handler
+
+
+
 ## [3.4.1](https://github.com/KongHack/FormConfig/releases/tag/3.4.1)
  - @GameCharmer Allow overriding the Navigation title
  - @GameCharmer Right-side html for navigation title 
