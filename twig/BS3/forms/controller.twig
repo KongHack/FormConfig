@@ -72,12 +72,15 @@
 
 
 {% macro doFormElement(element, route, activeForm) %}
+    {% set key = element.getFormKey() %}
+
     {% if element.getFormType() == 1 %}
         {% if element.getFormUrl() != '' %}
             {% set url = element.getFormUrl() %}
         {% else %}
             {% set url = route ~ '/' ~ element.getFormKey() %}
         {% endif %}
+
         <a href="{{ url }}"
            id="FC_NAV_BTN_{{ key }}"
            class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
@@ -90,7 +93,7 @@
     {% elseif element.getFormType() == 4 %}
         <div class="FC_HTML_BREAK">{{ element.getFormName()|raw }}</div>
     {% elseif element.getFormType() == 5 %}
-        <a href="{{ url }}"
+        <a href="{{ element.getFormUrl() }}"
            id="FC_NAV_BTN_{{ key }}"
            class="btn btn-left btn-default btn-block"
            >
