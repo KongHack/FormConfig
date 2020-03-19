@@ -7,6 +7,7 @@ class FormConfigFormElement
     const TYPE_DIV_BREAK  = 2;
     const TYPE_HR_BREAK   = 3;
     const TYPE_HTML_BREAK = 4;
+    const TYPE_LINK       = 5;
 
     protected $form_key  = '';
     protected $form_url  = '';

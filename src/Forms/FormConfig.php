@@ -42,6 +42,8 @@ class FormConfig implements FieldContainerInterface
     protected $fields            = [];
     protected $builder           = null;
     protected $navigationTag     = null;
+    protected $navigationTitle   = 'Navigation';
+    protected $navigationRight   = null;
     protected $renderArgs        = [
         'formArray'   => [],
         'formCurrent' => '',
@@ -553,7 +555,6 @@ class FormConfig implements FieldContainerInterface
             'twigOverrides' => $this->twigOverrides,
             'formId'        => $this->getFormId(),
             'holdOn'        => $this->useHoldOn,
-            'navHeading'    => $this->getNavigationTag(),
             $this->name     => $this->fields,
         ];
     }
@@ -760,5 +761,43 @@ class FormConfig implements FieldContainerInterface
     public function getCSRFTokenName()
     {
         return $this->csrfName;
+    }
+
+    /**
+     * @param string $title
+     * @return $this
+     */
+    public function setNavigationTitle(string $title)
+    {
+        $this->navigationTitle = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNavigationTitle()
+    {
+        return $this->navigationTitle;
+    }
+
+    /**
+     * @param string $html
+     * @return $this
+     */
+    public function setNavigationRight(string $html)
+    {
+        $this->navigationRight = $html;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNavigationRight()
+    {
+        return $this->navigationRight;
     }
 }
