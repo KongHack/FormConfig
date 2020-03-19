@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.1](https://github.com/KongHack/FormConfig/releases/tag/3.4.1)
+ - @GameCharmer Allow overriding the Navigation title
+ - @GameCharmer Right-side html for navigation title 
+ - @GameCharmer Link form element type
+
+
 ## [3.4.0](https://github.com/KongHack/FormConfig/releases/tag/3.4.0)
  - @GameCharmer Update Twig from 2.x to 3.x
 
