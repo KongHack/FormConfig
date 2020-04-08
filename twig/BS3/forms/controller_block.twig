@@ -11,6 +11,7 @@
 {% endfor %}
 
 <form action="{{ formUrl }}" method="post" id="{{ formId }}" enctype="multipart/form-data">
+    {% if FC_Config.isWrapped() %}
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">
             <{{ FC_Config.getNavigationTag() }} class="panel-title">{{ forms[activeForm]|raw }}</{{ FC_Config.getNavigationTag() }}>
@@ -23,6 +24,7 @@
             {% endif %}
         {% endif %}
         <div class="panel-body">
+    {% endif %}
             {% if form is defined and form != '' %}
                 {% set file = form|replace({'REPLACE':'BS3'}) %}
                 {% include file %}
@@ -30,6 +32,7 @@
                 {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
                 {{ simpleForm.render(_context) }}
             {% endif %}
+    {% if FC_Config.isWrapped() %}
         </div>
         <div class="panel-footer">
             {% if twigOverrides.submitButton is not defined %}
@@ -39,6 +42,7 @@
             {% endif %}
         </div>
     </div>
+    {% endif %}
 
     {% if FC_Config.getCSRFTokenName() != null %}
         {% set csrf_token_name = FC_Config.getCSRFTokenName() %}

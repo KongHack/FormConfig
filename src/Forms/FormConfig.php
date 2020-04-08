@@ -33,6 +33,7 @@ class FormConfig implements FieldContainerInterface
 
     protected $csrfName          = null;
     protected $isReadOnly        = false;
+    protected $isWrapped         = true;
     protected $useHoldOn         = false;
     protected $name              = '';
     protected $hooks             = [];
@@ -799,5 +800,24 @@ class FormConfig implements FieldContainerInterface
     public function getNavigationRight()
     {
         return $this->navigationRight;
+    }
+
+    /**
+     * @param bool $wrap
+     * @return $this
+     */
+    public function setWrapped(bool $wrap)
+    {
+        $this->isWrapped = $wrap;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWrapped()
+    {
+        return $this->isWrapped;
     }
 }
