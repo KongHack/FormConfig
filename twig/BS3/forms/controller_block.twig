@@ -34,13 +34,17 @@
             {% endif %}
     {% if FC_Config.isWrapped() %}
         </div>
-        <div class="panel-footer">
-            {% if twigOverrides.submitButton is not defined %}
+        {% if twigOverrides.submitButton is not defined %}
+            <div class="panel-footer">
                 <input type="submit" class="btn btn-success" value="Save" id="FC_SAVE_BTN">
-            {% else %}
-                {{ twigOverrides.submitButton|raw }}
+            </div>
+        {% else %}
+            {% if twigOverrides.submitButton != '' %}
+                <div class="panel-footer">
+                    {{ twigOverrides.submitButton|raw }}
+                </div>
             {% endif %}
-        </div>
+        {% endif %}
     </div>
     {% endif %}
 
