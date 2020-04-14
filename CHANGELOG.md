@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.4](https://github.com/KongHack/FormConfig/releases/tag/3.4.4)
+ - @GameCharmer Remove panel-footer completely if override is blank
+
+
+
 ## [3.4.3](https://github.com/KongHack/FormConfig/releases/tag/3.4.3)
  - @GameCharmer Add isWrapped check to FormConfig and controller block
 
