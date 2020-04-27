@@ -176,7 +176,7 @@ class FormField
     }
 
     /**
-     * @return string|null
+     * @return mixed
      */
     public function getValue()
     {

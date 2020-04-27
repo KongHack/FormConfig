@@ -2,6 +2,7 @@
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
+use GCWorld\FormConfig\Core\FileInputReadOnly;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
@@ -52,13 +53,7 @@ class FileManager extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        if(empty($field->getValue())) {
-            $field->setValue('No File Selected');
-        } else {
-            $field->setValue('');
-        }
-
-        $field->setType(HTML::getKey());
+        FileInputReadOnly::makeReadOnly($field);
 
         return $field;
     }
