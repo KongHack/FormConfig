@@ -52,7 +52,13 @@ class FileManager extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
-        $field->setValue('File Input Here')->setType(StaticInput::getKey());
+        if(empty($field->getValue())) {
+            $field->setValue('No File Selected');
+        } else {
+            $field->setValue('');
+        }
+
+        $field->setType(HTML::getKey());
 
         return $field;
     }
