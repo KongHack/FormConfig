@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.6](https://github.com/KongHack/FormConfig/releases/tag/3.4.6)
+ - @GameCharmer change submit override buttons over to javascript submission due to compatibility issues
+
+
+
 ## [3.4.5](https://github.com/KongHack/FormConfig/releases/tag/3.4.5)
  - @GameCharmer Fix labels on HTML fields
  - @GameCharmer adjust verbiage on file inputs. 

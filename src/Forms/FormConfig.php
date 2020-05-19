@@ -612,15 +612,41 @@ class FormConfig implements FieldContainerInterface
                     ->setOverride('submitButton', '<input type="submit" class="btn btn-success" value="Activate">');
                 break;
             case 'add_more':
+                $id = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 10);
+                $id = 'submitBtn_'.$id;
+
                 $this->setOverride('submitButton', '
-                    <button name="submitMode" type="submit" class="btn btn-default" value="C">Save &amp; Continue</button>
-                    <button name="submitMode" type="submit" class="btn btn-default" value="A">Save &amp; Add More</button>
+                    <input type="hidden" name="submitMode" class="submitMode" value="C">
+                    <button class="btn btn-default '.$id.'" value="C">Save &amp; Continue</button>
+                    <button class="btn btn-default '.$id.'" value="A">Save &amp; Add More</button>
+                    <script type="text/javascript">
+                        $(function(){
+                            $(".'.$id.'").click(function(e){
+                                e.preventDefault();
+                                $(this).siblings(".submitMode").val($(this).val());
+                                $(this).closest("form").submit();
+                            });
+                        });
+                    </script>
                 ');
                 break;
             case 'continue_or_stay':
+                $id = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 10);
+                $id = 'submitBtn_'.$id;
+
                 $this->setOverride('submitButton', '
-                    <button name="submitMode" type="submit" class="btn btn-default" value="C">Save &amp; Continue</button>
-                    <button name="submitMode" type="submit" class="btn btn-default" value="A">Save &amp; Stay on This Page</button>
+                    <input type="hidden" name="submitMode" class="submitMode" value="C">
+                    <button class="btn btn-default '.$id.'" value="C">Save &amp; Continue</button>
+                    <button class="btn btn-default '.$id.'" value="A">Save &amp; Stay on This Page</button>
+                    <script type="text/javascript">
+                        $(function(){
+                            $(".'.$id.'").click(function(e){
+                                e.preventDefault();
+                                $(this).siblings(".submitMode").val($(this).val());
+                                $(this).closest("form").submit();
+                            });
+                        });
+                    </script>
                 ');
                 break;
         }
