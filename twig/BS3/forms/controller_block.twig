@@ -10,7 +10,12 @@
     {% endif %}
 {% endfor %}
 
-<form action="{{ formUrl }}" method="post" id="{{ formId }}" enctype="multipart/form-data">
+<form
+        action="{{ FC_Config.getRenderArg('urlCurrent') }}"
+        method="{{ FC_Config.getMethod() }}"
+        id="{{ FC_Config.getFormId() }}"
+        {% if FC_Config.getMethod() != 'GET' %} enctype="multipart/form-data"{% endif %}
+>
     {% if FC_Config.isWrapped() %}
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">

@@ -31,6 +31,7 @@ class FormConfig implements FieldContainerInterface
     protected static $requiredIndicator = null;
     protected static $formMode          = null;
 
+    protected $method            = 'POST';
     protected $csrfName          = null;
     protected $isReadOnly        = false;
     protected $isWrapped         = true;
@@ -845,5 +846,24 @@ class FormConfig implements FieldContainerInterface
     public function isWrapped()
     {
         return $this->isWrapped;
+    }
+
+    /**
+     * @param string $method
+     * @return $this
+     */
+    public function setMethod(string $method)
+    {
+        $this->method = strtoupper($method);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return $this->method;
     }
 }
