@@ -37,6 +37,9 @@ class FormArrayElement implements FieldContainerInterface
     protected $row_classes   = [];
     protected $extras        = [];
     protected $icons         = [];
+    protected $wrapperId     = null;
+    protected $wrapperClass  = null;
+    protected $wrapperStyle  = null;
 
     /**
      * Used for indicating which row contains the "new item" inputs
@@ -506,5 +509,71 @@ class FormArrayElement implements FieldContainerInterface
         $this->icons[$index] = $icon;
 
         return $this;
+    }
+
+    /**
+     * @param string|null $id
+     * @return $this
+     */
+    public function setWrapperId(string $id = null)
+    {
+        $this->wrapperId = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $class
+     * @return $this
+     */
+    public function setWrapperClass(string $class = null)
+    {
+        $this->wrapperClass = $class;
+
+        return $this;
+    }
+
+    /**
+     * @param string|null $style
+     * @return $this
+     */
+    public function setWrapperStyle(string $style = null)
+    {
+        $this->wrapperStyle = $style;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWrapperId()
+    {
+        return $this->wrapperId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWrapperClass()
+    {
+        return $this->wrapperClass;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getWrapperStyle()
+    {
+        return $this->wrapperStyle;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasWrapper()
+    {
+        return $this->wrapperId !== null || $this->wrapperClass !== null || $this->wrapperStyle !== null;
     }
 }

@@ -1,8 +1,14 @@
 {% macro handleFormArray(arr) %}
     {% do arr.doUsed() %}
-
     {% import 'macros/forms.twig' as forms %}
 
+    {% if arr.hasWrapper() %}
+        <div
+            {{ arr.getWrapperId() ? 'id="' ~ arr.getWrapperId() ~ '"' : '' }}
+            {{ arr.getWrapperClass() ? 'class="' ~ arr.getWrapperClass() ~ '"' : '' }}
+            {{ arr.getWrapperStyle() ? 'class="' ~ arr.getWrapperStyle() ~ '"' : '' }}
+        >
+    {% endif %}
     {% if arr.getMode() == 'table' %}
         <table class="form-array {{ arr.getTableClasses() }}" id="{{ arr.getTableId() }}">
             <thead>
@@ -102,6 +108,10 @@
         {% for msg in arr.getErrors() %}
             <div class="alert alert-danger">{{ msg|raw }}</div>
         {% endfor %}
+    {% endif %}
+
+    {% if arr.hasWrapper() %}
+    </div>
     {% endif %}
 
 {% endmacro %}
