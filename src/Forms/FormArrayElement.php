@@ -517,7 +517,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function setWrapperId(string $id = null)
     {
-        $this->wrapperId = $id;
+        $this->wrapperId = \trim($id,' "');
 
         return $this;
     }
@@ -528,7 +528,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function setWrapperClass(string $class = null)
     {
-        $this->wrapperClass = $class;
+        $this->wrapperClass = \trim($class,' "');
 
         return $this;
     }
@@ -539,7 +539,7 @@ class FormArrayElement implements FieldContainerInterface
      */
     public function setWrapperStyle(string $style = null)
     {
-        $this->wrapperStyle = $style;
+        $this->wrapperStyle = \trim($style,' "');
 
         return $this;
     }

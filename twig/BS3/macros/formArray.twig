@@ -4,9 +4,9 @@
 
     {% if arr.hasWrapper() %}
         <div
-            {{ arr.getWrapperId() ? 'id="' ~ arr.getWrapperId() ~ '"' : '' }}
-            {{ arr.getWrapperClass() ? 'class="' ~ arr.getWrapperClass() ~ '"' : '' }}
-            {{ arr.getWrapperStyle() ? 'class="' ~ arr.getWrapperStyle() ~ '"' : '' }}
+            {{ (arr.getWrapperId() ? 'id="' ~ arr.getWrapperId()|raw ~ '"' : '')|raw }}
+            {{ (arr.getWrapperClass() ? 'class="' ~ arr.getWrapperClass()|raw ~ '"' : '')|raw }}
+            {{ (arr.getWrapperStyle() ? 'style="' ~ arr.getWrapperStyle()|raw ~ '"' : '')|raw }}
         >
     {% endif %}
     {% if arr.getMode() == 'table' %}
