@@ -3,15 +3,13 @@ namespace GCWorld\FormConfig\Forms;
 
 use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Config;
+use GCWorld\FormConfig\Core\CSRFController;
 use GCWorld\FormConfig\Core\FCHook;
 use GCWorld\FormConfig\Core\Twig;
-use GCWorld\FormConfig\Exceptions\CSRFNotEnabledException;
-use GCWorld\FormConfig\Exceptions\CSRFRequestFailedException;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Fields\Hidden;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\FormConfig\Interfaces\ModelFieldText;
-use GCWorld\Globals\Globals;
 
 /**
  * Class FormConfig.
@@ -93,11 +91,7 @@ class FormConfig implements FieldContainerInterface
             }
         }
 
-        if(isset($config['csrf'])) {
-            $this->csrf['enabled']          = $config['csrf']['enabled'] ?? false;
-            $this->csrf['tokenNameMethod']  = $config['tokenNameMethod'] ?? '';
-            $this->csrf['tokenValueMethod'] = $config['tokenValueMethod'] ?? '';
-        }
+        $this->csrf = CSRFController::get()->getConfig();
 
         if($this->csrf['enabled']) {
             $this->setCSRFField();
@@ -106,18 +100,12 @@ class FormConfig implements FieldContainerInterface
 
     /**
      * @return $this
-     *
-     * @throws CSRFNotEnabledException
      */
     protected function enableCSRF()
     {
-        if($this->csrf['tokenNameMethod'] != '' && $this->csrf['tokenValueMethod'] != '') {
-            $this->csrf['enabled'] = true;
+        CSRFController::get()->forceEnable();
 
-            return $this;
-        }
-
-        throw new CSRFNotEnabledException();
+        return $this;
     }
 
     /**
@@ -137,29 +125,6 @@ class FormConfig implements FieldContainerInterface
             $this->csrfName = $name;
             $this->addFieldObject($cField);
         }
-    }
-
-    /**
-     * @return bool
-     * @throws CSRFNotEnabledException
-     * @throws CSRFRequestFailedException
-     */
-    public function checkCSRFField()
-    {
-        if($this->csrf['enabled']
-            && $this->csrf['tokenNameMethod'] != ''
-            && $this->csrf['tokenValueMethod'] != ''
-        ) {
-            $name   = call_user_func($this->csrf['tokenNameMethod']);
-            $value  = call_user_func($this->csrf['tokenValueMethod']);
-            $cGlobals = new Globals();
-            if($cGlobals->string()->REQUEST($name) !== $value) {
-                throw new CSRFRequestFailedException();
-            }
-            return true;
-        }
-
-        throw new CSRFNotEnabledException();
     }
 
     /**
