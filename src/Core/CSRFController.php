@@ -19,7 +19,6 @@ class CSRFController
      */
     protected $csrf = [
         'enabled'          => false,
-        'name'             => '',
         'tokenNameMethod'  => '',
         'tokenValueMethod' => '',
     ];
@@ -95,6 +94,30 @@ class CSRFController
         }
 
         throw new CSRFNotEnabledException();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTokenName()
+    {
+        if($this->csrf['enabled']) {
+            return call_user_func($this->csrf['tokenNameMethod']);
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTokenValue()
+    {
+        if($this->csrf['enabled']) {
+            return call_user_func($this->csrf['tokenValueMethod']);
+        }
+
+        return '';
     }
 
     /**

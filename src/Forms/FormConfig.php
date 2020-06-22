@@ -122,8 +122,10 @@ class FormConfig implements FieldContainerInterface
             $cField = new FormField($name);
             $cField->setValue($value);
             $cField->setType(Hidden::getKey());
-            $this->csrfName = $name;
             $this->addFieldObject($cField);
+
+            $this->csrf['name']  = $name;
+            $this->csrf['value'] = $value;
         }
     }
 
