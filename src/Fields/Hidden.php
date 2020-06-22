@@ -32,7 +32,7 @@ class Hidden extends Base implements FieldInterface
      */
     public static function isStandardLabel(): bool
     {
-        return true;
+        return false;
     }
 
     /**

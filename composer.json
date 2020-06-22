@@ -14,7 +14,8 @@
     "twig/twig": "^3.0",
     "riimu/kit-phpencoder": "^2.3",
     "kint-php/kint": ">=1.1",
-    "symfony/yaml": "^4.0"
+    "symfony/yaml": "^4.0",
+    "gcworld/globals": "^3.0.1"
   },
   "suggest": {
     "gcworld/orm": "^3.4.2"

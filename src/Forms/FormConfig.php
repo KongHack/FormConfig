@@ -5,10 +5,13 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Config;
 use GCWorld\FormConfig\Core\FCHook;
 use GCWorld\FormConfig\Core\Twig;
+use GCWorld\FormConfig\Exceptions\CSRFNotEnabledException;
+use GCWorld\FormConfig\Exceptions\CSRFRequestFailedException;
 use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Fields\Hidden;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\FormConfig\Interfaces\ModelFieldText;
+use GCWorld\Globals\Globals;
 
 /**
  * Class FormConfig.
@@ -32,7 +35,6 @@ class FormConfig implements FieldContainerInterface
     protected static $formMode          = null;
 
     protected $method            = 'POST';
-    protected $csrfName          = null;
     protected $isReadOnly        = false;
     protected $isWrapped         = true;
     protected $useHoldOn         = false;
@@ -51,6 +53,13 @@ class FormConfig implements FieldContainerInterface
         'formCurrent' => '',
         'urlBase'     => '',
         'urlCurrent'  => '',
+    ];
+
+    protected $csrf = [
+        'enabled'          => false,
+        'name'             => '',
+        'tokenNameMethod'  => '',
+        'tokenValueMethod' => '',
     ];
 
     /**
@@ -84,19 +93,73 @@ class FormConfig implements FieldContainerInterface
             }
         }
 
-        if(isset($config['csrf'])
-           && $config['csrf']['enabled']
-           && $config['csrf']['tokenNameMethod'] != ''
-           && $config['csrf']['tokenNameMethod'] != ''
+        if(isset($config['csrf'])) {
+            $this->csrf['enabled']          = $config['csrf']['enabled'] ?? false;
+            $this->csrf['tokenNameMethod']  = $config['tokenNameMethod'] ?? '';
+            $this->csrf['tokenValueMethod'] = $config['tokenValueMethod'] ?? '';
+        }
+
+        if($this->csrf['enabled']) {
+            $this->setCSRFField();
+        }
+    }
+
+    /**
+     * @return $this
+     *
+     * @throws CSRFNotEnabledException
+     */
+    protected function enableCSRF()
+    {
+        if($this->csrf['tokenNameMethod'] != '' && $this->csrf['tokenValueMethod'] != '') {
+            $this->csrf['enabled'] = true;
+
+            return $this;
+        }
+
+        throw new CSRFNotEnabledException();
+    }
+
+    /**
+     * @return void
+     */
+    protected function setCSRFField()
+    {
+        if($this->csrf['enabled']
+            && $this->csrf['tokenNameMethod'] != ''
+            && $this->csrf['tokenValueMethod'] != ''
         ) {
-            $name   = call_user_func($config['csrf']['tokenNameMethod']);
-            $value  = call_user_func($config['csrf']['tokenValueMethod']);
+            $name   = call_user_func($this->csrf['tokenNameMethod']);
+            $value  = call_user_func($this->csrf['tokenValueMethod']);
             $cField = new FormField($name);
             $cField->setValue($value);
             $cField->setType(Hidden::getKey());
             $this->csrfName = $name;
             $this->addFieldObject($cField);
         }
+    }
+
+    /**
+     * @return bool
+     * @throws CSRFNotEnabledException
+     * @throws CSRFRequestFailedException
+     */
+    public function checkCSRFField()
+    {
+        if($this->csrf['enabled']
+            && $this->csrf['tokenNameMethod'] != ''
+            && $this->csrf['tokenValueMethod'] != ''
+        ) {
+            $name   = call_user_func($this->csrf['tokenNameMethod']);
+            $value  = call_user_func($this->csrf['tokenValueMethod']);
+            $cGlobals = new Globals();
+            if($cGlobals->string()->REQUEST($name) !== $value) {
+                throw new CSRFRequestFailedException();
+            }
+            return true;
+        }
+
+        throw new CSRFNotEnabledException();
     }
 
     /**
@@ -434,7 +497,7 @@ class FormConfig implements FieldContainerInterface
                     }
                 }
             } else {
-                if ($field->getNameRaw() != $this->csrfName
+                if ($field->getNameRaw() != $this->csrf['name']
                     && method_exists($field, 'getLabel')
                     && empty($field->getLabel())
                     && method_exists($object, 'getFieldName')
@@ -788,7 +851,7 @@ class FormConfig implements FieldContainerInterface
      */
     public function getCSRFTokenName()
     {
-        return $this->csrfName;
+        return $this->csrf['name'];
     }
 
     /**

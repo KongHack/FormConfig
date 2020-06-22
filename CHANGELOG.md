@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.10](https://github.com/KongHack/FormConfig/releases/tag/3.4.10)
+ - @GameCharmer CSRF Upgrades
+
+
+
 ## [3.4.9](https://github.com/KongHack/FormConfig/releases/tag/3.4.9)
  - @GameCharmer trim on element wrapping, add in raw output
 
