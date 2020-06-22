@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.12](https://github.com/KongHack/FormConfig/releases/tag/3.4.12)
+ - @GameCharmer CSRF Controller Fix
+
+
+
 ## [3.4.11](https://github.com/KongHack/FormConfig/releases/tag/3.4.11)
  - @GameCharmer CSRF Controller System
 

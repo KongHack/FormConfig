@@ -42,8 +42,8 @@ class CSRFController
 
         if(isset($config['csrf'])) {
             $this->csrf['enabled']          = $config['csrf']['enabled'] ?? false;
-            $this->csrf['tokenNameMethod']  = $config['tokenNameMethod'] ?? '';
-            $this->csrf['tokenValueMethod'] = $config['tokenValueMethod'] ?? '';
+            $this->csrf['tokenNameMethod']  = $config['csrf']['tokenNameMethod'] ?? '';
+            $this->csrf['tokenValueMethod'] = $config['csrf']['tokenValueMethod'] ?? '';
         }
 
         if($this->csrf['enabled'] && empty($this->csrf['tokenNameMethod'])) {
