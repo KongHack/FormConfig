@@ -512,6 +512,8 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @deprecated Use the setRenderX methods
+     *
      * @param array  $formsArray
      * @param string $currentForm
      * @param string $baseRoute
