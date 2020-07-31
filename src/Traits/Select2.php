@@ -9,9 +9,34 @@ trait Select2
     protected $select2MinLength = 2;
 
     /**
+     * @var int
+     */
+    protected $maxSelectionLength = 0;
+
+    /**
      * @var string
      */
     protected $select2DropdownParent = '';
+
+    /**
+     * @param int $length
+     *
+     * @return $this
+     */
+    public function setMaxSelectionLength(int $length)
+    {
+        $this->maxSelectionLength = $length;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxSelectionLength()
+    {
+        return $this->maxSelectionLength;
+    }
 
     /**
      * @param int $length
