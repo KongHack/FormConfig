@@ -5,6 +5,7 @@ use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
+use GCWorld\FormConfig\Traits\Select2;
 
 /**
  * Class FormField.
@@ -12,6 +13,7 @@ use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 class FormField
 {
     use FieldFormConfigTrait;
+    use Select2;
 
     /**
      * @var array
@@ -102,17 +104,6 @@ class FormField
      * @var array
      */
     protected static $types = [];
-
-    /**
-     * @var int
-     */
-    protected $select2MinLength = 2;
-
-    /**
-     * @var string
-     */
-    protected $select2DropdownParent = '';
-
 
     /**
      * @var array
@@ -667,26 +658,6 @@ class FormField
     }
 
     /**
-     * @param int $length
-     *
-     * @return $this
-     */
-    public function setSelect2MinLength(int $length)
-    {
-        $this->select2MinLength = $length;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSelect2MinLength()
-    {
-        return $this->select2MinLength;
-    }
-
-    /**
      * @return FormField
      */
     public function makeReadOnly()
@@ -763,24 +734,5 @@ class FormField
         $this->isUsed = true;
 
         return $this;
-    }
-
-    /**
-     * @param string $parent
-     * @return $this
-     */
-    public function setSelect2DropdownParent(string $parent)
-    {
-        $this->select2DropdownParent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSelect2DropdownParent()
-    {
-        return $this->select2DropdownParent;
     }
 }

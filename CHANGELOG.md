@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.17](https://github.com/KongHack/FormConfig/releases/tag/3.4.17)
+ - @GameCharmer crappy/paste into FormField till I can come up with a better solution
+
+
+
 ## [3.4.16](https://github.com/KongHack/FormConfig/releases/tag/3.4.16)
  - @GameCharmer added maxSelectionLength support
 
