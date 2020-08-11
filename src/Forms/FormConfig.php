@@ -898,4 +898,21 @@ class FormConfig implements FieldContainerInterface
     {
         return $this->method;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getRenderForm()
+    {
+        return $this->renderArgs['formCurrent'] ?? '';
+    }
+
+    /**
+     * @return array
+     */
+    public function getRenderForms()
+    {
+        return $this->renderArgs['formArray'] ?? [];
+    }
 }

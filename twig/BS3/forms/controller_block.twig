@@ -19,7 +19,9 @@
     {% if FC_Config.isWrapped() %}
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">
-            <{{ FC_Config.getNavigationTag() }} class="panel-title">{{ forms[activeForm]|raw }}</{{ FC_Config.getNavigationTag() }}>
+            <{{ FC_Config.getNavigationTag() }} class="panel-title">
+                {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()]|raw }}
+            </{{ FC_Config.getNavigationTag() }}>
         </div>
         {% if FC_Config.getRequiredIndicator() == 1 %}
             {% if FC_Config.hasRequired() %}
