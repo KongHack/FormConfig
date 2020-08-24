@@ -126,19 +126,19 @@ class FormField
     protected $isUsed = false;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $numberMin = 0;
+    protected $numberMin = null;
 
     /**
-     * @var int
+     * @var int|null
      */
-    protected $numberMax = 0;
+    protected $numberMax = null;
 
     /**
-     * @var float
+     * @var float|null
      */
-    protected $numberStep = 0.0;
+    protected $numberStep = null;
 
     /**
      * @param string $name
@@ -752,10 +752,10 @@ class FormField
     }
 
     /**
-     * @param int $min
+     * @param int|null $min
      * @return $this
      */
-    public function setMin(int $min)
+    public function setMin(int $min = null)
     {
         $this->numberMin = $min;
 
@@ -763,10 +763,10 @@ class FormField
     }
 
     /**
-     * @param int $max
+     * @param int|null $max
      * @return $this
      */
-    public function setMax(int $max)
+    public function setMax(int $max = null)
     {
         $this->numberMax = $max;
 
@@ -774,10 +774,10 @@ class FormField
     }
 
     /**
-     * @param float $step
+     * @param float|null $step
      * @return $this
      */
-    public function setStep(float $step)
+    public function setStep(float $step = null)
     {
         $this->numberStep = $step;
 
@@ -785,7 +785,7 @@ class FormField
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMin()
     {
@@ -793,7 +793,7 @@ class FormField
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getMax()
     {
@@ -801,7 +801,7 @@ class FormField
     }
 
     /**
-     * @return float
+     * @return float|null
      */
     public function getStep()
     {
