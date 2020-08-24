@@ -126,6 +126,21 @@ class FormField
     protected $isUsed = false;
 
     /**
+     * @var int
+     */
+    protected $numberMin = 0;
+
+    /**
+     * @var int
+     */
+    protected $numberMax = 0;
+
+    /**
+     * @var float
+     */
+    protected $numberStep = 0.0;
+
+    /**
      * @param string $name
      */
     public function __construct(string $name)
@@ -734,5 +749,62 @@ class FormField
         $this->isUsed = true;
 
         return $this;
+    }
+
+    /**
+     * @param int $min
+     * @return $this
+     */
+    public function setMin(int $min)
+    {
+        $this->numberMin = $min;
+
+        return $this;
+    }
+
+    /**
+     * @param int $max
+     * @return $this
+     */
+    public function setMax(int $max)
+    {
+        $this->numberMax = $max;
+
+        return $this;
+    }
+
+    /**
+     * @param float $step
+     * @return $this
+     */
+    public function setStep(float $step)
+    {
+        $this->numberStep = $step;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMin()
+    {
+        return $this->numberMin;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMax()
+    {
+        return $this->numberMax;
+    }
+
+    /**
+     * @return float
+     */
+    public function getStep()
+    {
+        return $this->numberStep;
     }
 }
