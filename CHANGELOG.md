@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.21](https://github.com/KongHack/FormConfig/releases/tag/3.4.21)
+ - @GameCharmer compensate for null
+
+
+
 ## [3.4.19](https://github.com/KongHack/FormConfig/releases/tag/3.4.19)
  - @GameCharmer add number methods for min/max/step
 
