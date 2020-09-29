@@ -24,6 +24,11 @@ interface FieldInterface
     public static function isStandardLabel(): bool;
 
     /**
+     * @return bool
+     */
+    public static function isStandardGrouping(): bool;
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string;

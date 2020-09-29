@@ -37,7 +37,9 @@
                 {% if field.getWrappingClass() != '' %}
                     <div class="{{ field.getWrappingClass()|raw }}">
                 {% endif %}
+                {% if field.isStandardGrouping() %}
                 <div class="form-group {{ field.getErrors()|length>0?'has-error has-feedback'}} {{ field.getNoticeText()|length>0?'has-warning has-feedback' }}">
+                {% endif %}
 
                     {% if field.isStandardLabel() %}
                         {% if field.label is not null %}
@@ -72,7 +74,9 @@
                     {% if field.getNoticeText()|length > 0 %}
                         <div class="FC_notice_text alert alert-warning">{{ field.getNoticeText()|raw }}</div>
                     {% endif %}
+                {% if field.isStandardGrouping() %}
                 </div>
+                {% endif %}
 
                 {% if field.getWrappingClass() != '' %}
                     </div>

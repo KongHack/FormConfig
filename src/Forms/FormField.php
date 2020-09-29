@@ -736,6 +736,18 @@ class FormField
     /**
      * @return bool
      */
+    public function isStandardGrouping()
+    {
+        $class = FieldConstants::DEFINITIONS[$this->type]['class'];
+        /** @var FieldInterface $obj */
+        $obj   = new $class();
+
+        return $obj::isStandardGrouping();
+    }
+
+    /**
+     * @return bool
+     */
     public function isUsed()
     {
         return $this->isUsed;

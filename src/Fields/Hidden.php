@@ -36,6 +36,14 @@ class Hidden extends Base implements FieldInterface
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardGrouping(): bool
+    {
+        return false;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

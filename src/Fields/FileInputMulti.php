@@ -43,6 +43,14 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
     }
 
     /**
+     * @return bool
+     */
+    public static function isStandardGrouping(): bool
+    {
+        return true;
+    }
+
+    /**
      * @return string
      */
     public static function getTwigPath(): string

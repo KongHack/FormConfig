@@ -49,6 +49,14 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
         return true;
     }
 
+    /**
+     * @return bool
+     */
+    public static function isStandardGrouping(): bool
+    {
+        return true;
+    }
+
 
     /**
      * @return string
