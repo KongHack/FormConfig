@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.23](https://github.com/KongHack/FormConfig/releases/tag/3.4.23)
+ - @GameCharmer File Input with Remove Field (Experimental)
+
+
+
 ## [3.4.22](https://github.com/KongHack/FormConfig/releases/tag/3.4.22)
  - @GameCharmer Add `isStandardGrouping` to fields
 
