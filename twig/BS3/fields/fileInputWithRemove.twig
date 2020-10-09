@@ -21,6 +21,10 @@
             </span>
             <label class="sr-only" for="{{ field.id }}_path">File Path</label>
             <input id="{{ field.id }}_path" type="text" class="form-control" readonly {{ field.getDataAttributeString()|raw }}>
+            <span class="input-group-addon">
+                <label for="remove_{{ field.id }}">Remove</label>
+                <input type="checkbox" value="-1" name="remove_{{ field.name }}" id="remove_{{ field.id }}">
+            </span>
         </div>
 
         {% if field.errors|length>0 %}
