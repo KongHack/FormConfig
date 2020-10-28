@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.24](https://github.com/KongHack/FormConfig/releases/tag/3.4.24)
+ - @GameCharmer Publish @jakerarr data attribute changes
+
+
+
 ## [3.4.23](https://github.com/KongHack/FormConfig/releases/tag/3.4.23)
  - @GameCharmer File Input with Remove Field (Experimental)
 
