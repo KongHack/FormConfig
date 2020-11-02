@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.4.25](https://github.com/KongHack/FormConfig/releases/tag/3.4.25)
+ - @GameCharmer Add same `|raw` argument to the HTML version of select2
+
+
+
 ## [3.4.24](https://github.com/KongHack/FormConfig/releases/tag/3.4.24)
  - @GameCharmer Publish @jakerarr data attribute changes
 
