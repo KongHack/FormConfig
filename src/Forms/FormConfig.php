@@ -42,6 +42,7 @@ class FormConfig implements FieldContainerInterface
     protected $twigTemplate      = '';
     protected $twigOverrides     = [];
     protected $fields            = [];
+    protected $rawData           = [];
     protected $builder           = null;
     protected $navigationTag     = null;
     protected $navigationTitle   = 'Navigation';
@@ -242,6 +243,30 @@ class FormConfig implements FieldContainerInterface
         }
 
         return 'form_'.$this->name;
+    }
+
+    /**
+     * You can add anything here, even objects and resources!  It's just for referential storage
+
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function addRawData(string $key, $value)
+    {
+        $this->rawData[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getRawData(string $key)
+    {
+        return $this->rawData[$key] ?? null;
     }
 
     /**
