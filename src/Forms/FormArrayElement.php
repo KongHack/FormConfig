@@ -90,6 +90,44 @@ class FormArrayElement implements FieldContainerInterface
     }
 
     /**
+     * @param int    $index
+     * @param string $name
+     *
+     * @return void
+     */
+    public function removeField(int $index, string $name)
+    {
+        if(!isset($this->fields[$index])) {
+            return;
+        }
+        unset($this->fields[$index][$name]);
+        if(empty($this->fields[$index])) {
+            unset($this->fields[$index]);
+        }
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function removeFieldByName(string $name)
+    {
+        foreach($this->fields as $index => $items) {
+            foreach(array_keys($items) as $item) {
+                if($item == $name) {
+                    unset($this->fields[$index][$name]);
+                    if(empty($this->fields[$index])) {
+                        unset($this->fields[$index]);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * @return string
      */
     public function getName()

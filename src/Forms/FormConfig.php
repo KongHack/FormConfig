@@ -361,6 +361,29 @@ class FormConfig implements FieldContainerInterface
 
     /**
      * @param string $name
+     * @return $this
+     */
+    public function removeField(string $name)
+    {
+        if(isset($this->fields[$name])) {
+            unset($this->fields[$name]);
+            return $this;
+        }
+
+        // If we are not in the main bank of fields, maybe we are in an array
+        foreach($this->fields as $field) {
+            if($field instanceof FormArrayElement) {
+                if($field->removeFieldByName($name)) {
+                    return $this;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
      *
      * @return FormArrayElement
      */
@@ -696,12 +719,18 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @param callable|null $postProcess
+     *
      * @return void
      */
-    public function makeReadOnly()
+    public function makeReadOnly(callable $postProcess = null)
     {
         $this->isReadOnly = true;
         $this->makeFieldsReadOnly($this->fields);
+
+        if($postProcess !== null) {
+            call_user_func($postProcess, $this);
+        }
     }
 
     /**
