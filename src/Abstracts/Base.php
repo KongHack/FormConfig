@@ -4,6 +4,7 @@ namespace GCWorld\FormConfig\Abstracts;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
+use GCWorld\FormConfig\Traits\MetaDataTrait;
 
 /**
  * Class Base.
@@ -11,6 +12,7 @@ use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 abstract class Base implements FieldInterface
 {
     use FieldFormConfigTrait;
+    use MetaDataTrait;
 
     /**
      * @var array
