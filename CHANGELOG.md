@@ -6,11 +6,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.5.1](https://github.com/KongHack/FormConfig/releases/tag/3.5.1)
+ - @GameCharmer Adjust Select2HTML meta usage
+
+
+
 ## [3.5.0](https://github.com/KongHack/FormConfig/releases/tag/3.5.0)
  - @GameCharmer Add Meta Data system for fields
  - @GameCharmer Remove Ionic Fields
  - @GameCharmer Remove mobile assist
  - @GameCharmer Add callback methods for select 2 html via meta data
+
 
 
 ## [3.4.27](https://github.com/KongHack/FormConfig/releases/tag/3.4.27)
