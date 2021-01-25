@@ -6,6 +6,40 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.5.1](https://github.com/KongHack/FormConfig/releases/tag/3.5.1)
+ - @GameCharmer Adjust Select2HTML meta usage
+
+
+
+## [3.5.0](https://github.com/KongHack/FormConfig/releases/tag/3.5.0)
+ - @GameCharmer Add Meta Data system for fields
+ - @GameCharmer Remove Ionic Fields
+ - @GameCharmer Remove mobile assist
+ - @GameCharmer Add callback methods for select 2 html via meta data
+
+
+
+## [3.4.27](https://github.com/KongHack/FormConfig/releases/tag/3.4.27)
+ - @GameCharmer add Raw Data methods
+
+
+
+## [3.4.26](https://github.com/KongHack/FormConfig/releases/tag/3.4.26)
+ - @GameCharmer add removeField method to FormConfig
+ - @GameCharmer allow passing a callable for post-processing in Make Read Only
+
+
+
+## [3.4.25](https://github.com/KongHack/FormConfig/releases/tag/3.4.25)
+ - @GameCharmer Add same `|raw` argument to the HTML version of select2
+
+
+
+## [3.4.24](https://github.com/KongHack/FormConfig/releases/tag/3.4.24)
+ - @GameCharmer Publish @jakerarr data attribute changes
+
+
+
 ## [3.4.23](https://github.com/KongHack/FormConfig/releases/tag/3.4.23)
  - @GameCharmer File Input with Remove Field (Experimental)
 

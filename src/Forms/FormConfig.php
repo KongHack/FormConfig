@@ -42,6 +42,7 @@ class FormConfig implements FieldContainerInterface
     protected $twigTemplate      = '';
     protected $twigOverrides     = [];
     protected $fields            = [];
+    protected $rawData           = [];
     protected $builder           = null;
     protected $navigationTag     = null;
     protected $navigationTitle   = 'Navigation';
@@ -245,6 +246,30 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * You can add anything here, even objects and resources!  It's just for referential storage
+
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function addRawData(string $key, $value)
+    {
+        $this->rawData[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getRawData(string $key)
+    {
+        return $this->rawData[$key] ?? null;
+    }
+
+    /**
      * @param $value
      * @return $this
      */
@@ -357,6 +382,29 @@ class FormConfig implements FieldContainerInterface
         }
 
         return $this->fields[$name];
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function removeField(string $name)
+    {
+        if(isset($this->fields[$name])) {
+            unset($this->fields[$name]);
+            return $this;
+        }
+
+        // If we are not in the main bank of fields, maybe we are in an array
+        foreach($this->fields as $field) {
+            if($field instanceof FormArrayElement) {
+                if($field->removeFieldByName($name)) {
+                    return $this;
+                }
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -696,12 +744,18 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @param callable|null $postProcess
+     *
      * @return void
      */
-    public function makeReadOnly()
+    public function makeReadOnly(callable $postProcess = null)
     {
         $this->isReadOnly = true;
         $this->makeFieldsReadOnly($this->fields);
+
+        if($postProcess !== null) {
+            call_user_func($postProcess, $this);
+        }
     }
 
     /**

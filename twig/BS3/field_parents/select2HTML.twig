@@ -1,5 +1,5 @@
 {% macro render(field, multi) %}
-    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" class="{{ field.class }}" {{ field.getDataAttributeString() }}>
+    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" class="{{ field.class }}" {{ field.getDataAttributeString()|raw }}>
 
     <script type="text/javascript">
         $(function(){
@@ -15,10 +15,21 @@
                 data: {{ field.getOptionsSelect2()|json_encode|raw }},
                 templateSelection: function(result, container) {
                     console.log(result);
+
+                    let callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
+                    if(callbackMethod !== '') {
+                        return window[callbackMethod](result)
+                    }
+
                     return result.text;
                 },
                 templateResult: function(result) {
                     console.log(result);
+
+                    let callbackMethod = '{{ field.getMetaData('templateResult') ?? '' }}';
+                    if(callbackMethod !== '') {
+                        return window[callbackMethod](result)
+                    }
                     return result.text;
                 },
                 escapeMarkup: function (markup) { return markup; },

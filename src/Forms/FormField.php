@@ -5,6 +5,7 @@ use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
+use GCWorld\FormConfig\Traits\MetaDataTrait;
 use GCWorld\FormConfig\Traits\Select2;
 
 /**
@@ -13,6 +14,7 @@ use GCWorld\FormConfig\Traits\Select2;
 class FormField
 {
     use FieldFormConfigTrait;
+    use MetaDataTrait;
     use Select2;
 
     /**
