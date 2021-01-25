@@ -1,5 +1,11 @@
 {% macro render(field, multi) %}
-    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" class="{{ field.class }}" {{ field.getDataAttributeString()|raw }}>
+    <input type="hidden"
+           name="{{ field.name }}"
+           id="{{ field.id }}"
+           class="{{ field.class }}"
+           {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete()) ~ '"' }}
+           {{ field.getDataAttributeString()|raw }}
+    >
 
     <script type="text/javascript">
         $(function(){

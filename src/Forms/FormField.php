@@ -7,6 +7,7 @@ use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 use GCWorld\FormConfig\Traits\MetaDataTrait;
 use GCWorld\FormConfig\Traits\Select2;
+use GCWorld\FormConfig\Core\AutoCompleteConstants;
 
 /**
  * Class FormField.
@@ -143,6 +144,11 @@ class FormField
     protected $numberStep = null;
 
     /**
+     * @var null
+     */
+    protected $autoCompleteComponent = null;
+
+    /**
      * @param string $name
      */
     public function __construct(string $name)
@@ -225,6 +231,27 @@ class FormField
     public function getNameRaw()
     {
         return $this->name;
+    }
+
+    public function getAutoComplete()
+    {
+        return $this->autoCompleteComponent;
+    }
+
+    /**
+     * @param $component
+     * @return $this
+     * @throws \Exception
+     */
+    public function setAutoComplete($component)
+    {
+        if (!isset(AutoCompleteConstants::COMPONENTS[$component])) {
+            $msg = 'Invalid Auto Complete Type: '.$component.'<br>Possible auto-complete types are: '.implode(', ',AutoCompleteConstants::COMPONENTS);
+            throw new \Exception($msg);
+        }
+
+        $this->autoCompleteComponent = $component;
+        return $this;
     }
 
     /**

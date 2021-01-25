@@ -8,6 +8,7 @@
                 id="{{ id }}"
                 class="form-control {{ field.class }}"
                 multiple
+                {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete()) ~ '"' }}
                 {{ field.getDataAttributeString()|raw }}
                 {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
         >

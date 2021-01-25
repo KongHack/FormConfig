@@ -5,6 +5,7 @@
     <select name="{{ field.name }}"
             id="{{ field.id }}"
             class="form-control {{ field.class }}"
+            {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete()) ~ '"' }}
             {{ field.getDataAttributeString()|raw }}
             {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >
