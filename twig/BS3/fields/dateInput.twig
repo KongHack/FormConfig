@@ -17,7 +17,7 @@
                name="{{ field.name }}"
                value="{{ field.value|date('m/d/Y') }}"
                style="text-align:right"
-               {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete()) ~ '"' }}
+               {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete() ~ '"') }}
                class="form-control {{ field.class }}"
                placeholder="{{ field.getPlaceholder()|default('') }}"
                {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
