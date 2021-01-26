@@ -4,7 +4,7 @@
                name="{{ field.name }}"
                id="{{ field.id }}"
                value="1"
-               autocomplete="off"
+               {{ (field.getAutoComplete()!= '' ? 'autocomplete="' ~ field.getAutoComplete() ~ '"' : 'autocomplete="off"')|raw }}
                {{ (field.value ? 'checked="checked"' : '') }}
                {{ field.getDataAttributeString()|raw }}
                class="{{ field.class }}"

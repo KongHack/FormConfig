@@ -3,7 +3,7 @@
            name="{{ field.name }}"
            id="{{ field.id }}"
            class="{{ field.class }}"
-           {{ (field.getAutoComplete() = '' ? 'autocomplete="off"' : 'autocomplete="' ~ field.getAutoComplete() ~ '"') }}
+           {{ (field.getAutoComplete() = '' ? 'autocomplete="' ~ field.getAutoComplete() ~ '"') }}
            {{ field.getDataAttributeString()|raw }}
     >
 

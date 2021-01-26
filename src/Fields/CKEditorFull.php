@@ -5,6 +5,7 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
+use GCWorld\FormConfig\Traits\AutoComplete;
 use GCWorld\FormConfig\Traits\Height;
 
 /**
@@ -13,6 +14,7 @@ use GCWorld\FormConfig\Traits\Height;
 class CKEditorFull extends Base implements FieldInterface
 {
     use Height;
+    use AutoComplete;
 
     /**
      * @return string

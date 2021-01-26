@@ -1,5 +1,5 @@
 <?php
-namespace GCWorld\FormConfig\Core;
+namespace GCWorld\FormConfig\Interfaces;
 
 interface AutoCompleteConstants
 {
@@ -7,6 +7,8 @@ interface AutoCompleteConstants
      * A full list:
      * https://www.w3.org/TR/WCAG21/#input-purposes
      */
+    const ON                        = 'on';
+    const OFF                       = 'off';
     const TYPE_FULL_NAME            = 'name';
     const TYPE_HONORIFIC_PREFIX     = 'honorific-prefix';
     const TYPE_FIRST_NAME           = 'given-name';
@@ -61,6 +63,8 @@ interface AutoCompleteConstants
     const TYPE_EMAIL                = 'email';
     const TYPE_IMPP                 = 'impp';
     const COMPONENTS                = [
+        self::ON,
+        self::OFF,
         self::TYPE_FULL_NAME,
         self::TYPE_HONORIFIC_PREFIX,
         self::TYPE_FIRST_NAME,
