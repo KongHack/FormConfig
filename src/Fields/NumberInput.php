@@ -5,12 +5,15 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
+use GCWorld\FormConfig\Traits\AutoComplete;
 
 /**
  * Class NumberInput
  */
 class NumberInput extends Base implements FieldInterface
 {
+    use AutoComplete;
+
     protected $min = null;
     protected $max = null;
     protected $step = null;

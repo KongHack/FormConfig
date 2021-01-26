@@ -6,6 +6,7 @@ use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
 use GCWorld\FormConfig\MultiSelectInterface;
+use GCWorld\FormConfig\Traits\AutoComplete;
 use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;
 
@@ -16,6 +17,7 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
 {
     use Options;
     use Select2;
+    use AutoComplete;
 
     /**
      * @return string

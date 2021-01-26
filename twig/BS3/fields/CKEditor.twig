@@ -4,6 +4,7 @@
             class="form-control {{ field.class }}"
             style="height:{{ field.height|default('120px') }}"
             id="ck_{{ field.name }}"
+            {{ (field.getAutoComplete()!= '' ? 'autocomplete="' ~ field.getAutoComplete() ~ '"')|raw }}
             {{ field.getDataAttributeString()|raw }}
             {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >{{ field.value }}</textarea>

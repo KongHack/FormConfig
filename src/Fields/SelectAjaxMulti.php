@@ -7,6 +7,7 @@ use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\Ajax;
+use GCWorld\FormConfig\Traits\AutoComplete;
 use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;
 
@@ -18,6 +19,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
     use Ajax;
     use Options;
     use Select2;
+    use AutoComplete;
 
     /**
      * @return string

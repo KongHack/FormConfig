@@ -5,6 +5,7 @@ use GCWorld\FormConfig\Abstracts\Base;
 use GCWorld\FormConfig\Core\Twig;
 use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Forms\FormField;
+use GCWorld\FormConfig\Traits\AutoComplete;
 use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;
 
@@ -15,6 +16,7 @@ class SelectNormalSingle extends Base implements FieldInterface
 {
     use Options;
     use Select2;
+    use AutoComplete;
 
     /**
      * @return string
