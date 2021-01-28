@@ -3,7 +3,16 @@ namespace GCWorld\FormConfig\Traits;
 
 use GCWorld\FormConfig\Interfaces\AutoCompleteConstants;
 
-trait AutoComplete {
+/**
+ * Trait AutoComplete
+ *
+ * @package GCWorld\FormConfig\Traits
+ */
+trait AutoComplete
+{
+    /**
+     * @var string
+     */
     protected $autoCompleteComponent = '';
 
     /**
@@ -12,6 +21,18 @@ trait AutoComplete {
     public function getAutoComplete()
     {
         return $this->autoCompleteComponent;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAutoCompleteAttribute()
+    {
+        if(empty($this->autoCompleteComponent)) {
+            return '';
+        }
+
+        return ' autocomplete="'.$this->autoCompleteComponent.'" ';
     }
 
     /**

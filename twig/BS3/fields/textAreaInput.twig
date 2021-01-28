@@ -3,7 +3,7 @@
               id="{{ field.id }}"
               class="form-control {{ field.class }}"
               style="height:{{ field.height|default('120px') }}"
-              {{ (field.getAutoComplete()!= '' ? 'autocomplete="' ~ field.getAutoComplete() ~ '"')|raw }}
+              {{ field.getAutoCompleteAttribute()|raw }}
               {{ field.getDataAttributeString()|raw }}
               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
     >{{ field.value }}</textarea>

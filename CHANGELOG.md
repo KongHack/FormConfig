@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.6.2](https://github.com/KongHack/FormConfig/releases/tag/3.6.2)
+ - @GameCharmer Patch broken AutoComplete system
+
+
+
 ## [3.6.1](https://github.com/KongHack/FormConfig/releases/tag/3.6.1)
  - @GameCharmer Update Composer Dependencies
 
