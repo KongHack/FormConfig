@@ -471,7 +471,11 @@ class FormArrayElement implements FieldContainerInterface
     {
         foreach ($this->fields as &$fields) {
             foreach ($fields as &$field) {
-                FormConfig::makeFieldReadOnly($field);
+                if($field instanceof FormArrayElement) {
+                    $field->makeFieldsReadOnly();;
+                } else {
+                    FormConfig::makeFieldReadOnly($field);
+                }
             }
         }
     }
