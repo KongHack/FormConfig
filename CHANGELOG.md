@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.6.4](https://github.com/KongHack/FormConfig/releases/tag/3.6.4)
+ - @GameCharmer Button "field"
+
+
+
 ## [3.6.3](https://github.com/KongHack/FormConfig/releases/tag/3.6.3)
  - @GameCharmer handle recursive read only
 
