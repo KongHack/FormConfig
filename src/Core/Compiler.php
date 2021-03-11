@@ -154,6 +154,9 @@ class Compiler
         $contents .= PHP_EOL;
         $contents .= 'use GCWorld\\FormConfig\\Abstracts\\FieldCreateParent as FCP;'.PHP_EOL;
         $contents .= PHP_EOL;
+        $contents .= '/**'.PHP_EOL;
+        $contents .= ' * Class FieldCreate'.PHP_EOL;
+        $contents .= ' */'.PHP_EOL;
         $contents .= 'class FieldCreate extends FCP'.PHP_EOL;
         $contents .= '{'.PHP_EOL;
         foreach($definitions as $key => $definition) {
@@ -171,11 +174,12 @@ class Compiler
             // $contents .= '        $obj->setName($name);'.PHP_EOL;
             // $contents .= '        $this->formConfig->addBuiltField($obj);'.PHP_EOL;
             $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);'.PHP_EOL;
-            $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::'.$definition['constant'].');';
+            $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::'.
+                $definition['constant'].');'.PHP_EOL;
             $contents .= '        $this->formConfig->addFieldObject($obj);'.PHP_EOL;
             $contents .= PHP_EOL;
             $contents .= '        return $obj;'.PHP_EOL;
-            $contents .= '    }'.PHP_EOL;
+            $contents .= '    }'.PHP_EOL.PHP_EOL;
         }
         $contents .= '}'.PHP_EOL.PHP_EOL;
 
