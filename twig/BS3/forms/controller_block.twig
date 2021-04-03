@@ -37,7 +37,7 @@
                 {% include file %}
             {% else %}
                 {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
-                {{ simpleForm.render(_context) }}
+                {{ simpleForm.render(FC_Config) }}
             {% endif %}
     {% if FC_Config.isWrapped() %}
         </div>
