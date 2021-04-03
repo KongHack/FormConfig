@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.6.6](https://github.com/KongHack/FormConfig/releases/tag/3.6.6)
+ - @GameCharmer Update Composer Dependencies
+
+
+
 ## [3.6.5](https://github.com/KongHack/FormConfig/releases/tag/3.6.5)
  - @GameCharmer update simple_form to be name agnostic
 

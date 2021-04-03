@@ -6,6 +6,6 @@ New Form Builder System.  Still a work in progress.
 
 
 ### Version
-3.6.5
+3.6.6
 
 ### Additional Information
