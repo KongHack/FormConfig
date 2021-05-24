@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.7.0](https://github.com/KongHack/FormConfig/releases/tag/3.7.0)
+ - @GameCharmer PHP 8.0 Requirement
+ - @GameCharmer Composer Updates
+ - @GameCharmer Calling Object in FormConfig constructor (optional, nullable)
+
+
+
 ## [3.6.6](https://github.com/KongHack/FormConfig/releases/tag/3.6.6)
  - @GameCharmer Update Composer Dependencies
 
