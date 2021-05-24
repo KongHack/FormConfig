@@ -69,10 +69,17 @@ class FormConfig implements FieldContainerInterface
     protected $simpleFormWrappingClass = '';
 
     /**
+     * @var null
+     */
+    protected ?object $callingObject = null;
+
+    /**
      * FormConfig constructor.
      */
-    public function __construct()
+    public function __construct(object $callingObject = null)
     {
+        $this->callingObject = $callingObject;
+
         $config = Config::getInstance()->getConfig();
         if(isset($config['general']['holdOn'])) {
             $this->useHoldOn = (bool) $config['general']['holdOn'];
