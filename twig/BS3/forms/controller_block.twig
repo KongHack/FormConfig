@@ -39,6 +39,19 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
+            {% for k, hook in FC_Config.getHooks() %}
+                {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_FIELDS_PRE') %}
+                    {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+                        {{ hook.getData()|raw }}
+                    {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+                        {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+                        {% include file %}
+                    {% endif %}
+                    {% do FC_Config.removeHook(k) %}
+                {% endif %}
+            {% endfor %}
+
             {% if form is defined and form != '' %}
                 {% set file = form|replace({'REPLACE':'BS3'}) %}
                 {% include file %}
@@ -46,6 +59,19 @@
                 {% import '@form_config_BS3/macros/simple_form.twig' as simpleForm %}
                 {{ simpleForm.render(FC_Config) }}
             {% endif %}
+
+            {% for k, hook in FC_Config.getHooks() %}
+                {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_FIELDS_POST') %}
+                    {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+                        {{ hook.getData()|raw }}
+                    {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+                        {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
+                        {% include file %}
+                    {% endif %}
+                    {% do FC_Config.removeHook(k) %}
+                {% endif %}
+            {% endfor %}
+
     {% if FC_Config.isWrapped() %}
         </div>
         {% if twigOverrides.submitButton is not defined %}

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.7.2](https://github.com/KongHack/FormConfig/releases/tag/3.7.2)
+ - @GameCharmer Fields Pre/Post Hooks
+
+
+
 ## [3.7.1](https://github.com/KongHack/FormConfig/releases/tag/3.7.1)
  - @GameCharmer Unattributed Errors handling for FormConfig
 

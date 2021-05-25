@@ -1,12 +1,17 @@
 <?php
 namespace GCWorld\FormConfig\Core;
 
+/**
+ * Class FCHook
+ */
 class FCHook
 {
-    const TYPE_MAIN_PRE   = 1;
-    const TYPE_MAIN_POST  = 2;
-    const TYPE_BLOCK_PRE  = 3;
-    const TYPE_BLOCK_POST = 4;
+    const TYPE_MAIN_PRE    = 1;
+    const TYPE_MAIN_POST   = 2;
+    const TYPE_BLOCK_PRE   = 3;
+    const TYPE_BLOCK_POST  = 4;
+    const TYPE_FIELDS_PRE  = 5;
+    const TYPE_FIELDS_POST = 6;
 
     const METHOD_HTML    = 1;
     const METHOD_INCLUDE = 2;
