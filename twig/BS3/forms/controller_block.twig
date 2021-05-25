@@ -32,6 +32,13 @@
         {% endif %}
         <div class="panel-body">
     {% endif %}
+            {% if FC_Config.getUnattributedErrors()|length > 0 %}
+                <div class="alert alert-warning">
+                    {% for k, v in FC_Config.getUnattributedErrors() %}
+                        <b>{{ k }}</b>: {{ v }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% if form is defined and form != '' %}
                 {% set file = form|replace({'REPLACE':'BS3'}) %}
                 {% include file %}

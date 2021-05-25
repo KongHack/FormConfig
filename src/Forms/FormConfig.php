@@ -61,6 +61,8 @@ class FormConfig implements FieldContainerInterface
         'tokenValueMethod' => '',
     ];
 
+    protected $unattributedErrors = [];
+
     /**
      * Only used in the event of a simple form.  Great for rows!
      *
@@ -463,7 +465,10 @@ class FormConfig implements FieldContainerInterface
                     /** @var FormField $field */
                     $field = $this->fields[$name];
                     $field->addError($err);
+                    continue;
                 }
+
+                $this->unattributedErrors[$name] = $err;
             }
         }
 
@@ -478,7 +483,6 @@ class FormConfig implements FieldContainerInterface
     public function setValuesFromObject($object)
     {
         $stock = ($object instanceof ModelFieldText);
-
 
         foreach ($this->fields as $name => $field) {
             /** @var FormField $field */
@@ -975,5 +979,13 @@ class FormConfig implements FieldContainerInterface
     public function getRenderForms()
     {
         return $this->renderArgs['formArray'] ?? [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getUnattributedErrors()
+    {
+        return $this->unattributedErrors;
     }
 }
