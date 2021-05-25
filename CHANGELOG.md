@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.7.1](https://github.com/KongHack/FormConfig/releases/tag/3.7.1)
+ - @GameCharmer Unattributed Errors handling for FormConfig
+
+
+
 ## [3.7.0](https://github.com/KongHack/FormConfig/releases/tag/3.7.0)
  - @GameCharmer PHP 8.0 Requirement
  - @GameCharmer Composer Updates
