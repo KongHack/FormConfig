@@ -487,9 +487,15 @@ class FormConfig implements FieldContainerInterface
         foreach ($this->fields as $name => $field) {
             /** @var FormField $field */
             if (property_exists($object, $name) && method_exists($field, 'setValue')) {
-                $function = 'get'.str_replace('_', '', ucwords($name, '_'));
+                // In the event we're running into encoded UUIDs
+                $function = 'get'.str_replace('_', '', ucwords($name, '_')).'AsString';
                 if(method_exists($object,$function)) {
                     $field->setValue($object->$function());
+                } else {
+                    $function = 'get' . str_replace('_', '', ucwords($name, '_'));
+                    if (method_exists($object, $function)) {
+                        $field->setValue($object->$function());
+                    }
                 }
             }
             if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
