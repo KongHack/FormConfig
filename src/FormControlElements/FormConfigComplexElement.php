@@ -131,5 +131,4 @@ class FormConfigComplexElement
             'active' => $active,
         ]);
     }
-
 }
