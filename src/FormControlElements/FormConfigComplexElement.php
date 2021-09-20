@@ -43,6 +43,17 @@ class FormConfigComplexElement
     }
 
     /**
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getTitle(): string
