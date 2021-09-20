@@ -30,6 +30,8 @@
                     {% for key, value in FC_Config.getRenderArg('formArray') %}
                         {% if value is FC_isFormElement() %}
                             {{ fcc.doFormElement(value, FC_Config.getRenderArg('urlBase'), FC_Config.getRenderArg('formCurrent')) }}
+                        {% elseif value is FC_isComplexElement() %}
+                            {{ value.render(FC_Config.getRenderArg('formCurrent')==key)|raw }}
                         {% else %}
                             <a href="{{ FC_Config.getRenderArg('urlBase') }}/{{ key }}"
                                id="FC_NAV_BTN_{{ key }}"

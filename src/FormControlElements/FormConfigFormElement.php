@@ -1,6 +1,9 @@
 <?php
-namespace GCWorld\FormConfig\Forms;
+namespace GCWorld\FormConfig\FormControlElements;
 
+/**
+ * FormConfigFormElement Class.
+ */
 class FormConfigFormElement
 {
     const TYPE_STANDARD   = 1;

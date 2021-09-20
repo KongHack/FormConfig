@@ -1,0 +1,18 @@
+<a href="{{ object.getUrl() }}"
+   id="FC_NAV_BTN_{{ object.getKey() }}"
+   class="btn btn-left btn-{{ active?'primary':'default' }} btn-block"
+   {{ active?'aria-describedby="form_controller_described_by"':'' }}
+>
+    <span class="pull-left">
+        {% if object.getHover() %}
+            <span class="tool_html">{{ object.getTitle()|raw }}</span>
+            <div class="hide">{{ object.getHover()|raw }}</div>
+        {% else %}
+            {{ object.getTitle()|raw }}
+        {% endif %}
+    </span>
+    {% if object.getRight() %}
+        <span class="pull-right">{{ object.getRight()|raw }}</span>
+    {% endif %}
+    <span class="clearfix"></span>
+</a>

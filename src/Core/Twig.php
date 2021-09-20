@@ -1,7 +1,8 @@
 <?php
 namespace GCWorld\FormConfig\Core;
 
-use GCWorld\FormConfig\Forms\FormConfigFormElement;
+use GCWorld\FormConfig\FormControlElements\FormConfigComplexElement;
+use GCWorld\FormConfig\FormControlElements\FormConfigFormElement;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -78,6 +79,9 @@ class Twig
 
         $environment->addTest(new TwigTest('FC_isFormElement',function($obj){
             return $obj instanceof FormConfigFormElement;
+        }));
+        $environment->addTest(new TwigTest('FC_isComplexElement',function($obj){
+            return $obj instanceof FormConfigComplexElement;
         }));
     }
 

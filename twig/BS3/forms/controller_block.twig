@@ -11,16 +11,24 @@
 {% endfor %}
 
 <form
-        action="{{ FC_Config.getRenderArg('urlCurrent') }}"
-        method="{{ FC_Config.getMethod() }}"
-        id="{{ FC_Config.getFormId() }}"
-        {% if FC_Config.getMethod() != 'GET' %} enctype="multipart/form-data"{% endif %}
+    action="{{ FC_Config.getRenderArg('urlCurrent') }}"
+    method="{{ FC_Config.getMethod() }}"
+    id="{{ FC_Config.getFormId() }}"
+    {% if FC_Config.getMethod() != 'GET' %} enctype="multipart/form-data"{% endif %}
 >
     {% if FC_Config.isWrapped() %}
     <div class="panel panel-{{ twigOverrides.panelClass|default('sitespecific') }}">
         <div class="panel-heading">
             <{{ FC_Config.getNavigationTag() }} class="panel-title">
-                {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()]|raw }}
+                {% if FC_Config.getRenderForms()[FC_Config.getRenderForm()] is FC_isComplexElement() %}
+                    {% if FC_Config.getRenderForms()[FC_Config.getRenderForm()].getHeading() %}
+                        {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()].getHeading()|raw }}
+                    {% else %}
+                        {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()].getTitle()|raw }}
+                    {% endif %}
+                {% else %}
+                    {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()]|raw }}
+                {% endif %}
             </{{ FC_Config.getNavigationTag() }}>
         </div>
         {% if FC_Config.getRequiredIndicator() == 1 %}
