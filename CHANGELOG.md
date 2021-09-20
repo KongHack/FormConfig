@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.8.0](https://github.com/KongHack/FormConfig/releases/tag/3.8.0)
+ - @GameCharmer Complex Navigation Item
+
+
+
 ## [3.7.3](https://github.com/KongHack/FormConfig/releases/tag/3.7.3)
  - @GameCharmer Add `AsString` method checks for improved Uuid/Binary support
 
