@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.8.1](https://github.com/KongHack/FormConfig/releases/tag/3.8.1)
+ - @GameCharmer Adjust spacing for complex nav item
+
+
+
 ## [3.8.0](https://github.com/KongHack/FormConfig/releases/tag/3.8.0)
  - @GameCharmer Complex Navigation Item
 
