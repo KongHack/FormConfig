@@ -16,8 +16,8 @@ use Twig\TwigTest;
  */
 class Twig
 {
-    const TWIG_NAMESPACE_REPLACE     = 'form_config_REPLACE';
-    const TWIG_NAMESPACES = [
+    const TWIG_NAMESPACE_REPLACE = 'form_config_REPLACE';
+    const TWIG_NAMESPACES        = [
         'BS3',
     ];
 

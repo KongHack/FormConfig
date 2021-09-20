@@ -124,7 +124,9 @@ class FormConfigComplexElement
      */
     public function render(bool $active)
     {
-        return Twig::render('@'.Twig::TWIG_NAMESPACE_REPLACE.'/form_control_elements/complex.twig',[
+        $ns = str_replace('_REPLACE','_BS3',Twig::TWIG_NAMESPACE_REPLACE);
+
+        return Twig::render('@'.$ns.'/form_control_elements/complex.twig',[
             'object' => $this,
             'active' => $active,
         ]);
