@@ -72,6 +72,11 @@ abstract class Base implements FieldInterface
     protected $maxLength = 255;
 
     /**
+     * @var null|string
+     */
+    protected $underLabelHtml = null;
+
+    /**
      * Base constructor.
      */
     public function __construct()
@@ -419,5 +424,24 @@ abstract class Base implements FieldInterface
         }
 
         return $dataString;
+    }
+
+    /**
+     * @param ?string $html
+     * @return $this
+     */
+    public function setUnderLabelHtml(?string $html)
+    {
+        $this->underLabelHtml = $html;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnderLabelHtml()
+    {
+        return $this->underLabelHtml;
     }
 }
