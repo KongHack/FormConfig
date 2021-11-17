@@ -70,6 +70,11 @@ class FormField
     protected $maxLength = 250;
 
     /**
+     * @var null|string
+     */
+    protected $underLabelHtml = null;
+
+    /**
      * @var bool
      */
     protected $suppressLabel = false;
@@ -824,5 +829,24 @@ class FormField
     public function getStep()
     {
         return $this->numberStep;
+    }
+
+    /**
+     * @param ?string $html
+     * @return $this
+     */
+    public function setUnderLabelHtml(?string $html)
+    {
+        $this->underLabelHtml = $html;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUnderLabelHtml()
+    {
+        return $this->underLabelHtml;
     }
 }
