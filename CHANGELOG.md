@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.8.3](https://github.com/KongHack/FormConfig/releases/tag/3.8.3)
+ - @GameCharmer under html attribute for fields
+
+
+
 ## [3.8.2](https://github.com/KongHack/FormConfig/releases/tag/3.8.2)
  - @GameCharmer `allowclear` Select2 toggle
 
