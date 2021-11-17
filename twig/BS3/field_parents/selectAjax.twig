@@ -31,6 +31,7 @@
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
                 containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
                 theme: "bootstrap",
                 width:'100%',
                 ajax: {

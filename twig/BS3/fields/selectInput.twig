@@ -27,6 +27,7 @@
                 {% if field.getSelect2DropdownParent() != '' %}
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
                 theme: "bootstrap",
                 width:'100%'
             });

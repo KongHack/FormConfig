@@ -39,7 +39,7 @@
                     return result.text;
                 },
                 escapeMarkup: function (markup) { return markup; },
-                allowClear: {{ multi ? 'false':'true' }},
+                allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}
             });
             {% if field.value|length > 0 %}

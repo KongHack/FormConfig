@@ -19,6 +19,11 @@ trait Select2
     protected $select2DropdownParent = '';
 
     /**
+     * @var bool
+     */
+    protected $select2AllowClear = false;
+
+    /**
      * @param int $length
      *
      * @return $this
@@ -75,5 +80,24 @@ trait Select2
     public function getSelect2DropdownParent()
     {
         return $this->select2DropdownParent;
+    }
+
+    /**
+     * @param bool $clear
+     * @return $this
+     */
+    public function setSelect2AllowClear(bool $clear)
+    {
+        $this->select2AllowClear = $clear;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSelect2AllowClear()
+    {
+        return $this->select2AllowClear;
     }
 }

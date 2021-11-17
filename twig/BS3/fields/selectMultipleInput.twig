@@ -45,6 +45,7 @@
                 {% if field.getMaxSelectionLength() > 0 %}
                 maximumSelectionLength: {{ field.getMaxSelectionLength() }},
                 {% endif %}
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
                 theme: "bootstrap",
                 width:'100%'
             });
