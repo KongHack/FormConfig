@@ -761,6 +761,23 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @param array $fields
+     * @return void
+     * @throws \Exception
+     */
+    public function setFormFields(array $fields)
+    {
+        foreach($fields as $id => $field) {
+            if(!($field instanceof FormField)) {
+                throw new \Exception('Not a valid form field :: '.$id);
+            }
+        }
+
+        $this->fields = $fields;
+    }
+
+
+    /**
      * @param callable|null $postProcess
      *
      * @return void
