@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.8.5](https://github.com/KongHack/FormConfig/releases/tag/3.8.5)
+ - @GameCharmer setFormFields method for FormConfig
+
+
+
 ## [3.8.4](https://github.com/KongHack/FormConfig/releases/tag/3.8.4)
  - @GameCharmer Sync up FormField with base
 
