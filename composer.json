@@ -31,5 +31,10 @@
   "license":"GPL-3.0-only",
   "require-dev": {
     "phpstan/phpstan": ">=1.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
   }
 }

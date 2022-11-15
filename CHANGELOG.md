@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.0](https://github.com/KongHack/FormConfig/releases/tag/3.9.0)
+- @GameCharmer Handle null name for PHP 8.1
+
+
+
 ## [3.8.5](https://github.com/KongHack/FormConfig/releases/tag/3.8.5)
  - @GameCharmer setFormFields method for FormConfig
 
