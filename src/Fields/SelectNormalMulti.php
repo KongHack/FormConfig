@@ -65,7 +65,7 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
      */
     public function getName()
     {
-        if ('[]' != substr($this->name, -2)) {
+        if ('[]' != substr($this->name??'', -2)) {
             return $this->name.'[]';
         }
         return parent::getName();
