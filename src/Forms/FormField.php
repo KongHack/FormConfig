@@ -279,7 +279,7 @@ class FormField
      */
     public function addClass(string $class)
     {
-        $classes = explode(' ', $this->class);
+        $classes = $this->class === null ? [] : explode(' ', $this->class);
         if (!in_array($class, $classes)) {
             $classes[]   = $class;
             $this->class = implode(' ', $classes);
