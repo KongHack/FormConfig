@@ -14,67 +14,20 @@ abstract class Base implements FieldInterface
     use FieldFormConfigTrait;
     use MetaDataTrait;
 
-    /**
-     * @var array
-     */
-    protected $errors = [];
-    /**
-     * @var null|mixed
-     */
-    protected $value = null;
-    /**
-     * @var null|string
-     */
-    protected $name = null;
-    /**
-     * @var null|string
-     */
-    protected $id = null;
-    /**
-     * @var null|string
-     */
-    protected $class = null;
-    /**
-     * @var null|string
-     */
-    protected $label = null;
-    /**
-     * @var null|string
-     */
-    protected $placeholder = null;
-    /**
-     * @var int
-     */
-    protected $reqLevel = 1;    //Default of 1
-    /**
-     * @var bool
-     */
-    protected $suppressLabel = false;
-
-    /**
-     * @var null|string
-     */
-    protected $helpText = null;
-
-    /**
-     * @var null|string
-     */
-    protected $noticeText = null;
-
-    /**
-     * @var null|array
-     */
-    protected $dataAttributes = [];
-
-    /**
-     * @var int
-     */
-    protected $maxLength = 255;
-
-    /**
-     * @var null|string
-     */
-    protected $underLabelHtml = null;
+    protected array   $errors           = [];
+    protected mixed   $value            = null;
+    protected ?string $name             = null;
+    protected ?string $id               = null;
+    protected ?string $class            = null;
+    protected ?string $label            = null;
+    protected ?string $placeholder      = null;
+    protected int     $reqLevel         = 1;
+    protected bool    $suppressLabel    = false;
+    protected ?string $helpText         = null;
+    protected ?string $noticeText       = null;
+    protected array   $dataAttributes   = [];
+    protected int     $maxLength        = 255;
+    protected ?string $underLabelHtml   = null;
 
     /**
      * Base constructor.
@@ -117,7 +70,7 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return string|null
+     * @return mixed
      */
     public function getValue()
     {
@@ -169,8 +122,8 @@ abstract class Base implements FieldInterface
      */
     public function getID()
     {
-        if (null == $this->id) {
-            return 'id_'.str_replace('[]', '', $this->name);
+        if (null === $this->id) {
+            return 'id_'.str_replace('[]', '', $this->name??'');
         }
 
         return $this->id;
@@ -195,7 +148,7 @@ abstract class Base implements FieldInterface
      */
     public function addClass(string $class)
     {
-        $classes = explode(' ', $this->class);
+        $classes = explode(' ', $this->class ?? '');
         if (!in_array($class, $classes)) {
             $classes[]   = $class;
             $this->class = implode(' ', $classes);
@@ -220,6 +173,7 @@ abstract class Base implements FieldInterface
         if(interface_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
             return FieldConstants::DEFINITIONS[static::getKey()];
         }
+
         return [];
     }
 
@@ -240,7 +194,7 @@ abstract class Base implements FieldInterface
      */
     public function getPlaceholder()
     {
-        if (null == $this->placeholder) {
+        if (null === $this->placeholder) {
             return $this->getLabel();
         }
 
@@ -287,8 +241,6 @@ abstract class Base implements FieldInterface
         return $this->helpText;
     }
 
-
-
     /**
      * @param string $label
      *
@@ -316,7 +268,7 @@ abstract class Base implements FieldInterface
      */
     public function setMaxLength(int $length)
     {
-        $this->maxLength = intval($length);
+        $this->maxLength = $length;
 
         return $this;
     }
@@ -369,9 +321,6 @@ abstract class Base implements FieldInterface
         return $this;
     }
 
-
-
-
     /**
      * @return array|null
      */
@@ -397,12 +346,12 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @param string $key
-     * @param string $value
+     * @param string|int|float $key
+     * @param string|int|float $value
      *
      * @return $this
      */
-    public function setDataAttribute(string $key, string $value)
+    public function setDataAttribute(string|int|float $key, string|int|float $value)
     {
         $this->dataAttributes[$key] = $value;
 

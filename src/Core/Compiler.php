@@ -96,7 +96,7 @@ class Compiler
         $constants   = [];
         $definitions = [];
         foreach ($objects as $name => $object) {
-            /** @var $object FieldInterface */
+            /** @var FieldInterface $object */
             $constant = 'TYPE_'.$object::getConstantName();
             $key      = $object::getKey();
             $twig     = $object::getTwigPath();

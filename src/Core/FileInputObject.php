@@ -8,7 +8,7 @@ class FileInputObject
     protected $fileUrl  = null;
 
     /**
-     * @param string $fileUrl
+     * @param string $fileName
      * @return $this
      */
     public function setFileName(string $fileName)
@@ -19,7 +19,7 @@ class FileInputObject
     }
 
     /**
-     * @param string $fileUrl
+     * @param string $fileId
      * @return $this
      */
     public function setFileId(string $fileId)

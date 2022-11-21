@@ -1,8 +1,6 @@
 parameters:
-	autoload_directories:
-		- %rootDir%/../../../src
-
-	excludes_analyse:
+	reportUnmatchedIgnoredErrors: false
+	excludePaths:
 		- %rootDir%/../../../src/Generated/*
 
 	ignoreErrors:
