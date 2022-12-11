@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.3](https://github.com/KongHack/FormConfig/releases/tag/3.9.3)
+- @GameCharmer Implement Json Serializable 
+
+
+
 ## [3.9.2](https://github.com/KongHack/FormConfig/releases/tag/3.9.2)
 - @GameCharmer PHP 8.1 Modernizations
 
