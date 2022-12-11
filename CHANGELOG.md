@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.4](https://github.com/KongHack/FormConfig/releases/tag/3.9.4)
+- @GameCharmer Limit to 8.1+, add return type to jsonSerialize
+
+
+
 ## [3.9.3](https://github.com/KongHack/FormConfig/releases/tag/3.9.3)
 - @GameCharmer Implement Json Serializable 
 
