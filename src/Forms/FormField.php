@@ -12,7 +12,7 @@ use GCWorld\FormConfig\Traits\Select2;
 /**
  * Class FormField.
  */
-class FormField
+class FormField implements \JsonSerializable
 {
     use FieldFormConfigTrait;
     use MetaDataTrait;
@@ -848,5 +848,39 @@ class FormField
     public function getUnderLabelHtml()
     {
         return $this->underLabelHtml;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'                => $this->getID(),
+            'type'              => $this->getType(),
+            'type_definition'   => FieldConstants::DEFINITIONS[$this->getType()]??[],
+            'name'              => $this->getName(),
+            'name_raw'          => $this->getNameRaw(),
+            'label'             => $this->getLabel(),
+            'placeholder'       => $this->getPlaceholder(),
+            'value'             => $this->getValue(),
+            'errors'            => $this->getErrors(),
+            'help'              => $this->getHelpText(),
+            'height'            => $this->getHeight(),
+            'under_html'        => $this->getUnderLabelHtml(),
+            'ajax_url'          => $this->getAjaxUrl(),
+            'ajax_method'       => $this->getAjaxMethod(),
+            'data_attributes'   => $this->dataAttributes,
+            'meta_data'         => $this->getMetaDataAll(),
+            'num_min'           => $this->getMin(),
+            'num_max'           => $this->getMax(),
+            'num_step'          => $this->getStep(),
+            'max_length'        => $this->getMaxLength(),
+            'selection_length'  => $this->getMaxSelectionLength(),
+            'options'           => $this->getOptions(),
+            'select2_options'   => $this->getOptionsSelect2(),
+            'select2_clear'     => $this->getSelect2AllowClear(),
+            'select2_parent'    => $this->getSelect2DropdownParent(),
+        ];
     }
 }
