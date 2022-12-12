@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.5](https://github.com/KongHack/FormConfig/releases/tag/3.9.5)
+- @GameCharmer Update Yaml from 4.x to 6.x
+
+
+
 ## [3.9.4](https://github.com/KongHack/FormConfig/releases/tag/3.9.4)
 - @GameCharmer Limit to 8.1+, add return type to jsonSerialize
 
