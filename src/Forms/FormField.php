@@ -185,6 +185,10 @@ class FormField implements \JsonSerializable
      */
     public function setValue($value)
     {
+        if($value instanceof \BackedEnum) {
+            $value = $value->value;
+        }
+
         $this->value = $value;
 
         return $this;

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.6](https://github.com/KongHack/FormConfig/releases/tag/3.9.6)
+- @GameCharmer Support `BackedEnum` in `setValue` 
+
+
+
 ## [3.9.5](https://github.com/KongHack/FormConfig/releases/tag/3.9.5)
 - @GameCharmer Update Yaml from 4.x to 6.x
 
