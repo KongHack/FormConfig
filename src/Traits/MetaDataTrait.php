@@ -6,7 +6,7 @@ namespace GCWorld\FormConfig\Traits;
  */
 trait MetaDataTrait
 {
-    protected $metaData = [];
+    protected array $metaData = [];
 
     /**
      * @param string $key

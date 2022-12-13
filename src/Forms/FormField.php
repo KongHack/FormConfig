@@ -19,135 +19,35 @@ class FormField implements \JsonSerializable
     use Select2;
     use AutoComplete;
 
-    /**
-     * @var array
-     */
-    protected $errors = [];
-    /**
-     * @var null|mixed
-     */
-    protected $value = null;
-    /**
-     * @var null|string
-     */
-    protected $name = null;
-    /**
-     * @var null|string
-     */
-    protected $id = null;
-    /**
-     * @var null|string
-     */
-    protected $class = null;
-    /**
-     * @var null|string
-     */
-    protected $label = null;
-    /**
-     * @var null|string
-     */
-    protected $script = null;
-    /**
-     * @var string
-     */
-    protected $type = 'textInput';
-    /**
-     * @var null|string
-     */
-    protected $placeholder = null;
-    /**
-     * @var int
-     */
-    protected $reqLevel = 1;    //Default of 1
-    /**
-     * @var array
-     */
-    protected $options = [];
+    protected static array $types = [];
 
-    /**
-     * @var int
-     */
-    protected $maxLength = 250;
-
-    /**
-     * @var null|string
-     */
-    protected $underLabelHtml = null;
-
-    /**
-     * @var bool
-     */
-    protected $suppressLabel = false;
-
-    /**
-     * @var null|string
-     */
-    protected $helpText = null;
-
-    /**
-     * @var null|string
-     */
-    protected $noticeText = null;
-
-    /**
-     * @var null|string
-     */
-    protected $ajaxUrl = null;
-
-    /**
-     * @var null|string
-     */
-    protected $height = null;
-
-    /**
-     * @var null|array
-     */
-    protected $dataAttributes = [];
-
-    /**
-     * @var string
-     */
-    protected $ajaxMethod = 'GET';
-
-    /**
-     * @var array
-     */
-    protected static $types = [];
-
-    /**
-     * @var array
-     */
-    protected $definition = [];
-
-    /**
-     * @var string
-     */
-    protected $labelledBy = '';
-
-    /**
-     * @var string
-     */
-    protected $wrappingClass = '';
-
-    /**
-     * @var bool
-     */
-    protected $isUsed = false;
-
-    /**
-     * @var int|null
-     */
-    protected $numberMin = null;
-
-    /**
-     * @var int|null
-     */
-    protected $numberMax = null;
-
-    /**
-     * @var float|null
-     */
-    protected $numberStep = null;
+    protected array   $errors = [];
+    protected mixed   $value = null;
+    protected ?string $name = null;
+    protected ?string $id = null;
+    protected ?string $class = null;
+    protected ?string $label = null;
+    protected ?string $script = null;
+    protected string  $type = 'textInput';
+    protected ?string $placeholder = null;
+    protected int     $reqLevel = 1;    //Default of 1
+    protected array   $options = [];
+    protected int     $maxLength = 250;
+    protected ?string $underLabelHtml = null;
+    protected bool    $suppressLabel = false;
+    protected ?string $helpText = null;
+    protected ?string $noticeText = null;
+    protected ?string $ajaxUrl = null;
+    protected ?string $height = null;
+    protected ?array  $dataAttributes = [];
+    protected string  $ajaxMethod = 'GET';
+    protected array   $definition = [];
+    protected string  $labelledBy = '';
+    protected string  $wrappingClass = '';
+    protected bool    $isUsed = false;
+    protected ?int    $numberMin = null;
+    protected ?int    $numberMax = null;
+    protected ?float  $numberStep = null;
 
     /**
      * @param string $name

@@ -1,27 +1,15 @@
 <?php
 namespace GCWorld\FormConfig\Traits;
 
+/**
+ * Trait Select2
+ */
 trait Select2
 {
-    /**
-     * @var int
-     */
-    protected $select2MinLength = 2;
-
-    /**
-     * @var int
-     */
-    protected $maxSelectionLength = 0;
-
-    /**
-     * @var string
-     */
-    protected $select2DropdownParent = '';
-
-    /**
-     * @var bool
-     */
-    protected $select2AllowClear = false;
+    protected int    $select2MinLength = 2;
+    protected int    $maxSelectionLength = 0;
+    protected string $select2DropdownParent = '';
+    protected bool   $select2AllowClear = false;
 
     /**
      * @param int $length

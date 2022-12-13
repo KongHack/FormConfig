@@ -1,9 +1,25 @@
 <?php
 namespace GCWorld\FormConfig\Traits;
 
+/**
+ * Trait Options
+ */
 trait Options
 {
-    protected $options = [];
+    protected array $options = [];
+
+    /**
+     * @param \BackedEnum $enum
+     * @return void
+     */
+    public function addOptionEnum(\BackedEnum $enum)
+    {
+        if(method_exists($enum,'text')) {
+            $this->addOption($enum->value, $enum->text());
+        }
+
+        $this->addOption($enum->value, $enum->name);
+    }
 
     /**
      * @param array $options
@@ -18,12 +34,12 @@ trait Options
     }
 
     /**
-     * @param string $key
-     * @param string $value
+     * @param string|int|float $key
+     * @param string|int|float $value
      *
      * @return $this
      */
-    public function addOption(string $key, string $value)
+    public function addOption(string|int|float $key, string|int|float $value)
     {
         $this->options[$key] = $value;
 
@@ -31,11 +47,11 @@ trait Options
     }
 
     /**
-     * @param string $key
+     * @param string|int|float $key
      *
      * @return $this
      */
-    public function removeOption(string $key)
+    public function removeOption(string|int|float $key)
     {
         unset($this->options[$key]);
 
