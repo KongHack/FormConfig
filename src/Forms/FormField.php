@@ -7,6 +7,7 @@ use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\AutoComplete;
 use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 use GCWorld\FormConfig\Traits\MetaDataTrait;
+use GCWorld\FormConfig\Traits\Options;
 use GCWorld\FormConfig\Traits\Select2;
 
 /**
@@ -18,6 +19,7 @@ class FormField implements \JsonSerializable
     use MetaDataTrait;
     use Select2;
     use AutoComplete;
+    use Options;
 
     protected static array $types = [];
 
@@ -31,7 +33,6 @@ class FormField implements \JsonSerializable
     protected string  $type = 'textInput';
     protected ?string $placeholder = null;
     protected int     $reqLevel = 1;    //Default of 1
-    protected array   $options = [];
     protected int     $maxLength = 250;
     protected ?string $underLabelHtml = null;
     protected bool    $suppressLabel = false;
@@ -314,65 +315,6 @@ class FormField implements \JsonSerializable
         $this->options = $options;
 
         return $this;
-    }
-
-    /**
-     * @param \BackedEnum $enum
-     * @return void
-     */
-    public function addOptionEnum(\BackedEnum $enum)
-    {
-        if(method_exists($enum,'text')) {
-            $this->addOption($enum->value, $enum->text());
-        }
-
-        $this->addOption($enum->value, $enum->name);
-    }
-
-    /**
-     * @param string|int|float $key
-     * @param string|int|float $value
-     *
-     * @return $this
-     */
-    public function addOption(string|int|float $key, string|int|float $value)
-    {
-        $this->options[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param string|int|float $key
-     *
-     * @return $this
-     */
-    public function removeOption(string|int|float $key)
-    {
-        unset($this->options[$key]);
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptionsSelect2()
-    {
-        $out = [];
-        foreach ($this->options as $k => $v) {
-            $out[] = ['id' => $k, 'text' => $v];
-        }
-
-        return $out;
     }
 
     /**

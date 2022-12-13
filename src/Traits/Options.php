@@ -10,7 +10,8 @@ trait Options
 
     /**
      * @param \BackedEnum $enum
-     * @return void
+     *
+     * @return $this
      */
     public function addOptionEnum(\BackedEnum $enum)
     {
@@ -19,6 +20,8 @@ trait Options
         }
 
         $this->addOption($enum->value, $enum->name);
+
+        return $this;
     }
 
     /**
