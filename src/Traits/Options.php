@@ -1,6 +1,8 @@
 <?php
 namespace GCWorld\FormConfig\Traits;
 
+use GCWorld\Interfaces\BackedEnumWithTextInterface;
+
 /**
  * Trait Options
  */
@@ -15,8 +17,10 @@ trait Options
      */
     public function addOptionEnum(\BackedEnum $enum)
     {
-        if(method_exists($enum,'text')) {
+        if($enum instanceof BackedEnumWithTextInterface) {
             $this->addOption($enum->value, $enum->text());
+
+            return $this;
         }
 
         $this->addOption($enum->value, $enum->name);
