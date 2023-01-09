@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.8](https://github.com/KongHack/FormConfig/releases/tag/3.9.8)
+- @GameCharmer Remove references to nanospell
+
+
+
 ## [3.9.7](https://github.com/KongHack/FormConfig/releases/tag/3.9.7)
 - @GameCharmer Cleanup, code reduction, interface update
 
