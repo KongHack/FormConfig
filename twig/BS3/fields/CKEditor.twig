@@ -21,7 +21,6 @@
         ],
             removeButtons: 'Flash,Smiley,Save,NewPage,SetLanguage,IFrame'
         });
-        nanospell.ckeditor('ck_{{ field.name }}',{server : "php"});
     </script>
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>

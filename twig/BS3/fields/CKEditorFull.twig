@@ -10,7 +10,6 @@
     >{{ field.value }}</textarea>
     <script type="text/javascript">
         CKEDITOR.replace("ck_{{ field.name }}", {'toolbar':'Full'});
-        nanospell.ckeditor('ck_{{ field.name }}',{server : "php"});
     </script>
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
