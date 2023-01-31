@@ -1,3 +1,5 @@
+{% import _self as fcc %}
+
 <div class="panel panel-sitespecific">
     <div class="panel-heading">
         <{{ FC_Config.getNavigationTag() }} class="panel-title{{ FC_Config.getNavigationRight() ? ' pull-left' : '' }}">
@@ -25,3 +27,39 @@
     </div>
     <div id="form_controller_described_by" style="display:none">Current Form</div>
 </div>
+
+
+{% macro doFormElement(element, route, activeForm) %}
+    {% set key = element.getFormKey() %}
+
+    {% if element.getFormType() == 1 %}
+        {% if element.getFormUrl() != '' %}
+            {% set url = element.getFormUrl() %}
+        {% else %}
+            {% set url = route ~ '/' ~ element.getFormKey() %}
+        {% endif %}
+
+        <a href="{{ url }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-{{ activeForm==key?'primary':'default' }} btn-block"
+                {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+        >{{ element.getFormName()|raw }}</a>
+    {% elseif element.getFormType() == 2 %}
+        <div class="FC_DIV_BREAK"></div>
+    {% elseif element.getFormType() == 3 %}
+        <hr class="FC_HR_BREAK">
+    {% elseif element.getFormType() == 4 %}
+        <div class="FC_HTML_BREAK">{{ element.getFormName()|raw }}</div>
+    {% elseif element.getFormType() == 5 %}
+        <a href="{{ element.getFormUrl() }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-default btn-block"
+        >
+            <span class="pull-left">{{ element.getFormName()|raw }}</span>
+            <span class="pull-right">
+                <i class="fas fa-fw fa-external-link-alt"></i>
+            </span>
+            <span class="clearfix"></span>
+        </a>
+    {% endif %}
+{% endmacro %}
