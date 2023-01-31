@@ -16,33 +16,7 @@
 <div class="row">
     {% if FC_Config.getRenderArg('formArray')|length > 1 %}
         <div class="col-md-3">
-            <div class="panel panel-sitespecific">
-                <div class="panel-heading">
-                    <{{ FC_Config.getNavigationTag() }} class="panel-title{{ FC_Config.getNavigationRight() ? ' pull-left' : '' }}">
-                        {{ FC_Config.getNavigationTitle()|raw }}
-                    </{{ FC_Config.getNavigationTag() }}>
-                    {% if FC_Config.getNavigationRight() %}
-                        <div class="panel-title pull-right">{{ FC_Config.getNavigationRight()|raw }}</div>
-                        <div class="clearfix"></div>
-                    {% endif %}
-                </div>
-                <div class="panel-body">
-                    {% for key, value in FC_Config.getRenderArg('formArray') %}
-                        {% if value is FC_isFormElement() %}
-                            {{ fcc.doFormElement(value, FC_Config.getRenderArg('urlBase'), FC_Config.getRenderArg('formCurrent')) }}
-                        {% elseif value is FC_isComplexElement() %}
-                            {{ value.render(FC_Config.getRenderArg('formCurrent')==key)|raw }}
-                        {% else %}
-                            <a href="{{ FC_Config.getRenderArg('urlBase') }}/{{ key }}"
-                               id="FC_NAV_BTN_{{ key }}"
-                               class="btn btn-left btn-{{ FC_Config.getRenderArg('formCurrent')==key?'primary':'default' }} btn-block"
-                                    {{ FC_Config.getRenderArg('formCurrent')==key?'aria-describedby="form_controller_described_by"':'' }}
-                            >{{ value|raw }}</a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div id="form_controller_described_by" style="display:none">Current Form</div>
-            </div>
+            {% include '@form_config_BS3/forms/controller_nav.twig' %}
         </div>
     {% endif %}
     <div class="col-md-{{ (forms|length > 1) ? '9' : '12' }}">
