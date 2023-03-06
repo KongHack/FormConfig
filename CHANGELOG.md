@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.12](https://github.com/KongHack/FormConfig/releases/tag/3.9.12)
+- @GameCharmer Update composer/installers dependency
+
+
 ## [3.9.11](https://github.com/KongHack/FormConfig/releases/tag/3.9.11)
 - @GameCharmer Add support for ORM Description system
 
