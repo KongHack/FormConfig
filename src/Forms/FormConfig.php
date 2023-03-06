@@ -580,7 +580,7 @@ class FormConfig implements FieldContainerInterface
         if(!empty($helpText) && empty($cField->getHelpText())) {
             $cField->setHelpText($helpText);
         }
-        if(!empty($descText) && empty($cField->getNoticeText())) {
+        if(!empty($descText) && empty($cField->getUnderLabelHtml())) {
             $cField->setUnderLabelHtml($descText);
         }
         if($maxLength > 0 && $cField->getMaxLength() < 1) {
