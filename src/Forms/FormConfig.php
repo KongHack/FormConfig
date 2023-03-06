@@ -569,10 +569,10 @@ class FormConfig implements FieldContainerInterface
      */
     protected function setFieldPropertiesFromORM(ORMDescriptionInterface $cObject, string $fieldName, FormField $cField)
     {
-        $label     = $cObject::getFieldTitle($fieldName);
-        $helpText  = $cObject::getFieldHelp($fieldName);
-        $descText  = $cObject::getFieldDesc($fieldName);
-        $maxLength = $cObject::getFieldMaxLength($fieldName);
+        $label     = $cObject::getORMFieldTitle($fieldName);
+        $helpText  = $cObject::getORMFieldHelp($fieldName);
+        $descText  = $cObject::getORMFieldDesc($fieldName);
+        $maxLength = $cObject::getORMFieldMaxLength($fieldName);
 
         if(!empty($label) && empty($cField->getLabel())) {
             $cField->setLabel($label);
