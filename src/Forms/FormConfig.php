@@ -10,6 +10,7 @@ use GCWorld\FormConfig\FieldContainerInterface;
 use GCWorld\FormConfig\Fields\Hidden;
 use GCWorld\FormConfig\Generated\FieldCreate;
 use GCWorld\FormConfig\Interfaces\ModelFieldText;
+use GCWorld\Interfaces\ORMDescriptionInterface;
 
 /**
  * Class FormConfig.
@@ -482,7 +483,8 @@ class FormConfig implements FieldContainerInterface
      */
     public function setValuesFromObject($object)
     {
-        $stock = ($object instanceof ModelFieldText);
+        $mft = ($object instanceof ModelFieldText);
+        $orm = ($object instanceof ORMDescriptionInterface);
 
         foreach ($this->fields as $name => $field) {
             /** @var FormField $field */
@@ -498,6 +500,11 @@ class FormConfig implements FieldContainerInterface
                     }
                 }
             }
+            if($orm) {
+                $this->setFieldPropertiesFromORM($object, $name, $field);
+                continue;
+            }
+
             if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
                 $dbType = $object::$dbInfo[$name];
                 if (strstr($dbType, '(')) {
@@ -515,7 +522,7 @@ class FormConfig implements FieldContainerInterface
             // Stock makes things much quicker, so instead of adding these in as an or
             // I'm splitting it out for speed purposes.
             // Eventually, I'd like to remove the second half and only care about instances of model field text;
-            if($stock) {
+            if($mft) {
                 if(empty($field->getLabel())) {
                     $name = $object->getFieldName(str_replace('[]', '', $field->getNameRaw()));
                     if($name !== null) {
@@ -552,6 +559,33 @@ class FormConfig implements FieldContainerInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @param ORMDescriptionInterface $cObject
+     * @param string                  $fieldName
+     *
+     * @return void
+     */
+    protected function setFieldPropertiesFromORM(ORMDescriptionInterface $cObject, string $fieldName, FormField $cField)
+    {
+        $label     = $cObject::getFieldTitle($fieldName);
+        $helpText  = $cObject::getFieldHelp($fieldName);
+        $descText  = $cObject::getFieldDesc($fieldName);
+        $maxLength = $cObject::getFieldMaxLength($fieldName);
+
+        if(!empty($label) && empty($cField->getLabel())) {
+            $cField->setLabel($label);
+        }
+        if(!empty($helpText) && empty($cField->getHelpText())) {
+            $cField->setHelpText($helpText);
+        }
+        if(!empty($descText) && empty($cField->getNoticeText())) {
+            $cField->setUnderLabelHtml($descText);
+        }
+        if($maxLength > 0 && $cField->getMaxLength() < 1) {
+            $cField->setMaxLength($maxLength);
+        }
     }
 
     /**
