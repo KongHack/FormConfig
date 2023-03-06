@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.13](https://github.com/KongHack/FormConfig/releases/tag/3.9.13)
+- @GameCharmer Add instanceof type check for FormField to prevent collisions with array elements
+
+
+
 ## [3.9.12](https://github.com/KongHack/FormConfig/releases/tag/3.9.12)
 - @GameCharmer Update composer/installers dependency
 

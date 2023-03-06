@@ -500,7 +500,7 @@ class FormConfig implements FieldContainerInterface
                     }
                 }
             }
-            if($orm) {
+            if($orm && $field instanceof FormField) {
                 $this->setFieldPropertiesFromORM($object, $name, $field);
                 continue;
             }
