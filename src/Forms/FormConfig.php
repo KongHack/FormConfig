@@ -562,6 +562,38 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
+     * @param ORMDescriptionInterface $object
+     *
+     * @return $this
+     */
+    public function setPropertiesFromObject(ORMDescriptionInterface $object)
+    {
+
+        foreach ($this->fields as $name => $field) {
+            if($field instanceof FormField) {
+                $this->setFieldPropertiesFromORM($object, $name, $field);
+                continue;
+            }
+
+            if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
+                $dbType = $object::$dbInfo[$name];
+                if (strstr($dbType, '(')) {
+                    $start  = strpos($dbType, '(');
+                    $end    = strpos($dbType, ')', $start + 1);
+                    $length = $end - $start;
+                    $result = substr($dbType, $start + 1, $length - 1);
+                    $result = intval($result);
+                    if ($result > 0) {
+                        $field->setMaxLength($result);
+                    }
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @param ORMDescriptionInterface $cObject
      * @param string                  $fieldName
      *
