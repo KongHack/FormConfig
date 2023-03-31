@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.15](https://github.com/KongHack/FormConfig/releases/tag/3.9.15)
+- @GameCharmer Silently discard failed values sets from object
+- @TODO: Implement a logger for things like this
+
+
+
 ## [3.9.14](https://github.com/KongHack/FormConfig/releases/tag/3.9.14)
 - @GameCharmer new `setPropertiesFromObject` method
 

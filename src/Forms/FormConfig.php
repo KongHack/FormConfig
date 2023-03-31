@@ -496,7 +496,11 @@ class FormConfig implements FieldContainerInterface
                 } else {
                     $function = 'get' . str_replace('_', '', ucwords($name, '_'));
                     if (method_exists($object, $function)) {
-                        $field->setValue($object->$function());
+                        try {
+                            $field->setValue($object->$function());
+                        } catch (\Exception) {
+                            // @TODO: Implement a logger
+                        }
                     }
                 }
             }
