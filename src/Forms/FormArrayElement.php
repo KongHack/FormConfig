@@ -622,7 +622,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'headers'       => $this->headers,

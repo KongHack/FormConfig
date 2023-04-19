@@ -31,7 +31,7 @@ class FormArrayField extends FormField
     /**
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $base              = parent::jsonSerialize();
         $base['col_width'] = $this->colWidth;
