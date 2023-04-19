@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.16](https://github.com/KongHack/FormConfig/releases/tag/3.9.16)
+- @GameCharmer Add json serialize to Form Array Element and update Form Array Field
+
+
+
 ## [3.9.15](https://github.com/KongHack/FormConfig/releases/tag/3.9.15)
 - @GameCharmer Silently discard failed values sets from object
 - @TODO: Implement a logger for things like this

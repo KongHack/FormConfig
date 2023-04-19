@@ -10,7 +10,7 @@ use GCWorld\FormConfig\Traits\FieldFormConfigTrait;
 /**
  * Class FormArrayElement.
  */
-class FormArrayElement implements FieldContainerInterface
+class FormArrayElement implements FieldContainerInterface, \JsonSerializable
 {
     use FieldFormConfigTrait;
 
@@ -617,5 +617,29 @@ class FormArrayElement implements FieldContainerInterface
     public function hasWrapper()
     {
         return $this->wrapperId !== null || $this->wrapperClass !== null || $this->wrapperStyle !== null;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'headers'       => $this->headers,
+            'widths'        => $this->widths,
+            'fields'        => $this->fields,
+            'index'         => $this->index,
+            'mode'          => $this->mode,
+            'errors'        => $this->errors,
+            'table_classes' => $this->table_classes,
+            'foot_fields'   => $this->footFields,
+            'table_id'      => $this->table_id,
+            'row_classes'   => $this->row_classes,
+            'extras'        => $this->extras,
+            'icons'         => $this->icons,
+            'wrapper_id'    => $this->wrapperId,
+            'wrapper_class' => $this->wrapperClass,
+            'wrapper_style' => $this->wrapperStyle,
+        ];
     }
 }
