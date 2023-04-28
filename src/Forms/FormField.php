@@ -729,7 +729,7 @@ class FormField implements \JsonSerializable
             'under_html'        => $this->getUnderLabelHtml(),
             'ajax_url'          => $this->getAjaxUrl(),
             'ajax_method'       => $this->getAjaxMethod(),
-            'data_attributes'   => $this->dataAttributes,
+            'data_attributes'   => $this->getDataAttributes(),
             'meta_data'         => $this->getMetaDataAll(),
             'num_min'           => $this->getMin(),
             'num_max'           => $this->getMax(),
@@ -740,6 +740,7 @@ class FormField implements \JsonSerializable
             'select2_options'   => $this->getOptionsSelect2(),
             'select2_clear'     => $this->getSelect2AllowClear(),
             'select2_parent'    => $this->getSelect2DropdownParent(),
+            'req_level'         => $this->getReqLevel(),
         ];
     }
 }
