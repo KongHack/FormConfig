@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.18](https://github.com/KongHack/FormConfig/releases/tag/3.9.18)
+- @GameCharmer add `req_level` to Form Field JSON Serialize
+
+
+
 ## [3.9.17](https://github.com/KongHack/FormConfig/releases/tag/3.9.17)
 - @GameCharmer Add mixed return type
 
