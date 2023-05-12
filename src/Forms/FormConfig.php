@@ -27,52 +27,57 @@ class FormConfig implements FieldContainerInterface
     const REQUIRED_INDICATOR_VERBOSE  = 2;
 
     const FORM_MODE_BOOTSTRAP_3       = 'BS3';
-    const FORM_MODE_BOOTSTRAP_4       = 'BS4';
-    const FORM_MODE_IONIC             = 'ION';
+    const FORM_MODE_BOOTSTRAP_5       = 'BS5';
 
-    protected static $requiredIndicator = null;
-    protected static $formMode          = null;
+    protected static ?int    $requiredIndicator = null;
+    protected static ?string $formMode          = null;
 
-    protected $method            = 'POST';
-    protected $isReadOnly        = false;
-    protected $isWrapped         = true;
-    protected $useHoldOn         = false;
-    protected $name              = '';
-    protected $hooks             = [];
-    protected $formId            = '';
-    protected $twigTemplate      = '';
-    protected $twigOverrides     = [];
-    protected $fields            = [];
-    protected $rawData           = [];
-    protected $builder           = null;
-    protected $navigationTag     = null;
-    protected $navigationTitle   = 'Navigation';
-    protected $navigationRight   = null;
-    protected $renderArgs        = [
+    protected ?FieldCreate $builder         = null;
+    protected ?string      $navigationTag   = null;
+    protected ?string      $navigationRight = null;
+    protected string       $method          = 'POST';
+    protected bool         $isReadOnly      = false;
+    protected bool         $isWrapped       = true;
+    protected bool         $useHoldOn       = false;
+    protected string       $name            = '';
+    protected array        $hooks           = [];
+    protected string       $formId          = '';
+    protected string       $twigTemplate    = '';
+    protected array        $twigOverrides   = [];
+    protected array        $fields          = [];
+    protected array        $rawData         = [];
+    protected string       $navigationTitle = 'Navigation';
+    protected array        $renderArgs      = [
         'formArray'   => [],
         'formCurrent' => '',
         'urlBase'     => '',
         'urlCurrent'  => '',
     ];
 
-    protected $csrf = [
+    /**
+     * @var array
+     */
+    protected array $csrf = [
         'enabled'          => false,
         'name'             => '',
         'tokenNameMethod'  => '',
         'tokenValueMethod' => '',
     ];
 
-    protected $unattributedErrors = [];
+    /**
+     * @var array
+     */
+    protected array $unattributedErrors = [];
 
     /**
      * Only used in the event of a simple form.  Great for rows!
      *
      * @var string
      */
-    protected $simpleFormWrappingClass = '';
+    protected string $simpleFormWrappingClass = '';
 
     /**
-     * @var null
+     * @var object|null
      */
     protected ?object $callingObject = null;
 
@@ -112,7 +117,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return $this
      */
-    protected function enableCSRF()
+    protected function enableCSRF(): static
     {
         CSRFController::get()->forceEnable();
 
@@ -122,7 +127,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return void
      */
-    protected function setCSRFField()
+    protected function setCSRFField(): void
     {
         if($this->csrf['enabled']
             && $this->csrf['tokenNameMethod'] != ''
@@ -133,6 +138,7 @@ class FormConfig implements FieldContainerInterface
             $cField = new FormField($name);
             $cField->setValue($value);
             $cField->setType(Hidden::getKey());
+            $cField->setDataAttribute('csrf','1');
             $this->addFieldObject($cField);
 
             $this->csrf['name']  = $name;
@@ -579,7 +585,9 @@ class FormConfig implements FieldContainerInterface
                 continue;
             }
 
-            if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
+            if (property_exists($object, 'dbInfo')
+                && array_key_exists($name, $object::$dbInfo)
+            ) {
                 $dbType = $object::$dbInfo[$name];
                 if (strstr($dbType, '(')) {
                     $start  = strpos($dbType, '(');
