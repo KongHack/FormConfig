@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.20](https://github.com/KongHack/FormConfig/releases/tag/3.9.20)
+- @GameCharmer Add `addOptionEnumAllCases` to Options Enum
+
+
+
 ## [3.9.19](https://github.com/KongHack/FormConfig/releases/tag/3.9.19)
 - @GameCharmer Add a csrf data indicator to the csrf field
 
