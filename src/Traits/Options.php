@@ -1,6 +1,8 @@
 <?php
 namespace GCWorld\FormConfig\Traits;
 
+use BackedEnum;
+use Exception;
 use GCWorld\Interfaces\BackedEnumWithTextInterface;
 
 /**
@@ -11,11 +13,11 @@ trait Options
     protected array $options = [];
 
     /**
-     * @param \BackedEnum $enum
+     * @param BackedEnum $enum
      *
      * @return $this
      */
-    public function addOptionEnum(\BackedEnum $enum)
+    public function addOptionEnum(BackedEnum $enum): static
     {
         if($enum instanceof BackedEnumWithTextInterface) {
             $this->addOption($enum->value, $enum->text());
@@ -29,11 +31,34 @@ trait Options
     }
 
     /**
+     * @param BackedEnum[] $cases
+     * @return $this
+     * @throws Exception
+     */
+    public function addOptionEnumAllCases(array $cases): static
+    {
+        foreach($cases as $case) {
+            if($case instanceof BackedEnumWithTextInterface) {
+                $this->addOption($case->value, $case->text());
+                continue;
+            }
+            if($case instanceof BackedEnum) {
+                $this->addOption($case->value, $case->name);
+                continue;
+            }
+
+            throw new Exception('Passed case is not a backed enum');
+        }
+
+        return $this;
+    }
+
+    /**
      * @param array $options
      *
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): static
     {
         $this->options = $options;
 
@@ -46,7 +71,7 @@ trait Options
      *
      * @return $this
      */
-    public function addOption(string|int|float $key, string|int|float $value)
+    public function addOption(string|int|float $key, string|int|float $value): static
     {
         $this->options[$key] = $value;
 
@@ -58,7 +83,7 @@ trait Options
      *
      * @return $this
      */
-    public function removeOption(string|int|float $key)
+    public function removeOption(string|int|float $key): static
     {
         unset($this->options[$key]);
 
@@ -68,7 +93,7 @@ trait Options
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -76,7 +101,7 @@ trait Options
     /**
      * @return array
      */
-    public function getOptionsSelect2()
+    public function getOptionsSelect2(): array
     {
         $out = [];
         foreach ($this->options as $k => $v) {
