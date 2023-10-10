@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.21](https://github.com/KongHack/FormConfig/releases/tag/3.9.21)
+- @GameCharmer Update composer dependencies (Dependabot)
+
+
+
 ## [3.9.20](https://github.com/KongHack/FormConfig/releases/tag/3.9.20)
 - @GameCharmer Add `addOptionEnumAllCases` to Options Enum
 
