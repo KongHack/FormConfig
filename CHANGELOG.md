@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.9.22](https://github.com/KongHack/FormConfig/releases/tag/3.9.22)
+- @GameCharmer Clear stored form config value in form fields during clone so that individual fields can be reused
+
+
+
 ## [3.9.21](https://github.com/KongHack/FormConfig/releases/tag/3.9.21)
 - @GameCharmer Update composer dependencies (Dependabot)
 
