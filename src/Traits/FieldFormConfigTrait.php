@@ -8,7 +8,15 @@ use GCWorld\FormConfig\Forms\FormConfig;
  */
 trait FieldFormConfigTrait
 {
-    protected $formConfig = null;
+    protected ?FormConfig $formConfig = null;
+
+    /**
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->formConfig = null;
+    }
 
     /**
      * @param FormConfig $formConfig
@@ -31,7 +39,7 @@ trait FieldFormConfigTrait
     /**
      * @return null|FormConfig
      */
-    public function getFormConfig()
+    public function getFormConfig(): ?FormConfig
     {
         return $this->formConfig;
     }

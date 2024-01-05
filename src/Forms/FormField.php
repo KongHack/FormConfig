@@ -64,7 +64,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function addError(string $message)
+    public function addError(string $message): static
     {
         $this->errors[] = $message;
 
@@ -74,7 +74,7 @@ class FormField implements \JsonSerializable
     /**
      * @return array
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -84,7 +84,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setValue($value)
+    public function setValue($value): static
     {
         if($value instanceof \BackedEnum) {
             $value = $value->value;
