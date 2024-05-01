@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ca0576c486b9edd7b766ce29b88d1b7",
+    "content-hash": "5536cbcbce6be8f36d288371dfc941b7",
     "packages": [
         {
             "name": "brick/math",
@@ -213,16 +213,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.7.1",
+            "version": "2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "aaf6ed5ccd27c23f79a545e351b4d7842a99d0bc"
+                "reference": "a625e50598e12171d3f60b1149eb530690c43474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/aaf6ed5ccd27c23f79a545e351b4d7842a99d0bc",
-                "reference": "aaf6ed5ccd27c23f79a545e351b4d7842a99d0bc",
+                "url": "https://api.github.com/repos/composer/composer/zipball/a625e50598e12171d3f60b1149eb530690c43474",
+                "reference": "a625e50598e12171d3f60b1149eb530690c43474",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +307,7 @@
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "security": "https://github.com/composer/composer/security/policy",
-                "source": "https://github.com/composer/composer/tree/2.7.1"
+                "source": "https://github.com/composer/composer/tree/2.7.4"
             },
             "funding": [
                 {
@@ -323,7 +323,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T14:26:28+00:00"
+            "time": "2024-04-22T19:17:03+00:00"
         },
         {
             "name": "composer/installers",
@@ -882,20 +882,21 @@
         },
         {
             "name": "gcworld/interfaces",
-            "version": "4.1.5",
+            "version": "4.3.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KongHack/Interfaces.git",
-                "reference": "74b5084ad9257fa4437ea83fbff040bb575745f7"
+                "reference": "1fdef6316985c464750361814c0ee8f21f0d9ab0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/74b5084ad9257fa4437ea83fbff040bb575745f7",
-                "reference": "74b5084ad9257fa4437ea83fbff040bb575745f7",
+                "url": "https://api.github.com/repos/KongHack/Interfaces/zipball/1fdef6316985c464750361814c0ee8f21f0d9ab0",
+                "reference": "1fdef6316985c464750361814c0ee8f21f0d9ab0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0"
+                "php": ">=8.1",
+                "twig/twig": "^3.5"
             },
             "require-dev": {
                 "gcworld/code_sniffer_contrib": "^2.0.4",
@@ -918,12 +919,12 @@
                     "email": "admin@gamecharmer.com"
                 }
             ],
-            "description": "GCWorld Industries Interfaces",
+            "description": "GCWorld Interfaces",
             "support": {
                 "issues": "https://github.com/KongHack/Interfaces/issues",
-                "source": "https://github.com/KongHack/Interfaces/tree/4.1.5"
+                "source": "https://github.com/KongHack/Interfaces/tree/4.3.11"
             },
-            "time": "2023-03-06T14:39:47+00:00"
+            "time": "2024-05-01T12:07:08+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -2944,5 +2945,5 @@
         "php": ">=8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

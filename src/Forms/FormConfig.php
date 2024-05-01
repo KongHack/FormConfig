@@ -149,7 +149,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return int|null
      */
-    public static function getRequiredIndicator()
+    public static function getRequiredIndicator(): ?int
     {
         return self::$requiredIndicator;
     }
@@ -159,7 +159,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    public static function setRequiredIndicator(int $indicator)
+    public static function setRequiredIndicator(int $indicator): void
     {
         self::$requiredIndicator = $indicator;
     }
@@ -167,7 +167,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string|null
      */
-    public static function getFormMode()
+    public static function getFormMode(): ?string
     {
         return self::$formMode;
     }
@@ -177,7 +177,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    public static function setFormMode(string $mode)
+    public static function setFormMode(string $mode): void
     {
         self::$formMode = $mode;
     }
@@ -187,7 +187,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setHoldOn(bool $use)
+    public function setHoldOn(bool $use): static
     {
         $this->useHoldOn = $use;
 
@@ -197,7 +197,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return bool
      */
-    public function canHoldOn()
+    public function canHoldOn(): bool
     {
         return $this->useHoldOn;
     }
@@ -205,7 +205,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return bool
      */
-    public function hasRequired()
+    public function hasRequired(): bool
     {
         foreach($this->getFormFields() as $field) {
             if($field->getReqLevel() > 1) {
@@ -222,7 +222,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -232,7 +232,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -242,7 +242,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setFormId(string $id)
+    public function setFormId(string $id): static
     {
         $this->formId = $id;
 
@@ -252,7 +252,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getFormId()
+    public function getFormId(): string
     {
         if ('' != $this->formId) {
             return $this->formId;
@@ -269,7 +269,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function addRawData(string $key, $value)
+    public function addRawData(string $key, mixed $value): static
     {
         $this->rawData[$key] = $value;
 
@@ -280,7 +280,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $key
      * @return mixed|null
      */
-    public function getRawData(string $key)
+    public function getRawData(string $key): mixed
     {
         return $this->rawData[$key] ?? null;
     }
@@ -289,7 +289,7 @@ class FormConfig implements FieldContainerInterface
      * @param $value
      * @return $this
      */
-    public function setNavigationTag($value)
+    public function setNavigationTag($value): static
     {
         if(strlen($value) == 1 && is_numeric($value)){
             $value = 'h'.$value;
@@ -302,7 +302,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return null|string
      */
-    public function getNavigationTag()
+    public function getNavigationTag(): ?string
     {
         if(null != $this->navigationTag){
             return $this->navigationTag;
@@ -317,7 +317,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setOverride(string $key, string $value)
+    public function setOverride(string $key, string $value): static
     {
         $this->twigOverrides[$key] = $value;
 
@@ -329,7 +329,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setTwigTemplate(string $fileName)
+    public function setTwigTemplate(string $fileName): static
     {
         $this->twigTemplate = $fileName;
 
@@ -339,7 +339,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getTwigTemplate()
+    public function getTwigTemplate(): string
     {
         return $this->twigTemplate;
     }
@@ -349,7 +349,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function addFieldObject(FormField $field)
+    public function addFieldObject(FormField $field): static
     {
         $this->fields[$field->getNameRaw()] = $field;
         $field->setFormConfig($this);
@@ -362,7 +362,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function addBuiltField(Base $field)
+    public function addBuiltField(Base $field): static
     {
         $this->fields[$field->getNameRaw()] = $field;
         $field->setFormConfig($this);
@@ -375,7 +375,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return FormField
      */
-    public function createField(string $name)
+    public function createField(string $name): FormField
     {
         $field               = new FormField($name);
         $this->fields[$name] = $field;
@@ -391,7 +391,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @throws \Exception
      */
-    public function getField(string $name)
+    public function getField(string $name): FormField
     {
         if (!array_key_exists($name, $this->fields)) {
             throw new \Exception('Field Not Defined: '.$name);
@@ -404,7 +404,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $name
      * @return $this
      */
-    public function removeField(string $name)
+    public function removeField(string $name): static
     {
         if(isset($this->fields[$name])) {
             unset($this->fields[$name]);
@@ -428,7 +428,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return FormArrayElement
      */
-    public function createFieldArray(string $name)
+    public function createFieldArray(string $name): FormArrayElement
     {
         $field               = new FormArrayElement($name);
         $this->fields[$name] = $field;
@@ -442,7 +442,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setRequirements(array $requirements)
+    public function setRequirements(array $requirements): static
     {
         if (count($requirements) > 0) {
             //Iterate fields.
@@ -463,7 +463,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setErrors(array $errors)
+    public function setErrors(array $errors): static
     {
         if (count($errors) > 0) {
             //Iterate fields.
@@ -487,7 +487,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setValuesFromObject($object)
+    public function setValuesFromObject(mixed $object): static
     {
         $mft = ($object instanceof ModelFieldText);
         $orm = ($object instanceof ORMDescriptionInterface);
@@ -517,7 +517,7 @@ class FormConfig implements FieldContainerInterface
 
             if (property_exists($object, 'dbInfo') && array_key_exists($name, $object::$dbInfo)) {
                 $dbType = $object::$dbInfo[$name];
-                if (strstr($dbType, '(')) {
+                if (str_contains($dbType, '(')) {
                     $start  = strpos($dbType, '(');
                     $end    = strpos($dbType, ')', $start + 1);
                     $length = $end - $start;
@@ -576,7 +576,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setPropertiesFromObject(ORMDescriptionInterface $object)
+    public function setPropertiesFromObject(ORMDescriptionInterface $object): static
     {
 
         foreach ($this->fields as $name => $field) {
@@ -589,7 +589,7 @@ class FormConfig implements FieldContainerInterface
                 && array_key_exists($name, $object::$dbInfo)
             ) {
                 $dbType = $object::$dbInfo[$name];
-                if (strstr($dbType, '(')) {
+                if (str_contains($dbType, '(')) {
                     $start  = strpos($dbType, '(');
                     $end    = strpos($dbType, ')', $start + 1);
                     $length = $end - $start;
@@ -611,7 +611,11 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    protected function setFieldPropertiesFromORM(ORMDescriptionInterface $cObject, string $fieldName, FormField $cField)
+    protected function setFieldPropertiesFromORM(
+        ORMDescriptionInterface $cObject,
+        string $fieldName,
+        FormField $cField
+    ): void
     {
         $label     = $cObject::getORMFieldTitle($fieldName);
         $helpText  = $cObject::getORMFieldHelp($fieldName);
@@ -639,7 +643,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setValues(array $values)
+    public function setValues(array $values): static
     {
         foreach ($values as $k => $v) {
             if (!array_key_exists($k, $this->fields)) {
@@ -655,29 +659,10 @@ class FormConfig implements FieldContainerInterface
     }
 
     /**
-     * @deprecated Use the setRenderX methods
-     *
-     * @param array  $formsArray
-     * @param string $currentForm
-     * @param string $baseRoute
-     * @param string $formUrl
-     *
-     * @return array
-     */
-    public function getRenderArray(array $formsArray, string $currentForm, string $baseRoute, string $formUrl)
-    {
-        return $this->setRenderForms($formsArray)
-            ->setRenderForm($currentForm)
-            ->setRenderUrlBase($baseRoute)
-            ->setRenderUrlForm($formUrl)
-            ->getTwigArray();
-    }
-
-    /**
      * @param string $form
      * @return $this
      */
-    public function setRenderForm(string $form)
+    public function setRenderForm(string $form): static
     {
         $this->renderArgs['formCurrent'] = $form;
 
@@ -688,7 +673,7 @@ class FormConfig implements FieldContainerInterface
      * @param array $forms
      * @return $this
      */
-    public function setRenderForms(array $forms)
+    public function setRenderForms(array $forms): static
     {
         $this->renderArgs['formArray'] = $forms;
 
@@ -699,7 +684,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $url
      * @return $this
      */
-    public function setRenderUrlBase(string $url)
+    public function setRenderUrlBase(string $url): static
     {
         $this->renderArgs['urlBase'] = $url;
 
@@ -710,7 +695,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $url
      * @return $this
      */
-    public function setRenderUrlForm(string $url)
+    public function setRenderUrlForm(string $url): static
     {
         $this->renderArgs['urlCurrent'] = $url;
 
@@ -720,7 +705,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return array
      */
-    public function getTwigArray()
+    public function getTwigArray(): array
     {
         return [
             'FC_Config'     => $this,
@@ -739,7 +724,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return array
      */
-    public function getTwigOverrides()
+    public function getTwigOverrides(): array
     {
         return $this->twigOverrides;
     }
@@ -748,7 +733,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $key
      * @return mixed
      */
-    public function getRenderArg(string $key)
+    public function getRenderArg(string $key): mixed
     {
         return $this->renderArgs[$key] ?? null;
     }
@@ -759,7 +744,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return array
      */
-    public function getRenderFields()
+    public function getRenderFields(): array
     {
         if (empty($this->name)) {
             throw new \Exception('Name must be set first');
@@ -775,7 +760,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return $this
      */
-    public function setDefaults(string $mode)
+    public function setDefaults(string $mode): static
     {
         switch ($mode) {
             case 'delete':
@@ -833,7 +818,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return FormField[]
      */
-    public function getFormFields()
+    public function getFormFields(): array
     {
         return $this->fields;
     }
@@ -843,7 +828,7 @@ class FormConfig implements FieldContainerInterface
      * @return void
      * @throws \Exception
      */
-    public function setFormFields(array $fields)
+    public function setFormFields(array $fields): void
     {
         foreach($fields as $id => $field) {
             if(!($field instanceof FormField)) {
@@ -860,7 +845,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    public function makeReadOnly(callable $postProcess = null)
+    public function makeReadOnly(callable $postProcess = null): void
     {
         $this->isReadOnly = true;
         $this->makeFieldsReadOnly($this->fields);
@@ -875,7 +860,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    public static function makeFieldReadOnly(FormField &$field)
+    public static function makeFieldReadOnly(FormField &$field): void
     {
         $field->makeReadOnly();
     }
@@ -885,7 +870,7 @@ class FormConfig implements FieldContainerInterface
      *
      * @return void
      */
-    protected function makeFieldsReadOnly(array &$fields)
+    protected function makeFieldsReadOnly(array &$fields): void
     {
         foreach ($fields as &$field) {
             if ($field instanceof FormField) {
@@ -911,7 +896,7 @@ class FormConfig implements FieldContainerInterface
      * @param FCHook $hook
      * @return $this
      */
-    public function addHook(FCHook $hook)
+    public function addHook(FCHook $hook): static
     {
         $this->hooks[] = $hook;
 
@@ -922,7 +907,7 @@ class FormConfig implements FieldContainerInterface
      * @param int $index
      * @return $this
      */
-    public function removeHook(int $index)
+    public function removeHook(int $index): static
     {
         unset($this->hooks[$index]);
 
@@ -932,7 +917,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return array
      */
-    public function getHooks()
+    public function getHooks(): array
     {
         return $this->hooks;
     }
@@ -941,7 +926,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $value
      * @return $this
      */
-    public function setSimpleFormWrappingClass(string $value)
+    public function setSimpleFormWrappingClass(string $value): static
     {
         $this->simpleFormWrappingClass = $value;
 
@@ -951,7 +936,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getSimpleFormWrappingClass()
+    public function getSimpleFormWrappingClass(): string
     {
         return $this->simpleFormWrappingClass;
     }
@@ -959,7 +944,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return bool
      */
-    public function isReadOnly()
+    public function isReadOnly(): bool
     {
         return $this->isReadOnly;
     }
@@ -967,7 +952,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return bool
      */
-    public function doDebug()
+    public function doDebug(): bool
     {
         $config = Config::getInstance()->getConfig();
         if(isset($config['debugging'])
@@ -984,7 +969,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string|null
      */
-    public function getCSRFTokenName()
+    public function getCSRFTokenName(): ?string
     {
         return $this->csrf['name'];
     }
@@ -993,7 +978,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $title
      * @return $this
      */
-    public function setNavigationTitle(string $title)
+    public function setNavigationTitle(string $title): static
     {
         $this->navigationTitle = $title;
 
@@ -1003,7 +988,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getNavigationTitle()
+    public function getNavigationTitle(): string
     {
         return $this->navigationTitle;
     }
@@ -1012,7 +997,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $html
      * @return $this
      */
-    public function setNavigationRight(string $html)
+    public function setNavigationRight(string $html): static
     {
         $this->navigationRight = $html;
 
@@ -1022,7 +1007,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string|null
      */
-    public function getNavigationRight()
+    public function getNavigationRight(): ?string
     {
         return $this->navigationRight;
     }
@@ -1031,7 +1016,7 @@ class FormConfig implements FieldContainerInterface
      * @param bool $wrap
      * @return $this
      */
-    public function setWrapped(bool $wrap)
+    public function setWrapped(bool $wrap): static
     {
         $this->isWrapped = $wrap;
 
@@ -1041,7 +1026,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return bool
      */
-    public function isWrapped()
+    public function isWrapped(): bool
     {
         return $this->isWrapped;
     }
@@ -1050,7 +1035,7 @@ class FormConfig implements FieldContainerInterface
      * @param string $method
      * @return $this
      */
-    public function setMethod(string $method)
+    public function setMethod(string $method): static
     {
         $this->method = strtoupper($method);
 
@@ -1069,7 +1054,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return string
      */
-    public function getRenderForm()
+    public function getRenderForm(): string
     {
         return $this->renderArgs['formCurrent'] ?? '';
     }
@@ -1077,7 +1062,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return array
      */
-    public function getRenderForms()
+    public function getRenderForms(): array
     {
         return $this->renderArgs['formArray'] ?? [];
     }
@@ -1085,7 +1070,7 @@ class FormConfig implements FieldContainerInterface
     /**
      * @return array
      */
-    public function getUnattributedErrors()
+    public function getUnattributedErrors(): array
     {
         return $this->unattributedErrors;
     }
