@@ -3,15 +3,15 @@ namespace GCWorld\FormConfig\Core;
 
 class FileInputObject
 {
-    protected $fileName = null;
-    protected $fileId   = null;
-    protected $fileUrl  = null;
+    protected ?string $fileName = null;
+    protected ?string $fileId   = null;
+    protected ?string $fileUrl  = null;
 
     /**
      * @param string $fileName
      * @return $this
      */
-    public function setFileName(string $fileName)
+    public function setFileName(string $fileName): static
     {
         $this->fileName = $fileName;
 
@@ -22,7 +22,7 @@ class FileInputObject
      * @param string $fileId
      * @return $this
      */
-    public function setFileId(string $fileId)
+    public function setFileId(string $fileId): static
     {
         $this->fileId = $fileId;
 
@@ -33,7 +33,7 @@ class FileInputObject
      * @param string $fileUrl
      * @return $this
      */
-    public function setFileUrl(string $fileUrl)
+    public function setFileUrl(string $fileUrl): static
     {
         $this->fileUrl = $fileUrl;
 
@@ -43,7 +43,7 @@ class FileInputObject
     /**
      * @return null|string
      */
-    public function getFileName()
+    public function getFileName(): ?string
     {
         return $this->fileName;
     }
@@ -51,7 +51,7 @@ class FileInputObject
     /**
      * @return null|string
      */
-    public function getFileId()
+    public function getFileId(): ?string
     {
         return $this->fileId;
     }
@@ -59,9 +59,8 @@ class FileInputObject
     /**
      * @return null|string
      */
-    public function getFileUrl()
+    public function getFileUrl(): ?string
     {
         return $this->fileUrl;
     }
-
 }

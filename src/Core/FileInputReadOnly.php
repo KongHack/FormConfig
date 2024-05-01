@@ -14,7 +14,7 @@ class FileInputReadOnly
      * @param FormField $field
      * @return void
      */
-    public static function makeReadOnly(FormField $field)
+    public static function makeReadOnly(FormField $field): void
     {
         if(empty($field->getValue())) {
             $field->setValue('No File Selected');
@@ -28,8 +28,9 @@ class FileInputReadOnly
 
     /**
      * @param mixed $val
+     * @return string
      */
-    protected static function getValue($val)
+    protected static function getValue(mixed $val): string
     {
 
         if(is_array($val) && isset($val['url'])) {

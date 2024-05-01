@@ -12,15 +12,15 @@ class Config
     /**
      * @var array
      */
-    protected $config = [];
+    protected array $config = [];
     /**
      * @var null|string
      */
-    protected $configPath = null;
+    protected ?string $configPath = null;
     /**
      * @var null|Config
      */
-    protected static $instance = null;
+    protected static ?self $instance = null;
 
     /**
      * Config constructor.
@@ -68,7 +68,7 @@ class Config
         }
 
         foreach (array_keys($config) as $key) {
-            if (strpos($key, 'example') !== false) {
+            if (str_contains($key, 'example')) {
                 unset($config[$key]);
             }
         }
@@ -92,7 +92,7 @@ class Config
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }

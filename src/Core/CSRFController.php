@@ -10,14 +10,14 @@ use GCWorld\Globals\Globals;
  */
 class CSRFController
 {
-    protected static $instance = null;
+    protected static ?self $instance = null;
 
     /**
      * CSRF Config Array
      *
      * @var array
      */
-    protected $csrf = [
+    protected array $csrf = [
         'enabled'          => false,
         'tokenNameMethod'  => '',
         'tokenValueMethod' => '',
@@ -35,6 +35,9 @@ class CSRFController
         return self::$instance;
     }
 
+    /**
+     * CSRFController Constructor.
+     */
     public function __construct()
     {
         $config = Config::getInstance()->getConfig();
@@ -56,15 +59,17 @@ class CSRFController
     /**
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return $this->csrf['enabled'];
     }
 
     /**
      * @throws CSRFNotEnabledException
+     *
+     * @return void
      */
-    public function forceEnable()
+    public function forceEnable(): void
     {
         if(empty($this->csrf['tokenNameMethod']) || empty($this->csrf['tokenValueMethod'])) {
             throw new CSRFNotEnabledException('Improperly Configured Tokens');
@@ -78,7 +83,7 @@ class CSRFController
      * @throws CSRFNotEnabledException
      * @throws CSRFRequestFailedException
      */
-    public function doCheck()
+    public function doCheck(): bool
     {
         if($this->csrf['enabled']
             && $this->csrf['tokenNameMethod'] != ''
@@ -99,7 +104,7 @@ class CSRFController
     /**
      * @return string
      */
-    public function getTokenName()
+    public function getTokenName(): string
     {
         if($this->csrf['enabled']) {
             return call_user_func($this->csrf['tokenNameMethod']);
@@ -111,7 +116,7 @@ class CSRFController
     /**
      * @return string
      */
-    public function getTokenValue()
+    public function getTokenValue(): string
     {
         if($this->csrf['enabled']) {
             return call_user_func($this->csrf['tokenValueMethod']);
@@ -123,7 +128,7 @@ class CSRFController
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->csrf;
     }

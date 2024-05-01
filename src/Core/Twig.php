@@ -8,6 +8,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
+use Twig\Loader\LoaderInterface;
 use Twig\TwigFunction;
 use Twig\TwigTest;
 
@@ -21,14 +22,14 @@ class Twig
         'BS3',
     ];
 
-    protected static $twig      = null;
-    protected static $loader    = null;
-    protected static $FCVersion = null;
+    protected static ?Environment     $twig      = null;
+    protected static ?LoaderInterface $loader    = null;
+    protected static ?string $FCVersion          = null;
 
     /**
      * @return string
      */
-    public static function getFCVersion()
+    public static function getFCVersion(): string
     {
         if(static::$FCVersion === null) {
             $file  = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
@@ -47,7 +48,7 @@ class Twig
      *
      * @return void
      */
-    public static function attachPath(FilesystemLoader $filesystem)
+    public static function attachPath(FilesystemLoader $filesystem): void
     {
         $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
         $dir .= '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
@@ -64,7 +65,7 @@ class Twig
      * @param Environment $environment
      * @return void
      */
-    public static function mapAll(Environment $environment)
+    public static function mapAll(Environment $environment): void
     {
         $loader = $environment->getLoader();
         if ($loader instanceof FilesystemLoader) {
@@ -88,7 +89,7 @@ class Twig
     /**
      * @return Environment
      */
-    public static function get()
+    public static function get(): Environment
     {
         if (null == self::$twig) {
             $loader     = self::getLoader();
@@ -106,7 +107,7 @@ class Twig
     /**
      * @return FilesystemLoader
      */
-    public static function getLoader()
+    public static function getLoader(): FilesystemLoader
     {
         if (null == self::$loader) {
             $loader       = new FilesystemLoader(self::getTwigDir());
@@ -119,7 +120,7 @@ class Twig
     /**
      * @return string
      */
-    protected static function getTwigDir()
+    protected static function getTwigDir(): string
     {
         return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
     }
@@ -130,11 +131,11 @@ class Twig
      *
      * @throws SyntaxError
      * @throws LoaderError
-     * @throws RuntimeError
+     * @throws RuntimeError|\Throwable
      *
      * @return string
      */
-    public static function render(string $name, array $context = null)
+    public static function render(string $name, array $context = null): string
     {
         try {
             if (null == $context) {
@@ -142,11 +143,7 @@ class Twig
             }
 
             return self::get()->render($name, $context);
-        } catch (SyntaxError $e) {
-            d($e);
-
-            throw $e;
-        } catch (LoaderError $e) {
+        } catch (SyntaxError|LoaderError $e) {
             d($e);
 
             throw $e;

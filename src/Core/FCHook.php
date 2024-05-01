@@ -16,9 +16,9 @@ class FCHook
     const METHOD_HTML    = 1;
     const METHOD_INCLUDE = 2;
 
-    protected $type   = null;
-    protected $method = null;
-    protected $data   = null;
+    protected int    $type;
+    protected string $method;
+    protected string $data;
 
     /**
      * FCHook constructor.
@@ -37,7 +37,7 @@ class FCHook
     /**
      * @return int
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
@@ -45,7 +45,7 @@ class FCHook
     /**
      * @return int
      */
-    public function getMethod()
+    public function getMethod(): int
     {
         return $this->method;
     }
@@ -53,7 +53,7 @@ class FCHook
     /**
      * @return string
      */
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }

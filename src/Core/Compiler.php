@@ -10,7 +10,7 @@ use Riimu\Kit\PHPEncoder\PHPEncoder;
  */
 class Compiler
 {
-    protected $groups = [];
+    protected array $groups = [];
 
     /**
      * Compiler constructor.
@@ -54,7 +54,7 @@ class Compiler
      *
      * @return $this
      */
-    public function addFieldGroup(string $namespace, string $directory)
+    public function addFieldGroup(string $namespace, string $directory): static
     {
         $this->groups[rtrim($namespace, '\\')] = rtrim($directory, DIRECTORY_SEPARATOR);
 
@@ -65,7 +65,7 @@ class Compiler
      * @param bool $debug
      * @return void
      */
-    public function run($debug = false)
+    public function run(bool $debug = false): void
     {
         $objects = [];
         foreach ($this->groups as $ns => $dir) {
@@ -170,9 +170,6 @@ class Compiler
             $contents .= '     */'.PHP_EOL;
             $contents .= '    public function '.$function.'(string $name)'.PHP_EOL;
             $contents .= '    {'.PHP_EOL;
-            // $contents .= '        $obj = new \\'.$class.'();'.PHP_EOL;
-            // $contents .= '        $obj->setName($name);'.PHP_EOL;
-            // $contents .= '        $this->formConfig->addBuiltField($obj);'.PHP_EOL;
             $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);'.PHP_EOL;
             $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::'.
                 $definition['constant'].');'.PHP_EOL;
