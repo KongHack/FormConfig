@@ -84,6 +84,41 @@ class Twig
         $environment->addTest(new TwigTest('FC_isComplexElement',function($obj){
             return $obj instanceof FormConfigComplexElement;
         }));
+
+        $environment->addFunction(new TwigFunction('FC_Enum', function (string $fullClassName): object {
+            $parts     = \explode('::', $fullClassName);
+            $className = $parts[0];
+            $constant  = $parts[1] ?? null;
+
+            if (!\enum_exists($className)) {
+                throw new \Exception(\sprintf('"%s" is not an enum.', $className));
+            }
+
+            if ($constant) {
+                return \constant($fullClassName);
+            }
+
+            return new class($fullClassName) {
+                /**
+                 * @param string $fullClassName
+                 */
+                public function __construct(private string $fullClassName)
+                {
+                }
+
+                /**
+                 * @param string $caseName
+                 * @param array  $arguments
+                 *
+                 * @return mixed
+                 */
+                public function __call(string $caseName, array $arguments): mixed
+                {
+                    return \call_user_func_array([$this->fullClassName, $caseName], $arguments);
+                }
+            };
+        }));
+
     }
 
     /**

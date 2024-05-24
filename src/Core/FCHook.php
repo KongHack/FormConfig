@@ -1,53 +1,44 @@
 <?php
 namespace GCWorld\FormConfig\Core;
 
+use GCWorld\FormConfig\Enums\FCHookMethod;
+use GCWorld\FormConfig\Enums\FCHookType;
+
 /**
  * Class FCHook
  */
 class FCHook
 {
-    const TYPE_MAIN_PRE    = 1;
-    const TYPE_MAIN_POST   = 2;
-    const TYPE_BLOCK_PRE   = 3;
-    const TYPE_BLOCK_POST  = 4;
-    const TYPE_FIELDS_PRE  = 5;
-    const TYPE_FIELDS_POST = 6;
-
-    const METHOD_HTML    = 1;
-    const METHOD_INCLUDE = 2;
-
-    protected int    $type;
-    protected string $method;
-    protected string $data;
+    protected FCHookType   $cType;
+    protected FCHookMethod $cMethod;
+    protected string       $data;
 
     /**
-     * FCHook constructor.
-     *
-     * @param int    $type
-     * @param int    $method
-     * @param string $data
+     * @param FCHookType   $type
+     * @param FCHookMethod $method
+     * @param string       $data
      */
-    public function __construct(int $type, int $method, string $data)
+    public function __construct(FCHookType $type, FCHookMethod $method, string $data)
     {
-        $this->type   = $type;
-        $this->method = $method;
-        $this->data   = $data;
+        $this->cType   = $type;
+        $this->cMethod = $method;
+        $this->data    = $data;
     }
 
     /**
-     * @return int
+     * @return FCHookType
      */
-    public function getType(): int
+    public function getType(): FCHookType
     {
-        return $this->type;
+        return $this->cType;
     }
 
     /**
-     * @return int
+     * @return FCHookMethod
      */
-    public function getMethod(): int
+    public function getMethod(): FCHookMethod
     {
-        return $this->method;
+        return $this->cMethod;
     }
 
     /**

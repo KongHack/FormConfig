@@ -1,8 +1,8 @@
 {% for k, hook in FC_Config.getHooks() %}
-    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_BLOCK_PRE') %}
-        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::BLOCK_PRE') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
             {{ hook.getData()|raw }}
-        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
             {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
             {% include file %}
         {% endif %}
@@ -49,10 +49,10 @@
             {% endif %}
 
             {% for k, hook in FC_Config.getHooks() %}
-                {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_FIELDS_PRE') %}
-                    {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+                {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::FIELDS_PRE') %}
+                    {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
                         {{ hook.getData()|raw }}
-                    {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+                    {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
                         {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
                         {% include file %}
                     {% endif %}
@@ -69,10 +69,10 @@
             {% endif %}
 
             {% for k, hook in FC_Config.getHooks() %}
-                {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_FIELDS_POST') %}
-                    {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+                {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::FIELDS_POST') %}
+                    {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
                         {{ hook.getData()|raw }}
-                    {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+                    {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
                         {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
                         {% include file %}
                     {% endif %}
@@ -121,10 +121,10 @@
 
 
 {% for k, hook in FC_Config.getHooks() %}
-    {% if hook.getType() == constant('GCWorld\\FormConfig\\Core\\FCHook::TYPE_BLOCK_POST') %}
-        {% if hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_HTML') %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::BLOCK_POST') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
             {{ hook.getData()|raw }}
-        {% elseif hook.getMethod() ==  constant('GCWorld\\FormConfig\\Core\\FCHook::METHOD_INCLUDE') %}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
             {% set file = hook.getData()|replace({'REPLACE':'BS3'}) %}
             {% include file %}
         {% endif %}

@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.10.0](https://github.com/KongHack/FormConfig/releases/tag/3.10.0)
+- @GameCharmer Update PHP Dependency from 8.1 to 8.2
+- @GameCharmer Implement Enums for FCHook system
+
+
+
 ## [3.9.22](https://github.com/KongHack/FormConfig/releases/tag/3.9.22)
 - @GameCharmer Clear stored form config value in form fields during clone so that individual fields can be reused
 
