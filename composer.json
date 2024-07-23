@@ -9,7 +9,7 @@
   ],
   "require": {
     "php": ">=8.2",
-    "composer/composer": "^2.0",
+    "composer/composer": "^2.7",
     "composer/installers": ">=2.2",
     "twig/twig": "^3.0",
     "riimu/kit-phpencoder": "^2.3",

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.10.1](https://github.com/KongHack/FormConfig/releases/tag/3.10.1)
+- @GameCharmer Update composer/composer
+
+
+
 ## [3.10.0](https://github.com/KongHack/FormConfig/releases/tag/3.10.0)
 - @GameCharmer Update PHP Dependency from 8.1 to 8.2
 - @GameCharmer Implement Enums for FCHook system
