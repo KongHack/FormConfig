@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.10.2](https://github.com/KongHack/FormConfig/releases/tag/3.10.2)
+- @GameCharmer Update Twig per CVE-2024-45411
+
+
+
 ## [3.10.1](https://github.com/KongHack/FormConfig/releases/tag/3.10.1)
 - @GameCharmer Update composer/composer
 
