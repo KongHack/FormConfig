@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.10.4](https://github.com/KongHack/FormConfig/releases/tag/3.10.4)
+- @GameCharmer Update Globals
+
+
+
 ## [3.10.3](https://github.com/KongHack/FormConfig/releases/tag/3.10.3)
 - @GameCharmer Update Composer Dependencies
 
