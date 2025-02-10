@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.10.6](https://github.com/KongHack/FormConfig/releases/tag/3.10.6)
+- @GameCharmer Add target property to FCFE. At some point I need to split this into multiple objects and eliminate the constants.
+
+
+
 ## [3.10.5](https://github.com/KongHack/FormConfig/releases/tag/3.10.5)
 - @GameCharmer Add right side icon for links
 

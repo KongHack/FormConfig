@@ -16,6 +16,7 @@ class FormConfigFormElement
     protected string $form_url   = '';
     protected string $form_name  = '';
     protected string $right_icon = '';
+    protected string $target     = '';
     protected int    $form_type  = self::TYPE_STANDARD;
 
     /**
@@ -47,6 +48,25 @@ class FormConfigFormElement
     public function getRightIcon(): string
     {
         return $this->right_icon;
+    }
+
+    /**
+     * @param string $target
+     * @return $this
+     */
+    public function setTarget(string $target): static
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTarget(): string
+    {
+        return $this->target;
     }
 
     /**

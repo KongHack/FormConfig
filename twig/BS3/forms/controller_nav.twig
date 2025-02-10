@@ -54,6 +54,7 @@
         <a href="{{ element.getFormUrl() }}"
            id="FC_NAV_BTN_{{ key }}"
            class="btn btn-left btn-default btn-block"
+           {{ element.getTarget() != '' ? 'target="'~element.getTarget()~'"' : '' }}
         >
             <span class="pull-left">{{ element.getFormName()|raw }}</span>
             <span class="pull-right">
