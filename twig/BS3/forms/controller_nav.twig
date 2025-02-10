@@ -57,7 +57,7 @@
         >
             <span class="pull-left">{{ element.getFormName()|raw }}</span>
             <span class="pull-right">
-                <i class="fas fa-fw fa-external-link-alt"></i>
+                {{ element.getRightIcon() == '' ? '<i class="fas fa-fw fa-external-link-alt"></i>' : element.getRightIcon()|raw }}
             </span>
             <span class="clearfix"></span>
         </a>

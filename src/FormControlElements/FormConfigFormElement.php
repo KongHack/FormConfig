@@ -12,10 +12,11 @@ class FormConfigFormElement
     const TYPE_HTML_BREAK = 4;
     const TYPE_LINK       = 5;
 
-    protected $form_key  = '';
-    protected $form_url  = '';
-    protected $form_name = '';
-    protected $form_type = self::TYPE_STANDARD;
+    protected string $form_key   = '';
+    protected string $form_url   = '';
+    protected string $form_name  = '';
+    protected string $right_icon = '';
+    protected int    $form_type  = self::TYPE_STANDARD;
 
     /**
      * FormConfigFormElement constructor.
@@ -30,11 +31,30 @@ class FormConfigFormElement
     }
 
     /**
+     * @param string $icon
+     * @return $this
+     */
+    public function setRightIcon(string $icon): static
+    {
+        $this->right_icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRightIcon(): string
+    {
+        return $this->right_icon;
+    }
+
+    /**
      * @param int $form_type
      *
      * @return $this
      */
-    public function setFormType(int $form_type)
+    public function setFormType(int $form_type): static
     {
         $this->form_type = $form_type;
 
@@ -44,7 +64,7 @@ class FormConfigFormElement
     /**
      * @return int
      */
-    public function getFormType()
+    public function getFormType(): int
     {
         return $this->form_type;
     }
@@ -52,7 +72,7 @@ class FormConfigFormElement
     /**
      * @return string
      */
-    public function getFormKey()
+    public function getFormKey(): string
     {
         return $this->form_key;
     }
@@ -60,7 +80,7 @@ class FormConfigFormElement
     /**
      * @return string
      */
-    public function getFormName()
+    public function getFormName(): string
     {
         return $this->form_name;
     }
@@ -70,7 +90,7 @@ class FormConfigFormElement
      *
      * @return $this
      */
-    public function setFormUrl(string $url)
+    public function setFormUrl(string $url): static
     {
         $this->form_url = $url;
 
@@ -80,7 +100,7 @@ class FormConfigFormElement
     /**
      * @return string
      */
-    public function getFormUrl()
+    public function getFormUrl(): string
     {
         return $this->form_url;
     }
