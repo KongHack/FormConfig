@@ -61,11 +61,11 @@
                                 </span>
                             {% endif %}
                         {% endif %}
-                    {% endif %}
-                    {% if field.getUnderLabelHtml() %}
-                        <div class="FC_under_label_html">
-                            {{ field.getUnderLabelHtml()|raw }}
-                        </div>
+                        {% if field.getUnderLabelHtml() %}
+                            <div class="FC_under_label_html">
+                                {{ field.getUnderLabelHtml()|raw }}
+                            </div>
+                        {% endif %}
                     {% endif %}
 
                     {{ twigFile.render(field) }}

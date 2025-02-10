@@ -8,6 +8,11 @@
     >
         {{ field.value  }}
     </button>
+    {% if field.getUnderLabelHtml() %}
+        <div class="FC_under_label_html">
+            {{ field.getUnderLabelHtml()|raw }}
+        </div>
+    {% endif %}
     {% if field.getScript() is not empty %}
         <script type="text/javascript">{{ field.getScript()|raw }}</script>
     {% endif %}

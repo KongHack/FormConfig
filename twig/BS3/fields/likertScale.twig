@@ -9,6 +9,11 @@
                     </span>
                 {% endif %}
             </legend>
+            {% if field.getUnderLabelHtml() %}
+                <div class="FC_under_label_html">
+                    {{ field.getUnderLabelHtml()|raw }}
+                </div>
+            {% endif %}
         {% endif %}
 
         <table class="table" id="{{ field.id }}">

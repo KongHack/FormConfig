@@ -9,6 +9,12 @@
                     </span>
                 {% endif %}
             </legend>
+
+            {% if field.getUnderLabelHtml() %}
+                <div class="FC_under_label_html">
+                    {{ field.getUnderLabelHtml()|raw }}
+                </div>
+            {% endif %}
         {% endif %}
 
         <div class="btn-group" data-toggle="buttons" id="{{ field.id }}">
