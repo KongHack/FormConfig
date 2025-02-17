@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.1](https://github.com/KongHack/FormConfig/releases/tag/3.11.1)
+- @GameCharmer Remove PHP Encoder. This was last updated in 2022
+
+
+
 ## [3.11.0](https://github.com/KongHack/FormConfig/releases/tag/3.11.0)
 - @GameCharmer Bump to PHP 8.4
 
