@@ -19,7 +19,7 @@ class ComposerInstaller
      *
      * @return bool
      */
-    public static function setupConfig(Event $event = null)
+    public static function setupConfig(?Event $event = null): bool
     {
         $ds    = DIRECTORY_SEPARATOR;
         $myDir = __DIR__;

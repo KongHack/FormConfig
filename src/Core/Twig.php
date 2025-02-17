@@ -164,13 +164,13 @@ class Twig
      * @param string     $name
      * @param array|null $context
      *
-     * @throws SyntaxError
+     * @return string
      * @throws LoaderError
      * @throws RuntimeError|\Throwable
      *
-     * @return string
+     * @throws SyntaxError
      */
-    public static function render(string $name, array $context = null): string
+    public static function render(string $name, ?array $context = null): string
     {
         try {
             if (null == $context) {

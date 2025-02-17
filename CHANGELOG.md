@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.0](https://github.com/KongHack/FormConfig/releases/tag/3.11.0)
+- @GameCharmer Bump to PHP 8.4
+
+
+
 ## [3.10.7](https://github.com/KongHack/FormConfig/releases/tag/3.10.7)
 - @GameCharmer Update FC under label html implementation
 
