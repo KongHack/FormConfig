@@ -2,7 +2,6 @@
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\FieldInterface;
-use Riimu\Kit\PHPEncoder\PHPEncoder;
 
 /**
  * Class Compiler
@@ -132,17 +131,7 @@ class Compiler
         }
         $contents .= PHP_EOL;
 
-        $cEncoder = new PHPEncoder();
-        $encoded  = $cEncoder->encode($definitions, [
-            'array.short'        => true,
-            'array.base'         => 4,
-            'array.inline'       => false,
-            'array.omit'         => false,
-            'array.align'        => true,
-            'array.indent'       => 4,
-            'boolean.capitalize' => true,
-            'null.capitalize'    => true,
-        ]);
+        $encoded  = var_export($definitions, true);
         $contents .= '    const DEFINITIONS = '.$encoded.';'.PHP_EOL;
         $contents .= '}'.PHP_EOL.PHP_EOL;
 
