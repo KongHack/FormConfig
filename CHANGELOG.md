@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.4](https://github.com/KongHack/FormConfig/releases/tag/3.11.4)
+- @GameCharmer Add more cleanup to military time
+
+
+
 ## [3.11.3](https://github.com/KongHack/FormConfig/releases/tag/3.11.3)
 - @GameCharmer Patch file names
 
