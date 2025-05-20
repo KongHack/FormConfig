@@ -1,8 +1,8 @@
 {% macro render(field) %}
     <input type="text"
-           maxlength="{{ field.maxLength }}"
            name="{{ field.name }}"
            value="{{ field.value|default('') }}"
+           {% if field.maxLength > 0 %}maxlength="{{ field.maxLength }}"{% endif %}
            class="form-control {{ field.class }}"
            placeholder="{{ field.getPlaceholder()|default('') }}"
            {{ field.getAutoCompleteAttribute()|raw }}

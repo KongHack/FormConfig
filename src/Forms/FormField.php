@@ -33,7 +33,7 @@ class FormField implements \JsonSerializable
     protected string  $type = 'textInput';
     protected ?string $placeholder = null;
     protected int     $reqLevel = 1;    //Default of 1
-    protected int     $maxLength = 250;
+    protected ?int    $maxLength = null;
     protected ?string $underLabelHtml = null;
     protected bool    $suppressLabel = false;
     protected ?string $helpText = null;
@@ -364,7 +364,7 @@ class FormField implements \JsonSerializable
      */
     public function setMaxLength(int $length)
     {
-        $this->maxLength = intval($length);
+        $this->maxLength = $length;
 
         return $this;
     }

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.5](https://github.com/KongHack/FormConfig/releases/tag/3.11.5)
+- @GameCharmer Update maxLength usage. Default to null instead of 250
+
+
+
 ## [3.11.4](https://github.com/KongHack/FormConfig/releases/tag/3.11.4)
 - @GameCharmer Add more cleanup to military time
 

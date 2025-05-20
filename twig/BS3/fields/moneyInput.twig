@@ -5,14 +5,14 @@
            id="{{ field.id }}"
            class="form-control {{ field.class }}"
            style="text-align:right"
-           maxlength="{{ field.maxLength }}"
+           {% if field.maxLength > 0 %}maxlength="{{ field.maxLength }}"{% endif %}
            type="number"
            step="0.01"
            value="{{ field.value }}"
            onblur="$(this).val(parseFloat($(this).val()).toFixed(2))"
-            {{ field.getAutoCompleteAttribute()|raw }}
+           {{ field.getAutoCompleteAttribute()|raw }}
            {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
-            {{ field.getDataAttributeString()|raw }}
+           {{ field.getDataAttributeString()|raw }}
     >
     {% if field.errors|length>0 %}
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
