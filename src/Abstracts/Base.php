@@ -26,7 +26,7 @@ abstract class Base implements FieldInterface
     protected ?string $helpText         = null;
     protected ?string $noticeText       = null;
     protected array   $dataAttributes   = [];
-    protected int     $maxLength        = 255;
+    protected ?int    $maxLength        = null;
     protected ?string $underLabelHtml   = null;
 
     /**
@@ -274,9 +274,9 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getMaxLength()
+    public function getMaxLength(): ?int
     {
         return $this->maxLength;
     }

@@ -370,9 +370,9 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return ?int
      */
-    public function getMaxLength()
+    public function getMaxLength(): ?int
     {
         return $this->maxLength;
     }
