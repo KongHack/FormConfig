@@ -6,10 +6,10 @@ namespace GCWorld\FormConfig\Traits;
  */
 trait Select2
 {
-    protected int    $select2MinLength = 2;
-    protected int    $maxSelectionLength = 0;
+    protected int    $select2MinLength      = 2;
+    protected int    $maxSelectionLength    = 0;
     protected string $select2DropdownParent = '';
-    protected bool   $select2AllowClear = false;
+    protected bool   $select2AllowClear     = false;
 
     /**
      * @param int $length
@@ -23,10 +23,7 @@ trait Select2
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaxSelectionLength()
+    public function getMaxSelectionLength(): int
     {
         return $this->maxSelectionLength;
     }
@@ -43,10 +40,7 @@ trait Select2
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getSelect2MinLength()
+    public function getSelect2MinLength(): int
     {
         return $this->select2MinLength;
     }
@@ -62,10 +56,7 @@ trait Select2
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSelect2DropdownParent()
+    public function getSelect2DropdownParent(): string
     {
         return $this->select2DropdownParent;
     }
@@ -81,10 +72,7 @@ trait Select2
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getSelect2AllowClear()
+    public function getSelect2AllowClear(): bool
     {
         return $this->select2AllowClear;
     }

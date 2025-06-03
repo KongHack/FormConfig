@@ -10,7 +10,8 @@ use GCWorld\Interfaces\BackedEnumWithTextInterface;
  */
 trait Options
 {
-    protected array $options = [];
+    protected array $options         = [];
+    protected array $optionAllIgnore = [];
 
     /**
      * @param BackedEnum $enum
@@ -109,5 +110,20 @@ trait Options
         }
 
         return $out;
+    }
+
+    public function getOptionAllIgnore(): array
+    {
+        return $this->optionAllIgnore;
+    }
+
+    public function setOptionAllIgnore(array $values): void
+    {
+        $this->optionAllIgnore = $values;
+    }
+
+    public function addOptionAllIgnore(mixed $value): void
+    {
+        $this->optionAllIgnore[] = $value;
     }
 }
