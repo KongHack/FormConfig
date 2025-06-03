@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.7](https://github.com/KongHack/FormConfig/releases/tag/3.11.7)
+- @GameCharmer Ignore system for all selection
+
+
+
 ## [3.11.6](https://github.com/KongHack/FormConfig/releases/tag/3.11.6)
 - @GameCharmer Add type cast to getMaxLength
 
