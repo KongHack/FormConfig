@@ -20,7 +20,7 @@
                 width:'100%',
                 data: {{ field.getGroupsSelect2()|json_encode|raw }},
                 templateSelection: function(result, container) {
-                    console.log(result);
+                    console.log(['templateSelection Called', container, result]);
 
                     let callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
                     if(callbackMethod !== '') {
@@ -30,7 +30,7 @@
                     return result.text;
                 },
                 templateResult: function(result) {
-                    console.log(result);
+                    console.log(['templateResult Called', result]);
 
                     let callbackMethod = '{{ field.getMetaData('templateResult') ?? '' }}';
                     if(callbackMethod !== '') {
@@ -38,7 +38,11 @@
                     }
                     return result.text;
                 },
-                escapeMarkup: function (markup) { return markup; },
+                escapeMarkup: function (markup) {
+                    console.log(['escapeMarkup Called', markup]);
+
+                    return markup;
+                },
                 allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}
             });
@@ -52,6 +56,7 @@
                         $(field).select2('val',"{{ field.value }}");
                     {% endif %}
                 {% endif %}
+                $(field).trigger('change');
             {% endif %}
 
         });
