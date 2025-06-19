@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.12](https://github.com/KongHack/FormConfig/releases/tag/3.11.12)
+- @GameCharmer Move `Select2HTMLGroupedSingle` to independent global variable for ease of debugging, add new console log calls
+
+
 ## [3.11.11](https://github.com/KongHack/FormConfig/releases/tag/3.11.11)
 - @GameCharmer Patch up `Select2HTMLGroupedSingle`. Looks like we're going to need to use more arrays to make this work
 

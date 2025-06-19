@@ -8,8 +8,12 @@
     >
 
     <script type="text/javascript">
+        var {{ field.id }}_data = {{ field.getGroupsSelect2()|json_encode|raw }};
+
         $(function(){
-            var field = $("#{{ field.id }}").select2({
+            let field = $("#{{ field.id }}");
+
+            $(field).select2({
                 {% if field.getSelect2DropdownParent() != '' %}
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
@@ -18,7 +22,7 @@
                 {% endif %}
                 theme: "bootstrap",
                 width:'100%',
-                data: {{ field.getGroupsSelect2()|json_encode|raw }},
+                data: {{ field.id }}_data,
                 templateSelection: function(result, container) {
                     let callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
                     if(callbackMethod !== '') {
@@ -40,6 +44,13 @@
                 allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}
             });
+            $(field).on('select2:select', function () {
+                console.log('on select: ' + $(this).val());
+            });
+            $(field).on('select2:close', function () {
+                console.log('on close: ' + $(this).val());
+            });
+
             {% if field.value|length > 0 %}
                 {% if field.value is iterable %}
                     {% for k in field.value %}
