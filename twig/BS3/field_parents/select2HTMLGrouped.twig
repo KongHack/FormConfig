@@ -27,7 +27,7 @@
                         return window[callbackMethod](result)
                     }
 
-                    return result.text;
+                    return $.parseHTML(result.text);
                 },
                 templateResult: function(result) {
                     console.log(['templateResult Called', result]);
@@ -36,12 +36,12 @@
                     if(callbackMethod !== '') {
                         return window[callbackMethod](result)
                     }
-                    return result.text;
+                    return $.parseHTML(result.text);
                 },
                 escapeMarkup: function (markup) {
                     console.log(['escapeMarkup Called', markup]);
 
-                    return markup;
+                    return $.parseHTML(markup);
                 },
                 allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.10](https://github.com/KongHack/FormConfig/releases/tag/3.11.10)
+- @GameCharmer attempt using parseHTML to deal with select2's text option
+
+
+
 ## [3.11.9](https://github.com/KongHack/FormConfig/releases/tag/3.11.9)
 - @GameCharmer Add additional console log data to `Select2HTMLGroupedSingle`, include a `trigger('change')` for good measure
 
