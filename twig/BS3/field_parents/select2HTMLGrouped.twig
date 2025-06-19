@@ -1,0 +1,62 @@
+{% macro render(field, multi) %}
+    <input type="hidden"
+           name="{{ field.name }}"
+           id="{{ field.id }}"
+           class="{{ field.class }}"
+           {{ field.getAutoCompleteAttribute()|raw }}
+           {{ field.getDataAttributeString()|raw }}
+    >
+
+    <script type="text/javascript">
+        $(function(){
+            var field = $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                {% if field.getMaxSelectionLength() > 0 %}
+                maximumSelectionLength: {{ field.getMaxSelectionLength() }},
+                {% endif %}
+                theme: "bootstrap",
+                width:'100%',
+                data: {{ field.getGroupsSelect2()|json_encode|raw }},
+                templateSelection: function(result, container) {
+                    console.log(result);
+
+                    let callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
+                    if(callbackMethod !== '') {
+                        return window[callbackMethod](result)
+                    }
+
+                    return result.text;
+                },
+                templateResult: function(result) {
+                    console.log(result);
+
+                    let callbackMethod = '{{ field.getMetaData('templateResult') ?? '' }}';
+                    if(callbackMethod !== '') {
+                        return window[callbackMethod](result)
+                    }
+                    return result.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
+                multiple: {{ multi ? 'true':'false' }}
+            });
+            {% if field.value|length > 0 %}
+                {% if field.value is iterable %}
+                    {% for k in field.value %}
+                        $(field).select2('val',{{ field.value|json_encode|raw }});
+                    {% endfor %}
+                {% else %}
+                    {% if field.value != '' %}
+                        $(field).select2('val',"{{ field.value }}");
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+        });
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

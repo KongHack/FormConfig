@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.8](https://github.com/KongHack/FormConfig/releases/tag/3.11.8)
+- @GameCharmer `Select2HTMLGroupedSingle` field (experimental)
+
+
+
 ## [3.11.7](https://github.com/KongHack/FormConfig/releases/tag/3.11.7)
 - @GameCharmer Ignore system for all selection
 
