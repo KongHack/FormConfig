@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.13](https://github.com/KongHack/FormConfig/releases/tag/3.11.13)
+- @GameCharmer Attempt using on close to properly render select2 HTML
+
+
+
 ## [3.11.12](https://github.com/KongHack/FormConfig/releases/tag/3.11.12)
 - @GameCharmer Move `Select2HTMLGroupedSingle` to independent global variable for ease of debugging, add new console log calls
 

@@ -48,7 +48,19 @@
                 console.log('on select: ' + $(this).val());
             });
             $(field).on('select2:close', function () {
-                console.log('on close: ' + $(this).val());
+                let val = $(this).val();
+                console.log('on close: ' + val);
+
+                let tmp = {{ field.id }}_data;
+                this_loop:
+                for(let i = 0; i < tmp.length; i++) {
+                    for(let j = 0; j < tmp[i].children.length; i++) {
+                        if(tmp[i].children[j].id == val) {
+                            $("#select2-{{ field.id }}-container").html(tmp[i].children[j].html);
+                            break this_loop;
+                        }
+                    }
+                }
             });
 
             {% if field.value|length > 0 %}
