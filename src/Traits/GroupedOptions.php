@@ -69,6 +69,7 @@ trait GroupedOptions
      * @param string|int $groupId
      * @param array $options
      * @return $this
+     * @throws Exception
      */
     public function setOptions(string|int $groupId, array $options): static
     {
@@ -83,18 +84,27 @@ trait GroupedOptions
 
     /**
      * @param string|int $groupId
-     * @param string|int|float $key
+     * @param string|int $key
      * @param string|int|float $value
+     * @param string|null $html
      * @return $this
      * @throws Exception
      */
-    public function addOption(string|int $groupId, string|int|float $key, string|int|float $value): static
+    public function addOption(
+        string|int $groupId,
+        string|int $key,
+        string|int|float $value,
+        ?string $html = null
+    ): static
     {
         if(!isset($this->groups[$groupId])) {
             throw new Exception('Group does not exist');
         }
 
-        $this->groups[$groupId]['children'][$key] = $value;
+        $this->groups[$groupId]['children'][$key] = [
+            'text' => $value,
+            'html' => $html ?? $value,
+        ];
 
         return $this;
     }
@@ -132,6 +142,13 @@ trait GroupedOptions
                 'children' => [],
             ];
             foreach($group['children'] as $k => $v) {
+                if(is_array($v)) {
+                    $v['id']            = $k;
+                    $item['children'][] = $v;
+
+                    continue;
+                }
+
                 $item['children'][] = [
                     'id'   => $k,
                     'text' => $v,

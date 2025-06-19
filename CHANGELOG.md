@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.11](https://github.com/KongHack/FormConfig/releases/tag/3.11.11)
+- @GameCharmer Patch up `Select2HTMLGroupedSingle`. Looks like we're going to need to use more arrays to make this work
+
+
+
 ## [3.11.10](https://github.com/KongHack/FormConfig/releases/tag/3.11.10)
 - @GameCharmer attempt using parseHTML to deal with select2's text option
 
