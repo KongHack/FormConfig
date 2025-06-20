@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.14](https://github.com/KongHack/FormConfig/releases/tag/3.11.14)
+- @GameCharmer We need a better Select2
+
+
+
 ## [3.11.13](https://github.com/KongHack/FormConfig/releases/tag/3.11.13)
 - @GameCharmer Attempt using on close to properly render select2 HTML
 

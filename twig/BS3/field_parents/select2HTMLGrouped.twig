@@ -51,12 +51,19 @@
                 let val = $(this).val();
                 console.log('on close: ' + val);
 
-                let tmp = {{ field.id }}_data;
+                const tmp = {{ field.id }}_data;
                 this_loop:
                 for(let i = 0; i < tmp.length; i++) {
-                    for(let j = 0; j < tmp[i].children.length; i++) {
-                        if(tmp[i].children[j].id == val) {
-                            $("#select2-{{ field.id }}-container").html(tmp[i].children[j].html);
+                    let tmp2 = tmp[i];
+                    for(let j = 0; j < tmp2.children.length; j++) {
+                        console.log(tmp2.children);
+                        if(tmp2.children[j].id == val) {
+                            let outHtml = tmp2.children[j].html;
+                            console.log('SETTING:: ',outHtml);
+                            $("#select2-{{ field.id }}-container").html(outHtml);
+                            setTimeout(function(){
+                                $("#select2-{{ field.id }}-container").html(outHtml);
+                            },100);
                             break this_loop;
                         }
                     }
