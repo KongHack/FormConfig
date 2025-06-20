@@ -1,10 +1,10 @@
 {% macro render(field, multi) %}
     <input type="hidden"
-           name="{{ field.name }}"
-           id="{{ field.id }}"
-           class="{{ field.class }}"
-           {{ field.getAutoCompleteAttribute()|raw }}
-           {{ field.getDataAttributeString()|raw }}
+       name="{{ field.name }}"
+       id="{{ field.id }}"
+       class="{{ field.class }}"
+       {{ field.getAutoCompleteAttribute()|raw }}
+       {{ field.getDataAttributeString()|raw }}
     >
 
     <script type="text/javascript">
@@ -48,10 +48,12 @@
                 console.log('on select: ' + $(this).val());
             });
             $(field).on('select2:close', function () {
-                let val = $(this).val();
-                console.log('on close: ' + val);
-
+                console.log('on close: ', $(this).val());
+                processSelection($(this).val());
+            });
+            function processSelection(val) {
                 const tmp = {{ field.id }}_data;
+
                 this_loop:
                 for(let i = 0; i < tmp.length; i++) {
                     let tmp2 = tmp[i];
@@ -68,7 +70,7 @@
                         }
                     }
                 }
-            });
+            }
 
             {% if field.value|length > 0 %}
                 {% if field.value is iterable %}
@@ -78,6 +80,7 @@
                 {% else %}
                     {% if field.value != '' %}
                         $(field).select2('val',"{{ field.value }}");
+                        processSelection('{{ field.value }}')
                     {% endif %}
                 {% endif %}
                 $(field).trigger('change');

@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.15](https://github.com/KongHack/FormConfig/releases/tag/3.11.15)
+- @GameCharmer setTimeout seems to be the only way to fix Select2 in this instance
+
+
+
 ## [3.11.14](https://github.com/KongHack/FormConfig/releases/tag/3.11.14)
 - @GameCharmer We need a better Select2
 
