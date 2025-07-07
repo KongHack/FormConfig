@@ -607,7 +607,8 @@ class FormConfig implements FieldContainerInterface
 
     /**
      * @param ORMDescriptionInterface $cObject
-     * @param string                  $fieldName
+     * @param string $fieldName
+     * @param FormField $cField
      *
      * @return void
      */

@@ -9,7 +9,18 @@
 
     <script type="text/javascript">
         $(function(){
-            var field = $("#{{ field.id }}").select2({
+            let $field = $("#{{ field.id }}");
+            {% if field.value|length > 0 %}
+                {% if field.value is iterable %}
+                    $field.val({{ field.value|json_encode|raw }});
+                    {% else %}
+                        {% if field.value != '' %}
+                        $field.val("{{ field.value }}");
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            $field.select2({
                 {% if field.getSelect2DropdownParent() != '' %}
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
@@ -42,18 +53,6 @@
                 allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}
             });
-            {% if field.value|length > 0 %}
-                {% if field.value is iterable %}
-                    {% for k in field.value %}
-                        $(field).select2('val',{{ field.value|json_encode|raw }});
-                    {% endfor %}
-                {% else %}
-                    {% if field.value != '' %}
-                        $(field).select2('val',"{{ field.value }}");
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-
         });
     </script>
     {% if field.getScript() is not empty %}
