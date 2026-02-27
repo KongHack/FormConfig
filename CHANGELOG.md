@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.18](https://github.com/KongHack/FormConfig/releases/tag/3.11.18)
+- @GameCharmer Update Composer and PHPStan Dependencies
+
+
+
 ## [3.11.17](https://github.com/KongHack/FormConfig/releases/tag/3.11.17)
 - @GameCharmer `RadioTable` for handling those bulky radio groups
 
