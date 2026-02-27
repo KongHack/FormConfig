@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.17](https://github.com/KongHack/FormConfig/releases/tag/3.11.17)
+- @GameCharmer `RadioTable` for handling those bulky radio groups
+
+
+
 ## [3.11.16](https://github.com/KongHack/FormConfig/releases/tag/3.11.16)
 - @GameCharmer Update Select2HTML Implementation to set value before init of select2. This conforms with the latest Select2 version's use of `'val'`
 
