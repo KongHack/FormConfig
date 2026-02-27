@@ -9,7 +9,7 @@
   ],
   "require": {
     "php": ">=8.4",
-    "composer/composer": "^2.7",
+    "composer/composer": "^2.9",
     "composer/installers": ">=2.2",
     "twig/twig": "^3.14",
     "kint-php/kint": ">=1.1",
