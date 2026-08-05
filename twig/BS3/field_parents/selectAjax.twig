@@ -8,7 +8,7 @@
             class="form-control {{ field.class }}"
             {{ field.getAutoCompleteAttribute()|raw }}
             {{ field.getDataAttributeString()|raw }}
-            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledby ~ '"' }}
+            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"' }}
     >
         {% if placeholder and not multi %}
             <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>

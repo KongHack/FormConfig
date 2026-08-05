@@ -1,0 +1,158 @@
+```twig
+{% macro render(field, multi, overrideOptions, overridePlaceholder) %}
+    {% set options = overrideOptions ? overrideOptions : field.options %}
+    {% set placeholder = overridePlaceholder ? overridePlaceholder : field.getPlaceholder() %}
+
+    <select name="{{ field.name }}"
+            {{ multi ? 'multiple="multiple"' : '' }}
+            id="{{ field.id }}"
+            class="form-control {{ field.class }}"
+            {{ field.getAutoCompleteAttribute()|raw }}
+            {{ field.getDataAttributeString()|raw }}
+            {{ field.labelledBy != '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"' }}
+    >
+        {% if placeholder and not multi %}
+            <option value=""
+                    disabled="disabled"
+                    {{ field.value is empty or field.value == 0 ? 'selected' : '' }}
+            >
+                {{ placeholder }}
+            </option>
+        {% endif %}
+
+        {#
+        Only render currently selected options.
+        The complete option list is loaded through AJAX when Select2 is first opened.
+        #}
+        {% for k, v in options %}
+            {% if multi and k in field.value %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif not multi and field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <script type="text/javascript">
+        $(function () {
+            const $select = $("#{{ field.id }}");
+
+            let cachedResponse = null;
+            let activeRequest = null;
+
+            $select.select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+
+                containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
+                theme: "bootstrap",
+                width: "100%",
+
+                ajax: {
+                    url: "{{ field.getAjaxUrl() }}",
+                    method: "{{ field.getAjaxMethod() }}",
+                    dataType: "json",
+
+                    /*
+                     * Reuse the first successful response rather than hitting the endpoint every time the dropdown is reopened.
+                     */
+                    transport: function (params, success, failure) {
+                        if (cachedResponse !== null) {
+                            success(cachedResponse);
+
+                            return {
+                                abort: function () {}
+                            };
+                        }
+
+                        /*
+                         * Prevent frantic meat-finger clicking from creating several identical requests while the first is active.
+                         */
+                        if (activeRequest !== null) {
+                            activeRequest
+                                .done(success)
+                                .fail(failure);
+
+                            return activeRequest;
+                        }
+
+                        activeRequest = $.ajax(params);
+
+                        activeRequest
+                            .done(function (response) {
+                                cachedResponse = response;
+                                success(response);
+                            })
+                            .fail(failure)
+                            .always(function () {
+                                activeRequest = null;
+                            });
+
+                        return activeRequest;
+                    },
+
+                    /*
+                     * Send the existing data-* attributes, but no search term or pagination values.
+                     */
+                    data: function () {
+                        const requestData = {};
+
+                        $.each($select.data(), function (key, value) {
+                            if (
+                                typeof value !== "object"
+                                && typeof value !== "function"
+                                && key !== "q"
+                                && key !== "page"
+                            ) {
+                                requestData[key] = value;
+                            }
+                        });
+
+                        return requestData;
+                    },
+
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+
+                    cache: false
+                },
+
+                templateSelection: function (result) {
+                    return result.text;
+                },
+
+                templateResult: function (result) {
+                    return result.text;
+                },
+
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+
+                /*
+                 * Allow the initial request immediately when opened.
+                 */
+                minimumInputLength: 0,
+
+                /*
+                 * Hide the search box. All returned options are displayed.
+                 */
+                minimumResultsForSearch: Infinity,
+
+                multiple: {{ multi ? 'true' : 'false' }}
+            });
+        });
+    </script>
+
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">
+            {{ field.getScript()|raw }}
+        </script>
+    {% endif %}
+{% endmacro %}
+```
