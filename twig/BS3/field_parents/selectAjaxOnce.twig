@@ -36,11 +36,7 @@
     <script type="text/javascript">
         $(function () {
             const $select = $("#{{ field.id }}");
-
-            let cachedResponse = null;
-            let activeRequest = null;
-
-            $select.select2({
+            const select2BaseConfig = {
                 {% if field.getSelect2DropdownParent() != '' %}
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
@@ -49,78 +45,6 @@
                 allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
                 theme: "bootstrap",
                 width: "100%",
-
-                ajax: {
-                    url: "{{ field.getAjaxUrl() }}",
-                    method: "{{ field.getAjaxMethod() }}",
-                    dataType: "json",
-
-                    /*
-                     * Reuse the first successful response rather than hitting the endpoint every time the dropdown is reopened.
-                     */
-                    transport: function (params, success, failure) {
-                        if (cachedResponse !== null) {
-                            success(cachedResponse);
-
-                            return {
-                                abort: function () {}
-                            };
-                        }
-
-                        /*
-                         * Prevent frantic meat-finger clicking from creating several identical requests while the first is active.
-                         */
-                        if (activeRequest !== null) {
-                            activeRequest
-                                .done(success)
-                                .fail(failure);
-
-                            return activeRequest;
-                        }
-
-                        activeRequest = $.ajax(params);
-
-                        activeRequest
-                            .done(function (response) {
-                                cachedResponse = response;
-                                success(response);
-                            })
-                            .fail(failure)
-                            .always(function () {
-                                activeRequest = null;
-                            });
-
-                        return activeRequest;
-                    },
-
-                    /*
-                     * Send the existing data-* attributes, but no search term or pagination values.
-                     */
-                    data: function () {
-                        const requestData = {};
-
-                        $.each($select.data(), function (key, value) {
-                            if (
-                                typeof value !== "object"
-                                && typeof value !== "function"
-                                && key !== "q"
-                                && key !== "page"
-                            ) {
-                                requestData[key] = value;
-                            }
-                        });
-
-                        return requestData;
-                    },
-
-                    processResults: function (data) {
-                        return {
-                            results: data
-                        };
-                    },
-
-                    cache: false
-                },
 
                 templateSelection: function (result) {
                     return result.text;
@@ -134,17 +58,119 @@
                     return markup;
                 },
 
-                /*
-                 * Allow the initial request immediately when opened.
-                 */
                 minimumInputLength: 0,
-
-                /*
-                 * Hide the search box. All returned options are displayed.
-                 */
-                minimumResultsForSearch: Infinity,
-
+                minimumResultsForSearch: 0,
                 multiple: {{ multi ? 'true' : 'false' }}
+            };
+
+            let cachedResponse = null;
+            let activeRequest = null;
+            let hasLoadedOptions = false;
+            let shouldOpenAfterLoad = false;
+
+            function getRequestData() {
+                const requestData = {};
+
+                $.each($select.data(), function (key, value) {
+                    if (
+                        typeof value !== "object"
+                        && typeof value !== "function"
+                        && key !== "q"
+                        && key !== "page"
+                    ) {
+                        requestData[key] = value;
+                    }
+                });
+
+                return requestData;
+            }
+
+            function getSelectedValues() {
+                const selectedValue = $select.val();
+
+                if (selectedValue === null) {
+                    return [];
+                }
+
+                return Array.isArray(selectedValue)
+                    ? selectedValue.map(String)
+                    : [String(selectedValue)];
+            }
+
+            function rebuildSelectWithLoadedOptions() {
+                const selectedValues = getSelectedValues();
+                const placeholderOptions = $select
+                    .find('option[value=""][disabled]')
+                    .clone();
+
+                if ($select.data("select2")) {
+                    $select.select2("destroy");
+                }
+
+                $select.empty().append(placeholderOptions);
+                $select.select2($.extend(true, {}, select2BaseConfig, {
+                    data: cachedResponse
+                }));
+
+                {% if multi %}
+                $select.val(selectedValues).trigger("change");
+                {% else %}
+                $select
+                    .val(selectedValues.length > 0 ? selectedValues[0] : "")
+                    .trigger("change");
+                {% endif %}
+            }
+
+            function loadOptionsOnce() {
+                if (cachedResponse !== null) {
+                    hasLoadedOptions = true;
+                    rebuildSelectWithLoadedOptions();
+
+                    if (shouldOpenAfterLoad) {
+                        shouldOpenAfterLoad = false;
+                        $select.select2("open");
+                    }
+
+                    return;
+                }
+
+                if (activeRequest !== null) {
+                    return;
+                }
+
+                activeRequest = $.ajax({
+                    url: "{{ field.getAjaxUrl() }}",
+                    method: "{{ field.getAjaxMethod() }}",
+                    dataType: "json",
+                    data: getRequestData()
+                });
+
+                activeRequest
+                    .done(function (response) {
+                        cachedResponse = response;
+                        hasLoadedOptions = true;
+                        rebuildSelectWithLoadedOptions();
+
+                        if (shouldOpenAfterLoad) {
+                            shouldOpenAfterLoad = false;
+                            $select.select2("open");
+                        }
+                    })
+                    .always(function () {
+                        activeRequest = null;
+                    });
+            }
+
+            $select.select2(select2BaseConfig);
+
+            $select.on("select2:opening.selectAjaxOnce", function (event) {
+                if (hasLoadedOptions) {
+                    return;
+                }
+
+                event.preventDefault();
+                shouldOpenAfterLoad = true;
+                loadOptionsOnce();
             });
         });
     </script>

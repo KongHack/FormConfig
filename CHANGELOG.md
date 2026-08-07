@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.11.22](https://github.com/KongHack/FormConfig/releases/tag/3.11.22)
+- @GameCharmer Enable Search for Select 2 Once 
+
+
+
 ## [3.11.21](https://github.com/KongHack/FormConfig/releases/tag/3.11.21)
 - @GameCharmer Missed a Once adjustment
 
