@@ -142,7 +142,17 @@
                     url: "{{ field.getAjaxUrl() }}",
                     method: "{{ field.getAjaxMethod() }}",
                     dataType: "json",
-                    data: getRequestData()
+                    data: getRequestData(),
+                    beforeSend: function() {
+                        if(window.HoldOn) {
+                            window.HoldOn.open(window.HoldOnOptions || {});
+                        }
+                    },
+                    complete: function() {
+                        if(window.HoldOn) {
+                            window.HoldOn.close();
+                        }
+                    }
                 });
 
                 activeRequest
