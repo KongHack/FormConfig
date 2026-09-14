@@ -5,3 +5,4 @@ config/config.yml
 config/GCWorld_FormConfig.yml
 twig/cache/*
 docker-compose-local.yml
+codex/*
