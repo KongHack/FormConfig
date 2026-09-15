@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\Enums\FCHookMethod;
@@ -9,9 +10,9 @@ use GCWorld\FormConfig\Enums\FCHookType;
  */
 class FCHook
 {
-    protected FCHookType   $cType;
+    protected FCHookType $cType;
     protected FCHookMethod $cMethod;
-    protected string       $data;
+    protected string $data;
 
     /**
      * @param FCHookType   $type
@@ -48,5 +49,4 @@ class FCHook
     {
         return $this->data;
     }
-
 }

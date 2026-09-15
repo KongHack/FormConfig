@@ -1,7 +1,7 @@
 <?php
+
 namespace GCWorld\FormConfig\Forms;
 
-use GCWorld\FormConfig\FieldInterface;
 use GCWorld\FormConfig\Generated\FieldConstants;
 use GCWorld\FormConfig\MultiSelectInterface;
 use GCWorld\FormConfig\Traits\AutoComplete;
@@ -21,34 +21,38 @@ class FormField implements \JsonSerializable
     use AutoComplete;
     use Options;
 
+    /** @var list<string> */
     protected static array $types = [];
 
-    protected array   $errors = [];
-    protected mixed   $value = null;
+    /** @var list<string> */
+    protected array $errors = [];
+    protected mixed $value = null;
     protected ?string $name = null;
     protected ?string $id = null;
     protected ?string $class = null;
     protected ?string $label = null;
     protected ?string $script = null;
-    protected string  $type = 'textInput';
+    protected string $type = 'textInput';
     protected ?string $placeholder = null;
-    protected int     $reqLevel = 1;    //Default of 1
-    protected ?int    $maxLength = null;
+    protected int $reqLevel = 1;    //Default of 1
+    protected ?int $maxLength = null;
     protected ?string $underLabelHtml = null;
-    protected bool    $suppressLabel = false;
+    protected bool $suppressLabel = false;
     protected ?string $helpText = null;
     protected ?string $noticeText = null;
     protected ?string $ajaxUrl = null;
     protected ?string $height = null;
-    protected ?array  $dataAttributes = [];
-    protected string  $ajaxMethod = 'GET';
-    protected array   $definition = [];
-    protected string  $labelledBy = '';
-    protected string  $wrappingClass = '';
-    protected bool    $isUsed = false;
-    protected ?int    $numberMin = null;
-    protected ?int    $numberMax = null;
-    protected ?float  $numberStep = null;
+    /** @var array<string, mixed>|null */
+    protected ?array $dataAttributes = [];
+    protected string $ajaxMethod = 'GET';
+    /** @var array<string, string> */
+    protected array $definition = [];
+    protected string $labelledBy = '';
+    protected string $wrappingClass = '';
+    protected bool $isUsed = false;
+    protected ?int $numberMin = null;
+    protected ?int $numberMax = null;
+    protected ?float $numberStep = null;
 
     /**
      * @param string $name
@@ -72,7 +76,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return list<string>
      */
     public function getErrors(): array
     {
@@ -86,7 +90,7 @@ class FormField implements \JsonSerializable
      */
     public function setValue($value): static
     {
-        if($value instanceof \BackedEnum) {
+        if ($value instanceof \BackedEnum) {
             $value = $value->value;
         }
 
@@ -124,7 +128,7 @@ class FormField implements \JsonSerializable
         $obj   = new $class();
         if ($obj instanceof MultiSelectInterface) {
             if ('[]' != substr($this->name, -2)) {
-                return $this->name.'[]';
+                return $this->name . '[]';
             }
         }
 
@@ -159,7 +163,7 @@ class FormField implements \JsonSerializable
     public function getID()
     {
         if (null == $this->id) {
-            return 'id_'.str_replace('[]', '', $this->name);
+            return 'id_' . str_replace('[]', '', $this->name);
         }
 
         return $this->id;
@@ -198,7 +202,7 @@ class FormField implements \JsonSerializable
      */
     public function getClass()
     {
-        return 'gc-form-field '.$this->class;
+        return 'gc-form-field ' . $this->class;
     }
 
     /**
@@ -211,7 +215,7 @@ class FormField implements \JsonSerializable
     public function setType(string $type)
     {
         if (!in_array($type, self::getTypes())) {
-            $msg = 'Invalid Type: '.$type.'<br>Possible field types are: '.implode(', ',self::getTypes());
+            $msg = 'Invalid Type: ' . $type . '<br>Possible field types are: ' . implode(', ', self::getTypes());
             throw new \Exception($msg);
         }
 
@@ -226,7 +230,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getDefinition()
     {
@@ -306,7 +310,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @param array $options
+     * @param array<int|string, int|float|string> $options
      *
      * @return $this
      */
@@ -478,7 +482,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return array|null
+     * @return array<string, mixed>
      */
     public function getDataAttributes()
     {
@@ -489,7 +493,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @param array $dataAttributes
+     * @param array<string, mixed> $dataAttributes
      *
      * @return $this
      */
@@ -521,9 +525,9 @@ class FormField implements \JsonSerializable
         $dataString = '';
         foreach ($this->getDataAttributes() as $dk => $dv) {
             if (null == $dv || '' == $dv) {
-                $dataString .= ' data-'.$dk.'=""';
+                $dataString .= ' data-' . $dk . '=""';
             } else {
-                $dataString .= ' data-'.$dk.'="'.htmlentities($dv).'"';
+                $dataString .= ' data-' . $dk . '="' . htmlentities($dv) . '"';
             }
         }
 
@@ -531,7 +535,7 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return list<string>
      */
     public static function getTypes()
     {
@@ -597,7 +601,6 @@ class FormField implements \JsonSerializable
     public function isStandardLabel()
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
-        /** @var FieldInterface $obj */
         $obj   = new $class();
 
         return $obj::isStandardLabel();
@@ -609,7 +612,6 @@ class FormField implements \JsonSerializable
     public function isStandardGrouping()
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
-        /** @var FieldInterface $obj */
         $obj   = new $class();
 
         return $obj::isStandardGrouping();
@@ -637,7 +639,7 @@ class FormField implements \JsonSerializable
      * @param int|null $min
      * @return $this
      */
-    public function setMin(int $min = null)
+    public function setMin(?int $min = null)
     {
         $this->numberMin = $min;
 
@@ -648,7 +650,7 @@ class FormField implements \JsonSerializable
      * @param int|null $max
      * @return $this
      */
-    public function setMax(int $max = null)
+    public function setMax(?int $max = null)
     {
         $this->numberMax = $max;
 
@@ -659,7 +661,7 @@ class FormField implements \JsonSerializable
      * @param float|null $step
      * @return $this
      */
-    public function setStep(float $step = null)
+    public function setStep(?float $step = null)
     {
         $this->numberStep = $step;
 
@@ -710,14 +712,14 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function jsonSerialize(): mixed
     {
         return [
             'id'                => $this->getID(),
             'type'              => $this->getType(),
-            'type_definition'   => FieldConstants::DEFINITIONS[$this->getType()]??[],
+            'type_definition'   => FieldConstants::DEFINITIONS[$this->getType()] ?? [],
             'name'              => $this->getName(),
             'name_raw'          => $this->getNameRaw(),
             'label'             => $this->getLabel(),

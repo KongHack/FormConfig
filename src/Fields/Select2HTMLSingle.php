@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -57,7 +58,7 @@ class Select2HTMLSingle extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/select2HTMLSingle.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/select2HTMLSingle.twig';
     }
 
     /**

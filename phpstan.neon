@@ -1,7 +1,10 @@
 parameters:
+	level: 6
+	paths:
+		- src
+		- tests
+
 	reportUnmatchedIgnoredErrors: false
 	excludePaths:
-		- %rootDir%/../../../src/Generated/*
-
-	ignoreErrors:
-		- '#will always evaluate to false#'
+		analyse:
+			- src/Generated/*

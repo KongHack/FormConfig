@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\FieldInterface;
@@ -9,6 +10,7 @@ use GCWorld\FormConfig\FieldInterface;
  */
 class Compiler
 {
+    /** @var array<string, string> */
     protected array $groups = [];
 
     /**
@@ -16,15 +18,15 @@ class Compiler
      */
     public function __construct()
     {
-        $base = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-        $dir  = $base . '..'.DIRECTORY_SEPARATOR.'Fields';
+        $base = rtrim(__DIR__, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $dir  = $base . '..' . DIRECTORY_SEPARATOR . 'Fields';
         $this->groups['\\GCWorld\\FormConfig\\Fields'] = $dir;
 
         $config = Config::getInstance()->getConfig();
 
-        if(isset($config['forms'])) {
+        if (isset($config['forms'])) {
             foreach ($config['forms'] as $group => $item) {
-                if($group == 'example_group') {
+                if ($group == 'example_group') {
                     continue;
                 }
 
@@ -33,15 +35,15 @@ class Compiler
                 // Core / Source / Vendors
                 $found = false;
                 for ($i = 3; $i < 10; ++$i) {
-                    $up = str_repeat('..'.DIRECTORY_SEPARATOR, $i);
-                    if (is_dir($base.$up.$directory)) {
-                        $this->addFieldGroup($namespace, realpath($base.$up.$directory));
+                    $up = str_repeat('..' . DIRECTORY_SEPARATOR, $i);
+                    if (is_dir($base . $up . $directory)) {
+                        $this->addFieldGroup($namespace, realpath($base . $up . $directory));
                         $found = true;
                         break;
                     }
                 }
                 if (!$found) {
-                    throw new \Exception('Did not find the things in group: '.$group);
+                    throw new \Exception('Did not find the things in group: ' . $group);
                 }
             }
         }
@@ -68,8 +70,8 @@ class Compiler
     {
         $objects = [];
         foreach ($this->groups as $ns => $dir) {
-            $files = glob($dir.DIRECTORY_SEPARATOR.'*.php');
-            if($debug) {
+            $files = glob($dir . DIRECTORY_SEPARATOR . '*.php');
+            if ($debug) {
                 d($dir);
                 d($files);
             }
@@ -78,13 +80,12 @@ class Compiler
                 $fileName  = array_pop($tmp);
                 $tmp       = explode('.', $fileName);
                 $className = array_shift($tmp);
-                $fullName  = $ns.'\\'.$className;
+                $fullName  = $ns . '\\' . $className;
                 $cObject   = new $fullName();
 
                 if ($cObject instanceof FieldInterface) {
                     $objects[$className] = $cObject;
                 }
-
             }
         }
 
@@ -96,7 +97,7 @@ class Compiler
         $definitions = [];
         foreach ($objects as $name => $object) {
             /** @var FieldInterface $object */
-            $constant = 'TYPE_'.$object::getConstantName();
+            $constant = 'TYPE_' . $object::getConstantName();
             $key      = $object::getKey();
             $twig     = $object::getTwigPath();
             $class    = get_class($object);
@@ -110,65 +111,64 @@ class Compiler
             ];
         }
 
-        if($debug) {
+        if ($debug) {
             d($definitions);
         }
 
         // Make sure directory exists!
-        $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.
-            DIRECTORY_SEPARATOR.'Generated'.DIRECTORY_SEPARATOR;
+        $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '..' .
+            DIRECTORY_SEPARATOR . 'Generated' . DIRECTORY_SEPARATOR;
         if (!is_dir($dir)) {
             mkdir($dir);
         }
         $fileName = 'FieldConstants.php';
-        $contents = '<?php'.PHP_EOL;
-        $contents .= 'namespace GCWorld\\FormConfig\\Generated;'.PHP_EOL;
+        $contents = '<?php' . PHP_EOL;
+        $contents .= 'namespace GCWorld\\FormConfig\\Generated;' . PHP_EOL;
         $contents .= PHP_EOL;
-        $contents .= 'interface FieldConstants'.PHP_EOL;
-        $contents .= '{'.PHP_EOL;
+        $contents .= 'interface FieldConstants' . PHP_EOL;
+        $contents .= '{' . PHP_EOL;
         foreach ($constants as $k => $v) {
-            $contents .= '    const '.$k.' = '.var_export($v, true).';'.PHP_EOL;
+            $contents .= '    const ' . $k . ' = ' . var_export($v, true) . ';' . PHP_EOL;
         }
         $contents .= PHP_EOL;
 
         $encoded  = var_export($definitions, true);
-        $contents .= '    const DEFINITIONS = '.$encoded.';'.PHP_EOL;
-        $contents .= '}'.PHP_EOL.PHP_EOL;
+        $contents .= '    const DEFINITIONS = ' . $encoded . ';' . PHP_EOL;
+        $contents .= '}' . PHP_EOL . PHP_EOL;
 
-        file_put_contents($dir.$fileName, $contents);
+        file_put_contents($dir . $fileName, $contents);
 
         $fileName = 'FieldCreate.php';
-        $contents = '<?php'.PHP_EOL;
-        $contents .= 'namespace GCWorld\\FormConfig\\Generated;'.PHP_EOL;
+        $contents = '<?php' . PHP_EOL;
+        $contents .= 'namespace GCWorld\\FormConfig\\Generated;' . PHP_EOL;
         $contents .= PHP_EOL;
-        $contents .= 'use GCWorld\\FormConfig\\Abstracts\\FieldCreateParent as FCP;'.PHP_EOL;
+        $contents .= 'use GCWorld\\FormConfig\\Abstracts\\FieldCreateParent as FCP;' . PHP_EOL;
         $contents .= PHP_EOL;
-        $contents .= '/**'.PHP_EOL;
-        $contents .= ' * Class FieldCreate'.PHP_EOL;
-        $contents .= ' */'.PHP_EOL;
-        $contents .= 'class FieldCreate extends FCP'.PHP_EOL;
-        $contents .= '{'.PHP_EOL;
-        foreach($definitions as $key => $definition) {
-            $class = $definition['class'];
-            $pieces = preg_split('/(?=[A-Z])/',$key);
+        $contents .= '/**' . PHP_EOL;
+        $contents .= ' * Class FieldCreate' . PHP_EOL;
+        $contents .= ' */' . PHP_EOL;
+        $contents .= 'class FieldCreate extends FCP' . PHP_EOL;
+        $contents .= '{' . PHP_EOL;
+        foreach ($definitions as $key => $definition) {
+            $pieces = preg_split('/(?=[A-Z])/', $key);
             $pieces[0] = ucfirst($pieces[0]);
-            $function = 'create'.implode('',$pieces);
-            $contents .= '    /**'.PHP_EOL;
-            $contents .= '     * @param string $name'.PHP_EOL;
-            $contents .= '     * @return \\'.$class.PHP_EOL;
-            $contents .= '     */'.PHP_EOL;
-            $contents .= '    public function '.$function.'(string $name)'.PHP_EOL;
-            $contents .= '    {'.PHP_EOL;
-            $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);'.PHP_EOL;
-            $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::'.
-                $definition['constant'].');'.PHP_EOL;
-            $contents .= '        $this->formConfig->addFieldObject($obj);'.PHP_EOL;
+            $function = 'create' . implode('', $pieces);
+            $contents .= '    /**' . PHP_EOL;
+            $contents .= '     * @param string $name' . PHP_EOL;
+            $contents .= '     * @return \\GCWorld\\FormConfig\\Forms\\FormField' . PHP_EOL;
+            $contents .= '     */' . PHP_EOL;
+            $contents .= '    public function ' . $function . '(string $name)' . PHP_EOL;
+            $contents .= '    {' . PHP_EOL;
+            $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);' . PHP_EOL;
+            $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::' .
+                $definition['constant'] . ');' . PHP_EOL;
+            $contents .= '        $this->formConfig->addFieldObject($obj);' . PHP_EOL;
             $contents .= PHP_EOL;
-            $contents .= '        return $obj;'.PHP_EOL;
-            $contents .= '    }'.PHP_EOL.PHP_EOL;
+            $contents .= '        return $obj;' . PHP_EOL;
+            $contents .= '    }' . PHP_EOL . PHP_EOL;
         }
-        $contents .= '}'.PHP_EOL.PHP_EOL;
+        $contents .= '}' . PHP_EOL . PHP_EOL;
 
-        file_put_contents($dir.$fileName, $contents);
+        file_put_contents($dir . $fileName, $contents);
     }
 }

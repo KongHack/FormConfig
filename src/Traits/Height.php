@@ -1,8 +1,10 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 trait Height
 {
+    /** @var string */
     protected $height = '120px';
 
     /**

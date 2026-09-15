@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Enums;
 
 use GCWorld\Interfaces\BackedEnumWithTextInterface;

@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\Exceptions\CSRFNotEnabledException;
@@ -15,10 +16,11 @@ class CSRFController
     /**
      * CSRF Config Array
      *
-     * @var array
+     * @var array<string, bool|string>
      */
     protected array $csrf = [
         'enabled'          => false,
+        'name'             => '',
         'tokenNameMethod'  => '',
         'tokenValueMethod' => '',
     ];
@@ -28,7 +30,7 @@ class CSRFController
      */
     public static function get()
     {
-        if(self::$instance === null) {
+        if (self::$instance === null) {
             self::$instance = new self();
         }
 
@@ -42,16 +44,16 @@ class CSRFController
     {
         $config = Config::getInstance()->getConfig();
 
-        if(isset($config['csrf'])) {
+        if (isset($config['csrf'])) {
             $this->csrf['enabled']          = $config['csrf']['enabled'] ?? false;
             $this->csrf['tokenNameMethod']  = $config['csrf']['tokenNameMethod'] ?? '';
             $this->csrf['tokenValueMethod'] = $config['csrf']['tokenValueMethod'] ?? '';
         }
 
-        if($this->csrf['enabled'] && empty($this->csrf['tokenNameMethod'])) {
+        if ($this->csrf['enabled'] && empty($this->csrf['tokenNameMethod'])) {
             $this->csrf['enabled'] = false;
         }
-        if($this->csrf['enabled'] && empty($this->csrf['tokenValueMethod'])) {
+        if ($this->csrf['enabled'] && empty($this->csrf['tokenValueMethod'])) {
             $this->csrf['enabled'] = false;
         }
     }
@@ -71,7 +73,7 @@ class CSRFController
      */
     public function forceEnable(): void
     {
-        if(empty($this->csrf['tokenNameMethod']) || empty($this->csrf['tokenValueMethod'])) {
+        if (empty($this->csrf['tokenNameMethod']) || empty($this->csrf['tokenValueMethod'])) {
             throw new CSRFNotEnabledException('Improperly Configured Tokens');
         }
 
@@ -85,14 +87,15 @@ class CSRFController
      */
     public function doCheck(): bool
     {
-        if($this->csrf['enabled']
+        if (
+            $this->csrf['enabled']
             && $this->csrf['tokenNameMethod'] != ''
             && $this->csrf['tokenValueMethod'] != ''
         ) {
             $name   = call_user_func($this->csrf['tokenNameMethod']);
             $value  = call_user_func($this->csrf['tokenValueMethod']);
             $cGlobals = new Globals();
-            if($cGlobals->string()->REQUEST($name) !== $value) {
+            if ($cGlobals->string()->REQUEST($name) !== $value) {
                 throw new CSRFRequestFailedException();
             }
             return true;
@@ -106,7 +109,7 @@ class CSRFController
      */
     public function getTokenName(): string
     {
-        if($this->csrf['enabled']) {
+        if ($this->csrf['enabled']) {
             return call_user_func($this->csrf['tokenNameMethod']);
         }
 
@@ -118,7 +121,7 @@ class CSRFController
      */
     public function getTokenValue(): string
     {
-        if($this->csrf['enabled']) {
+        if ($this->csrf['enabled']) {
             return call_user_func($this->csrf['tokenValueMethod']);
         }
 
@@ -126,11 +129,10 @@ class CSRFController
     }
 
     /**
-     * @return array
+     * @return array<string, bool|string>
      */
     public function getConfig(): array
     {
         return $this->csrf;
     }
-
 }

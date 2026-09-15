@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use Exception;
@@ -9,9 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class Config
 {
-    /**
-     * @var array
-     */
+    /** @var array<string, mixed> */
     protected array $config = [];
     /**
      * @var null|string
@@ -28,8 +27,8 @@ class Config
      */
     protected function __construct()
     {
-        $file = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..';
-        $file .= DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.yml';
+        $file = rtrim(__DIR__, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+        $file .= DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.yml';
         if (!file_exists($file)) {
             throw new Exception('Config File Not Found');
         }
@@ -38,14 +37,14 @@ class Config
         if (isset($config['config_path'])) {
             // We need an extra ../ here due to the composer installer being 1 level up.
 
-            $file             = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.$config['config_path'];
+            $file             = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $config['config_path'];
             $this->configPath = $file;
             $config           = Yaml::parseFile($file);
         }
 
         // Get the example config, make sure we have all variables.
-        $example = rtrim(dirname(__FILE__), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..';
-        $example .= DIRECTORY_SEPARATOR.'config/config.example.yml';
+        $example = rtrim(dirname(__FILE__), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+        $example .= DIRECTORY_SEPARATOR . 'config/config.example.yml';
         $exConfig = Yaml::parseFile($example);
 
         $reSave = false;
@@ -64,7 +63,7 @@ class Config
         }
 
         if ($reSave) {
-            file_put_contents($file, Yaml::dump($config,4));
+            file_put_contents($file, Yaml::dump($config, 4));
         }
 
         foreach (array_keys($config) as $key) {
@@ -82,7 +81,7 @@ class Config
      */
     public static function getInstance()
     {
-        if(self::$instance == null) {
+        if (self::$instance == null) {
             self::$instance = new self();
         }
 
@@ -90,7 +89,7 @@ class Config
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getConfig(): array
     {

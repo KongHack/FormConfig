@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -54,7 +55,7 @@ class FileInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/fileInput.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/fileInput.twig';
     }
 
     /**

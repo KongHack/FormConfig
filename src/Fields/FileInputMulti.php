@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -55,7 +56,7 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/fileInputMulti.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/fileInputMulti.twig';
     }
 
     /**
@@ -63,8 +64,8 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
      */
     public function getName()
     {
-        if ('[]' != substr($this->name??'', -2)) {
-            return $this->name.'[]';
+        if ('[]' != substr($this->name ?? '', -2)) {
+            return $this->name . '[]';
         }
         return parent::getName();
     }

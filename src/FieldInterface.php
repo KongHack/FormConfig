@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig;
 
 use GCWorld\FormConfig\Forms\FormField;

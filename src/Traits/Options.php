@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 use BackedEnum;
@@ -10,7 +11,10 @@ use GCWorld\Interfaces\BackedEnumWithTextInterface;
  */
 trait Options
 {
+    /** @var array<int|string, int|float|string> */
     protected array $options         = [];
+
+    /** @var array<mixed> */
     protected array $optionAllIgnore = [];
 
     /**
@@ -20,7 +24,7 @@ trait Options
      */
     public function addOptionEnum(BackedEnum $enum): static
     {
-        if($enum instanceof BackedEnumWithTextInterface) {
+        if ($enum instanceof BackedEnumWithTextInterface) {
             $this->addOption($enum->value, $enum->text());
 
             return $this;
@@ -32,18 +36,18 @@ trait Options
     }
 
     /**
-     * @param BackedEnum[] $cases
+     * @param array<mixed> $cases
      * @return $this
      * @throws Exception
      */
     public function addOptionEnumAllCases(array $cases): static
     {
-        foreach($cases as $case) {
-            if($case instanceof BackedEnumWithTextInterface) {
+        foreach ($cases as $case) {
+            if ($case instanceof BackedEnumWithTextInterface) {
                 $this->addOption($case->value, $case->text());
                 continue;
             }
-            if($case instanceof BackedEnum) {
+            if ($case instanceof BackedEnum) {
                 $this->addOption($case->value, $case->name);
                 continue;
             }
@@ -55,7 +59,7 @@ trait Options
     }
 
     /**
-     * @param array $options
+     * @param array<int|string, int|float|string> $options
      *
      * @return $this
      */
@@ -92,7 +96,7 @@ trait Options
     }
 
     /**
-     * @return array
+     * @return array<int|string, int|float|string>
      */
     public function getOptions(): array
     {
@@ -100,7 +104,7 @@ trait Options
     }
 
     /**
-     * @return array
+     * @return array<array<mixed>>
      */
     public function getOptionsSelect2(): array
     {
@@ -112,11 +116,13 @@ trait Options
         return $out;
     }
 
+    /** @return array<mixed> */
     public function getOptionAllIgnore(): array
     {
         return $this->optionAllIgnore;
     }
 
+    /** @param array<mixed> $values */
     public function setOptionAllIgnore(array $values): void
     {
         $this->optionAllIgnore = $values;

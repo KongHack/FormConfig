@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 use GCWorld\FormConfig\Interfaces\AutoCompleteConstants;
@@ -28,23 +29,23 @@ trait AutoComplete
      */
     public function getAutoCompleteAttribute()
     {
-        if(empty($this->autoCompleteComponent)) {
+        if (empty($this->autoCompleteComponent)) {
             return '';
         }
 
-        return ' autocomplete="'.$this->autoCompleteComponent.'" ';
+        return ' autocomplete="' . $this->autoCompleteComponent . '" ';
     }
 
     /**
-     * @param $component
+     * @param mixed $component
      * @return $this
      * @throws \Exception
      */
     public function setAutoComplete($component)
     {
         if (!in_array($component, AutoCompleteConstants::COMPONENTS)) {
-            $msg = 'Invalid Auto Complete Type: '.$component.'<br>Possible auto-complete types are: '
-                .implode(', ',AutoCompleteConstants::COMPONENTS);
+            $msg = 'Invalid Auto Complete Type: ' . $component . '<br>Possible auto-complete types are: '
+                . implode(', ', AutoCompleteConstants::COMPONENTS);
             throw new \Exception($msg);
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Forms;
 
 /**
@@ -6,6 +7,7 @@ namespace GCWorld\FormConfig\Forms;
  */
 class FormArrayField extends FormField
 {
+    /** @var string */
     protected $colWidth = 'col-sm-12';
 
     /**
@@ -29,7 +31,7 @@ class FormArrayField extends FormField
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function jsonSerialize(): mixed
     {
@@ -38,5 +40,4 @@ class FormArrayField extends FormField
 
         return $base;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\FormControlElements;
 
 /**
@@ -17,7 +18,7 @@ class FormConfigFormElement
     protected string $form_name  = '';
     protected string $right_icon = '';
     protected string $target     = '';
-    protected int    $form_type  = self::TYPE_STANDARD;
+    protected int $form_type  = self::TYPE_STANDARD;
 
     /**
      * FormConfigFormElement constructor.

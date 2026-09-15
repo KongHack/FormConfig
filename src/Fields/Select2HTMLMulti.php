@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -58,7 +59,7 @@ class Select2HTMLMulti extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/select2HTMLMulti.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/select2HTMLMulti.twig';
     }
 
     /**
@@ -66,8 +67,8 @@ class Select2HTMLMulti extends Base implements FieldInterface
      */
     public function getName()
     {
-        if ('[]' != substr($this->name??'', -2)) {
-            return $this->name.'[]';
+        if ('[]' != substr($this->name ?? '', -2)) {
+            return $this->name . '[]';
         }
         return parent::getName();
     }
@@ -80,7 +81,7 @@ class Select2HTMLMulti extends Base implements FieldInterface
     public static function makeReadOnly(FormField $field): FormField
     {
         $opts   = $field->getOptions();
-        $values = is_array($field->getValue()) ? $field->getValue() : explode(',',$field->getValue());
+        $values = is_array($field->getValue()) ? $field->getValue() : explode(',', $field->getValue());
         $text   = [];
         foreach ($values as $val) {
             if (array_key_exists($val, $opts)) {

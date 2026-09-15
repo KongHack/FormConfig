@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Abstracts;
 
 use GCWorld\FormConfig\FieldInterface;
@@ -14,19 +15,21 @@ abstract class Base implements FieldInterface
     use FieldFormConfigTrait;
     use MetaDataTrait;
 
-    protected array   $errors           = [];
-    protected mixed   $value            = null;
+    /** @var list<string> */
+    protected array $errors           = [];
+    protected mixed $value            = null;
     protected ?string $name             = null;
     protected ?string $id               = null;
     protected ?string $class            = null;
     protected ?string $label            = null;
     protected ?string $placeholder      = null;
-    protected int     $reqLevel         = 1;
-    protected bool    $suppressLabel    = false;
+    protected int $reqLevel         = 1;
+    protected bool $suppressLabel    = false;
     protected ?string $helpText         = null;
     protected ?string $noticeText       = null;
-    protected array   $dataAttributes   = [];
-    protected ?int    $maxLength        = null;
+    /** @var array<int|string, int|float|string|null> */
+    protected array $dataAttributes   = [];
+    protected ?int $maxLength        = null;
     protected ?string $underLabelHtml   = null;
 
     /**
@@ -50,7 +53,7 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return array
+     * @return list<string>
      */
     public function getErrors()
     {
@@ -123,7 +126,7 @@ abstract class Base implements FieldInterface
     public function getID()
     {
         if (null === $this->id) {
-            return 'id_'.str_replace('[]', '', $this->name??'');
+            return 'id_' . str_replace('[]', '', $this->name ?? '');
         }
 
         return $this->id;
@@ -166,11 +169,11 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getDefinition()
     {
-        if(interface_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
+        if (interface_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
             return FieldConstants::DEFINITIONS[static::getKey()];
         }
 
@@ -322,7 +325,7 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return array|null
+     * @return array<int|string, int|float|string|null>
      */
     public function getDataAttributes()
     {
@@ -334,7 +337,7 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @param array $dataAttributes
+     * @param array<int|string, int|float|string|null> $dataAttributes
      *
      * @return $this
      */
@@ -366,9 +369,9 @@ abstract class Base implements FieldInterface
         $dataString = '';
         foreach ($this->getDataAttributes() as $dk => $dv) {
             if (null == $dv || '' == $dv) {
-                $dataString .= ' data-'.$dk.'=""';
+                $dataString .= ' data-' . $dk . '=""';
             } else {
-                $dataString .= ' data-'.$dk.'="'.htmlentities($dv).'"';
+                $dataString .= ' data-' . $dk . '="' . htmlentities($dv) . '"';
             }
         }
 

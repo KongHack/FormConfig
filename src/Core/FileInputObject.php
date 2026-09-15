@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 class FileInputObject

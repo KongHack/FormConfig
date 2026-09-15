@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -40,7 +41,7 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/selectMultipleInput.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/selectMultipleInput.twig';
     }
 
     /**
@@ -65,8 +66,8 @@ class SelectNormalMulti extends Base implements FieldInterface, MultiSelectInter
      */
     public function getName()
     {
-        if ('[]' != substr($this->name??'', -2)) {
-            return $this->name.'[]';
+        if ('[]' != substr($this->name ?? '', -2)) {
+            return $this->name . '[]';
         }
         return parent::getName();
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -58,7 +59,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/selectAjaxMulti.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/selectAjaxMulti.twig';
     }
 
     /**
@@ -66,8 +67,8 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
      */
     public function getName()
     {
-        if ('[]' != substr($this->name??'', -2)) {
-            return $this->name.'[]';
+        if ('[]' != substr($this->name ?? '', -2)) {
+            return $this->name . '[]';
         }
         return parent::getName();
     }

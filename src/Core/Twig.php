@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\FormControlElements\FormConfigComplexElement;
@@ -8,7 +9,6 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
-use Twig\Loader\LoaderInterface;
 use Twig\TwigFunction;
 use Twig\TwigTest;
 
@@ -22,8 +22,8 @@ class Twig
         'BS3',
     ];
 
-    protected static ?Environment     $twig      = null;
-    protected static ?LoaderInterface $loader    = null;
+    protected static ?Environment $twig      = null;
+    protected static ?FilesystemLoader $loader   = null;
     protected static ?string $FCVersion          = null;
 
     /**
@@ -31,10 +31,10 @@ class Twig
      */
     public static function getFCVersion(): string
     {
-        if(static::$FCVersion === null) {
-            $file  = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-            $file .= '..'.DIRECTORY_SEPARATOR;
-            $file .= '..'.DIRECTORY_SEPARATOR;
+        if (static::$FCVersion === null) {
+            $file  = rtrim(__DIR__, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            $file .= '..' . DIRECTORY_SEPARATOR;
+            $file .= '..' . DIRECTORY_SEPARATOR;
             $file .= 'VERSION';
 
             static::$FCVersion = trim(file_get_contents($file));
@@ -50,14 +50,14 @@ class Twig
      */
     public static function attachPath(FilesystemLoader $filesystem): void
     {
-        $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-        $dir .= '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
+        $dir = rtrim(__DIR__, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $dir .= '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'twig';
         $dir = realpath($dir);
-        $dir = rtrim($dir,DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        $dir = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        foreach(self::TWIG_NAMESPACES as $namespace) {
-            $ns = str_replace('REPLACE',$namespace, self::TWIG_NAMESPACE_REPLACE);
-            $filesystem->addPath($dir.$namespace.DIRECTORY_SEPARATOR, $ns);
+        foreach (self::TWIG_NAMESPACES as $namespace) {
+            $ns = str_replace('REPLACE', $namespace, self::TWIG_NAMESPACE_REPLACE);
+            $filesystem->addPath($dir . $namespace . DIRECTORY_SEPARATOR, $ns);
         }
     }
 
@@ -72,16 +72,16 @@ class Twig
             self::attachPath($loader);
         }
 
-        $environment->addFunction(new TwigFunction('FC_getConfig', function(){
+        $environment->addFunction(new TwigFunction('FC_getConfig', function () {
             $config  = Config::getInstance()->getConfig();
             unset($config['forms']);
             return $config;
         }));
 
-        $environment->addTest(new TwigTest('FC_isFormElement',function($obj){
+        $environment->addTest(new TwigTest('FC_isFormElement', function ($obj) {
             return $obj instanceof FormConfigFormElement;
         }));
-        $environment->addTest(new TwigTest('FC_isComplexElement',function($obj){
+        $environment->addTest(new TwigTest('FC_isComplexElement', function ($obj) {
             return $obj instanceof FormConfigComplexElement;
         }));
 
@@ -98,7 +98,7 @@ class Twig
                 return \constant($fullClassName);
             }
 
-            return new class($fullClassName) {
+            return new class ($fullClassName) {
                 /**
                  * @param string $fullClassName
                  */
@@ -108,7 +108,7 @@ class Twig
 
                 /**
                  * @param string $caseName
-                 * @param array  $arguments
+                 * @param array<mixed> $arguments
                  *
                  * @return mixed
                  */
@@ -118,7 +118,6 @@ class Twig
                 }
             };
         }));
-
     }
 
     /**
@@ -129,7 +128,7 @@ class Twig
         if (null == self::$twig) {
             $loader     = self::getLoader();
             $twig       = new Environment($loader, [
-                'cache'       => self::getTwigDir().DIRECTORY_SEPARATOR.'cache',
+                'cache'       => self::getTwigDir() . DIRECTORY_SEPARATOR . 'cache',
                 'auto_reload' => true,
             ]);
             self::mapAll($twig);
@@ -157,12 +156,12 @@ class Twig
      */
     protected static function getTwigDir(): string
     {
-        return __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'twig';
+        return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'twig';
     }
 
     /**
      * @param string     $name
-     * @param array|null $context
+     * @param array<string, mixed>|null $context
      *
      * @return string
      * @throws LoaderError
@@ -178,7 +177,7 @@ class Twig
             }
 
             return self::get()->render($name, $context);
-        } catch (SyntaxError|LoaderError $e) {
+        } catch (SyntaxError | LoaderError $e) {
             d($e);
 
             throw $e;

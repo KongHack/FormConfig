@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\FormControlElements;
 
 use GCWorld\FormConfig\Core\Twig;
@@ -8,9 +9,9 @@ use GCWorld\FormConfig\Core\Twig;
  */
 class FormConfigComplexElement
 {
-    protected string  $key     = '';
-    protected string  $url     = '';
-    protected string  $title   = '';
+    protected string $key     = '';
+    protected string $url     = '';
+    protected string $title   = '';
     protected ?string $hover   = null;
     protected ?string $heading = null;
     protected ?string $right   = null;
@@ -124,9 +125,9 @@ class FormConfigComplexElement
      */
     public function render(bool $active)
     {
-        $ns = str_replace('_REPLACE','_BS3',Twig::TWIG_NAMESPACE_REPLACE);
+        $ns = str_replace('_REPLACE', '_BS3', Twig::TWIG_NAMESPACE_REPLACE);
 
-        return Twig::render('@'.$ns.'/form_control_elements/complex.twig',[
+        return Twig::render('@' . $ns . '/form_control_elements/complex.twig', [
             'object' => $this,
             'active' => $active,
         ]);

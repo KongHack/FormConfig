@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 use GCWorld\FormConfig\Forms\FormConfig;
@@ -27,7 +28,7 @@ trait FieldFormConfigTrait
      */
     public function setFormConfig(FormConfig $formConfig)
     {
-        if($this->formConfig != null) {
+        if ($this->formConfig != null) {
             throw new \Exception('Form Config already set on this object');
         }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Core;
 
 use GCWorld\FormConfig\Fields\FileInput;
@@ -16,7 +17,7 @@ class FileInputReadOnly
      */
     public static function makeReadOnly(FormField $field): void
     {
-        if(empty($field->getValue())) {
+        if (empty($field->getValue())) {
             $field->setValue('No File Selected');
         } else {
             $val = $field->getValue();
@@ -33,7 +34,7 @@ class FileInputReadOnly
     protected static function getValue(mixed $val): string
     {
 
-        if(is_array($val) && isset($val['url'])) {
+        if (is_array($val) && isset($val['url'])) {
             $url  = $val['url'];
             $name = $val['name'] ?? $val['url'];
             $id   = $val['id'] ?? null;
@@ -45,13 +46,13 @@ class FileInputReadOnly
             // Intentionally failover
         }
 
-        if($val instanceof FileInputObject) {
+        if ($val instanceof FileInputObject) {
             $html  = '<div>';
-            $html .= '<a href="'.$val->getFileUrl().'"';
-            if($val->getFileId() !== null) {
-                $html .= ' data-file_id="'.str_replace('"',"'",$val->getFileId()).'"';
+            $html .= '<a href="' . $val->getFileUrl() . '"';
+            if ($val->getFileId() !== null) {
+                $html .= ' data-file_id="' . str_replace('"', "'", $val->getFileId()) . '"';
             }
-            $html .= '>'.$val->getFileName().'</a>';
+            $html .= '>' . $val->getFileName() . '</a>';
             $html .= '</div>';
             return $html;
         }

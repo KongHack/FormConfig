@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -48,7 +49,7 @@ class Hidden extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/hidden.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/hidden.twig';
     }
 
     /**

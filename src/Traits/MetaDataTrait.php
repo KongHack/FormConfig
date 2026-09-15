@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 /**
@@ -6,6 +7,7 @@ namespace GCWorld\FormConfig\Traits;
  */
 trait MetaDataTrait
 {
+    /** @var array<string, mixed> */
     protected array $metaData = [];
 
     /**
@@ -31,7 +33,7 @@ trait MetaDataTrait
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function getMetaDataAll()
     {

@@ -1,9 +1,13 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 trait Ajax
 {
+    /** @var string */
     protected $ajaxUrl = '';
+
+    /** @var string */
     protected $ajaxMethod = 'GET';
 
 
@@ -46,5 +50,4 @@ trait Ajax
 
         return $this;
     }
-
 }

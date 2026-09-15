@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Fields;
 
 use GCWorld\FormConfig\Abstracts\Base;
@@ -14,8 +15,13 @@ class NumberInput extends Base implements FieldInterface
 {
     use AutoComplete;
 
+    /** @var float|null */
     protected $min = null;
+
+    /** @var float|null */
     protected $max = null;
+
+    /** @var float|null */
     protected $step = null;
 
     /**
@@ -55,7 +61,7 @@ class NumberInput extends Base implements FieldInterface
      */
     public static function getTwigPath(): string
     {
-        return '@'.Twig::TWIG_NAMESPACE_REPLACE.'/fields/numberInput.twig';
+        return '@' . Twig::TWIG_NAMESPACE_REPLACE . '/fields/numberInput.twig';
     }
 
     /**

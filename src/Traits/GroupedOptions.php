@@ -1,4 +1,5 @@
 <?php
+
 namespace GCWorld\FormConfig\Traits;
 
 use BackedEnum;
@@ -10,7 +11,10 @@ use GCWorld\Interfaces\BackedEnumWithTextInterface;
  */
 trait GroupedOptions
 {
+    /** @var array<int|string, array<mixed>> */
     protected array $groups          = [];
+
+    /** @var array<mixed> */
     protected array $optionAllIgnore = [];
 
     /**
@@ -20,7 +24,7 @@ trait GroupedOptions
      */
     public function addOptionEnum(string|int $groupId, BackedEnum $enum): static
     {
-        if($enum instanceof BackedEnumWithTextInterface) {
+        if ($enum instanceof BackedEnumWithTextInterface) {
             $this->addOption($groupId, $enum->value, $enum->text());
 
             return $this;
@@ -33,18 +37,18 @@ trait GroupedOptions
 
     /**
      * @param string|int $groupId
-     * @param array $cases
+     * @param array<mixed> $cases
      * @return $this
      * @throws Exception
      */
     public function addOptionEnumAllCases(string|int $groupId, array $cases): static
     {
-        foreach($cases as $case) {
-            if($case instanceof BackedEnumWithTextInterface) {
+        foreach ($cases as $case) {
+            if ($case instanceof BackedEnumWithTextInterface) {
                 $this->addOption($groupId, $case->value, $case->text());
                 continue;
             }
-            if($case instanceof BackedEnum) {
+            if ($case instanceof BackedEnum) {
                 $this->addOption($groupId, $case->value, $case->name);
                 continue;
             }
@@ -67,13 +71,13 @@ trait GroupedOptions
 
     /**
      * @param string|int $groupId
-     * @param array $options
+     * @param array<mixed> $options
      * @return $this
      * @throws Exception
      */
     public function setOptions(string|int $groupId, array $options): static
     {
-        if(!isset($this->groups[$groupId])) {
+        if (!isset($this->groups[$groupId])) {
             throw new Exception('Group does not exist');
         }
 
@@ -95,9 +99,8 @@ trait GroupedOptions
         string|int $key,
         string|int|float $value,
         ?string $html = null
-    ): static
-    {
-        if(!isset($this->groups[$groupId])) {
+    ): static {
+        if (!isset($this->groups[$groupId])) {
             throw new Exception('Group does not exist');
         }
 
@@ -122,7 +125,7 @@ trait GroupedOptions
     }
 
     /**
-     * @return array
+     * @return array<int|string, array<mixed>>
      */
     public function getGroups(): array
     {
@@ -130,19 +133,19 @@ trait GroupedOptions
     }
 
     /**
-     * @return array
+     * @return array<array<mixed>>
      */
     public function getGroupsSelect2(): array
     {
         $out = [];
-        foreach($this->groups as $group) {
+        foreach ($this->groups as $group) {
             $item = [
                 'id'       => '', // Left blank to prevent select2 from selecting it
                 'text'     => $group['name'],
                 'children' => [],
             ];
-            foreach($group['children'] as $k => $v) {
-                if(is_array($v)) {
+            foreach ($group['children'] as $k => $v) {
+                if (is_array($v)) {
                     $v['id']            = $k;
                     $item['children'][] = $v;
 
@@ -160,11 +163,13 @@ trait GroupedOptions
         return $out;
     }
 
+    /** @return array<mixed> */
     public function getOptionAllIgnore(): array
     {
         return $this->optionAllIgnore;
     }
 
+    /** @param array<mixed> $values */
     public function setOptionAllIgnore(array $values): void
     {
         $this->optionAllIgnore = $values;

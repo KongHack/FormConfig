@@ -10,12 +10,12 @@
   "require": {
     "php": ">=8.4",
     "composer/composer": "^2.9",
-    "composer/installers": ">=2.2",
+    "composer/installers": "^2.2",
     "twig/twig": "^3.14",
-    "kint-php/kint": ">=1.1",
+    "kint-php/kint": ">=1.1 <7.0",
     "symfony/yaml": "^6.0",
-    "gcworld/globals": ">=4.0",
-    "gcworld/interfaces": ">=4.3.11"
+    "gcworld/globals": "^4.0",
+    "gcworld/interfaces": "^4.3.11"
   },
   "suggest": {
     "gcworld/orm": "^3.4.2"
@@ -23,14 +23,30 @@
   "autoload": {
     "psr-4": {"GCWorld\\FormConfig\\": "src/"}
   },
+  "autoload-dev": {
+    "psr-4": {"GCWorld\\FormConfig\\Tests\\": "tests/"}
+  },
   "scripts": {
     "post-autoload-dump": [
       "GCWorld\\FormConfig\\ComposerInstaller::setupConfig"
+    ],
+    "lint": "find src tests -name '*.php' -print0 | xargs -0 -n1 php -l",
+    "phpstan": "phpstan analyse --no-progress --memory-limit=1G",
+    "phpcs": "phpcs",
+    "phpcbf": "phpcbf",
+    "test": "phpunit",
+    "check": [
+      "@lint",
+      "@phpstan",
+      "@phpcs",
+      "@test"
     ]
   },
-  "license":"MIT",
+  "license": "MIT",
   "require-dev": {
-    "phpstan/phpstan": ">=1.0"
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^12.0",
+    "squizlabs/php_codesniffer": "^3.13"
   },
   "config": {
     "allow-plugins": {
