@@ -4,11 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/KongHack/FormConfig/commits/master)
 
+
+
+## [3.11.24](https://github.com/KongHack/FormConfig/releases/tag/3.11.24)
 - @GameCharmer Add a safe, public Docker Compose development environment using the KongHack PHP image.
 - @GameCharmer Add PHPUnit characterization tests, PHPStan level 6, PHPCS, and Composer quality scripts.
 - @GameCharmer Add PHP 8.4 nullable declarations and resolve the existing static-analysis findings.
 - @GameCharmer Document installation, usage, configuration, CSRF responsibilities, and browser dependencies.
 - @GameCharmer Add PHP 8.4/8.5 GitHub Actions CI and tag-driven GitHub Release automation.
+
 
 
 ## [3.11.23](https://github.com/KongHack/FormConfig/releases/tag/3.11.23)
