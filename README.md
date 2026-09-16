@@ -9,7 +9,7 @@ FormConfig renders form markup but does not persist submitted values or replace
 application-level validation and authorization.
 
 ### Version
-3.11.24
+4.0.0
 
 ## Requirements
 
