@@ -45,7 +45,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function addError(string $message)
+    public function addError(string $message): static
     {
         $this->errors[] = $message;
 
@@ -55,7 +55,7 @@ abstract class Base implements FieldInterface
     /**
      * @return list<string>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -65,7 +65,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setValue($value)
+    public function setValue(mixed $value): static
     {
         $this->value = $value;
 
@@ -75,7 +75,7 @@ abstract class Base implements FieldInterface
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -85,7 +85,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -93,9 +93,9 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -103,7 +103,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getNameRaw()
+    public function getNameRaw(): ?string
     {
         return $this->name;
     }
@@ -113,7 +113,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setID(string $id)
+    public function setID(string $id): static
     {
         $this->id = $id;
 
@@ -121,9 +121,9 @@ abstract class Base implements FieldInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getID()
+    public function getID(): string
     {
         if (null === $this->id) {
             return 'id_' . str_replace('[]', '', $this->name ?? '');
@@ -137,7 +137,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setClass(string $class)
+    public function setClass(string $class): static
     {
         $this->class = $class;
 
@@ -149,7 +149,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function addClass(string $class)
+    public function addClass(string $class): static
     {
         $classes = explode(' ', $this->class ?? '');
         if (!in_array($class, $classes)) {
@@ -163,7 +163,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getClass()
+    public function getClass(): ?string
     {
         return $this->class;
     }
@@ -171,7 +171,7 @@ abstract class Base implements FieldInterface
     /**
      * @return array<string, string>
      */
-    public function getDefinition()
+    public function getDefinition(): array
     {
         if (interface_exists('\\GCWorld\\FormConfig\\Generated\\FieldConstants')) {
             return FieldConstants::DEFINITIONS[static::getKey()];
@@ -185,7 +185,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setPlaceholder(string $placeholder)
+    public function setPlaceholder(string $placeholder): static
     {
         $this->placeholder = $placeholder;
 
@@ -195,7 +195,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getPlaceholder()
+    public function getPlaceholder(): ?string
     {
         if (null === $this->placeholder) {
             return $this->getLabel();
@@ -209,7 +209,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setReqLevel(int $level)
+    public function setReqLevel(int $level): static
     {
         $this->reqLevel = $level;
 
@@ -219,7 +219,7 @@ abstract class Base implements FieldInterface
     /**
      * @return int
      */
-    public function getReqLevel()
+    public function getReqLevel(): int
     {
         return $this->reqLevel;
     }
@@ -229,7 +229,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setHelpText(string $text)
+    public function setHelpText(string $text): static
     {
         $this->helpText = $text;
 
@@ -239,7 +239,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getHelpText()
+    public function getHelpText(): ?string
     {
         return $this->helpText;
     }
@@ -249,7 +249,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): static
     {
         $this->label = $label;
 
@@ -259,7 +259,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -269,7 +269,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setMaxLength(int $length)
+    public function setMaxLength(int $length): static
     {
         $this->maxLength = $length;
 
@@ -287,7 +287,7 @@ abstract class Base implements FieldInterface
     /**
      * @return bool
      */
-    public function isSuppressLabel()
+    public function isSuppressLabel(): bool
     {
         return $this->suppressLabel;
     }
@@ -297,7 +297,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setSuppressLabel(bool $suppressLabel)
+    public function setSuppressLabel(bool $suppressLabel): static
     {
         $this->suppressLabel = $suppressLabel;
 
@@ -307,7 +307,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getNoticeText()
+    public function getNoticeText(): ?string
     {
         return $this->noticeText;
     }
@@ -317,7 +317,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setNoticeText(string $text)
+    public function setNoticeText(string $text): static
     {
         $this->noticeText = $text;
 
@@ -327,7 +327,7 @@ abstract class Base implements FieldInterface
     /**
      * @return array<int|string, int|float|string|null>
      */
-    public function getDataAttributes()
+    public function getDataAttributes(): array
     {
         $attributes             = $this->dataAttributes;
         $attributes['reqLevel'] = $this->reqLevel;
@@ -341,7 +341,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setDataAttributes(array $dataAttributes)
+    public function setDataAttributes(array $dataAttributes): static
     {
         $this->dataAttributes = $dataAttributes;
 
@@ -354,7 +354,7 @@ abstract class Base implements FieldInterface
      *
      * @return $this
      */
-    public function setDataAttribute(string|int|float $key, string|int|float $value)
+    public function setDataAttribute(string|int|float $key, string|int|float $value): static
     {
         $this->dataAttributes[$key] = $value;
 
@@ -364,7 +364,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string
      */
-    public function getDataAttributeString()
+    public function getDataAttributeString(): string
     {
         $dataString = '';
         foreach ($this->getDataAttributes() as $dk => $dv) {
@@ -382,7 +382,7 @@ abstract class Base implements FieldInterface
      * @param ?string $html
      * @return $this
      */
-    public function setUnderLabelHtml(?string $html)
+    public function setUnderLabelHtml(?string $html): static
     {
         $this->underLabelHtml = $html;
 
@@ -392,7 +392,7 @@ abstract class Base implements FieldInterface
     /**
      * @return string|null
      */
-    public function getUnderLabelHtml()
+    public function getUnderLabelHtml(): ?string
     {
         return $this->underLabelHtml;
     }

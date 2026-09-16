@@ -14,7 +14,7 @@ trait FieldFormConfigTrait
     /**
      * @return void
      */
-    public function __clone()
+    public function __clone(): void
     {
         $this->formConfig = null;
     }
@@ -26,7 +26,7 @@ trait FieldFormConfigTrait
      *
      * @throws \Exception
      */
-    public function setFormConfig(FormConfig $formConfig)
+    public function setFormConfig(FormConfig $formConfig): static
     {
         if ($this->formConfig != null) {
             throw new \Exception('Form Config already set on this object');

@@ -7,15 +7,14 @@ namespace GCWorld\FormConfig\Forms;
  */
 class FormArrayField extends FormField
 {
-    /** @var string */
-    protected $colWidth = 'col-sm-12';
+    protected string $colWidth = 'col-sm-12';
 
     /**
      * @param string $colWidth
      *
      * @return $this
      */
-    public function setColWidth(string $colWidth)
+    public function setColWidth(string $colWidth): static
     {
         $this->colWidth = $colWidth;
 
@@ -25,7 +24,7 @@ class FormArrayField extends FormField
     /**
      * @return string
      */
-    public function getColWidth()
+    public function getColWidth(): string
     {
         return $this->colWidth;
     }
@@ -33,7 +32,7 @@ class FormArrayField extends FormField
     /**
      * @return array<string, mixed>
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         $base              = parent::jsonSerialize();
         $base['col_width'] = $this->colWidth;

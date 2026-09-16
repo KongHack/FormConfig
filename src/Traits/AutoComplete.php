@@ -11,15 +11,12 @@ use GCWorld\FormConfig\Interfaces\AutoCompleteConstants;
  */
 trait AutoComplete
 {
-    /**
-     * @var string
-     */
-    protected $autoCompleteComponent = '';
+    protected string $autoCompleteComponent = '';
 
     /**
      * @return string
      */
-    public function getAutoComplete()
+    public function getAutoComplete(): string
     {
         return $this->autoCompleteComponent;
     }
@@ -27,7 +24,7 @@ trait AutoComplete
     /**
      * @return string
      */
-    public function getAutoCompleteAttribute()
+    public function getAutoCompleteAttribute(): string
     {
         if (empty($this->autoCompleteComponent)) {
             return '';
@@ -37,11 +34,11 @@ trait AutoComplete
     }
 
     /**
-     * @param mixed $component
+     * @param string $component
      * @return $this
      * @throws \Exception
      */
-    public function setAutoComplete($component)
+    public function setAutoComplete(string $component): static
     {
         if (!in_array($component, AutoCompleteConstants::COMPONENTS)) {
             $msg = 'Invalid Auto Complete Type: ' . $component . '<br>Possible auto-complete types are: '

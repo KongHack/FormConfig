@@ -17,7 +17,7 @@ trait Select2
      *
      * @return $this
      */
-    public function setMaxSelectionLength(int $length)
+    public function setMaxSelectionLength(int $length): static
     {
         $this->maxSelectionLength = $length;
 
@@ -34,7 +34,7 @@ trait Select2
      *
      * @return $this
      */
-    public function setSelect2MinLength(int $length)
+    public function setSelect2MinLength(int $length): static
     {
         $this->select2MinLength = $length;
 
@@ -50,7 +50,7 @@ trait Select2
      * @param string $parent
      * @return $this
      */
-    public function setSelect2DropdownParent(string $parent)
+    public function setSelect2DropdownParent(string $parent): static
     {
         $this->select2DropdownParent = $parent;
 
@@ -66,7 +66,7 @@ trait Select2
      * @param bool $clear
      * @return $this
      */
-    public function setSelect2AllowClear(bool $clear)
+    public function setSelect2AllowClear(bool $clear): static
     {
         $this->select2AllowClear = $clear;
 

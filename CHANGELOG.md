@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [4.0.0](https://github.com/KongHack/FormConfig/releases/tag/4.0.0)
+- @GameCharmer Add native property, parameter, and return types throughout the public API. Downstream subclasses and interface implementations must use compatible signatures.
+
+
+
 ## [3.11.24](https://github.com/KongHack/FormConfig/releases/tag/3.11.24)
 - @GameCharmer Add a safe, public Docker Compose development environment using the KongHack PHP image.
 - @GameCharmer Add PHPUnit characterization tests, PHPStan level 6, PHPCS, and Composer quality scripts.

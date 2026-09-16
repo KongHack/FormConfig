@@ -27,7 +27,7 @@ class FormField implements \JsonSerializable
     /** @var list<string> */
     protected array $errors = [];
     protected mixed $value = null;
-    protected ?string $name = null;
+    protected string $name;
     protected ?string $id = null;
     protected ?string $class = null;
     protected ?string $label = null;
@@ -42,8 +42,8 @@ class FormField implements \JsonSerializable
     protected ?string $noticeText = null;
     protected ?string $ajaxUrl = null;
     protected ?string $height = null;
-    /** @var array<string, mixed>|null */
-    protected ?array $dataAttributes = [];
+    /** @var array<string, mixed> */
+    protected array $dataAttributes = [];
     protected string $ajaxMethod = 'GET';
     /** @var array<string, string> */
     protected array $definition = [];
@@ -88,7 +88,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setValue($value): static
+    public function setValue(mixed $value): static
     {
         if ($value instanceof \BackedEnum) {
             $value = $value->value;
@@ -102,7 +102,7 @@ class FormField implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
@@ -112,7 +112,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -120,9 +120,9 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
         $obj   = new $class();
@@ -136,9 +136,9 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getNameRaw()
+    public function getNameRaw(): string
     {
         return $this->name;
     }
@@ -150,7 +150,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setID(string $id)
+    public function setID(string $id): static
     {
         $this->id = $id;
 
@@ -158,9 +158,9 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getID()
+    public function getID(): string
     {
         if (null == $this->id) {
             return 'id_' . str_replace('[]', '', $this->name);
@@ -174,7 +174,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setClass(string $class)
+    public function setClass(string $class): static
     {
         $this->class = $class;
 
@@ -186,7 +186,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function addClass(string $class)
+    public function addClass(string $class): static
     {
         $classes = $this->class === null ? [] : explode(' ', $this->class);
         if (!in_array($class, $classes)) {
@@ -198,9 +198,9 @@ class FormField implements \JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getClass()
+    public function getClass(): string
     {
         return 'gc-form-field ' . $this->class;
     }
@@ -212,7 +212,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(string $type): static
     {
         if (!in_array($type, self::getTypes())) {
             $msg = 'Invalid Type: ' . $type . '<br>Possible field types are: ' . implode(', ', self::getTypes());
@@ -232,7 +232,7 @@ class FormField implements \JsonSerializable
     /**
      * @return array<string, string>
      */
-    public function getDefinition()
+    public function getDefinition(): array
     {
         return $this->definition;
     }
@@ -240,7 +240,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -250,7 +250,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setPlaceholder(string $placeholder)
+    public function setPlaceholder(string $placeholder): static
     {
         $this->placeholder = $placeholder;
 
@@ -260,7 +260,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getPlaceholder()
+    public function getPlaceholder(): ?string
     {
         if (null == $this->placeholder) {
             return $this->getLabel();
@@ -274,7 +274,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setReqLevel(int $level)
+    public function setReqLevel(int $level): static
     {
         $this->reqLevel = $level;
 
@@ -284,7 +284,7 @@ class FormField implements \JsonSerializable
     /**
      * @return int
      */
-    public function getReqLevel()
+    public function getReqLevel(): int
     {
         return $this->reqLevel;
     }
@@ -294,7 +294,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setHelpText(string $text)
+    public function setHelpText(string $text): static
     {
         $this->helpText = $text;
 
@@ -304,7 +304,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getHelpText()
+    public function getHelpText(): ?string
     {
         return $this->helpText;
     }
@@ -314,7 +314,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): static
     {
         $this->options = $options;
 
@@ -326,7 +326,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): static
     {
         $this->label = $label;
 
@@ -336,7 +336,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -346,7 +346,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setScript(string $script)
+    public function setScript(string $script): static
     {
         $this->script = $script;
 
@@ -356,7 +356,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getScript()
+    public function getScript(): ?string
     {
         return $this->script;
     }
@@ -366,7 +366,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setMaxLength(int $length)
+    public function setMaxLength(int $length): static
     {
         $this->maxLength = $length;
 
@@ -384,7 +384,7 @@ class FormField implements \JsonSerializable
     /**
      * @return bool
      */
-    public function isSuppressLabel()
+    public function isSuppressLabel(): bool
     {
         return $this->suppressLabel;
     }
@@ -394,7 +394,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setSuppressLabel(bool $suppressLabel)
+    public function setSuppressLabel(bool $suppressLabel): static
     {
         $this->suppressLabel = $suppressLabel;
 
@@ -404,7 +404,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getNoticeText()
+    public function getNoticeText(): ?string
     {
         return $this->noticeText;
     }
@@ -414,7 +414,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setNoticeText(string $text)
+    public function setNoticeText(string $text): static
     {
         $this->noticeText = $text;
 
@@ -424,7 +424,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getAjaxUrl()
+    public function getAjaxUrl(): ?string
     {
         return $this->ajaxUrl;
     }
@@ -434,7 +434,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setAjaxUrl(string $ajaxUrl)
+    public function setAjaxUrl(string $ajaxUrl): static
     {
         $this->ajaxUrl = $ajaxUrl;
 
@@ -444,7 +444,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string
      */
-    public function getAjaxMethod()
+    public function getAjaxMethod(): string
     {
         return $this->ajaxMethod;
     }
@@ -454,7 +454,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setAjaxMethod(string $ajaxMethod)
+    public function setAjaxMethod(string $ajaxMethod): static
     {
         $this->ajaxMethod = $ajaxMethod;
 
@@ -464,7 +464,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getHeight()
+    public function getHeight(): ?string
     {
         return $this->height;
     }
@@ -474,7 +474,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setHeight(string $height)
+    public function setHeight(string $height): static
     {
         $this->height = $height;
 
@@ -484,7 +484,7 @@ class FormField implements \JsonSerializable
     /**
      * @return array<string, mixed>
      */
-    public function getDataAttributes()
+    public function getDataAttributes(): array
     {
         $attributes             = $this->dataAttributes;
         $attributes['reqLevel'] = $this->reqLevel;
@@ -497,7 +497,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setDataAttributes(array $dataAttributes)
+    public function setDataAttributes(array $dataAttributes): static
     {
         $this->dataAttributes = $dataAttributes;
 
@@ -510,7 +510,7 @@ class FormField implements \JsonSerializable
      *
      * @return $this
      */
-    public function setDataAttribute(string $key, string $value)
+    public function setDataAttribute(string $key, string $value): static
     {
         $this->dataAttributes[$key] = $value;
 
@@ -520,7 +520,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string
      */
-    public function getDataAttributeString()
+    public function getDataAttributeString(): string
     {
         $dataString = '';
         foreach ($this->getDataAttributes() as $dk => $dv) {
@@ -537,7 +537,7 @@ class FormField implements \JsonSerializable
     /**
      * @return list<string>
      */
-    public static function getTypes()
+    public static function getTypes(): array
     {
         if (count(self::$types) < 1) {
             self::$types = array_keys(FieldConstants::DEFINITIONS);
@@ -549,7 +549,7 @@ class FormField implements \JsonSerializable
     /**
      * @return FormField
      */
-    public function makeReadOnly()
+    public function makeReadOnly(): FormField
     {
         $definition = $this->getDefinition();
         $class      = $definition['class'];
@@ -560,7 +560,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string
      */
-    public function getLabelledBy()
+    public function getLabelledBy(): string
     {
         return $this->labelledBy;
     }
@@ -569,7 +569,7 @@ class FormField implements \JsonSerializable
      * @param string $value
      * @return $this
      */
-    public function setLabelledBy(string $value)
+    public function setLabelledBy(string $value): static
     {
         $this->labelledBy = $value;
 
@@ -580,7 +580,7 @@ class FormField implements \JsonSerializable
      * @param string $value
      * @return $this
      */
-    public function setWrappingClass(string $value)
+    public function setWrappingClass(string $value): static
     {
         $this->wrappingClass = $value;
 
@@ -590,7 +590,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string
      */
-    public function getWrappingClass()
+    public function getWrappingClass(): string
     {
         return $this->wrappingClass;
     }
@@ -598,7 +598,7 @@ class FormField implements \JsonSerializable
     /**
      * @return bool
      */
-    public function isStandardLabel()
+    public function isStandardLabel(): bool
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
         $obj   = new $class();
@@ -609,7 +609,7 @@ class FormField implements \JsonSerializable
     /**
      * @return bool
      */
-    public function isStandardGrouping()
+    public function isStandardGrouping(): bool
     {
         $class = FieldConstants::DEFINITIONS[$this->type]['class'];
         $obj   = new $class();
@@ -620,7 +620,7 @@ class FormField implements \JsonSerializable
     /**
      * @return bool
      */
-    public function isUsed()
+    public function isUsed(): bool
     {
         return $this->isUsed;
     }
@@ -628,7 +628,7 @@ class FormField implements \JsonSerializable
     /**
      * @return $this
      */
-    public function doUsed()
+    public function doUsed(): static
     {
         $this->isUsed = true;
 
@@ -639,7 +639,7 @@ class FormField implements \JsonSerializable
      * @param int|null $min
      * @return $this
      */
-    public function setMin(?int $min = null)
+    public function setMin(?int $min = null): static
     {
         $this->numberMin = $min;
 
@@ -650,7 +650,7 @@ class FormField implements \JsonSerializable
      * @param int|null $max
      * @return $this
      */
-    public function setMax(?int $max = null)
+    public function setMax(?int $max = null): static
     {
         $this->numberMax = $max;
 
@@ -661,7 +661,7 @@ class FormField implements \JsonSerializable
      * @param float|null $step
      * @return $this
      */
-    public function setStep(?float $step = null)
+    public function setStep(?float $step = null): static
     {
         $this->numberStep = $step;
 
@@ -671,7 +671,7 @@ class FormField implements \JsonSerializable
     /**
      * @return int|null
      */
-    public function getMin()
+    public function getMin(): ?int
     {
         return $this->numberMin;
     }
@@ -679,7 +679,7 @@ class FormField implements \JsonSerializable
     /**
      * @return int|null
      */
-    public function getMax()
+    public function getMax(): ?int
     {
         return $this->numberMax;
     }
@@ -687,7 +687,7 @@ class FormField implements \JsonSerializable
     /**
      * @return float|null
      */
-    public function getStep()
+    public function getStep(): ?float
     {
         return $this->numberStep;
     }
@@ -696,7 +696,7 @@ class FormField implements \JsonSerializable
      * @param ?string $html
      * @return $this
      */
-    public function setUnderLabelHtml(?string $html)
+    public function setUnderLabelHtml(?string $html): static
     {
         $this->underLabelHtml = $html;
 
@@ -706,7 +706,7 @@ class FormField implements \JsonSerializable
     /**
      * @return string|null
      */
-    public function getUnderLabelHtml()
+    public function getUnderLabelHtml(): ?string
     {
         return $this->underLabelHtml;
     }
@@ -714,7 +714,7 @@ class FormField implements \JsonSerializable
     /**
      * @return array<string, mixed>
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return [
             'id'                => $this->getID(),

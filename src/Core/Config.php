@@ -76,10 +76,10 @@ class Config
     }
 
     /**
-     * @return Config|null
+     * @return Config
      * @throws Exception
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         if (self::$instance == null) {
             self::$instance = new self();

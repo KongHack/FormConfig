@@ -65,7 +65,7 @@ class SelectAjaxMulti extends Base implements FieldInterface, MultiSelectInterfa
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         if ('[]' != substr($this->name ?? '', -2)) {
             return $this->name . '[]';

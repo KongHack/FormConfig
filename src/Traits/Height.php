@@ -4,13 +4,12 @@ namespace GCWorld\FormConfig\Traits;
 
 trait Height
 {
-    /** @var string */
-    protected $height = '120px';
+    protected string $height = '120px';
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getHeight()
+    public function getHeight(): string
     {
         return $this->height;
     }
@@ -20,7 +19,7 @@ trait Height
      *
      * @return $this
      */
-    public function setHeight(string $height)
+    public function setHeight(string $height): static
     {
         $this->height = $height;
 

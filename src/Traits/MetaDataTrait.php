@@ -16,7 +16,7 @@ trait MetaDataTrait
      *
      * @return $this
      */
-    public function setMetaData(string $key, $value)
+    public function setMetaData(string $key, mixed $value): static
     {
         $this->metaData[$key] = $value;
 
@@ -27,7 +27,7 @@ trait MetaDataTrait
      * @param string $key
      * @return mixed|null
      */
-    public function getMetaData(string $key)
+    public function getMetaData(string $key): mixed
     {
         return $this->metaData[$key] ?? null;
     }
@@ -35,7 +35,7 @@ trait MetaDataTrait
     /**
      * @return array<string, mixed>
      */
-    public function getMetaDataAll()
+    public function getMetaDataAll(): array
     {
         return $this->metaData;
     }

@@ -9,8 +9,7 @@ use GCWorld\FormConfig\FieldContainerInterface;
  */
 abstract class FieldCreateParent
 {
-    /** @var FieldContainerInterface|null */
-    protected $formConfig = null;
+    protected FieldContainerInterface $formConfig;
 
     /**
      * FieldCreateParent constructor.

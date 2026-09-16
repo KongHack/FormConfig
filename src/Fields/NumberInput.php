@@ -15,14 +15,11 @@ class NumberInput extends Base implements FieldInterface
 {
     use AutoComplete;
 
-    /** @var float|null */
-    protected $min = null;
+    protected ?float $min = null;
 
-    /** @var float|null */
-    protected $max = null;
+    protected ?float $max = null;
 
-    /** @var float|null */
-    protected $step = null;
+    protected ?float $step = null;
 
     /**
      * @return string
@@ -68,7 +65,7 @@ class NumberInput extends Base implements FieldInterface
      * @param float $min
      * @return $this
      */
-    public function setMin(float $min)
+    public function setMin(float $min): static
     {
         $this->min = $min;
 
@@ -79,7 +76,7 @@ class NumberInput extends Base implements FieldInterface
      * @param float $max
      * @return $this
      */
-    public function setMax(float $max)
+    public function setMax(float $max): static
     {
         $this->max = $max;
 
@@ -90,7 +87,7 @@ class NumberInput extends Base implements FieldInterface
      * @param float $step
      * @return $this
      */
-    public function setStep(float $step)
+    public function setStep(float $step): static
     {
         $this->step = $step;
 
@@ -100,7 +97,7 @@ class NumberInput extends Base implements FieldInterface
     /**
      * @return null|float
      */
-    public function getMin()
+    public function getMin(): ?float
     {
         return $this->min;
     }
@@ -108,7 +105,7 @@ class NumberInput extends Base implements FieldInterface
     /**
      * @return null|float
      */
-    public function getMax()
+    public function getMax(): ?float
     {
         return $this->max;
     }
@@ -116,7 +113,7 @@ class NumberInput extends Base implements FieldInterface
     /**
      * @return null|float
      */
-    public function getStep()
+    public function getStep(): ?float
     {
         return $this->step;
     }

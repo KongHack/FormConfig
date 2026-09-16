@@ -297,8 +297,9 @@ class FormConfig implements FieldContainerInterface
      * @param string|int $value
      * @return $this
      */
-    public function setNavigationTag($value): static
+    public function setNavigationTag(string|int $value): static
     {
+        $value = (string) $value;
         if (strlen($value) == 1 && is_numeric($value)) {
             $value = 'h' . $value;
         }

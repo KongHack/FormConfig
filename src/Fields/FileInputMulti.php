@@ -62,7 +62,7 @@ class FileInputMulti extends Base implements FieldInterface, MultiSelectInterfac
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         if ('[]' != substr($this->name ?? '', -2)) {
             return $this->name . '[]';

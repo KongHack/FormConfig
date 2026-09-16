@@ -157,7 +157,8 @@ class Compiler
             $contents .= '     * @param string $name' . PHP_EOL;
             $contents .= '     * @return \\GCWorld\\FormConfig\\Forms\\FormField' . PHP_EOL;
             $contents .= '     */' . PHP_EOL;
-            $contents .= '    public function ' . $function . '(string $name)' . PHP_EOL;
+            $contents .= '    public function ' . $function .
+                '(string $name): \\GCWorld\\FormConfig\\Forms\\FormField' . PHP_EOL;
             $contents .= '    {' . PHP_EOL;
             $contents .= '        $obj = new \\GCWorld\\FormConfig\\Forms\\FormField($name);' . PHP_EOL;
             $contents .= '        $obj->setType(\\GCWorld\\FormConfig\\Generated\\FieldConstants::' .

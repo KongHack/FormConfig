@@ -17,7 +17,7 @@ interface FieldContainerInterface
 
     /**
      * @param Base $field
-     * @return mixed
+     * @return $this
      */
-    public function addBuiltField(Base $field);
+    public function addBuiltField(Base $field): static;
 }

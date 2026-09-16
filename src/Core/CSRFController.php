@@ -28,7 +28,7 @@ class CSRFController
     /**
      * @return CSRFController
      */
-    public static function get()
+    public static function get(): self
     {
         if (self::$instance === null) {
             self::$instance = new self();

@@ -26,71 +26,60 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
 
 
     /** @var list<string> */
-    protected $headers = [];
+    protected array $headers = [];
 
     /** @var list<string> */
-    protected $widths = [];
+    protected array $widths = [];
 
     /** @var array<int, array<string, FormField|FormArrayElement|Base>> */
-    protected $fields = [];
+    protected array $fields = [];
 
-    /** @var int */
-    protected $index = 0;
+    protected int $index = 0;
 
-    /** @var string */
-    protected $mode = 'table';
+    protected string $mode = 'table';
 
     /** @var list<string> */
-    protected $errors = [];
+    protected array $errors = [];
 
-    /** @var string */
-    protected $table_classes = 'table table-striped';
+    protected string $table_classes = 'table table-striped';
 
     /** @var array<string, FormArrayField> */
-    protected $footFields = [];
+    protected array $footFields = [];
 
-    /** @var string */
-    protected $table_id = '';
+    protected string $table_id = '';
 
-    /** @var FieldCreate|null */
-    protected $builder = null;
+    protected ?FieldCreate $builder = null;
 
     /** @var array<int, string> */
-    protected $row_classes = [];
+    protected array $row_classes = [];
 
     /** @var array<int, string> */
-    protected $extras = [];
+    protected array $extras = [];
 
     /** @var array<int, string> */
-    protected $icons = [];
+    protected array $icons = [];
 
-    /** @var string|null */
-    protected $wrapperId = null;
+    protected ?string $wrapperId = null;
 
-    /** @var string|null */
-    protected $wrapperClass = null;
+    protected ?string $wrapperClass = null;
 
-    /** @var string|null */
-    protected $wrapperStyle = null;
+    protected ?string $wrapperStyle = null;
 
     /**
      * Used for indicating which row contains the "new item" inputs
      *
      * @var null|int
      */
-    protected $newRow = null;
+    protected ?int $newRow = null;
 
     /**
      * Used for indicating which column is the display column for mobile lists
      *
      * @var null|int
      */
-    protected $displayColumn = null;
+    protected ?int $displayColumn = null;
 
-    /**
-     * @var string
-     */
-    protected $name = 'ARRAY';
+    protected string $name = 'ARRAY';
 
     /**
      * FormArrayElement constructor.
@@ -106,7 +95,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return FormArrayField
      */
-    public function createField(string $name)
+    public function createField(string $name): FormArrayField
     {
         $field                             = new FormArrayField($name);
         $this->fields[$this->index][$name] = $field;
@@ -127,7 +116,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return void
      */
-    public function removeField(int $index, string $name)
+    public function removeField(int $index, string $name): void
     {
         if (!isset($this->fields[$index])) {
             return;
@@ -142,7 +131,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string $name
      * @return bool
      */
-    public function removeFieldByName(string $name)
+    public function removeFieldByName(string $name): bool
     {
         foreach ($this->fields as $index => $items) {
             foreach (array_keys($items) as $item) {
@@ -162,7 +151,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -170,7 +159,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string
      */
-    public function getNameRaw()
+    public function getNameRaw(): string
     {
         return $this->name;
     }
@@ -180,7 +169,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return FormArrayElement
      */
-    public function createFieldArray(string $name)
+    public function createFieldArray(string $name): FormArrayElement
     {
         $field                             = new FormArrayElement();
         $this->fields[$this->index][$name] = $field;
@@ -192,7 +181,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return int
      */
-    public function getReqLevel()
+    public function getReqLevel(): int
     {
         $max = 0;
         foreach ($this->fields as $fields) {
@@ -209,7 +198,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return FormArrayField
      */
-    public function createFootField(string $name)
+    public function createFootField(string $name): FormArrayField
     {
         $field                   = new FormArrayField($name);
         $this->footFields[$name] = $field;
@@ -227,7 +216,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function addFieldObject(FormField $field)
+    public function addFieldObject(FormField $field): static
     {
         $this->fields[$this->index][$field->getNameRaw()] = $field;
 
@@ -250,7 +239,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function addBuiltField(Base $field)
+    public function addBuiltField(Base $field): static
     {
         $this->fields[$this->index][$field->getNameRaw()] = $field;
         $field->setFormConfig($this->formConfig);
@@ -261,7 +250,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return $this
      */
-    public function bumpIndex()
+    public function bumpIndex(): static
     {
         ++$this->index;
 
@@ -271,7 +260,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return $this
      */
-    public function setNewRow()
+    public function setNewRow(): static
     {
         $this->newRow = $this->index;
 
@@ -281,7 +270,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return int
      */
-    public function getNewRow()
+    public function getNewRow(): int
     {
         return $this->newRow ?? 0;
     }
@@ -289,7 +278,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return $this
      */
-    public function addBreak()
+    public function addBreak(): static
     {
         if (isset($this->fields[$this->index])) {
             $this->bumpIndex();
@@ -303,7 +292,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return $this
      */
-    public function addHR()
+    public function addHR(): static
     {
         if (isset($this->fields[$this->index])) {
             $this->bumpIndex();
@@ -317,7 +306,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return $this
      */
-    public function repeatHeaders()
+    public function repeatHeaders(): static
     {
         if (isset($this->fields[$this->index])) {
             $this->bumpIndex();
@@ -333,7 +322,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function setIndex(int $index)
+    public function setIndex(int $index): static
     {
         $this->index = $index;
 
@@ -343,7 +332,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return int
      */
-    public function getIndex()
+    public function getIndex(): int
     {
         return $this->index;
     }
@@ -351,7 +340,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return array<int, array<string, FormField|FormArrayElement|Base>>
      */
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
@@ -359,7 +348,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return array<string, FormArrayField>
      */
-    public function getFootFields()
+    public function getFootFields(): array
     {
         return $this->footFields;
     }
@@ -367,7 +356,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string
      */
-    public function getTableId()
+    public function getTableId(): string
     {
         //wcag compliance (sets ID for TH and fields)
         if (empty($this->table_id)) {
@@ -382,7 +371,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function setTableId(string $table_id)
+    public function setTableId(string $table_id): static
     {
         $this->table_id = $table_id;
 
@@ -396,7 +385,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function addHeader(string $header, string $width = 'col-sm-1', bool $displayCol = false)
+    public function addHeader(string $header, string $width = 'col-sm-1', bool $displayCol = false): static
     {
         $this->headers[] = $header;
         $this->widths[]  = $width;
@@ -410,7 +399,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return int
      */
-    public function getDisplayColumn()
+    public function getDisplayColumn(): int
     {
         return $this->displayColumn ?? 0;
     }
@@ -418,7 +407,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return list<string>
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -426,7 +415,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return list<string>
      */
-    public function getWidths()
+    public function getWidths(): array
     {
         return $this->widths;
     }
@@ -438,7 +427,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function setMode(string $mode)
+    public function setMode(string $mode): static
     {
         if (!in_array($mode, self::MODES, true)) {
             throw new Exception('Invalid Mode Type');
@@ -451,7 +440,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string
      */
-    public function getMode()
+    public function getMode(): string
     {
         return $this->mode;
     }
@@ -461,7 +450,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function addError(string $msg)
+    public function addError(string $msg): static
     {
         $this->errors[] = $msg;
 
@@ -471,7 +460,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return list<string>
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }
@@ -479,7 +468,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string
      */
-    public function getTableClasses()
+    public function getTableClasses(): string
     {
         return $this->table_classes;
     }
@@ -489,7 +478,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      *
      * @return $this
      */
-    public function setTableClasses(string $classes)
+    public function setTableClasses(string $classes): static
     {
         $this->table_classes = $classes;
 
@@ -499,7 +488,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return void
      */
-    public function makeFieldsReadOnly()
+    public function makeFieldsReadOnly(): void
     {
         foreach ($this->fields as &$fields) {
             foreach ($fields as &$field) {
@@ -516,7 +505,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param int|null $index
      * @return string
      */
-    public function getRowClass(?int $index = null)
+    public function getRowClass(?int $index = null): string
     {
         if ($index === null) {
             $index = $this->index;
@@ -534,7 +523,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param int|null $index
      * @return $this
      */
-    public function setRowClass(string $class, ?int $index = null)
+    public function setRowClass(string $class, ?int $index = null): static
     {
         if ($index === null) {
             $index = $this->index;
@@ -547,7 +536,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return array<int, string>
      */
-    public function getExtras()
+    public function getExtras(): array
     {
         return $this->extras;
     }
@@ -557,7 +546,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param int $index
      * @return string
      */
-    public function getIcon(int $index)
+    public function getIcon(int $index): string
     {
         return $this->icons[$index] ?? '';
     }
@@ -566,7 +555,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string $icon
      * @return $this
      */
-    public function setIcon(string $icon)
+    public function setIcon(string $icon): static
     {
         $this->icons[$this->index] = $icon;
 
@@ -578,7 +567,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string $icon
      * @return $this
      */
-    public function replaceIcon(int $index, string $icon)
+    public function replaceIcon(int $index, string $icon): static
     {
         $this->icons[$index] = $icon;
 
@@ -589,7 +578,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string|null $id
      * @return $this
      */
-    public function setWrapperId(?string $id = null)
+    public function setWrapperId(?string $id = null): static
     {
         $this->wrapperId = \trim($id ?? '', ' "');
 
@@ -600,7 +589,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string|null $class
      * @return $this
      */
-    public function setWrapperClass(?string $class = null)
+    public function setWrapperClass(?string $class = null): static
     {
         $this->wrapperClass = \trim($class ?? '', ' "');
 
@@ -611,7 +600,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
      * @param string|null $style
      * @return $this
      */
-    public function setWrapperStyle(?string $style = null)
+    public function setWrapperStyle(?string $style = null): static
     {
         $this->wrapperStyle = \trim($style ?? '', ' "');
 
@@ -621,7 +610,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string|null
      */
-    public function getWrapperId()
+    public function getWrapperId(): ?string
     {
         return $this->wrapperId;
     }
@@ -629,7 +618,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string|null
      */
-    public function getWrapperClass()
+    public function getWrapperClass(): ?string
     {
         return $this->wrapperClass;
     }
@@ -638,7 +627,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return string|null
      */
-    public function getWrapperStyle()
+    public function getWrapperStyle(): ?string
     {
         return $this->wrapperStyle;
     }
@@ -646,7 +635,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return bool
      */
-    public function hasWrapper()
+    public function hasWrapper(): bool
     {
         return $this->wrapperId !== null || $this->wrapperClass !== null || $this->wrapperStyle !== null;
     }
@@ -654,7 +643,7 @@ class FormArrayElement implements FieldContainerInterface, \JsonSerializable
     /**
      * @return array<string, mixed>
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return [
             'headers'       => $this->headers,

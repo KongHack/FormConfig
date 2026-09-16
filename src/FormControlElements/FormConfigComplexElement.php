@@ -47,7 +47,7 @@ class FormConfigComplexElement
      * @param string $title
      * @return $this
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
@@ -72,9 +72,9 @@ class FormConfigComplexElement
 
     /**
      * @param string|null $hover
-     * @return FormConfigComplexElement
+     * @return $this
      */
-    public function setHover(?string $hover): FormConfigComplexElement
+    public function setHover(?string $hover): static
     {
         $this->hover = $hover;
 
@@ -91,9 +91,9 @@ class FormConfigComplexElement
 
     /**
      * @param string|null $heading
-     * @return FormConfigComplexElement
+     * @return $this
      */
-    public function setHeading(?string $heading): FormConfigComplexElement
+    public function setHeading(?string $heading): static
     {
         $this->heading = $heading;
 
@@ -110,9 +110,9 @@ class FormConfigComplexElement
 
     /**
      * @param string|null $right
-     * @return FormConfigComplexElement
+     * @return $this
      */
-    public function setRight(?string $right): FormConfigComplexElement
+    public function setRight(?string $right): static
     {
         $this->right = $right;
 
@@ -123,7 +123,7 @@ class FormConfigComplexElement
      * @param bool $active
      * @return string
      */
-    public function render(bool $active)
+    public function render(bool $active): string
     {
         $ns = str_replace('_REPLACE', '_BS3', Twig::TWIG_NAMESPACE_REPLACE);
 

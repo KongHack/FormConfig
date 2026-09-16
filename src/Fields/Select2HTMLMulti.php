@@ -65,7 +65,7 @@ class Select2HTMLMulti extends Base implements FieldInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         if ('[]' != substr($this->name ?? '', -2)) {
             return $this->name . '[]';

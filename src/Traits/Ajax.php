@@ -4,17 +4,15 @@ namespace GCWorld\FormConfig\Traits;
 
 trait Ajax
 {
-    /** @var string */
-    protected $ajaxUrl = '';
+    protected string $ajaxUrl = '';
 
-    /** @var string */
-    protected $ajaxMethod = 'GET';
+    protected string $ajaxMethod = 'GET';
 
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getAjaxUrl()
+    public function getAjaxUrl(): string
     {
         return $this->ajaxUrl;
     }
@@ -24,7 +22,7 @@ trait Ajax
      *
      * @return $this
      */
-    public function setAjaxUrl(string $ajaxUrl)
+    public function setAjaxUrl(string $ajaxUrl): static
     {
         $this->ajaxUrl = $ajaxUrl;
 
@@ -34,7 +32,7 @@ trait Ajax
     /**
      * @return string
      */
-    public function getAjaxMethod()
+    public function getAjaxMethod(): string
     {
         return $this->ajaxMethod;
     }
@@ -44,7 +42,7 @@ trait Ajax
      *
      * @return $this
      */
-    public function setAjaxMethod(string $ajaxMethod)
+    public function setAjaxMethod(string $ajaxMethod): static
     {
         $this->ajaxMethod = $ajaxMethod;
 

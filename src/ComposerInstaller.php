@@ -78,7 +78,7 @@ class ComposerInstaller
     /**
      * @return void
      */
-    public static function generateCode()
+    public static function generateCode(): void
     {
         $cCompiler = new Compiler();
         $cCompiler->run();
