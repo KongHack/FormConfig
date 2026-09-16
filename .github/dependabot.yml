@@ -5,8 +5,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    versioning-strategy: lockfile-only
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
