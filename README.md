@@ -1,5 +1,12 @@
 # GCWorld FormConfig
 
+![Packagist](https://img.shields.io/packagist/dm/gcworld/formconfig.svg)
+![Packagist](https://img.shields.io/packagist/dt/gcworld/formconfig.svg)
+
+![Packagist PHP](https://img.shields.io/packagist/php-v/gcworld/formconfig.svg)
+![Packagist](https://img.shields.io/packagist/v/gcworld/formconfig.svg)
+![GitHub](https://img.shields.io/github/tag/konghack/formconfig.svg)
+
 FormConfig is a PHP library for defining forms as objects and rendering them
 with Twig. It provides reusable field types, repeatable field arrays, model and
 ORM metadata helpers, read-only transformations, configurable CSRF tokens, and
