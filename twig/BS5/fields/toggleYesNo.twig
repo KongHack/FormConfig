@@ -1,0 +1,30 @@
+{% macro render(field) %}
+    <fieldset>
+        {% if field.label is not null %}
+            <legend {{ (field.isSuppressLabel() ? 'class="visually-hidden"') }}>
+                {{ field.label|raw }}
+                {% if field.helpText is not null %}
+                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                        <i class="fa fa-fw fa-question-circle"></i>
+                    </span>
+                {% endif %}
+            </legend>
+
+            {% if field.getUnderLabelHtml() %}
+                <div class="FC_under_label_html">
+                    {{ field.getUnderLabelHtml()|raw }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="btn-group" role="group" id="{{ field.id }}">
+            <input type="radio" id="{{ field.id }}_yes" class="btn-check {{ field.class }}" name="{{ field.name }}" value="Y" autocomplete="off" {{ (field.value=='Y' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}>
+            <label class="btn btn-outline-secondary yes" for="{{ field.id }}_yes">Yes</label>
+            <input type="radio" id="{{ field.id }}_no" class="btn-check {{ field.class }}" name="{{ field.name }}" value="N" autocomplete="off" {{ (field.value=='N' ? 'checked="checked"' : '') }} {{ field.getDataAttributeString()|raw }}>
+            <label class="btn btn-outline-secondary no" for="{{ field.id }}_no">No</label>
+        </div>
+    </fieldset>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,25 @@
+{% macro render(field) %}
+    {% set step = field.getStep() %}
+    {% set min = field.getMin() %}
+    {% set max = field.getMax() %}
+
+    <input
+            title="{{ field.label }}"
+            placeholder="{{ field.placeholder }}"
+            name="{{ field.name }}"
+            id="{{ field.id }}"
+            class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+            {% if field.maxLength > 0 %}maxlength="{{ field.maxLength }}"{% endif %}
+            type="number"
+            step="{{ step is null ? 'any' : step }}"
+            {{ field.getAutoCompleteAttribute()|raw }}
+            {% if min is not null  %} min="{{ min }}"{% endif %}
+            {% if max is not null  %} max="{{ max }}"{% endif %}
+            value="{{ field.value }}"
+            {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+            {{ field.getDataAttributeString()|raw }}
+    >
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

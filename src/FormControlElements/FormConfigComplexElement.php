@@ -3,6 +3,7 @@
 namespace GCWorld\FormConfig\FormControlElements;
 
 use GCWorld\FormConfig\Core\Twig;
+use GCWorld\FormConfig\Forms\FormConfig;
 
 /**
  * FormConfigComplexElement Class.
@@ -125,7 +126,11 @@ class FormConfigComplexElement
      */
     public function render(bool $active): string
     {
-        $ns = str_replace('_REPLACE', '_BS3', Twig::TWIG_NAMESPACE_REPLACE);
+        $mode = FormConfig::getFormMode() ?? FormConfig::FORM_MODE_BOOTSTRAP_3;
+        if (!\in_array($mode, Twig::TWIG_NAMESPACES, true)) {
+            $mode = FormConfig::FORM_MODE_BOOTSTRAP_3;
+        }
+        $ns = str_replace('REPLACE', $mode, Twig::TWIG_NAMESPACE_REPLACE);
 
         return Twig::render('@' . $ns . '/form_control_elements/complex.twig', [
             'object' => $this,

@@ -1,0 +1,27 @@
+{% macro render(field) %}
+    <div style="z-index:0">
+        <input type="text"
+               name="{{ field.name }}"
+               value="{{ field.value|default('') }}"
+               class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+               placeholder="{{ field.getPlaceholder()|default('') }}"
+               id="{{ field.id }}"
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+                {{ field.getDataAttributeString()|raw }}
+        >
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ field.id }}").spectrum({
+                preferredFormat: "rgb",
+                flat: true,
+                showInput: true,
+                showAlpha: false,
+                clickoutFiresChange: true
+            });
+        })
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

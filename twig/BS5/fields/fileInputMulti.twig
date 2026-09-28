@@ -1,0 +1,4 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% import '@form_config_BS5/fields/fileInput.twig' as input %}
+    {{ input.render(field, 1) }}
+{% endmacro %}

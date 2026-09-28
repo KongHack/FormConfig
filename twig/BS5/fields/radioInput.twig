@@ -1,0 +1,23 @@
+{% macro render(field, overrideOptions) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+
+    <div id="{{ field.id }}">
+        {% for k,v in options %}
+            <input
+                type="radio"
+                id="ri_{{ field.id }}_{{ k }}"
+                name="{{ field.name }}"
+                class="form-check-input{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+                value="{{ k }}"
+                {% if field.value == k %}
+                    checked="checked"
+                {% endif %}
+                {{ field.getDataAttributeString()|raw }}
+            >
+            <label class="form-check-label" for="ri_{{ field.id }}_{{ k }}"> {{ v|raw }}</label><br>
+        {% endfor %}
+    </div>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

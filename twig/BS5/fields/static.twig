@@ -1,0 +1,25 @@
+{% macro render(field) %}
+    {% if field.label is not null %}
+        <span {{ (field.isSuppressLabel() ? 'class="visually-hidden"') }}>
+            <strong>{{ field.label|raw }}</strong>
+            {% if field.reqLevel > 1 %}
+                {{ myself.requiredIndicator(field) }}
+            {% endif %}
+            {% if field.helpText is not null %}
+                <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                    <i class="fa fa-fw fa-question-circle"></i>
+                </span>
+            {% endif %}
+        </span>
+    {% else %}
+        {% if field.helpText is not null %}
+            <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                <i class="fa fa-fw fa-question-circle"></i>
+            </span>
+        {% endif %}
+    {% endif %}
+    <div class="form-control-plaintext {{ field.class }}" id="{{ field.id }}" {{ field.getDataAttributeString()|raw }}>{{ field.value|raw }}</div>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

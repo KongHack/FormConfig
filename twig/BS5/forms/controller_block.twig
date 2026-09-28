@@ -1,0 +1,164 @@
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::BLOCK_PRE') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+<form
+    action="{{ FC_Config.getRenderArg('urlCurrent') }}"
+    method="{{ FC_Config.getMethod() }}"
+    id="{{ FC_Config.getFormId() }}"
+    {% if FC_Config.getMethod() != 'GET' %} enctype="multipart/form-data"{% endif %}
+>
+    {% if FC_Config.isWrapped() %}
+    <div class="card border-{{ twigOverrides.panelClass|default('sitespecific') }}">
+        <div class="card-header">
+            <{{ FC_Config.getNavigationTag() }} class="card-title mb-0">
+                {% if FC_Config.getRenderForms()[FC_Config.getRenderForm()] is FC_isComplexElement() %}
+                    {% if FC_Config.getRenderForms()[FC_Config.getRenderForm()].getHeading() %}
+                        {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()].getHeading()|raw }}
+                    {% else %}
+                        {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()].getTitle()|raw }}
+                    {% endif %}
+                {% else %}
+                    {{ FC_Config.getRenderForms()[FC_Config.getRenderForm()]|raw }}
+                {% endif %}
+            </{{ FC_Config.getNavigationTag() }}>
+        </div>
+        {% if FC_Config.getRequiredIndicator() == 1 %}
+            {% if FC_Config.hasRequired() %}
+                <div class="text-end FC_global_required_text">
+                    <span>* = required</span>
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="card-body">
+    {% endif %}
+            {% if FC_Config.getUnattributedErrors()|length > 0 %}
+                <div class="alert alert-warning">
+                    {% for k, v in FC_Config.getUnattributedErrors() %}
+                        <b>{{ k }}</b>: {{ v }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for k, hook in FC_Config.getHooks() %}
+                {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::FIELDS_PRE') %}
+                    {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+                        {{ hook.getData()|raw }}
+                    {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+                        {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+                        {% include file %}
+                    {% endif %}
+                    {% do FC_Config.removeHook(k) %}
+                {% endif %}
+            {% endfor %}
+
+            {% if form is defined and form != '' %}
+                {% set file = form|replace({'REPLACE':'BS5'}) %}
+                {% include file %}
+            {% else %}
+                {% import '@form_config_BS5/macros/simple_form.twig' as simpleForm %}
+                {{ simpleForm.render(FC_Config) }}
+            {% endif %}
+
+            {% for k, hook in FC_Config.getHooks() %}
+                {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::FIELDS_POST') %}
+                    {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+                        {{ hook.getData()|raw }}
+                    {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+                        {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+                        {% include file %}
+                    {% endif %}
+                    {% do FC_Config.removeHook(k) %}
+                {% endif %}
+            {% endfor %}
+
+    {% if FC_Config.isWrapped() %}
+        </div>
+        {% if twigOverrides.submitButton is not defined %}
+            <div class="card-footer">
+                <input type="submit" class="btn btn-success" value="Save" id="FC_SAVE_BTN">
+            </div>
+        {% else %}
+            {% if twigOverrides.submitButton != '' %}
+                <div class="card-footer">
+                    {{ twigOverrides.submitButton|raw }}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if FC_Config.getCSRFTokenName() != null %}
+        {% set csrf_token_name = FC_Config.getCSRFTokenName() %}
+        {% if not FC_Config.getField(csrf_token_name).isUsed() %}
+            {% import '@form_config_BS5/macros/forms.twig' as form %}
+            {{ form.completeField(FC_Config.getField(csrf_token_name)) }}
+        {% endif %}
+    {% endif %}
+</form>
+
+{% if holdOn %}
+    <script type="text/javascript">
+        $(function(){
+            var FC_HOTrip = false;
+            $("#{{ formId }}:not(.FC_BOUND)").on('submit.FC',function(){
+                if(!FC_HOTrip) {
+                    HoldOn.open({{ FC_getConfig().general.holdOnOptions }});
+                    FC_HOTrip = true;
+                }
+            });
+        });
+    </script>
+{% endif %}
+
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::BLOCK_POST') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+
+{% if FC_Config.doDebug() %}
+    <div class="card border-info">
+        <div class="card-header bg-info text-dark">
+            <div class="card-title mb-0">Form Debug Info</div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Label</th>
+                        <th>Used</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in FC_Config.getFormFields() %}
+                        <tr>
+                            <td>{{ item.getID() }}</td>
+                            <td>{{ item.getName() }}</td>
+                            <td>{{ item.getLabel() }}</td>
+                            <td>{{ item.isUsed() ? 'Yes' : 'No' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endif %}

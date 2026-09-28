@@ -1,0 +1,25 @@
+{% macro render(field) %}
+    <div class="input-group">
+        <label class="visually-hidden" for="{{ field.id }}">File Manager Path</label>
+        <input type="text"
+               name="{{ field.name }}"
+               value="{{ field.value|default('') }}"
+               {% if field.maxLength > 0 %}maxlength="{{ field.maxLength }}"{% endif %}
+               class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+               placeholder="{{ field.getPlaceholder()|default('') }}"
+               id="{{ field.id }}"
+                {{ field.getDataAttributeString()|raw }}
+        >
+        <button type="button" class="btn btn-secondary" onclick="launchFileManager('load_{{ field.id }}')">File Manager</button>
+    </div>
+
+    <script type="text/javascript">
+        function load_{{ field.id }}(url)
+        {
+            $("#{{ field.id }}").val(url).trigger('change');
+        }
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

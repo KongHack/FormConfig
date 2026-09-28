@@ -774,6 +774,10 @@ class FormConfig implements FieldContainerInterface
      */
     public function setDefaults(string $mode): static
     {
+        $defaultButtonClass = self::$formMode === self::FORM_MODE_BOOTSTRAP_5
+            ? 'btn-secondary'
+            : 'btn-default';
+
         switch ($mode) {
             case 'delete':
                 $html = Twig::get()->render(self::$formMode . '/overrides/delete_button.twig');
@@ -790,8 +794,8 @@ class FormConfig implements FieldContainerInterface
 
                 $this->setOverride('submitButton', '
                     <input type="hidden" name="submitMode" class="submitMode" value="C">
-                    <button class="btn btn-default ' . $id . '" value="C">Save &amp; Continue</button>
-                    <button class="btn btn-default ' . $id . '" value="A">Save &amp; Add More</button>
+                    <button class="btn ' . $defaultButtonClass . ' ' . $id . '" value="C">Save &amp; Continue</button>
+                    <button class="btn ' . $defaultButtonClass . ' ' . $id . '" value="A">Save &amp; Add More</button>
                     <script type="text/javascript">
                         $(function(){
                             $(".' . $id . '").click(function(e){
@@ -809,8 +813,8 @@ class FormConfig implements FieldContainerInterface
 
                 $this->setOverride('submitButton', '
                     <input type="hidden" name="submitMode" class="submitMode" value="C">
-                    <button class="btn btn-default ' . $id . '" value="C">Save &amp; Continue</button>
-                    <button class="btn btn-default ' . $id . '" value="A">Save &amp; Stay on This Page</button>
+                    <button class="btn ' . $defaultButtonClass . ' ' . $id . '" value="C">Save &amp; Continue</button>
+                    <button class="btn ' . $defaultButtonClass . ' ' . $id . '" value="A">Save &amp; Stay on This Page</button>
                     <script type="text/javascript">
                         $(function(){
                             $(".' . $id . '").click(function(e){

@@ -1,0 +1,19 @@
+{% macro render(field) %}
+    <button type="button"
+       name="{{ field.name }}"
+       id="{{ field.id }}"
+       class="btn btn-secondary {{ field.class }}"
+       {{ field.getDataAttributeString()|raw }}
+       {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+    >
+        {{ field.value  }}
+    </button>
+    {% if field.getUnderLabelHtml() %}
+        <div class="FC_under_label_html">
+            {{ field.getUnderLabelHtml()|raw }}
+        </div>
+    {% endif %}
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

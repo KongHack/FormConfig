@@ -1,0 +1,75 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+    {% set id = (field.id?field.id:field.name) %}
+
+    <div class="input-group">
+        <select name="{{ field.name }}"
+                id="{{ id }}"
+                class="form-select{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+                multiple
+                {{ field.getAutoCompleteAttribute()|raw }}
+                {{ field.getDataAttributeString()|raw }}
+                {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+        >
+            {% if placeholder %}
+                <option value="" disabled="disabled">{{ placeholder }}</option>
+            {% endif %}
+            {% for k,v in options %}
+                {% if k in field.value %}
+                    <option value="{{ k }}" selected>{{ v|raw }}</option>
+                {% else %}
+                    <option value="{{ k }}">{{ v|raw }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        {% if field.getMaxSelectionLength() == 0 %}
+            <button class="btn btn-success tool_button" id="{{ id }}-all" type="button" title="Select All">
+                <i class="fa fa-check"></i><span class="visually-hidden">Select All</span>
+            </button>
+        {% endif %}
+        <button class="btn btn-danger tool_button" id="{{ id }}-none" type="button" title="Remove All">
+            <i class="fa fa-times"></i><span class="visually-hidden">Remove All</span>
+        </button>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                {% if field.getMaxSelectionLength() > 0 %}
+                maximumSelectionLength: {{ field.getMaxSelectionLength() }},
+                {% endif %}
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
+                theme: "bootstrap-5",
+                width:'100%'
+            });
+            $("#{{ id }}-all").click(function(){
+                let $sel = $("#{{ id }}");
+                let ignore = {{ field.getOptionAllIgnore()|json_encode|raw }};
+
+                $sel.find('option').each(function(){
+                    if($(this).prop('disabled')) {
+                        $(this).prop('selected', false);
+                    } else {
+                        if(!ignore.includes($(this).val())) {
+                            $(this).prop('selected',true);
+                        }
+                    }
+                });
+                $sel.trigger('change');
+            });
+            $("#{{ id }}-none").click(function(){
+                let $sel = $("#{{ id }}");
+                $sel.find('option').each(function(){
+                    $(this).prop('selected',false);
+                });
+                $sel.trigger('change');
+            });
+        });
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

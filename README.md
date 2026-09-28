@@ -23,11 +23,10 @@ application-level validation and authorization.
 - PHP 8.4 or newer
 - Composer 2
 - Twig 3
-- A consumer-provided Bootstrap 3 frontend stack
+- A consumer-provided Bootstrap 3 or Bootstrap 5 frontend stack
 
-Bootstrap 3 is currently the only implemented rendering mode. A Bootstrap 5
-constant exists for future compatibility, but no Bootstrap 5 templates are
-registered or shipped.
+Bootstrap 3 remains the default for backward compatibility. Bootstrap 5 is
+available through the parallel `@form_config_BS5` Twig namespace.
 
 ## Installation
 
@@ -82,6 +81,25 @@ echo Twig::render(
 );
 ```
 
+To render the Bootstrap 5 theme, set the configured form mode and select its
+controller namespace:
+
+```yaml
+general:
+  formMode: 'BS5'
+```
+
+```php
+echo Twig::render(
+    '@form_config_BS5/forms/controller.twig',
+    $form->getTwigArray(),
+);
+```
+
+The configured mode is also used when FormConfig renders nested navigation
+elements and built-in submit-button defaults. Consumers can migrate one
+application at a time while BS3 remains available.
+
 Fields can also be created generically when the type is selected dynamically:
 
 ```php
@@ -111,8 +129,8 @@ echo $twigEnvironment->render(
 );
 ```
 
-`mapAll()` attaches the `@form_config_BS3` namespace when the environment uses
-Twig's `FilesystemLoader`. Custom form templates can be selected with
+`mapAll()` attaches the `@form_config_BS3` and `@form_config_BS5` namespaces
+when the environment uses Twig's `FilesystemLoader`. Custom form templates can be selected with
 `FormConfig::setTwigTemplate()`.
 
 ## Values, requirements, and errors
@@ -216,9 +234,9 @@ must load the dependencies required by the field types they use.
 
 | Dependency | Used by |
 | --- | --- |
-| Bootstrap 3 | Form layout, panels, validation states, tables, buttons, and responsive classes |
+| Bootstrap 3 or 5 | Form layout, containers, validation states, tables, buttons, and responsive classes |
 | jQuery | All templates that emit interactive JavaScript |
-| Select2 and a Bootstrap-compatible Select2 theme | Normal, HTML, grouped, and Ajax select fields |
+| Select2 and the theme-compatible Select2 adapter | Normal, HTML, grouped, and Ajax select fields (`bootstrap` for BS3; `bootstrap-5` for BS5) |
 | CKEditor exposing the global `CKEDITOR` API | `CKEditor` and `CKEditorFull` fields |
 | Bootstrap Datepicker or a compatible `$.fn.datepicker` plugin | Date fields |
 | Spectrum or a compatible `$.fn.spectrum` plugin | Color picker fields |
@@ -228,6 +246,9 @@ must load the dependencies required by the field types they use.
 Exact asset versions are controlled by the consuming application. Before
 upgrading one of these libraries, verify the emitted initialization options and
 events against the FormConfig field types used by that application.
+
+The BS5 templates use Bootstrap 5-compatible markup and continue using Font
+Awesome for help and navigation icons. They do not require Bootstrap Icons.
 
 Several extension points intentionally render trusted strings with Twig's
 `raw` filter, including HTML fields, labels, notices, headings, hooks, option

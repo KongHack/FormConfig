@@ -1,0 +1,66 @@
+{% import _self as fcc %}
+
+<div class="card border-sitespecific">
+    <div class="card-header">
+        <{{ FC_Config.getNavigationTag() }} class="card-title mb-0{{ FC_Config.getNavigationRight() ? ' float-start' : '' }}">
+            {{ FC_Config.getNavigationTitle()|raw }}
+        </{{ FC_Config.getNavigationTag() }}>
+        {% if FC_Config.getNavigationRight() %}
+            <div class="card-title mb-0 float-end">{{ FC_Config.getNavigationRight()|raw }}</div>
+            <div class="clearfix"></div>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        {% for key, value in FC_Config.getRenderArg('formArray') %}
+            {% if value is FC_isFormElement() %}
+                {{ fcc.doFormElement(value, FC_Config.getRenderArg('urlBase'), FC_Config.getRenderArg('formCurrent')) }}
+            {% elseif value is FC_isComplexElement() %}
+                {{ value.render(FC_Config.getRenderArg('formCurrent')==key)|raw }}
+            {% else %}
+                <a href="{{ FC_Config.getRenderArg('urlBase') }}/{{ key }}"
+                   id="FC_NAV_BTN_{{ key }}"
+                   class="btn btn-left btn-{{ FC_Config.getRenderArg('formCurrent')==key?'primary':'secondary' }} w-100"
+                        {{ FC_Config.getRenderArg('formCurrent')==key?'aria-describedby="form_controller_described_by"':'' }}
+                >{{ value|raw }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div id="form_controller_described_by" style="display:none">Current Form</div>
+</div>
+
+
+{% macro doFormElement(element, route, activeForm) %}
+    {% set key = element.getFormKey() %}
+
+    {% if element.getFormType() == 1 %}
+        {% if element.getFormUrl() != '' %}
+            {% set url = element.getFormUrl() %}
+        {% else %}
+            {% set url = route ~ '/' ~ element.getFormKey() %}
+        {% endif %}
+
+        <a href="{{ url }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-{{ activeForm==key?'primary':'secondary' }} w-100"
+                {{ activeForm==key?'aria-describedby="form_controller_described_by"':'' }}
+        >{{ element.getFormName()|raw }}</a>
+    {% elseif element.getFormType() == 2 %}
+        <div class="FC_DIV_BREAK"></div>
+    {% elseif element.getFormType() == 3 %}
+        <hr class="FC_HR_BREAK">
+    {% elseif element.getFormType() == 4 %}
+        <div class="FC_HTML_BREAK">{{ element.getFormName()|raw }}</div>
+    {% elseif element.getFormType() == 5 %}
+        <a href="{{ element.getFormUrl() }}"
+           id="FC_NAV_BTN_{{ key }}"
+           class="btn btn-left btn-secondary w-100"
+           {{ element.getTarget() != '' ? 'target="'~element.getTarget()~'"' : '' }}
+        >
+            <span class="float-start">{{ element.getFormName()|raw }}</span>
+            <span class="float-end">
+                {{ element.getRightIcon() == '' ? '<i class="fas fa-fw fa-external-link-alt"></i>' : element.getRightIcon()|raw }}
+            </span>
+            <span class="clearfix"></span>
+        </a>
+    {% endif %}
+{% endmacro %}

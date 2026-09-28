@@ -1,0 +1,41 @@
+{% macro render(field) %}
+    {% if (field.value|date('Y-m-d')) <= '0000-00-00' or field.value == '' %}
+        <input type="text"
+               id="{{ field.id }}"
+               name="{{ field.name }}"
+               value=""
+               class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+               style="text-align:right"
+                {{ field.getAutoCompleteAttribute()|raw }}
+               placeholder="{{ field.getPlaceholder()|default('') }}"
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+                {{ field.getDataAttributeString()|raw }}
+        >
+    {% else %}
+        <input type="text"
+               id="{{ field.id }}"
+               name="{{ field.name }}"
+               value="{{ field.value|date('m/d/Y') }}"
+               style="text-align:right"
+               {{ field.getAutoCompleteAttribute()|raw }}
+               class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+               placeholder="{{ field.getPlaceholder()|default('') }}"
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+                {{ field.getDataAttributeString()|raw }}
+        >
+    {% endif %}
+
+    <script type="text/javascript">
+
+        $('#{{ field.id }}').datepicker({
+            todayBtn: "linked",
+            todayHighlight: true
+        }).on('changeDate', function(e){
+            $(this).trigger('input');
+        });
+    </script>
+
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

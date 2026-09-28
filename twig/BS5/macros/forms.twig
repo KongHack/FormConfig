@@ -1,0 +1,90 @@
+{% macro fieldErrorNotice(value) %}
+    {% if value|length > 1 %}
+        <div class="FC_error_notice invalid-feedback d-block">
+            {{ value|nl2br }}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro requiredIndicator(field) %}
+    {% if field %}
+        {% set ind = field.getFormConfig().getRequiredIndicator() %}
+        {% if ind == 1 %}
+            <span class="FC_required">*</span>
+        {% elseif ind == 2 %}
+            <span class="FC_required badge bg-warning text-dark">Required</span>
+        {% endif %}
+    {% else %}
+        <span class="FC_required badge bg-warning text-dark">Required</span>
+    {% endif %}
+{% endmacro %}
+
+{% macro completeField(field) %}
+    {% if field is not empty %}
+        {% do field.doUsed() %}
+        {% if field.fields is defined %}
+            {% import '@form_config_BS5/macros/formArray.twig' as formArray %}
+            {{ formArray.handleFormArray(field) }}
+        {% else %}
+            {% import _self as myself %}
+            {% set def = field.getDefinition() %}
+            {% set file = def.twig|replace({'REPLACE':'BS5'}) %}
+            {% import file as twigFile %}
+
+            {% if field.reqLevel > 0 %}
+                {% if field.getWrappingClass() != '' %}
+                    <div class="{{ field.getWrappingClass()|raw }}">
+                {% endif %}
+                {% if field.isStandardGrouping() %}
+                <div class="mb-3">
+                {% endif %}
+
+                    {% if field.isStandardLabel() %}
+                        {% if field.label is not null %}
+                            <label class="form-label{{ field.isSuppressLabel() ? ' visually-hidden' : '' }}" for="{{ field.id }}">
+                                {{ field.label|raw }}
+                                {% if field.reqLevel > 1 %}
+                                    {{ myself.requiredIndicator(field) }}
+                                {% endif %}
+                                {% if field.helpText is not null %}
+                                    <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                                        <i class="fa fa-fw fa-question-circle"></i>
+                                    </span>
+                                {% endif %}
+                            </label>
+                        {% else %}
+                            {% if field.helpText is not null %}
+                                <span class="FC_help_text tool_badge text-info" title="{{ field.helpText }}">
+                                    <i class="fa fa-fw fa-question-circle"></i>
+                                </span>
+                            {% endif %}
+                        {% endif %}
+                        {% if field.getUnderLabelHtml() %}
+                            <div class="FC_under_label_html">
+                                {{ field.getUnderLabelHtml()|raw }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {{ twigFile.render(field) }}
+
+                    {% if field.errors|length > 0 %}
+                        {% for err in field.errors %}
+                            {{ myself.fieldErrorNotice(err) }}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if field.getNoticeText()|length > 0 %}
+                        <div class="FC_notice_text alert alert-warning">{{ field.getNoticeText()|raw }}</div>
+                    {% endif %}
+                {% if field.isStandardGrouping() %}
+                </div>
+                {% endif %}
+
+                {% if field.getWrappingClass() != '' %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endmacro %}

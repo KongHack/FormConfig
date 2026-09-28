@@ -1,0 +1,45 @@
+{% set FC_CONTROLLER = true %}
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::MAIN_PRE') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}
+
+<div class="row">
+    {% if FC_Config.getRenderArg('formArray')|length > 1 %}
+        <div class="col-md-3">
+            {% include '@form_config_BS5/forms/controller_nav.twig' %}
+        </div>
+    {% endif %}
+    <div class="col-md-{{ (forms|length > 1) ? '9' : '12' }}">
+        {% if not twigOverrides.replace %}
+            {% include '@form_config_BS5/forms/controller_block.twig' %}
+        {% else %}
+            {% if includePath %}
+                {% set file = includePath|replace({'REPLACE':'BS5'}) %}
+                {% include file %}
+            {% else %}
+                <div class="alert alert-danger">includePath not defined!</div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% for k, hook in FC_Config.getHooks() %}
+    {% if hook.getType() == FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookType::MAIN_POST') %}
+        {% if hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::HTML') %}
+            {{ hook.getData()|raw }}
+        {% elseif hook.getMethod() ==  FC_Enum('GCWorld\\FormConfig\\Enums\\FCHookMethod::INCLUDE') %}
+            {% set file = hook.getData()|replace({'REPLACE':'BS5'}) %}
+            {% include file %}
+        {% endif %}
+        {% do FC_Config.removeHook(k) %}
+    {% endif %}
+{% endfor %}

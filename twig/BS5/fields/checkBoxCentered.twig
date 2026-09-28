@@ -1,0 +1,17 @@
+{% macro render(field) %}
+    <div style="text-align: center">
+        <input type="checkbox"
+               name="{{ field.name }}"
+               id="{{ field.id }}"
+               value="1"
+                {{ field.getAutoCompleteAttribute()|raw }}
+               {{ (field.value ? 'checked="checked"' : '') }}
+               {{ field.getDataAttributeString()|raw }}
+               {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+               class="form-check-input{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+        >
+    </div>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

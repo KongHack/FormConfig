@@ -1,0 +1,192 @@
+{% macro render(field, multi, overrideOptions, overridePlaceholder) %}
+    {% set options = overrideOptions ? overrideOptions : field.options %}
+    {% set placeholder = overridePlaceholder ? overridePlaceholder : field.getPlaceholder() %}
+
+    <select name="{{ field.name }}"
+            {{ multi ? 'multiple="multiple"' : '' }}
+            id="{{ field.id }}"
+            class="form-select{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+            {{ field.getAutoCompleteAttribute()|raw }}
+            {{ field.getDataAttributeString()|raw }}
+            {{ field.labelledBy != '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"' }}
+    >
+        {% if placeholder and not multi %}
+            <option value=""
+                    disabled="disabled"
+                    {{ field.value is empty or field.value == 0 ? 'selected' : '' }}
+            >
+                {{ placeholder }}
+            </option>
+        {% endif %}
+
+        {#
+        Only render currently selected options.
+        The complete option list is loaded through AJAX when Select2 is first opened.
+        #}
+        {% for k, v in options %}
+            {% if multi and k in field.value %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif not multi and field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <script type="text/javascript">
+        $(function () {
+            const $select = $("#{{ field.id }}");
+            const select2BaseConfig = {
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+
+                containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
+                theme: "bootstrap-5",
+                width: "100%",
+
+                templateSelection: function (result) {
+                    return result.text;
+                },
+
+                templateResult: function (result) {
+                    return result.text;
+                },
+
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+
+                minimumInputLength: 0,
+                minimumResultsForSearch: 0,
+                multiple: {{ multi ? 'true' : 'false' }}
+            };
+
+            let cachedResponse = null;
+            let activeRequest = null;
+            let hasLoadedOptions = false;
+            let shouldOpenAfterLoad = false;
+
+            function getRequestData() {
+                const requestData = {};
+
+                $.each($select.data(), function (key, value) {
+                    if (
+                        typeof value !== "object"
+                        && typeof value !== "function"
+                        && key !== "q"
+                        && key !== "page"
+                    ) {
+                        requestData[key] = value;
+                    }
+                });
+
+                return requestData;
+            }
+
+            function getSelectedValues() {
+                const selectedValue = $select.val();
+
+                if (selectedValue === null) {
+                    return [];
+                }
+
+                return Array.isArray(selectedValue)
+                    ? selectedValue.map(String)
+                    : [String(selectedValue)];
+            }
+
+            function rebuildSelectWithLoadedOptions() {
+                const selectedValues = getSelectedValues();
+                const placeholderOptions = $select
+                    .find('option[value=""][disabled]')
+                    .clone();
+
+                if ($select.data("select2")) {
+                    $select.select2("destroy");
+                }
+
+                $select.empty().append(placeholderOptions);
+                $select.select2($.extend(true, {}, select2BaseConfig, {
+                    data: cachedResponse
+                }));
+
+                {% if multi %}
+                $select.val(selectedValues).trigger("change");
+                {% else %}
+                $select
+                    .val(selectedValues.length > 0 ? selectedValues[0] : "")
+                    .trigger("change");
+                {% endif %}
+            }
+
+            function loadOptionsOnce() {
+                if (cachedResponse !== null) {
+                    hasLoadedOptions = true;
+                    rebuildSelectWithLoadedOptions();
+
+                    if (shouldOpenAfterLoad) {
+                        shouldOpenAfterLoad = false;
+                        $select.select2("open");
+                    }
+
+                    return;
+                }
+
+                if (activeRequest !== null) {
+                    return;
+                }
+
+                activeRequest = $.ajax({
+                    url: "{{ field.getAjaxUrl() }}",
+                    method: "{{ field.getAjaxMethod() }}",
+                    dataType: "json",
+                    data: getRequestData(),
+                    beforeSend: function() {
+                        if(window.HoldOn) {
+                            window.HoldOn.open(window.HoldOnOptions || {});
+                        }
+                    },
+                    complete: function() {
+                        if(window.HoldOn) {
+                            window.HoldOn.close();
+                        }
+                    }
+                });
+
+                activeRequest
+                    .done(function (response) {
+                        cachedResponse = response;
+                        hasLoadedOptions = true;
+                        rebuildSelectWithLoadedOptions();
+
+                        if (shouldOpenAfterLoad) {
+                            shouldOpenAfterLoad = false;
+                            $select.select2("open");
+                        }
+                    })
+                    .always(function () {
+                        activeRequest = null;
+                    });
+            }
+
+            $select.select2(select2BaseConfig);
+
+            $select.on("select2:opening.selectAjaxOnce", function (event) {
+                if (hasLoadedOptions) {
+                    return;
+                }
+
+                event.preventDefault();
+                shouldOpenAfterLoad = true;
+                loadOptionsOnce();
+            });
+        });
+    </script>
+
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">
+            {{ field.getScript()|raw }}
+        </script>
+    {% endif %}
+{% endmacro %}

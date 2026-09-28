@@ -1,0 +1,83 @@
+{% macro render(field, multi, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+
+    <select name="{{ field.name }}"
+            {{ multi ? 'multiple="multiple"':'' }}
+            id="{{ field.id }}"
+            class="form-select{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+            {{ field.getAutoCompleteAttribute()|raw }}
+            {{ field.getDataAttributeString()|raw }}
+            {{ field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"' }}
+    >
+        {% if placeholder and not multi %}
+            <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>
+        {% endif %}
+
+        {% for k,v in options %}
+            {% if multi and k in field.value %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif  not multi and field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% elseif field.getSelect2MinLength() < 1 %}
+                <option value="{{ k }}">{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                containerCssClass: "FC_select2_ajax_container_{{ field.getReqLevel() }}",
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
+                theme: "bootstrap-5",
+                width:'100%',
+                ajax: {
+                    url: "{{ field.getAjaxUrl() }}",
+                    method: "{{ field.getAjaxMethod() }}",
+                    dataType: "json",
+                    delay: 250,
+                    data: function (params) {
+                        let subData = {
+                            q: params.term,
+                            page: params.page
+                        };
+
+                        $.each($("#{{ field.id }}").data(),function(i, e) {
+                            if(typeof e != 'object'
+                                && typeof e != 'function'
+                                && i != 'q'
+                                && i != 'page'
+                            ) {
+                                subData[i] = e;
+                            }
+                        });
+
+                        return subData;
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: false
+                },
+
+                templateSelection: function(result, container) {
+                    return result.text;
+                },
+                templateResult: function(result) {
+                    return result.text;
+                },
+                escapeMarkup: function (markup) { return markup; },
+                minimumInputLength: {{ field.getSelect2MinLength() }},
+                multiple: {{ multi ? 'true' : 'false' }}
+            });
+        });
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

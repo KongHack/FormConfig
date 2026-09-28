@@ -1,0 +1,10 @@
+{% macro render(field) %}
+    <div
+        class="card card-body p-2 {{ field.class }}"
+        id="{{ field.id }}"
+        style="height:{{ field.height|default('120px') }};overflow:auto"
+        {{ field.getDataAttributeString()|raw }}
+    >
+        {{ field.value|nl2br }}
+    </div>
+{% endmacro %}

@@ -1,0 +1,39 @@
+{% macro render(field, overrideOptions, overridePlaceholder) %}
+    {% set options = (overrideOptions?overrideOptions:field.options) %}
+    {% set placeholder = (overridePlaceholder?overridePlaceholder:field.getPlaceholder()) %}
+
+    <select name="{{ field.name }}"
+            id="{{ field.id }}"
+            class="form-select{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+            {{ field.getAutoCompleteAttribute()|raw }}
+            {{ field.getDataAttributeString()|raw }}
+            {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+    >
+        {% if placeholder %}
+            <option value="" disabled="disabled" {{ field.value is empty or field.value == 0 ? 'selected' : '' }}>{{ placeholder }}</option>
+        {% endif %}
+
+        {% for k,v in options %}
+            {% if field.value == k %}
+                <option value="{{ k }}" selected>{{ v|raw }}</option>
+            {% else %}
+                <option value="{{ k }}">{{ v|raw }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+    <script type="text/javascript">
+        $(function(){
+            $("#{{ field.id }}").select2({
+                {% if field.getSelect2DropdownParent() != '' %}
+                dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
+                {% endif %}
+                allowClear: {{ field.getSelect2AllowClear() ? 'true' : 'false' }},
+                theme: "bootstrap-5",
+                width:'100%'
+            });
+        });
+    </script>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}

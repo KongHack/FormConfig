@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/KongHack/FormConfig/commits/master)
 
+- @GameCharmer Add a parallel Bootstrap 5 Twig theme while retaining Bootstrap 3 compatibility.
 
 
 ## [4.0.0](https://github.com/KongHack/FormConfig/releases/tag/4.0.0)

@@ -1,0 +1,14 @@
+{% macro render(field) %}
+    <textarea name="{{ field.name }}"
+              id="{{ field.id }}"
+              class="form-control{{ field.errors|length > 0 ? ' is-invalid' : '' }} {{ field.class }}"
+              style="height:{{ field.height|default('120px') }}"
+              {{ field.getAutoCompleteAttribute()|raw }}
+              {{ field.getDataAttributeString()|raw }}
+              {{ (field.labelledBy!= '' ? 'aria-labelledby="' ~ field.labelledBy ~ '"')|raw }}
+    >{{ field.value }}</textarea>
+    {% if field.getScript() is not empty %}
+        <script type="text/javascript">{{ field.getScript()|raw }}</script>
+    {% endif %}
+{% endmacro %}
+

@@ -20,6 +20,7 @@ class Twig
     const TWIG_NAMESPACE_REPLACE = 'form_config_REPLACE';
     const TWIG_NAMESPACES        = [
         'BS3',
+        'BS5',
     ];
 
     protected static ?Environment $twig      = null;
