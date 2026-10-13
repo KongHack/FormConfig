@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GCWorld\FormConfig\Tests\Core;
 
 use GCWorld\FormConfig\Core\Twig;
+use GCWorld\FormConfig\Fields\Select2HTMLGroupedSingle;
 use GCWorld\FormConfig\FormControlElements\FormConfigComplexElement;
 use GCWorld\FormConfig\Forms\FormConfig;
 use PHPUnit\Framework\TestCase;
@@ -89,6 +90,31 @@ final class TwigTest extends TestCase
 
         foreach ($bootstrap5Files as $template) {
             Twig::get()->load('@form_config_BS5/' . $template);
+        }
+    }
+
+    public function testGroupedHtmlSelectUsesSelectElementAndInitializesItsValue(): void
+    {
+        $field = (new Select2HTMLGroupedSingle())
+            ->setName('tenant')
+            ->setValue(42)
+            ->addGroup('internal', 'Internal')
+            ->addOption('internal', 42, 'Example', '<strong>Example</strong>');
+
+        foreach (['BS3', 'BS5'] as $theme) {
+            $template = Twig::get()->createTemplate(
+                "{% import '@form_config_{$theme}/fields/select2HTMLGroupedSingle.twig' as grouped %}" .
+                '{{ grouped.render(field) }}'
+            );
+            $html = $template->render(['field' => $field]);
+
+            self::assertStringContainsString('<select', $html);
+            self::assertStringContainsString('name="tenant"', $html);
+            self::assertStringContainsString('</select>', $html);
+            self::assertStringContainsString('$field.val(42).trigger(\'change\');', $html);
+            self::assertStringContainsString('return result.html || result.text;', $html);
+            self::assertStringNotContainsString('<input type="hidden"', $html);
+            self::assertStringNotContainsString("select2('val'", $html);
         }
     }
 

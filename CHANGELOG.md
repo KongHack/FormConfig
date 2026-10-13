@@ -4,7 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/KongHack/FormConfig/commits/master)
 
+
+
+## [4.0.1](https://github.com/KongHack/FormConfig/releases/tag/4.0.1)
 - @GameCharmer Add a parallel Bootstrap 5 Twig theme while retaining Bootstrap 3 compatibility.
+- @GameCharmer Fix grouped HTML Select2 fields so their initial selection is represented by a real select value and submitted without requiring a manual reselection.
 
 
 ## [4.0.0](https://github.com/KongHack/FormConfig/releases/tag/4.0.0)

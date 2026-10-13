@@ -1,19 +1,20 @@
 {% macro render(field, multi) %}
-    <input type="hidden"
+    <select
        name="{{ field.name }}"
        id="{{ field.id }}"
        class="{{ field.class }}"
+       {{ multi ? 'multiple' : '' }}
        {{ field.getAutoCompleteAttribute()|raw }}
        {{ field.getDataAttributeString()|raw }}
-    >
+    ></select>
 
     <script type="text/javascript">
-        var {{ field.id }}_data = {{ field.getGroupsSelect2()|json_encode|raw }};
+        const {{ field.id }}_data = {{ field.getGroupsSelect2()|json_encode|raw }};
 
         $(function(){
-            let field = $("#{{ field.id }}");
+            const $field = $("#{{ field.id }}");
 
-            $(field).select2({
+            $field.select2({
                 {% if field.getSelect2DropdownParent() != '' %}
                 dropdownParent: $('{{ field.getSelect2DropdownParent() }}'),
                 {% endif %}
@@ -24,15 +25,15 @@
                 width:'100%',
                 data: {{ field.id }}_data,
                 templateSelection: function(result, container) {
-                    let callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
+                    const callbackMethod = '{{ field.getMetaData('templateSelection') ?? '' }}';
                     if(callbackMethod !== '') {
                         return window[callbackMethod](result)
                     }
 
-                    return result.text;
+                    return result.html || result.text;
                 },
                 templateResult: function(result) {
-                    let callbackMethod = '{{ field.getMetaData('templateResult') ?? '' }}';
+                    const callbackMethod = '{{ field.getMetaData('templateResult') ?? '' }}';
                     if(callbackMethod !== '') {
                         return window[callbackMethod](result)
                     }
@@ -44,48 +45,10 @@
                 allowClear: {{ multi ? 'false': (field.getSelect2AllowClear() ? 'true' : 'false') }},
                 multiple: {{ multi ? 'true':'false' }}
             });
-            $(field).on('select2:select', function () {
-                console.log('on select: ' + $(this).val());
-            });
-            $(field).on('select2:close', function () {
-                console.log('on close: ', $(this).val());
-                processSelection($(this).val());
-            });
-            function processSelection(val) {
-                const tmp = {{ field.id }}_data;
-
-                this_loop:
-                for(let i = 0; i < tmp.length; i++) {
-                    let tmp2 = tmp[i];
-                    for(let j = 0; j < tmp2.children.length; j++) {
-                        console.log(tmp2.children);
-                        if(tmp2.children[j].id == val) {
-                            let outHtml = tmp2.children[j].html;
-                            console.log('SETTING:: ',outHtml);
-                            $("#select2-{{ field.id }}-container").html(outHtml);
-                            setTimeout(function(){
-                                $("#select2-{{ field.id }}-container").html(outHtml);
-                            },100);
-                            break this_loop;
-                        }
-                    }
-                }
-            }
 
             {% if field.value|length > 0 %}
-                {% if field.value is iterable %}
-                    {% for k in field.value %}
-                        $(field).select2('val',{{ field.value|json_encode|raw }});
-                    {% endfor %}
-                {% else %}
-                    {% if field.value != '' %}
-                        $(field).select2('val',"{{ field.value }}");
-                        processSelection('{{ field.value }}')
-                    {% endif %}
-                {% endif %}
-                $(field).trigger('change');
+                $field.val({{ field.value|json_encode|raw }}).trigger('change');
             {% endif %}
-
         });
     </script>
     {% if field.getScript() is not empty %}
