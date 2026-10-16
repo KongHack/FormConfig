@@ -118,6 +118,36 @@ final class TwigTest extends TestCase
         }
     }
 
+    public function testTimeInputUsesTheNativeControlInBothThemes(): void
+    {
+        $form = (new FormConfig())->setName('schedule');
+        $field = $form->getBuilder()
+            ->createTimeInput('start_time')
+            ->setValue('14:30')
+            ->setClass('shift-time')
+            ->setLabelledBy('start-time-label')
+            ->setDataAttribute('schedule-field', 'start')
+            ->setScript('initializeTimeInput();')
+            ->addError('Choose a start time.');
+
+        foreach (['BS3', 'BS5'] as $theme) {
+            $template = Twig::get()->createTemplate(
+                "{% import '@form_config_{$theme}/fields/timeInput.twig' as timeInput %}" .
+                '{{ timeInput.render(field) }}'
+            );
+            $html = $template->render(['field' => $field]);
+
+            self::assertStringContainsString('type="time"', $html);
+            self::assertStringContainsString('name="start_time"', $html);
+            self::assertStringContainsString('value="14:30"', $html);
+            self::assertStringContainsString('shift-time', $html);
+            self::assertStringContainsString('aria-labelledby="start-time-label"', $html);
+            self::assertStringContainsString('data-schedule-field="start"', $html);
+            self::assertStringContainsString('initializeTimeInput();', $html);
+            self::assertStringNotContainsString(".on('change'", $html);
+        }
+    }
+
     /**
      * @return list<string>
      */
