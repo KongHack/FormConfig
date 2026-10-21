@@ -260,7 +260,7 @@ Policy must account for those scripts or override the affected templates.
 
 ## Local development
 
-The supported local environment uses the public KongHack PHP 8.4 image:
+The supported local environment uses the public KongHack PHP 8.5 image:
 
 ```console
 ./dc up -d
