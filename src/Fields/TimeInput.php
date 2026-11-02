@@ -43,6 +43,22 @@ class TimeInput extends Base implements FieldInterface
      */
     public static function makeReadOnly(FormField $field): FormField
     {
+        $value = $field->getValue();
+        if (is_string($value) && preg_match('/^(\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?$/', $value, $matches)) {
+            $hour   = (int) $matches[1];
+            $minute = (int) $matches[2];
+            $second = (int) ($matches[3] ?? 0);
+
+            if ($hour < 24 && $minute < 60 && $second < 60) {
+                $field->setValue(sprintf(
+                    '%d:%02d %s',
+                    (($hour + 11) % 12) + 1,
+                    $minute,
+                    $hour < 12 ? 'AM' : 'PM',
+                ));
+            }
+        }
+
         $field->setType(StaticInput::getKey());
 
         return $field;

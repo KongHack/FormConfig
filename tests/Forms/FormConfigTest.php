@@ -80,6 +80,23 @@ final class FormConfigTest extends TestCase
         self::assertSame('person@example.com', $field->getValue());
     }
 
+    public function testMakingATimeInputReadOnlyUsesTwelveHourDisplay(): void
+    {
+        $form = (new FormConfig())->setName('schedule');
+        $afternoon = $form->getBuilder()->createTimeInput('afternoon')->setValue('14:30');
+        $midnight = $form->getBuilder()->createTimeInput('midnight')->setValue('00:05:00');
+        $unrecognized = $form->getBuilder()->createTimeInput('unrecognized')->setValue('not a time');
+        $invalid = $form->getBuilder()->createTimeInput('invalid')->setValue('14:30:99');
+
+        $form->makeReadOnly();
+
+        self::assertSame(StaticInput::getKey(), $afternoon->getType());
+        self::assertSame('2:30 PM', $afternoon->getValue());
+        self::assertSame('12:05 AM', $midnight->getValue());
+        self::assertSame('not a time', $unrecognized->getValue());
+        self::assertSame('14:30:99', $invalid->getValue());
+    }
+
     public function testTwigArrayContainsTheConfiguredRenderContract(): void
     {
         $form = (new FormConfig())
