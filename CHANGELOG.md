@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [4.0.3](https://github.com/KongHack/FormConfig/releases/tag/4.0.3)
+- @GameCharmer Update Make Readonly display for Time inputs to align AM/PM
+
+
+
 ## [4.0.2](https://github.com/KongHack/FormConfig/releases/tag/4.0.2)
 - @GameCharmer Patch Time Inputs
 
